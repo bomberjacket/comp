@@ -4,7 +4,10 @@ import { Redis } from '@upstash/redis';
 
 // Mock Redis client for E2E tests
 class MockRedis {
-  private storage = new Map<string, any>();
+  // Shared through globalThis so every Next.js server bundle in one process
+  // sees the same keys (e.g. /setup's route handler and its page).
+  private storage: Map<string, any> = ((globalThis as any).__compMockRedis ??=
+    new Map<string, any>());
 
   async get(key: string) {
     return this.storage.get(key) || null;

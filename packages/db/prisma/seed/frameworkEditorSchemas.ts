@@ -41,6 +41,7 @@ export const FrameworkEditorFrameworkSchema = z.object({
   version: z.string(),
   description: z.string(),
   visible: z.boolean().optional(), // @default(true)
+  familyId: z.string().nullable().optional(), // FrameworkEditorFrameworkFamily FK
   // requirements: FrameworkEditorRequirement[] - relational, omitted
   // frameworkInstances: FrameworkInstance[] - relational, omitted
   createdAt: z
@@ -68,6 +69,8 @@ export const FrameworkEditorRequirementSchema = z.object({
   name: z.string(),
   identifier: z.string().optional(), // @default("")
   description: z.string(),
+  requirementFamily: z.string().nullable().optional(),
+  sortOrder: z.number().int().nullable().optional(),
   // controlTemplates: FrameworkEditorControlTemplate[] - relational, omitted
   // requirementMaps: RequirementMap[] - relational, omitted
   createdAt: z
@@ -146,6 +149,7 @@ export const FrameworkEditorControlTemplateSchema = z.object({
   id: z.string().optional(), // @id @default
   name: z.string(),
   description: z.string(),
+  controlFamily: z.string().nullable().optional(),
   // policyTemplates: FrameworkEditorPolicyTemplate[] - relational, omitted
   // requirements: FrameworkEditorRequirement[] - relational, omitted
   // taskTemplates: FrameworkEditorTaskTemplate[] - relational, omitted
@@ -193,13 +197,52 @@ export const FindingTemplateSchema = z.object({
   // findings: Finding[] - relational, omitted
 });
 
+const optionalSeedDate = (field: string) =>
+  z
+    .preprocess(
+      datePreprocess,
+      z.string().datetime({
+        message: `Invalid datetime string for ${field}. Expected ISO 8601 format.`,
+      }),
+    )
+    .optional();
+
+export const FrameworkEditorFrameworkFamilySchema = z.object({
+  id: z.string().optional(), // @id @default
+  name: z.string(),
+  description: z.string().optional(), // @default("")
+  status: z.enum(['visible', 'hidden', 'under_construction', 'partial']).optional(), // @default(hidden)
+  // frameworks: FrameworkEditorFramework[] - relational, omitted
+  createdAt: optionalSeedDate('createdAt'),
+  updatedAt: optionalSeedDate('updatedAt'),
+});
+
+export const FrameworkEditorControlPolicyTemplateLinkSchema = z.object({
+  id: z.string().optional(), // @id @default
+  frameworkId: z.string(),
+  controlTemplateId: z.string(),
+  policyTemplateId: z.string(),
+  createdAt: optionalSeedDate('createdAt'),
+});
+
+export const FrameworkEditorControlTaskTemplateLinkSchema = z.object({
+  id: z.string().optional(), // @id @default
+  frameworkId: z.string(),
+  controlTemplateId: z.string(),
+  taskTemplateId: z.string(),
+  createdAt: optionalSeedDate('createdAt'),
+});
+
 // For use in seed script validation
 export const frameworkEditorModelSchemas = {
   FrameworkEditorVideo: FrameworkEditorVideoSchema,
+  FrameworkEditorFrameworkFamily: FrameworkEditorFrameworkFamilySchema,
   FrameworkEditorFramework: FrameworkEditorFrameworkSchema,
   FrameworkEditorRequirement: FrameworkEditorRequirementSchema,
   FrameworkEditorPolicyTemplate: FrameworkEditorPolicyTemplateSchema,
   FrameworkEditorTaskTemplate: FrameworkEditorTaskTemplateSchema,
   FrameworkEditorControlTemplate: FrameworkEditorControlTemplateSchema,
+  FrameworkEditorControlPolicyTemplateLink: FrameworkEditorControlPolicyTemplateLinkSchema,
+  FrameworkEditorControlTaskTemplateLink: FrameworkEditorControlTaskTemplateLinkSchema,
   FindingTemplate: FindingTemplateSchema,
 };

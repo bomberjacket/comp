@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '@prisma/client';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { frameworkEditorModelSchemas } from './frameworkEditorSchemas';
@@ -7,21 +7,35 @@ import { frameworkEditorModelSchemas } from './frameworkEditorSchemas';
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
+/**
+ * Seed files are named after their Prisma model and may carry a data-set suffix,
+ * e.g. `FrameworkEditorRequirement.nist-800-171.json` or
+ * `_FrameworkEditorControlTemplateToFrameworkEditorRequirement.unlink.nist-800-171.json`.
+ * The model name is always the first dot-separated segment (without the relation `_`).
+ */
+function modelNameOf(fileName: string): string {
+  return fileName.replace(/^_/, '').split('.')[0] ?? '';
+}
+
 async function seedJsonFiles(subDirectory: string) {
   const directoryPath = path.join(__dirname, subDirectory);
   console.log(`Starting to seed files from: ${directoryPath}`);
   const files = await fs.readdir(directoryPath);
   const jsonFiles = files.filter((file) => file.endsWith('.json'));
 
-  // Ensure deterministic order for primitives so FK dependencies are satisfied
-  // Specifically, seed Frameworks before Requirements (which reference Frameworks)
+  // Ensure deterministic order for primitives so FK dependencies are satisfied:
+  // framework families before frameworks, frameworks before requirements, and the
+  // framework-scoped *Link models last (they reference frameworks, controls,
+  // policies and tasks).
   if (subDirectory === 'primitives') {
-    const priorityOrder = ['FrameworkEditorFramework.json'];
-    const getPriority = (fileName: string) => {
-      const index = priorityOrder.indexOf(fileName);
-      return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+    const rank = (fileName: string): number => {
+      const model = modelNameOf(fileName);
+      if (model === 'FrameworkEditorFrameworkFamily') return 0;
+      if (model === 'FrameworkEditorFramework') return 1;
+      if (model.endsWith('Link')) return 3;
+      return 2;
     };
-    jsonFiles.sort((a, b) => getPriority(a) - getPriority(b));
+    jsonFiles.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
   }
 
   for (const jsonFile of jsonFiles) {
@@ -36,7 +50,7 @@ async function seedJsonFiles(subDirectory: string) {
       }
 
       if (subDirectory === 'primitives') {
-        const modelNameForPrisma = jsonFile.replace('.json', '');
+        const modelNameForPrisma = modelNameOf(jsonFile);
         const prismaModelKey =
           modelNameForPrisma.charAt(0).toLowerCase() + modelNameForPrisma.slice(1);
         const zodModelKey = modelNameForPrisma as keyof typeof frameworkEditorModelSchemas;
@@ -108,8 +122,12 @@ async function seedJsonFiles(subDirectory: string) {
           continue;
         }
 
-        const modelNamesPart = jsonFile.substring(1, jsonFile.indexOf('.json'));
+        const modelNamesPart = modelNameOf(jsonFile);
         const [modelANamePascal, modelBNamePascal] = modelNamesPart.split('To');
+        // `*.unlink.*.json` files list pairs removed from a generated data set since the
+        // last run; they are disconnected instead of connected.
+        const isUnlink = jsonFile.includes('.unlink.');
+        const relationAction = isUnlink ? 'disconnect' : 'connect';
 
         if (!modelANamePascal || !modelBNamePascal) {
           console.warn(`Could not parse model names from relation file: ${jsonFile}`);
@@ -151,7 +169,7 @@ async function seedJsonFiles(subDirectory: string) {
         }
 
         console.log(
-          `Processing relations from ${jsonFile} for ${prismaModelAName} to connect via ${relationFieldNameOnModelA}...`,
+          `Processing relations from ${jsonFile} for ${prismaModelAName} to ${relationAction} via ${relationFieldNameOnModelA}...`,
         );
         let connectionsMade = 0;
         for (const relationItem of jsonData) {
@@ -167,7 +185,7 @@ async function seedJsonFiles(subDirectory: string) {
               where: { id: idA },
               data: {
                 [relationFieldNameOnModelA]: {
-                  connect: { id: idB },
+                  [relationAction]: { id: idB },
                 },
               },
             });
@@ -302,15 +320,14 @@ async function seedIsmsDocumentTemplates() {
       },
     });
   }
-  console.log(
-    `Seeded ${ISMS_DOCUMENT_TEMPLATES.length} ISMS document templates.`,
-  );
+  console.log(`Seeded ${ISMS_DOCUMENT_TEMPLATES.length} ISMS document templates.`);
 }
 
 async function backfillFrameworkScopedLinks() {
   const fis = await prisma.frameworkInstance.findMany({ select: { id: true } });
   for (const fi of fis) {
-    await prisma.$executeRawUnsafe(`
+    await prisma.$executeRawUnsafe(
+      `
       INSERT INTO "FrameworkControlPolicyLink" ("frameworkInstanceId", "controlId", "policyId")
       SELECT DISTINCT $1, cp."A", cp."B"
       FROM "_ControlToPolicy" cp
@@ -323,9 +340,12 @@ async function backfillFrameworkScopedLinks() {
         WHERE fpl."frameworkInstanceId" = $1
           AND fpl."controlId" = cp."A" AND fpl."policyId" = cp."B"
       )
-    `, fi.id);
+    `,
+      fi.id,
+    );
 
-    await prisma.$executeRawUnsafe(`
+    await prisma.$executeRawUnsafe(
+      `
       INSERT INTO "FrameworkControlTaskLink" ("frameworkInstanceId", "controlId", "taskId")
       SELECT DISTINCT $1, ct."A", ct."B"
       FROM "_ControlToTask" ct
@@ -338,9 +358,12 @@ async function backfillFrameworkScopedLinks() {
         WHERE ftl."frameworkInstanceId" = $1
           AND ftl."controlId" = ct."A" AND ftl."taskId" = ct."B"
       )
-    `, fi.id);
+    `,
+      fi.id,
+    );
 
-    await prisma.$executeRawUnsafe(`
+    await prisma.$executeRawUnsafe(
+      `
       INSERT INTO "FrameworkControlDocumentTypeLink" ("frameworkInstanceId", "controlId", "formType")
       SELECT DISTINCT $1, cdt."controlId", cdt."formType"
       FROM "ControlDocumentType" cdt
@@ -353,7 +376,9 @@ async function backfillFrameworkScopedLinks() {
         WHERE fdl."frameworkInstanceId" = $1
           AND fdl."controlId" = cdt."controlId" AND fdl."formType" = cdt."formType"
       )
-    `, fi.id);
+    `,
+      fi.id,
+    );
   }
 }
 
@@ -366,11 +391,17 @@ async function main() {
     // On a fresh `migrate reset`, the backfill data migration runs against empty
     // tables and is a no-op; seed then creates the framework rows. Without this
     // call, local onboarding would fail because it reads from FrameworkVersion.
-    const { backfillFrameworkVersions } = await import(
-      '../../src/scripts/backfill-framework-versions'
-    );
+    const { backfillFrameworkVersions } =
+      await import('../../src/scripts/backfill-framework-versions');
     const result = await backfillFrameworkVersions();
     console.log('FrameworkVersion backfill:', result);
+
+    // Publish any additional FrameworkVersion entries declared by generated data sets
+    // (seed/versions/*.json). Existing (frameworkId, version) pairs are left untouched.
+    const { publishSeededFrameworkVersions } =
+      await import('../../src/scripts/publish-seeded-framework-versions');
+    const published = await publishSeededFrameworkVersions(path.join(__dirname, 'versions'));
+    console.log('Seeded FrameworkVersion publish:', published);
 
     await backfillFrameworkScopedLinks();
     console.log('Framework-scoped link backfill complete.');

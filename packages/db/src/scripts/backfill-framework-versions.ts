@@ -6,7 +6,7 @@ export interface BackfillResult {
   instancesBackfilled: number;
 }
 
-type FrameworkWithTemplates = Prisma.FrameworkEditorFrameworkGetPayload<{
+export type FrameworkWithTemplates = Prisma.FrameworkEditorFrameworkGetPayload<{
   include: {
     requirements: {
       include: {
@@ -89,7 +89,7 @@ export async function backfillFrameworkVersions(): Promise<BackfillResult> {
   return { versionsCreated, instancesBackfilled };
 }
 
-function buildManifestFromFramework(framework: FrameworkWithTemplates) {
+export function buildManifestFromFramework(framework: FrameworkWithTemplates) {
   // Collect all unique control templates across all requirements
   const controlTemplateMap = new Map<
     string,
@@ -126,9 +126,7 @@ function buildManifestFromFramework(framework: FrameworkWithTemplates) {
       id: c.id,
       name: c.name,
       description: c.description,
-      requirementIds: c.requirements
-        .map((r) => r.id)
-        .filter((id) => ownRequirementIds.has(id)),
+      requirementIds: c.requirements.map((r) => r.id).filter((id) => ownRequirementIds.has(id)),
       policyIds: c.policyTemplates.map((p) => p.id),
       taskIds: c.taskTemplates.map((t) => t.id),
       documentTypes: [...c.documentTypes],

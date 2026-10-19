@@ -175,6 +175,13 @@ async function bootstrap(): Promise<void> {
   });
 
   const server = await app.listen(port);
+  // Keep idle keep-alive sockets open longer than Node's 5 s default. Clients that
+  // reuse a connection after a pause (the device agent posts its check-in ~15 s
+  // after registering) otherwise hit a half-closed socket and fail with
+  // "fetch failed" because POSTs are not retried. 65 s also clears the 60 s idle
+  // timeout most load balancers use in front of the API.
+  server.keepAliveTimeout = 65_000;
+  server.headersTimeout = 66_000;
   const address = server.address();
   const actualPort = typeof address === 'string' ? port : address?.port || port;
   const actualUrl = `http://localhost:${actualPort}`;

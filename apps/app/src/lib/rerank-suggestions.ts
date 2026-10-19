@@ -1,4 +1,4 @@
-import { createGatewayProvider } from '@ai-sdk/gateway';
+import { aiModel } from '@/lib/ai/models';
 import { generateObject, jsonSchema } from 'ai';
 
 /**
@@ -38,17 +38,6 @@ export interface RerankedCandidate {
   /** 0-10, returned by the LLM. Higher is more relevant. */
   rerankScore: number;
 }
-
-const gateway = createGatewayProvider({
-  baseURL: process.env.AI_GATEWAY_BASE_URL,
-});
-
-/**
- * GA slug. Never pin a `-preview` alias here: the gateway retires it once the model
- * goes GA, and every rerank call then 404s. Both callers in `run-linkage.ts` swallow that
- * into a cosine-only fallback, so the failure is silent — suggestion quality just degrades.
- */
-const RERANK_MODEL = 'google/gemini-3.1-flash-lite' as const;
 
 const SYSTEM_PROMPT = `You are a GRC analyst evaluating which compliance tasks would meaningfully reduce a specific risk or vendor exposure.
 
@@ -114,7 +103,7 @@ export async function rerankSuggestions({
     .join('\n');
 
   const result = await generateObject({
-    model: gateway(RERANK_MODEL),
+    model: aiModel('fast'),
     system: SYSTEM_PROMPT,
     prompt: userPrompt,
     schema: rerankSchema,

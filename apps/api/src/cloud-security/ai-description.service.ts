@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { generateObject } from 'ai';
-import { anthropic } from '@ai-sdk/anthropic';
+import { AI_MODEL_IDS, aiModel } from '../ai/models';
 import {
   CHECK_DESCRIPTION_SYSTEM_PROMPT,
   buildCheckDescriptionPrompt,
@@ -11,11 +11,11 @@ import {
 } from './ai-description.prompt';
 
 /**
- * Haiku 4.5 — cheap, fast, plenty good for descriptive text. Locked here
+ * Fast tier — cheap, plenty good for descriptive text. Exported here
  * so cache invalidation can detect model upgrades via `modelVersion`.
  */
-export const DESCRIPTION_MODEL_VERSION = 'claude-haiku-4-5';
-const MODEL = anthropic(DESCRIPTION_MODEL_VERSION);
+export const DESCRIPTION_MODEL_VERSION = AI_MODEL_IDS.fast;
+const MODEL = aiModel('fast');
 
 @Injectable()
 export class AiDescriptionService {

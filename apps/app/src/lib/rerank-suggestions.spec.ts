@@ -5,7 +5,7 @@ const { generateObjectMock } = vi.hoisted(() => ({
 }));
 
 vi.mock('@ai-sdk/openai', () => ({
-  openai: () => 'mock-openai-model',
+  openai: (modelId: string) => ({ modelId }),
 }));
 
 vi.mock('ai', () => ({
@@ -13,6 +13,7 @@ vi.mock('ai', () => ({
   jsonSchema: <T>(schema: T) => schema,
 }));
 
+import { AI_MODEL_IDS } from './ai/models';
 import { rerankSuggestions } from './rerank-suggestions';
 
 beforeEach(() => {
@@ -80,10 +81,10 @@ describe('rerankSuggestions', () => {
     expect(byId.tsk_c).toBe(0);
   });
 
-  // Regression: the reranker was pinned to `google/gemini-3.1-flash-lite-preview`. The
-  // gateway retires `-preview` aliases on GA, so every call 404'd — and because both
-  // callers in run-linkage.ts catch and fall back to cosine, nothing surfaced the failure.
-  it('requests a GA model slug, never a -preview alias', async () => {
+  // Regression: the reranker was once pinned to a `-preview` alias the provider retired
+  // on GA, so every call 404'd — and because both callers in run-linkage.ts catch and
+  // fall back to cosine, nothing surfaced the failure. It must use the shared fast tier.
+  it('requests the shared fast-tier model, never a -preview alias', async () => {
     generateObjectMock.mockResolvedValueOnce({ object: { scores: [] } });
 
     await rerankSuggestions({
@@ -92,7 +93,7 @@ describe('rerankSuggestions', () => {
     });
 
     const { model } = generateObjectMock.mock.calls[0][0];
-    expect(model.modelId).toBe('google/gemini-3.1-flash-lite');
+    expect(model.modelId).toBe(AI_MODEL_IDS.fast);
     expect(model.modelId).not.toMatch(/-preview$/);
   });
 

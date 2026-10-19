@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { generateObject } from 'ai';
-import { anthropic } from '@ai-sdk/anthropic';
+import { aiModel } from '../ai/models';
 import { z } from 'zod';
 import {
   type FixPlan,
@@ -28,11 +28,11 @@ import {
 } from './azure-ai-remediation.prompt';
 import { normalizeFixPlan } from './plan-normalizer';
 
-const MODEL = anthropic('claude-opus-4-8');
+const MODEL = aiModel('flagship');
 // Cheaper, faster model for the manual-steps fallback. The output is pure
 // natural language with no SDK-call shape to validate, so the strongest
 // model is overkill — we just need clear instructions.
-const FALLBACK_MODEL = anthropic('claude-sonnet-4-6');
+const FALLBACK_MODEL = aiModel('balanced');
 const REMEDIATION_ROLE_NAME = 'CompAI-Remediator';
 
 export interface FindingContext {

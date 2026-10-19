@@ -33,7 +33,7 @@ import {
   ApiExtraModels,
 } from '@nestjs/swagger';
 import type { Response } from 'express';
-import { openai } from '@ai-sdk/openai';
+import { aiModel } from '../ai/models';
 import { streamText, convertToModelMessages, type UIMessage } from 'ai';
 import { db } from '@db';
 import { auth as triggerAuth, tasks } from '@trigger.dev/sdk';
@@ -1567,7 +1567,7 @@ Keep responses helpful and focused on the policy editing task.`;
     ];
 
     const result = streamText({
-      model: openai('gpt-5.5'),
+      model: aiModel('flagship'),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });

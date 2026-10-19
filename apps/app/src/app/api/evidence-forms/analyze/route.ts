@@ -1,7 +1,7 @@
 import { env } from '@/env.mjs';
 import { serverApi } from '@/lib/api-server';
 import { auth } from '@/utils/auth';
-import { openai } from '@ai-sdk/openai';
+import { aiModel } from '@/lib/ai/models';
 import { generateObject } from 'ai';
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
@@ -185,7 +185,7 @@ For each requirement, determine if the exercise documentation adequately address
 
   try {
     const { object } = await generateObject({
-      model: openai('gpt-4o-mini'),
+      model: aiModel('fast'),
       schema: analysisResultSchema,
       system: systemPrompt,
       prompt: userPrompt,

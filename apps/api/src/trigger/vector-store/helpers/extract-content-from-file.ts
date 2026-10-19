@@ -1,7 +1,6 @@
 import { loadXlsxWorkbook } from '@/utils/load-xlsx';
 import { logger } from '@/vector-store/logger';
-import { anthropic } from '@ai-sdk/anthropic';
-import { openai } from '@ai-sdk/openai';
+import { aiModel } from '../../../ai/models';
 import { generateText } from 'ai';
 import ExcelJS from 'exceljs';
 import mammoth from 'mammoth';
@@ -205,7 +204,7 @@ export async function extractContentFromFile(
 
     try {
       const { text } = await generateText({
-        model: anthropic('claude-sonnet-4-6'),
+        model: aiModel('balanced'),
         messages: [
           {
             role: 'user',
@@ -261,7 +260,7 @@ export async function extractContentFromFile(
 
     try {
       const { text } = await generateText({
-        model: openai('gpt-4o-mini'),
+        model: aiModel('fast'),
         messages: [
           {
             role: 'user',

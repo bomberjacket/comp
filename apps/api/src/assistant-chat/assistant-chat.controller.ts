@@ -19,7 +19,7 @@ import {
   ApiSecurity,
   ApiTags,
 } from '@nestjs/swagger';
-import { openai } from '@ai-sdk/openai';
+import { aiModel } from '../ai/models';
 import {
   streamText,
   convertToModelMessages,
@@ -119,7 +119,7 @@ Important:
 `;
 
       const result = streamText({
-        model: openai('gpt-5'),
+        model: aiModel('balanced'),
         system: systemPrompt,
         messages: await convertToModelMessages(messages),
         tools,

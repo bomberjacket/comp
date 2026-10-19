@@ -1,5 +1,4 @@
-import { openai } from '@ai-sdk/openai';
-import { anthropic } from '@ai-sdk/anthropic';
+import { aiModel } from '../../ai/models';
 import { generateText } from 'ai';
 import ExcelJS from 'exceljs';
 import AdmZip from 'adm-zip';
@@ -9,7 +8,7 @@ import {
   assertXlsxDecompressionWithinLimit,
   loadXlsxWorkbook,
 } from '@/utils/load-xlsx';
-import { PARSING_MODEL, VISION_EXTRACTION_PROMPT } from './constants';
+import { VISION_EXTRACTION_PROMPT } from './constants';
 import { parseQuestionsAndAnswers } from './question-parser';
 
 export interface ContentExtractionLogger {
@@ -794,7 +793,7 @@ async function extractPdfWithClaude(params: {
     label: params.label,
   });
   const { text } = await generateText({
-    model: anthropic('claude-sonnet-4-6'),
+    model: aiModel('balanced'),
     messages: [
       {
         role: 'user',
@@ -822,7 +821,7 @@ async function extractPdfWithOpenAI(params: {
     label: params.label,
   });
   const { text } = await generateText({
-    model: openai(PARSING_MODEL),
+    model: aiModel('fast'),
     messages: [
       {
         role: 'user',
@@ -860,7 +859,7 @@ async function extractFromVision(
 
   try {
     const { text } = await generateText({
-      model: openai(PARSING_MODEL),
+      model: aiModel('fast'),
       messages: [
         {
           role: 'user',

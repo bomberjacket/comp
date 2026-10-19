@@ -1,9 +1,8 @@
-import { openai } from '@ai-sdk/openai';
+import { aiModel } from '../../ai/models';
 import { generateObject, jsonSchema } from 'ai';
 import {
   MAX_CHUNK_SIZE_CHARS,
   MAX_CLASSIFICATION_CONCURRENCY,
-  PARSING_MODEL,
   QUESTION_PARSING_SYSTEM_PROMPT,
 } from './constants';
 
@@ -152,7 +151,7 @@ export async function parseChunkQuestionsAndAnswers(
 ): Promise<QuestionAnswer[]> {
   try {
     const { object } = await generateObject({
-      model: openai(PARSING_MODEL),
+      model: aiModel('fast'),
       schema: jsonSchema({
         type: 'object',
         properties: {

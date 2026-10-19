@@ -3,7 +3,6 @@ import { idempotencyKeys, tasks } from '@trigger.dev/sdk';
 import type { ReactElement } from 'react';
 import type { EmailChannel, sendEmailTask } from '../trigger/email/send-email';
 import type { EmailAttachment } from './resend';
-import { sendEmailDirect, shouldSendDirect } from './send-email-direct';
 
 type TriggerEmailFlags = {
   marketing?: boolean;
@@ -34,25 +33,6 @@ export async function triggerEmail(params: {
     const html = await render(params.react);
 
     const channel = resolveChannel(params);
-
-    if (shouldSendDirect()) {
-      return await sendEmailDirect({
-        to: params.to,
-        subject: params.subject,
-        html,
-        channel,
-        cc: params.cc,
-        scheduledAt: params.scheduledAt,
-        attachments: params.attachments?.map((att) => ({
-          filename: att.filename,
-          content:
-            typeof att.content === 'string'
-              ? att.content
-              : att.content.toString('base64'),
-          contentType: att.contentType,
-        })),
-      });
-    }
 
     // A worker's raw keys default to its run scope. These keys must survive
     // retries and separate submissions for the same pending request.

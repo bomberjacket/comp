@@ -1,0 +1,650 @@
+[
+  {
+    "id": "frk_ct_053b8eb910ce04d0a3b09e1e",
+    "name": "03.04.06 Least Functionality",
+    "description": "a. Configure the system to provide only mission-essential capabilities.\nb. Prohibit or restrict use of the following functions, ports, protocols, connections, and services: [Assignment: organization-defined functions, ports, protocols, connections, and services].\nc. Review the system [Assignment: organization-defined frequency] to identify unnecessary or nonsecure functions, ports, protocols, connections, and services.\nd. Disable or remove functions, ports, protocols, connections, and services that are unnecessary or nonsecure.\n\nRev 2 equivalent: 3.4.6.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.4.7.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_064832ba760aa9fff03bc9ad",
+    "name": "03.06.01 Incident Handling",
+    "description": "Implement an incident-handling capability that is consistent with the incident response plan and includes preparation, detection and analysis, containment, eradication, and recovery.\n\nRev 2 equivalent: 3.6.1.",
+    "controlFamily": "IR - Incident Response"
+  },
+  {
+    "id": "frk_ct_07a1c889565bb815f89ea2bd",
+    "name": "03.16.01 Security Engineering Principles",
+    "description": "Apply the following systems security engineering principles to the development or modification of the system and system components: [Assignment: organization-defined systems security engineering principles].\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "SA - System and Services Acquisition"
+  },
+  {
+    "id": "frk_ct_07bce77c4f272fb55c77e741",
+    "name": "03.04.02 Configuration Settings",
+    "description": "a. Establish, document, and implement the following configuration settings for the system that reflect the most restrictive mode consistent with operational requirements: [Assignment: organization-defined configuration settings].\nb. Identify, document, and approve any deviations from established configuration settings.\n\nRev 2 equivalent: 3.4.2.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_0cd1708c88199f2e17b98d0f",
+    "name": "03.08.07 Media Use",
+    "description": "a. Restrict or prohibit the use of [Assignment: organization-defined types of system media].\nb. Prohibit the use of removable system media without an identifiable owner.\n\nRev 2 equivalent: 3.8.7.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.8.8.",
+    "controlFamily": "MP - Media Protection"
+  },
+  {
+    "id": "frk_ct_0e6c28356040f1f8bab06fb4",
+    "name": "03.05.03 Multi-Factor Authentication",
+    "description": "Implement multi-factor authentication for access to privileged and non-privileged accounts.\n\nRev 2 equivalent: 3.5.3.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_1038277e51f6b179344e5ba8",
+    "name": "03.12.02 Plan of Action and Milestones",
+    "description": "a. Develop a plan of action and milestones for the system:\na.01. To document the planned remediation actions to correct weaknesses or deficiencies noted during security assessments and\na.02. To reduce or eliminate known system vulnerabilities.\nb. Update the existing plan of action and milestones based on the findings from:\nb.01. Security assessments,\nb.02. Audits or reviews, and\nb.03. Continuous monitoring activities.\n\nRev 2 equivalent: 3.12.2.",
+    "controlFamily": "CA - Security Assessment and Monitoring"
+  },
+  {
+    "id": "frk_ct_15336a7a06aee320c36c52c5",
+    "name": "03.04.10 System Component Inventory",
+    "description": "a. Develop and document an inventory of system components.\nb. Review and update the system component inventory [Assignment: organization-defined frequency].\nc. Update the system component inventory as part of installations, removals, and system updates.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_15f656a21095c81132397482",
+    "name": "03.12.03 Continuous Monitoring",
+    "description": "Develop and implement a system-level continuous monitoring strategy that includes ongoing monitoring and security assessments.\n\nRev 2 equivalent: 3.12.3.",
+    "controlFamily": "CA - Security Assessment and Monitoring"
+  },
+  {
+    "id": "frk_ct_19649c9de45b05da5cf6c449",
+    "name": "03.01.22 Publicly Accessible Content",
+    "description": "a. Train authorized individuals to ensure that publicly accessible information does not contain CUI.\nb. Review the content on publicly accessible systems for CUI and remove such information, if discovered.\n\nRev 2 equivalent: 3.1.22.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_1bb3f770820f462d7e134c36",
+    "name": "03.12.05 Information Exchange",
+    "description": "a. Approve and manage the exchange of CUI between the system and other systems using [Selection (one or more): interconnection security agreements; information exchange security agreements; memoranda of understanding or agreement; service-level agreements; user agreements; non-disclosure agreements; other types of agreements].\nb. Document interface characteristics, security requirements, and responsibilities for each system as part of the exchange agreements.\nc. Review and update the exchange agreements [Assignment: organization-defined frequency].\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "CA - Security Assessment and Monitoring"
+  },
+  {
+    "id": "frk_ct_22eb8a8ee5b0d761d1ed3c59",
+    "name": "03.01.18 Access Control for Mobile Devices",
+    "description": "a. Establish usage restrictions, configuration requirements, and connection requirements for mobile devices.\nb. Authorize the connection of mobile devices to the system.\nc. Implement full-device or container-based encryption to protect the confidentiality of CUI on mobile devices.\n\nRev 2 equivalent: 3.1.18.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.1.19.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_23930bda9280766dd4d24c19",
+    "name": "03.08.04 Media Marking",
+    "description": "Mark system media that contain CUI to indicate distribution limitations, handling caveats, and applicable CUI markings.\n\nRev 2 equivalent: 3.8.4.",
+    "controlFamily": "MP - Media Protection"
+  },
+  {
+    "id": "frk_ct_279c26fbfcc4e17fe83cbb8d",
+    "name": "03.12.01 Security Assessment",
+    "description": "Assess the security requirements for the system and its environment of operation [Assignment: organization-defined frequency] to determine if the requirements have been satisfied.\n\nRev 2 equivalent: 3.12.1.",
+    "controlFamily": "CA - Security Assessment and Monitoring"
+  },
+  {
+    "id": "frk_ct_2c6891ef6750cad13418c3ab",
+    "name": "03.04.12 System and Component Configuration for High-Risk Areas",
+    "description": "a. Issue systems or system components with the following configurations to individuals traveling to high-risk locations: [Assignment: organization-defined system configurations].\nb. Apply the following security requirements to the systems or components when the individuals return from travel: [Assignment: organization-defined security requirements].\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_2fe6a06c30194afd7058a113",
+    "name": "03.03.03 Audit Record Generation",
+    "description": "a. Generate audit records for the selected event types and audit record content specified in 03.03.01 and 03.03.02.\nb. Retain audit records for a time period consistent with the records retention policy.\n\nRev 2 equivalent: 3.3.3.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_3376b1bb8d060a56fcedc40c",
+    "name": "3.7.1 System Maintenance (Rev 2 only)",
+    "description": "Perform maintenance on organizational systems.\n\nWithdrawn in NIST SP 800-171 Rev 3: Recategorized as NCO.",
+    "controlFamily": "MA - Maintenance"
+  },
+  {
+    "id": "frk_ct_35792af6ebf001d042ffc405",
+    "name": "3.13.7 Split Tunneling (Rev 2 only)",
+    "description": "Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling).\n\nWithdrawn in NIST SP 800-171 Rev 3: Addressed by 03.01.12, 03.04.02 and 03.04.06.\n\nRelated Rev 3 requirements: 03.01.12 Remote Access, 03.04.02 Configuration Settings, 03.04.06 Least Functionality.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_3a39717cd8a38a4f5332dcef",
+    "name": "03.17.03 Supply Chain Requirements and Processes",
+    "description": "a. Establish a process for identifying and addressing weaknesses or deficiencies in the supply chain elements and processes.\nb. Enforce the following security requirements to protect against supply chain risks to the system, system components, or system services and to limit the harm or consequences from supply chain-related events: [Assignment: organization-defined security requirements].\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "SR - Supply Chain Risk Management"
+  },
+  {
+    "id": "frk_ct_441af6afa493791c9a0c37fa",
+    "name": "3.5.9 Temporary Passwords (Rev 2 only)",
+    "description": "Allow temporary password use for system logons with an immediate change to a permanent password\n\nWithdrawn in NIST SP 800-171 Rev 3: Consistency with SP 800-53.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_4544aaf652e0f1222c00e79c",
+    "name": "03.08.02 Media Access",
+    "description": "Restrict access to CUI on system media to authorized personnel or roles.\n\nRev 2 equivalent: 3.8.2.",
+    "controlFamily": "MP - Media Protection"
+  },
+  {
+    "id": "frk_ct_470a36050b82dfe9a080f577",
+    "name": "03.03.08 Protection of Audit Information",
+    "description": "a. Protect audit information and audit logging tools from unauthorized access, modification, and deletion.\nb. Authorize access to management of audit logging functionality to only a subset of privileged users or roles.\n\nRev 2 equivalent: 3.3.8.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.3.9.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_48ec84c4797523cb9924b115",
+    "name": "03.01.06 Least Privilege – Privileged Accounts",
+    "description": "a. Restrict privileged accounts on the system to [Assignment: organization-defined personnel or roles]..\nb. Require that users (or roles) with privileged accounts use non-privileged accounts when accessing non-security functions or non-security information.\n\nRev 2 equivalent: 3.1.6.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_4dd5425093d0d32be0fe184a",
+    "name": "03.03.04 Response to Audit Logging Process Failures",
+    "description": "a. Alert organizational personnel or roles within [Assignment: organization-defined time period] in the event of an audit logging process failure.\nb. Take the following additional actions: [Assignment: organization-defined additional actions].\n\nRev 2 equivalent: 3.3.4.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_4e727d68dfabe7c4b62cb7b6",
+    "name": "03.01.02 Access Enforcement",
+    "description": "Enforce approved authorizations for logical access to CUI and system resources in accordance with applicable access control policies.\n\nRev 2 equivalent: 3.1.2.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_4e98376eb71f5a40f9a21444",
+    "name": "03.05.02 Device Identification and Authentication",
+    "description": "Uniquely identify and authenticate [Assignment: organization-defined devices or types of devices] before establishing a system connection.\n\nRev 2 equivalent: 3.5.2.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_52c2f0ee974eac6bd20bb917",
+    "name": "03.04.04 Impact Analyses",
+    "description": "a. Analyze changes to the system to determine potential security impacts prior to change implementation.\nb. Verify that the security requirements for the system continue to be satisfied after the system changes have been implemented.\n\nRev 2 equivalent: 3.4.4.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_54fb346f7d660b2373b5817d",
+    "name": "03.05.12 Authenticator Management",
+    "description": "a. Verify the identity of the individual, group, role, service, or device receiving the authenticator as part of the initial authenticator distribution.\nb. Establish initial authenticator content for any authenticators issued by the organization.\nc. Establish and implement administrative procedures for initial authenticator distribution; for lost, compromised, or damaged authenticators; and for revoking authenticators.\nd. Change default authenticators at first use.\ne. Change or refresh authenticators [Assignment: organization-defined frequency] or when the following events occur: [Assignment: organization-defined events].\nf. Protect authenticator content from unauthorized disclosure and modification.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_57a0c43495e9cdfe04962874",
+    "name": "03.10.07 Physical Access Control",
+    "description": "a. Enforce physical access authorizations at entry and exit points to the facility where the system resides by:\na.01. Verifying individual physical access authorizations before granting access to the facility and\na.02. Controlling ingress and egress with physical access control systems, devices, or guards.\nb. Maintain physical access audit logs for entry or exit points.\nc. Escort visitors, and control visitor activity.\nd. Secure keys, combinations, and other physical access devices.\ne. Control physical access to output devices to prevent unauthorized individuals from obtaining access to CUI.\n\nNew in Rev 3 (no Rev 2 equivalent).\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.10.3, 3.10.4, 3.10.5.",
+    "controlFamily": "PE - Physical Protection"
+  },
+  {
+    "id": "frk_ct_5b12ec954714e269835ee974",
+    "name": "3.5.6 Identifier Disabling After Inactivity (Rev 2 only)",
+    "description": "Disable identifiers after a defined period of inactivity.\n\nWithdrawn in NIST SP 800-171 Rev 3: Consistency with SP 800-53.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_612d8b1629dc469f846752ed",
+    "name": "3.1.13 Remote Access Confidentiality (Rev 2 only)",
+    "description": "Employ cryptographic mechanisms to protect the confidentiality of remote access sessions.\n\nWithdrawn in NIST SP 800-171 Rev 3: Addressed by 03.13.08.\n\nRelated Rev 3 requirements: 03.13.08 Transmission and Storage Confidentiality.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_64d2b84e57ae56782a887310",
+    "name": "03.08.05 Media Transport",
+    "description": "a. Protect and control system media that contain CUI during transport outside of controlled areas.\nb. Maintain accountability of system media that contain CUI during transport outside of controlled areas.\nc. Document activities associated with the transport of system media that contain CUI.\n\nRev 2 equivalent: 3.8.5.",
+    "controlFamily": "MP - Media Protection"
+  },
+  {
+    "id": "frk_ct_66fc65b0ac2cb2eb65b78387",
+    "name": "03.13.06 Network Communications – Deny by Default – Allow by Exception",
+    "description": "Deny network communications traffic by default, and allow network communications traffic by exception.\n\nRev 2 equivalent: 3.13.6.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_685f29ac3c04206d13c1e770",
+    "name": "3.13.14 Voice over Internet Protocol Controls (Rev 2 only)",
+    "description": "Control and monitor the use of Voice over Internet Protocol (VoIP) technologies\n\nWithdrawn in NIST SP 800-171 Rev 3: Technology-specific.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_719a5138a263e38686ee7824",
+    "name": "03.13.01 Boundary Protection",
+    "description": "a. Monitor and control communications at external managed interfaces to the system and key internal managed interfaces within the system.\nb. Implement subnetworks for publicly accessible system components that are physically or logically separated from internal networks.\nc. Connect to external systems only through managed interfaces that consist of boundary protection devices arranged in accordance with an organizational security architecture.\n\nRev 2 equivalent: 3.13.1.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.13.5.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_71f994ef0436b1b66cce1aec",
+    "name": "03.01.12 Remote Access",
+    "description": "a. Establish usage restrictions, configuration requirements, and connection requirements for each type of allowable remote system access.\nb. Authorize each type of remote system access prior to establishing such connections.\nc. Route remote access to the system through authorized and managed access control points.\nd. Authorize the remote execution of privileged commands and remote access to security-relevant information.\n\nRev 2 equivalent: 3.1.12.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.1.14, 3.1.15.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_7541de2373f75ba0989743da",
+    "name": "03.05.11 Authentication Feedback",
+    "description": "Obscure feedback of authentication information during the authentication process.\n\nRev 2 equivalent: 3.5.11.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_76c6b7153aac32d0c1549ca3",
+    "name": "03.01.07 Least Privilege – Privileged Functions",
+    "description": "a. Prevent non-privileged users from executing privileged functions.\nb. Log the execution of privileged functions.\n\nRev 2 equivalent: 3.1.7.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_77800b346e6a983b68e25210",
+    "name": "03.13.08 Transmission and Storage Confidentiality",
+    "description": "Implement cryptographic mechanisms to prevent the unauthorized disclosure of CUI during transmission and while in storage.\n\nRev 2 equivalent: 3.13.8.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.8.6, 3.13.16.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_77d6d6f1f1591d3f1151f2ef",
+    "name": "03.15.03 Rules of Behavior",
+    "description": "a. Establish rules that describe the responsibilities and expected behavior for system usage and protecting CUI.\nb. Provide rules to individuals who require access to the system.\nc. Receive a documented acknowledgement from individuals indicating that they have read, understand, and agree to abide by the rules of behavior before authorizing access to CUI and the system.\nd. Review and update the rules of behavior [Assignment: organization-defined frequency].\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "PL - Planning"
+  },
+  {
+    "id": "frk_ct_783c4ff7f79fc1d9a598e9e7",
+    "name": "03.06.04 Incident Response Training",
+    "description": "a. Provide incident response training to system users consistent with assigned roles and responsibilities:\na.01. Within [Assignment: organization-defined time period] of assuming an incident response role or responsibility or acquiring system access,\na.02. When required by system changes, and\na.03. [Assignment: organization-defined frequency] thereafter.\nb. Review and update incident response training content [Assignment: organization-defined frequency] and following [Assignment: organization-defined events].\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "IR - Incident Response"
+  },
+  {
+    "id": "frk_ct_7a3c5fabf2fb70ff8d047ca1",
+    "name": "03.01.05 Least Privilege",
+    "description": "a. Allow only authorized system access for users (or processes acting on behalf of users) that is necessary to accomplish assigned organizational tasks.\nb. Authorize access to [Assignment: organization-defined security functions] and [Assignment: organization-defined security-relevant information].\nc. Review the privileges assigned to roles or classes of users [Assignment: organization-defined frequency] to validate the need for such privileges.\nd. Reassign or remove privileges, as necessary.\n\nRev 2 equivalent: 3.1.5.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_7b6e15dae7cc6ad9fa82c12a",
+    "name": "03.06.03 Incident Response Testing",
+    "description": "Test the effectiveness of the incident response capability [Assignment: organization-defined frequency].\n\nRev 2 equivalent: 3.6.3.",
+    "controlFamily": "IR - Incident Response"
+  },
+  {
+    "id": "frk_ct_7cb1e22be1030e74a1ec9156",
+    "name": "3.13.2 Security Engineering Principles (Rev 2 only)",
+    "description": "Employ architectural designs, software development techniques, and systems engineering principles that promote effective information security within organizational systems.\n\nWithdrawn in NIST SP 800-171 Rev 3: Recategorized as NCO.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_80e4da61cf07c2bbc6086657",
+    "name": "03.17.01 Supply Chain Risk Management Plan",
+    "description": "a. Develop a plan for managing supply chain risks associated with the research and development, design, manufacturing, acquisition, delivery, integration, operations, maintenance, and disposal of the system, system components, or system services.\nb. Review and update the supply chain risk management plan [Assignment: organization-defined frequency].\nc. Protect the supply chain risk management plan from unauthorized disclosure.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "SR - Supply Chain Risk Management"
+  },
+  {
+    "id": "frk_ct_82541a6f379d98c116f045e3",
+    "name": "03.10.02 Monitoring Physical Access",
+    "description": "a. Monitor physical access to the facility where the system resides to detect and respond to physical security incidents.\nb. Review physical access logs [Assignment: organization-defined frequency] and upon occurrence of [Assignment: organization-defined events or potential indications of events].\n\nRev 2 equivalent: 3.10.2.",
+    "controlFamily": "PE - Physical Protection"
+  },
+  {
+    "id": "frk_ct_832579202d075cb0f80d0b31",
+    "name": "03.04.05 Access Restrictions for Change",
+    "description": "Define, document, approve, and enforce physical and logical access restrictions associated with changes to the system.\n\nRev 2 equivalent: 3.4.5.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_84f3e57fe25be9695dedd505",
+    "name": "03.01.16 Wireless Access",
+    "description": "a. Establish usage restrictions, configuration requirements, and connection requirements for each type of wireless access to the system.\nb. Authorize each type of wireless access to the system prior to establishing such connections.\nc. Disable, when not intended for use, wireless networking capabilities prior to issuance and deployment.\nd. Protect wireless access to the system using authentication and encryption.\n\nRev 2 equivalent: 3.1.16.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.1.17.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_87dd7089aed02dbbf3276fa3",
+    "name": "03.13.09 Network Disconnect",
+    "description": "Terminate the network connection associated with a communications session at the end of the session or after [Assignment: organization-defined time period] of inactivity.\n\nRev 2 equivalent: 3.13.9.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_891510fb04219acd6a504de9",
+    "name": "3.5.8 Password Reuse Restriction (Rev 2 only)",
+    "description": "Prohibit password reuse for a specified number of generations.\n\nWithdrawn in NIST SP 800-171 Rev 3: Consistency with SP 800-53.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_8cdec6c2436cb41ffa0081dc",
+    "name": "03.09.01 Personnel Screening",
+    "description": "a. Screen individuals prior to authorizing access to the system.\nb. Rescreen individuals in accordance with [Assignment: organization-defined conditions requiring rescreening].\n\nRev 2 equivalent: 3.9.1.",
+    "controlFamily": "PS - Personnel Security"
+  },
+  {
+    "id": "frk_ct_8ce7be2678e0a8fc35a91ab2",
+    "name": "3.4.9 User-Installed Software (Rev 2 only)",
+    "description": "Control and monitor user-installed software.\n\nWithdrawn in NIST SP 800-171 Rev 3: Addressed by 03.01.05, 03.01.06, 03.01.07, 03.04.08, and 03.12.03.\n\nRelated Rev 3 requirements: 03.01.05 Least Privilege, 03.01.06 Least Privilege – Privileged Accounts, 03.01.07 Least Privilege – Privileged Functions, 03.04.08 Authorized Software – Allow by Exception, 03.12.03 Continuous Monitoring.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_8da84de1f0a39d3f4ca6ea0b",
+    "name": "03.15.02 System Security Plan",
+    "description": "a. Develop a system security plan that:\na.01. Defines the constituent system components;\na.02. Identifies the information types processed, stored, and transmitted by the system;\na.03. Describes specific threats to the system that are of concern to the organization;\na.04. Describes the operational environment for the system and any dependencies on or connections to other systems or system components;\na.05. Provides an overview of the security requirements for the system;\na.06. Describes the safeguards in place or planned for meeting the security requirements;\na.07. Identifies individuals that fulfill system roles and responsibilities; and\na.08. Includes other relevant information necessary for the protection of CUI.\nb. Review and update the system security plan [Assignment: organization-defined frequency].\nc. Protect the system security plan from unauthorized disclosure.\n\nNew in Rev 3 (no Rev 2 equivalent).\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.12.4.",
+    "controlFamily": "PL - Planning"
+  },
+  {
+    "id": "frk_ct_8e663618e36ccc78cbb45719",
+    "name": "03.15.01 Policy and Procedures",
+    "description": "a. Develop, document, and disseminate to organizational personnel or roles the policies and procedures needed to satisfy the security requirements for the protection of CUI.\nb. Review and update policies and procedures [Assignment: organization-defined frequency].\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "PL - Planning"
+  },
+  {
+    "id": "frk_ct_8f028b07cb7124f7a3eec81e",
+    "name": "03.06.05 Incident Response Plan",
+    "description": "a. Develop an incident response plan that:\na.01. Provides the organization with a roadmap for implementing its incident response capability,\na.02. Describes the structure and organization of the incident response capability,\na.03. Provides a high-level approach for how the incident response capability fits into the overall organization,\na.04. Defines reportable incidents,\na.05. Addresses the sharing of incident information, and\na.06. Designates responsibilities to organizational entities, personnel, or roles.\nb. Distribute copies of the incident response plan to designated incident response personnel (identified by name and/or by role) and organizational elements.\nc. Update the incident response plan to address system and organizational changes or problems encountered during plan implementation, execution, or testing.\nd. Protect the incident response plan from unauthorized disclosure.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "IR - Incident Response"
+  },
+  {
+    "id": "frk_ct_9062ee5975ef2917052c3915",
+    "name": "03.05.04 Replay-Resistant Authentication",
+    "description": "Implement replay-resistant authentication mechanisms for access to privileged and non-privileged accounts.\n\nRev 2 equivalent: 3.5.4.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_910a54aa8045f66a2d818097",
+    "name": "03.04.03 Configuration Change Control",
+    "description": "a. Define the types of changes to the system that are configuration-controlled.\nb. Review proposed configuration-controlled changes to the system, and approve or disapprove such changes with explicit consideration for security impacts.\nc. Implement and document approved configuration-controlled changes to the system.\nd. Monitor and review activities associated with configuration-controlled changes to the system.\n\nRev 2 equivalent: 3.4.3.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_93249ea8f9b1b99ed20438f2",
+    "name": "3.14.5 Periodic and Real-Time Scans (Rev 2 only)",
+    "description": "Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed.\n\nWithdrawn in NIST SP 800-171 Rev 3: Addressed by 03.14.02.\n\nRelated Rev 3 requirements: 03.14.02 Malicious Code Protection.",
+    "controlFamily": "SI - System and Information Integrity"
+  },
+  {
+    "id": "frk_ct_953b0a7c82d66adf573e084f",
+    "name": "03.07.04 Maintenance Tools",
+    "description": "a. Approve, control, and monitor the use of system maintenance tools.\nb. Check media with diagnostic and test programs for malicious code before it is used in the system.\nc. Prevent the removal of system maintenance equipment containing CUI by verifying that there is no CUI on the equipment, sanitizing or destroying the equipment, or retaining the equipment within the facility.\n\nRev 2 equivalent: 3.7.4.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.7.2.",
+    "controlFamily": "MA - Maintenance"
+  },
+  {
+    "id": "frk_ct_9550e0e02b470bbee2922dca",
+    "name": "03.02.01 Literacy Training and Awareness",
+    "description": "a. Provide security literacy training to system users:\na.01. As part of initial training for new users and [Assignment: organization-defined frequency] thereafter,\na.02. When required by system changes or following [Assignment: organization-defined events], and\na.03. On recognizing and reporting indicators of insider threat, social engineering, and social mining.\nb. Update security literacy training content [Assignment: organization-defined frequency] and following [Assignment: organization-defined events].\n\nRev 2 equivalent: 3.2.1.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.2.3.",
+    "controlFamily": "AT - Awareness and Training"
+  },
+  {
+    "id": "frk_ct_960d35c14ec1211eab45cd28",
+    "name": "03.01.01 Account Management",
+    "description": "a. Define the types of system accounts allowed and prohibited.\nb. Create, enable, modify, disable, and remove system accounts in accordance with policy, procedures, prerequisites, and criteria.\nc. Specify:\nc.01. Authorized users of the system,\nc.02. Group and role membership, and\nc.03. Access authorizations (i.e., privileges) for each account.\nd. Authorize access to the system based on:\nd.01. A valid access authorization and\nd.02. Intended system usage.\ne. Monitor the use of system accounts.\nf. Disable system accounts when:\nf.01. The accounts have expired,\nf.02. The accounts have been inactive for [Assignment: organization-defined time period],\nf.03. The accounts are no longer associated with a user or individual,\nf.04. The accounts are in violation of organizational policy, or\nf.05. Significant risks associated with individuals are discovered.\ng. Notify account managers and designated personnel or roles within:\ng.01. [Assignment: organization-defined time period] when accounts are no longer required.\ng.02. [Assignment: organization-defined time period] when users are terminated or transferred.\ng.03. [Assignment: organization-defined time period] when system usage or the need-to-know changes for an individual.\nh. Require that users log out of the system after [Assignment: organization-defined time period] of expected inactivity or when [Assignment: organization-defined circumstances].\n\nRev 2 equivalent: 3.1.1.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_96111f7edbef21748545f72c",
+    "name": "03.01.09 System Use Notification",
+    "description": "Display a system use notification message with privacy and security notices consistent with applicable CUI rules before granting access to the system.\n\nRev 2 equivalent: 3.1.9.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_96e1c02aff5d56a5aca19eee",
+    "name": "03.14.06 System Monitoring",
+    "description": "a. Monitor the system to detect:\na.01. Attacks and indicators of potential attacks and\na.02. Unauthorized connections.\nb. Identify unauthorized use of the system.\nc. Monitor inbound and outbound communications traffic to detect unusual or unauthorized activities or conditions.\n\nRev 2 equivalent: 3.14.6.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.14.7.",
+    "controlFamily": "SI - System and Information Integrity"
+  },
+  {
+    "id": "frk_ct_9722c549a9c5838ad4f4d76e",
+    "name": "03.03.05 Audit Record Review, Analysis, and Reporting",
+    "description": "a. Review and analyze system audit records [Assignment: organization-defined frequency] for indications and the potential impact of inappropriate or unusual activity.\nb. Report findings to organizational personnel or roles.\nc. Analyze and correlate audit records across different repositories to gain organization-wide situational awareness.\n\nRev 2 equivalent: 3.3.5.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_98a1d0cfd626a9bf06090077",
+    "name": "03.13.15 Session Authenticity",
+    "description": "Protect the authenticity of communications sessions.\n\nRev 2 equivalent: 3.13.15.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_9934405ec14c3a84d80526f1",
+    "name": "03.13.13 Mobile Code",
+    "description": "a. Define acceptable mobile code and mobile code technologies.\nb. Authorize, monitor, and control the use of mobile code.\n\nRev 2 equivalent: 3.13.13.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_9bd51b86770cb5be10c2eb04",
+    "name": "03.03.01 Event Logging",
+    "description": "a. Specify the following event types selected for logging within the system: [Assignment: organization-defined event types].\nb. Review and update the event types selected for logging [Assignment: organization-defined frequency].\n\nRev 2 equivalent: 3.3.1.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_9ecc39c92667c0dc129932f1",
+    "name": "03.01.11 Session Termination",
+    "description": "Terminate a user session automatically after [Assignment: organization-defined conditions or trigger events requiring session disconnect].\n\nRev 2 equivalent: 3.1.11.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_a1942a4199b3841d550653f4",
+    "name": "03.03.02 Audit Record Content",
+    "description": "a. Include the following content in audit records:\na.01. What type of event occurred\na.02. When the event occurred\na.03. Where the event occurred\na.04. Source of the event\na.05. Outcome of the event\na.06. Identity of the individuals, subjects, objects, or entities associated with the event\nb. Provide additional information for audit records as needed.\n\nRev 2 equivalent: 3.3.2.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_a4c3d7b53e7aeb9e7b44b3b6",
+    "name": "03.04.01 Baseline Configuration",
+    "description": "a. Develop and maintain under configuration control, a current baseline configuration of the system.\nb. Review and update the baseline configuration of the system [Assignment: organization-defined frequency] and when system components are installed or modified.\n\nRev 2 equivalent: 3.4.1.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_a7b0b90b1f3caeef7868597a",
+    "name": "03.04.08 Authorized Software – Allow by Exception",
+    "description": "a. Identify software programs authorized to execute on the system.\nb. Implement a deny-all, allow-by-exception policy for the execution of authorized software programs on the system.\nc. Review and update the list of authorized software programs [Assignment: organization-defined frequency].\n\nRev 2 equivalent: 3.4.8.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.4.7.",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_a8bb48dcc1bd971c14a36c59",
+    "name": "03.10.08 Access Control for Transmission",
+    "description": "Control physical access to system distribution and transmission lines within organizational facilities.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "PE - Physical Protection"
+  },
+  {
+    "id": "frk_ct_b2e45457bc178196aa77acae",
+    "name": "03.14.08 Information Management and Retention",
+    "description": "Manage and retain CUI within the system and CUI output from the system in accordance with applicable laws, Executive Orders, directives, regulations, policies, standards, guidelines, and operational requirements.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "SI - System and Information Integrity"
+  },
+  {
+    "id": "frk_ct_b4466bf1dbf4f29e610bdf27",
+    "name": "03.10.01 Physical Access Authorizations",
+    "description": "a. Develop, approve, and maintain a list of individuals with authorized access to the facility where the system resides.\nb. Issue authorization credentials for facility access.\nc. Review the facility access list [Assignment: organization-defined frequency].\nd. Remove individuals from the facility access list when access is no longer required.\n\nRev 2 equivalent: 3.10.1.",
+    "controlFamily": "PE - Physical Protection"
+  },
+  {
+    "id": "frk_ct_b5d177b2a2c04dec376f51c4",
+    "name": "03.05.07 Password Management",
+    "description": "a. Maintain a list of commonly-used, expected, or compromised passwords, and update the list [Assignment: organization-defined frequency] and when organizational passwords are suspected to have been compromised.\nb. Verify that passwords are not found on the list of commonly used, expected, or compromised passwords when users create or update passwords.\nc. Transmit passwords only over cryptographically protected channels.\nd. Store passwords in a cryptographically protected form.\ne. Select a new password upon first use after account recovery.\nf. Enforce the following composition and complexity rules for passwords: [Assignment: organization-defined composition and complexity rules].\n\nRev 2 equivalent: 3.5.7.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.5.10.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_b664240e19c6037de1e64c9d",
+    "name": "03.01.04 Separation of Duties",
+    "description": "a. Identify the duties of individuals requiring separation.\nb. Define system access authorizations to support separation of duties.\n\nRev 2 equivalent: 3.1.4.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_b7ad8901577c514f745fbad1",
+    "name": "03.01.03 Information Flow Enforcement",
+    "description": "Enforce approved authorizations for controlling the flow of CUI within the system and between connected systems.\n\nRev 2 equivalent: 3.1.3.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_bcb95903005d5de36b730b7a",
+    "name": "03.11.02 Vulnerability Monitoring and Scanning",
+    "description": "a. Monitor and scan the system for vulnerabilities [Assignment: organization-defined frequency] and when new vulnerabilities affecting the system are identified.\nb. Remediate system vulnerabilities within [Assignment: organization-defined response times].\nc. Update system vulnerabilities to be scanned [Assignment: organization-defined frequency] and when new vulnerabilities are identified and reported.\n\nRev 2 equivalent: 3.11.2.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.11.3.",
+    "controlFamily": "RA - Risk Assessment"
+  },
+  {
+    "id": "frk_ct_bd2186ca3a015c9027c72980",
+    "name": "03.02.02 Role-Based Training",
+    "description": "a. Provide role-based security training to organizational personnel:\na.01. Before authorizing access to the system or CUI, before performing assigned duties, and [Assignment: organization-defined frequency] thereafter\na.02. When required by system changes or following [Assignment: organization-defined events].\nb. Update role-based training content [Assignment: organization-defined frequency] and following [Assignment: organization-defined events].\n\nRev 2 equivalent: 3.2.2.",
+    "controlFamily": "AT - Awareness and Training"
+  },
+  {
+    "id": "frk_ct_bd7d8d5fe8a4f5a5ee3b4869",
+    "name": "03.08.01 Media Storage",
+    "description": "Physically control and securely store system media that contain CUI.\n\nRev 2 equivalent: 3.8.1.",
+    "controlFamily": "MP - Media Protection"
+  },
+  {
+    "id": "frk_ct_c08ad0e47bf982a44f66bee8",
+    "name": "03.13.12 Collaborative Computing Devices and Applications",
+    "description": "a. Prohibit the remote activation of collaborative computing devices and applications with the following exceptions: [Assignment: organization-defined exceptions where remote activation is to be allowed].\nb. Provide an explicit indication of use to users physically present at the devices.\n\nRev 2 equivalent: 3.13.12.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_c13c2e9268706a2a1631b6d0",
+    "name": "03.10.06 Alternate Work Site",
+    "description": "a. Determine alternate work sites allowed for use by employees.\nb. Employ the following security requirements at alternate work sites: [Assignment: organization-defined security requirements].\n\nRev 2 equivalent: 3.10.6.",
+    "controlFamily": "PE - Physical Protection"
+  },
+  {
+    "id": "frk_ct_c45e10b0c2f7e4a50821ff9b",
+    "name": "03.11.04 Risk Response",
+    "description": "Respond to findings from security assessments, monitoring, and audits.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "RA - Risk Assessment"
+  },
+  {
+    "id": "frk_ct_c7a0097ed8bd1c920a7fca27",
+    "name": "03.01.10 Device Lock",
+    "description": "a. Prevent access to the system by [Selection (one or more): initiating a device lock after [Assignment: organization-defined time period] of inactivity; requiring the user to initiate a device lock before leaving the system unattended].\nb. Retain the device lock until the user reestablishes access using established identification and authentication procedures.\nc. Conceal, via the device lock, information previously visible on the display with a publicly viewable image.\n\nRev 2 equivalent: 3.1.10.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_c86c7fb008a31aafcc7479af",
+    "name": "03.05.01 User Identification and Authentication",
+    "description": "a. Uniquely identify and authenticate system users, and associate that unique identification with processes acting on behalf of those users.\nb. Re-authenticate users when [Assignment: organization-defined circumstances or situations requiring re-authentication].\n\nRev 2 equivalent: 3.5.1.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_c9c9755ae25052f6d293c751",
+    "name": "03.09.02 Personnel Termination and Transfer",
+    "description": "a. When individual employment is terminated:\na.01. Disable system access within [Assignment: organization-defined time period],\na.02. Terminate or revoke authenticators and credentials associated with the individual, and\na.03. Retrieve security-related system property.\nb. When individuals are reassigned or transferred to other positions in the organization:\nb.01. Review and confirm the ongoing operational need for current logical and physical access authorizations to the system and facility, and\nb.02. Modify access authorization to correspond with any changes in operational need.\n\nRev 2 equivalent: 3.9.2.",
+    "controlFamily": "PS - Personnel Security"
+  },
+  {
+    "id": "frk_ct_cae7ce892f5eac3b653d0741",
+    "name": "03.01.20 Use of External Systems",
+    "description": "a. Prohibit the use of external systems unless the systems are specifically authorized.\nb. Establish the following security requirements to be satisfied on external systems prior to allowing use of or access to those systems by authorized individuals: [Assignment: organization-defined security requirements].\nc. Permit authorized individuals to use external systems to access the organizational system or to process, store, or transmit CUI only after:\nc.01. Verifying that the security requirements on the external systems as specified in the organization’s system security plans have been satisfied and\nc.02. Retaining approved system connection or processing agreements with the organizational entities hosting the external systems.\nd. Restrict the use of organization-controlled portable storage devices by authorized individuals on external systems.\n\nRev 2 equivalent: 3.1.20.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.1.21.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_ccc97dcfed5db62f40ae9ca0",
+    "name": "03.14.03 Security Alerts, Advisories, and Directives",
+    "description": "a. Receive system security alerts, advisories, and directives from external organizations on an ongoing basis.\nb. Generate and disseminate internal system security alerts, advisories, and directives, as necessary.\n\nRev 2 equivalent: 3.14.3.",
+    "controlFamily": "SI - System and Information Integrity"
+  },
+  {
+    "id": "frk_ct_cf2b75f1e7036f364de24627",
+    "name": "03.07.05 Nonlocal Maintenance",
+    "description": "a. Approve and monitor nonlocal maintenance and diagnostic activities.\nb. Implement multi-factor authentication and replay resistance in the establishment of nonlocal maintenance and diagnostic sessions.\nc. Terminate session and network connections when nonlocal maintenance is completed.\n\nRev 2 equivalent: 3.7.5.",
+    "controlFamily": "MA - Maintenance"
+  },
+  {
+    "id": "frk_ct_d62db61c1728a265dcf52803",
+    "name": "03.01.08 Unsuccessful Logon Attempts",
+    "description": "a. Enforce a limit of [Assignment: organization-defined number] consecutive invalid logon attempts by a user during a [Assignment: organization-defined time period].\nb. Automatically [Selection (one or more): lock the account or node for an [Assignment: organization-defined time period]; lock the account or node until released by an administrator; delay next logon prompt; notify system administrator; take other action] when the maximum number of unsuccessful attempts is exceeded.\n\nRev 2 equivalent: 3.1.8.",
+    "controlFamily": "AC - Access Control"
+  },
+  {
+    "id": "frk_ct_d6ba42c0f0b1adda29883dd8",
+    "name": "03.04.11 Information Location",
+    "description": "a. Identify and document the location of CUI and the system components on which the information is processed and stored.\nb. Document changes to the system or system component location where CUI is processed and stored.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "CM - Configuration Management"
+  },
+  {
+    "id": "frk_ct_d89ffe29de356a02d32dd31e",
+    "name": "03.11.01 Risk Assessment",
+    "description": "a. Assess the risk (including supply chain risk) of unauthorized disclosure resulting from the processing, storage, or transmission of CUI.\nb. Update risk assessments [Assignment: organization-defined frequency].\n\nRev 2 equivalent: 3.11.1.",
+    "controlFamily": "RA - Risk Assessment"
+  },
+  {
+    "id": "frk_ct_dbc663209619d9b97277b546",
+    "name": "03.13.04 Information in Shared System Resources",
+    "description": "Prevent unauthorized and unintended information transfer via shared system resources.\n\nRev 2 equivalent: 3.13.4.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_dced352060bba948f665f064",
+    "name": "03.14.02 Malicious Code Protection",
+    "description": "a. Implement malicious code protection mechanisms at system entry and exit points to detect and eradicate malicious code.\nb. Update malicious code protection mechanisms as new releases are available in accordance with configuration management policies and procedures.\nc. Configure malicious code protection mechanisms to:\nc.01. Perform scans of the system [Assignment: organization-defined frequency] and real-time scans of files from external sources at endpoints or system entry and exit points as the files are downloaded, opened, or executed; and\nc.02. Block malicious code, quarantine malicious code, or take other mitigation actions in response to malicious code detection.\n\nRev 2 equivalent: 3.14.2.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.14.4.",
+    "controlFamily": "SI - System and Information Integrity"
+  },
+  {
+    "id": "frk_ct_de0e9561412badc11865ddeb",
+    "name": "03.14.01 Flaw Remediation",
+    "description": "a. Identify, report, and correct system flaws.\nb. Install security-relevant software and firmware updates within [Assignment: organization-defined time period] of the release of the updates.\n\nRev 2 equivalent: 3.14.1.",
+    "controlFamily": "SI - System and Information Integrity"
+  },
+  {
+    "id": "frk_ct_de884c542bfc4158150a42fd",
+    "name": "03.13.10 Cryptographic Key Establishment and Management",
+    "description": "Establish and manage cryptographic keys in the system in accordance with the following key management requirements: [Assignment: organization-defined requirements for key generation, distribution, storage, access, and destruction].\n\nRev 2 equivalent: 3.13.10.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_df42bcffb1e6093c01864288",
+    "name": "3.13.3 Separation of User and System Management Functionality (Rev 2 only)",
+    "description": "Separate user functionality from system management functionality.\n\nWithdrawn in NIST SP 800-171 Rev 3: Addressed by 03.01.01, 03.01.02, 03.01.03, 03.01.04, 03.01.05, 03.01.06, and 03.01.07.\n\nRelated Rev 3 requirements: 03.01.01 Account Management, 03.01.02 Access Enforcement, 03.01.03 Information Flow Enforcement, 03.01.04 Separation of Duties, 03.01.05 Least Privilege, 03.01.06 Least Privilege – Privileged Accounts, 03.01.07 Least Privilege – Privileged Functions.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_e1bf5897290e09eb20688f0c",
+    "name": "03.06.02 Incident Monitoring, Reporting, and Response Assistance",
+    "description": "a. Track and document system security incidents.\nb. Report suspected incidents to the organizational incident response capability within [Assignment: organization-defined time period].\nc. Report incident information to [Assignment: organization-defined authorities].\nd. Provide an incident response support resource that offers advice and assistance to system users on handling and reporting incidents.\n\nRev 2 equivalent: 3.6.2.",
+    "controlFamily": "IR - Incident Response"
+  },
+  {
+    "id": "frk_ct_e9acb377d0f4f32ebd828845",
+    "name": "03.16.03 External System Services",
+    "description": "a. Require the providers of external system services used for the processing, storage, or transmission of CUI to comply with the following security requirements: [Assignment: organization-defined security requirements].\nb. Define and document user roles and responsibilities with regard to external system services, including shared responsibilities with external service providers.\nc. Implement processes, methods, and techniques to monitor security requirement compliance by external service providers on an ongoing basis.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "SA - System and Services Acquisition"
+  },
+  {
+    "id": "frk_ct_e9c02dd28bc522d55912e9ff",
+    "name": "03.07.06 Maintenance Personnel",
+    "description": "a. Establish a process for maintenance personnel authorization.\nb. Maintain a list of authorized maintenance organizations or personnel.\nc. Verify that non-escorted personnel who perform maintenance on the system possess the required access authorizations.\nd. Designate organizational personnel with required access authorizations and technical competence to supervise the maintenance activities of personnel who do not possess the required access authorizations.\n\nRev 2 equivalent: 3.7.6.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.7.2.",
+    "controlFamily": "MA - Maintenance"
+  },
+  {
+    "id": "frk_ct_ea9cb7d2f77675a65a6e92e1",
+    "name": "03.03.06 Audit Record Reduction and Report Generation",
+    "description": "a. Implement an audit record reduction and report generation capability that supports audit record review, analysis, reporting requirements, and after-the-fact investigations of incidents.\nb. Preserve the original content and time ordering of audit records.\n\nRev 2 equivalent: 3.3.6.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_eac1d59b542c695123de5d8b",
+    "name": "03.17.02 Acquisition Strategies, Tools, and Methods",
+    "description": "Develop and implement acquisition strategies, contract tools, and procurement methods to identify, protect against, and mitigate supply chain risks.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "SR - Supply Chain Risk Management"
+  },
+  {
+    "id": "frk_ct_ed4c279725ec4526a1566989",
+    "name": "03.05.05 Identifier Management",
+    "description": "a. Receive authorization from organizational personnel or roles to assign an individual, group, role, service, or device identifier.\nb. Select and assign an identifier that identifies an individual, group, role, service, or device.\nc. Prevent the reuse of identifiers for [Assignment: organization-defined time period].\nd. Manage individual identifiers by uniquely identifying each individual as [Assignment: organization-defined characteristic identifying individual status].\n\nRev 2 equivalent: 3.5.5.",
+    "controlFamily": "IA - Identification and Authentication"
+  },
+  {
+    "id": "frk_ct_f439fa17af257deb756d777a",
+    "name": "03.16.02 Unsupported System Components",
+    "description": "a. Replace system components when support for the components is no longer available from the developer, vendor, or manufacturer.\nb. Provide options for risk mitigation or alternative sources for continued support for unsupported components that cannot be replaced.\n\nNew in Rev 3 (no Rev 2 equivalent).",
+    "controlFamily": "SA - System and Services Acquisition"
+  },
+  {
+    "id": "frk_ct_f6da76c8a246db4e49691137",
+    "name": "03.03.07 Time Stamps",
+    "description": "a. Use internal system clocks to generate time stamps for audit records.\nb. Record time stamps for audit records that meet [Assignment: organization-defined granularity of time measurement] and that use Coordinated Universal Time (UTC), have a fixed local time offset from UTC, or include the local time offset as part of the time stamp.\n\nRev 2 equivalent: 3.3.7.",
+    "controlFamily": "AU - Audit and Accountability"
+  },
+  {
+    "id": "frk_ct_f83d9d6d035d80fbf0c5b791",
+    "name": "03.08.09 System Backup – Cryptographic Protection",
+    "description": "a. Protect the confidentiality of backup information.\nb. Implement cryptographic mechanisms to prevent the unauthorized disclosure of CUI at backup storage locations.\n\nRev 2 equivalent: 3.8.9.",
+    "controlFamily": "MP - Media Protection"
+  },
+  {
+    "id": "frk_ct_fc469c0573630ee79097a7dc",
+    "name": "03.13.11 Cryptographic Protection",
+    "description": "Implement the following types of cryptography to protect the confidentiality of CUI: [Assignment: organization-defined types of cryptography].\n\nRev 2 equivalent: 3.13.11.",
+    "controlFamily": "SC - System and Communications Protection"
+  },
+  {
+    "id": "frk_ct_ffe3a69ff72a4f12834fd392",
+    "name": "03.08.03 Media Sanitization",
+    "description": "Sanitize system media that contain CUI prior to disposal, release out of organizational control, or release for reuse.\n\nRev 2 equivalent: 3.8.3.\n\nAlso satisfies Rev 2 requirements withdrawn into this one: 3.7.3.",
+    "controlFamily": "MP - Media Protection"
+  }
+]

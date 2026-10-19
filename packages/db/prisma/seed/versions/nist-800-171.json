@@ -1,0 +1,12 @@
+[
+  {
+    "frameworkId": "frk_094af66195e51e2ccd00e7e8",
+    "version": "1.0.0",
+    "releaseNotes": "Initial NIST SP 800-171 Rev 2 release: 320 assessment objectives from SP 800-171A."
+  },
+  {
+    "frameworkId": "frk_062c0788fae6f9494f86b876",
+    "version": "1.0.0",
+    "releaseNotes": "Initial NIST SP 800-171 Rev 3 release: 422 determination statements and 88 organization-defined parameters from SP 800-171A Rev 3."
+  }
+]

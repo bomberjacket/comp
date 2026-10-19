@@ -6,7 +6,7 @@ import { integrationPlatformExtension } from './integrationPlatformExtension';
 
 export default defineConfig({
   runtime: 'node-22',
-  project: 'proj_zhioyrusqertqgafqgpj', // API project
+  project: 'proj_swugzsialqjdadycdaoa', // API project (BNI Trigger.dev project "Evy"; upstream: proj_zhioyrusqertqgafqgpj)
   logLevel: 'log',
   maxDuration: 300, // 5 minutes
   build: {

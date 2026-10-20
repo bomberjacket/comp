@@ -19,7 +19,9 @@ const TASK_TEMPLATES_PATH = join(
   '../../../packages/db/prisma/seed/primitives/FrameworkEditorTaskTemplate.json',
 );
 
-const OUTPUT_PATH = join(__dirname, '../src/task-mappings.ts');
+// Upstream list only; BNI's NIST objective tasks are generated separately by
+// generate-nist-task-mappings.ts and merged in src/task-mappings.ts.
+const OUTPUT_PATH = join(__dirname, '../src/task-mappings.upstream.ts');
 
 function generateTaskTypes() {
   // Read the JSON file

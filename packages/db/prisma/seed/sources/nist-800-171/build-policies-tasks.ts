@@ -1,22 +1,26 @@
-import { r2IdOfKey, type ControlsBuild } from './build-controls';
+import { artifactSection, bucketArtifacts, type ArtifactListRow } from './artifacts';
+import { splitKey, type ControlsBuild } from './build-controls';
 import type { Rev2Build } from './build-rev2';
 import type { Rev3Build } from './build-rev3';
 import { ids } from './ids';
+import { buildPolicyContent } from './policy-content';
 import {
   FAMILIES,
-  dominantFrequency,
   familyByR2,
   familyByR3,
+  sentenceCase,
+  stripTrailingPeriod,
   toCompFrequency,
   truncate,
 } from './text';
 import type {
-  ControlRow,
   FamilyDef,
+  Frequency,
   FrequencyRow,
   Pair,
   PolicyLinkRow,
   PolicyRow,
+  RequirementRow,
   Rev2Requirement,
   Revision,
   TaskLinkRow,
@@ -30,91 +34,33 @@ export interface PolicyTaskBuild {
   taskLinks: TaskLinkRow[];
   controlPolicyPairs: Pair[];
   controlTaskPairs: Pair[];
+  artifactRows: ArtifactListRow[];
 }
-
-type Node = { type: string; attrs?: Record<string, unknown>; content?: Node[]; text?: string };
-
-const heading = (text: string): Node => ({
-  type: 'heading',
-  attrs: { level: 2, textAlign: null },
-  content: [{ type: 'text', text }],
-});
-const paragraph = (text: string): Node => ({
-  type: 'paragraph',
-  attrs: { textAlign: null },
-  content: [{ type: 'text', text }],
-});
-const bullets = (items: string[]): Node => ({
-  type: 'bulletList',
-  content: items.map((t) => ({ type: 'listItem', content: [paragraph(t)] })),
-});
 
 function familyOfKey(key: string): FamilyDef {
-  const r2Id = r2IdOfKey(key);
-  return r2Id ? familyByR2(r2Id) : familyByR3(key);
-}
-
-/**
- * Structural TipTap policy document. Section order follows the upstream templates
- * (Purpose, Scope, Policy, Roles and Responsibilities, Compliance Measurement,
- * Exceptions, Non-Compliance, Review). Prose is a draft for CCA review.
- */
-export function buildPolicyContent(fam: FamilyDef, statements: string[]): Node {
-  const area = fam.name.toLowerCase();
-  return {
-    type: 'doc',
-    content: [
-      heading('Purpose'),
-      paragraph(
-        `This policy establishes {{COMPANY}}'s requirements for ${area} in accordance with the ` +
-          `${fam.code} family of NIST SP 800-171 (Rev 2 family ${fam.r2 ?? 'n/a'}; Rev 3 family ${fam.r3}). ` +
-          'It protects Controlled Unclassified Information (CUI) and Federal Contract Information (FCI) ' +
-          "handled under {{COMPANY}}'s Department of Defense and other federal contracts.",
-      ),
-      heading('Scope'),
-      paragraph(
-        'This policy applies to all {{COMPANY}} systems, system components, facilities, and personnel ' +
-          '(including contractors and third parties) that store, process, or transmit CUI, and to the ' +
-          'security protection assets that support them, as defined in the CMMC assessment scope.',
-      ),
-      heading('Policy'),
-      paragraph(`{{COMPANY}} shall implement and maintain the following ${area} requirements:`),
-      bullets(statements),
-      heading('Roles and Responsibilities'),
-      paragraph(
-        'The Information Security Officer owns this policy and its supporting procedures. System ' +
-          'owners implement the requirements for their systems. All personnel comply with this policy ' +
-          'and report suspected violations. The compliance function retains evidence of implementation.',
-      ),
-      heading('Compliance Measurement'),
-      paragraph(
-        'Compliance is verified through the evidence tasks linked to each control, periodic self-' +
-          'assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the ' +
-          'System Security Plan and the Plan of Action and Milestones.',
-      ),
-      heading('Exceptions'),
-      paragraph(
-        'Exceptions require a documented risk acceptance approved by the Information Security Officer, ' +
-          'an entry in the Plan of Action and Milestones, and a review date.',
-      ),
-      heading('Non-Compliance'),
-      paragraph(
-        'Violations may result in disciplinary action up to and including termination, and may be ' +
-          'reportable to the contracting officer under the applicable contract clauses.',
-      ),
-      heading('Review'),
-      paragraph(
-        'This policy is reviewed at least annually and upon significant changes to systems, ' +
-          'contracts, or the NIST SP 800-171 requirements.',
-      ),
-    ],
-  };
+  const [rev, reqId] = splitKey(key);
+  return rev === 'r2' ? familyByR2(reqId) : familyByR3(reqId);
 }
 
 function firstSentence(text: string): string {
   const first = text.split('\n')[0] ?? text;
   return truncate(first, 240);
 }
+
+/** `3.1.1[a] Authorized users are identified` (255-char column). */
+function taskName(identifier: string, objectiveText: string): string {
+  const text = sentenceCase(stripTrailingPeriod(objectiveText));
+  return truncate(`${identifier} ${text}`, 255);
+}
+
+const ODP_GUIDANCE =
+  'This objective is an organization-defined parameter. Evidence is the value the organization ' +
+  'selected, where it is documented (system security plan or the family policy) and where it is ' +
+  'enforced. Record the value in the task and attach the document that states it.';
+
+const NO_OBJECTS_NOTE =
+  "NIST's machine-readable export lists no examine or test objects for this requirement; " +
+  'use the assessment procedure in the SP 800-171A PDF to choose the artifacts.';
 
 export function buildPoliciesAndTasks(args: {
   controls: ControlsBuild;
@@ -125,24 +71,19 @@ export function buildPoliciesAndTasks(args: {
 }): PolicyTaskBuild {
   const { controls, rev2, rev3, requirementsR2, frequencies } = args;
   const reqR2 = new Map(requirementsR2.map((r) => [r.id, r]));
-  const controlById = new Map(controls.controls.map((c) => [c.id, c]));
   const keyOfId = new Map([...controls.idOfKey.entries()].map(([k, v]) => [v, k]));
+  const frameworkIdOf: Record<Revision, string> = { r2: rev2.framework.id, r3: rev3.framework.id };
 
-  // Rev 2 objectives (with BNI monitoring levels) grouped by control key.
-  const objectivesByKey = new Map<string, Array<{ identifier: string; level: string }>>();
-  for (const row of rev2.requirements) {
-    const key = controls.controlKeyOfRow.get(row.id);
-    const identifier = rev2.objectiveOf.get(row.id);
-    if (!key || !identifier) continue;
-    const level = frequencies.get(identifier)?.frequency ?? '';
-    objectivesByKey.set(key, [...(objectivesByKey.get(key) ?? []), { identifier, level }]);
-  }
-
+  // Policies: one per Rev 3 family, shared by both revisions. Statements come from the
+  // Rev 3 controls (the current NIST text); Rev 2 controls link to their own family.
   const policies: PolicyRow[] = [];
   const policyIdOfFamily = new Map<string, string>();
   for (const fam of FAMILIES) {
     const inFamily = controls.controls
-      .filter((c) => familyOfKey(keyOfId.get(c.id) ?? '').r3 === fam.r3)
+      .filter((c) => {
+        const key = keyOfId.get(c.id) ?? '';
+        return key.startsWith('r3:') && familyOfKey(key).r3 === fam.r3;
+      })
       .sort((a, b) => a.name.localeCompare(b.name));
     const statements = inFamily.map((c) => `${c.name}: ${firstSentence(c.description)}`);
     const id = ids.policy(fam.r3);
@@ -159,80 +100,138 @@ export function buildPoliciesAndTasks(args: {
     });
   }
 
+  // Tasks: one per assessment objective (requirement row).
   const tasks: TaskRow[] = [];
-  const taskIdOfKey = new Map<string, string>();
-  for (const control of controls.controls) {
-    const key = keyOfId.get(control.id);
-    if (!key) throw new Error(`Control ${control.id} has no key`);
+  const taskLinks: TaskLinkRow[] = [];
+  const controlTaskPairs: Pair[] = [];
+  const artifactRows: ArtifactListRow[] = [];
+
+  const addTask = (
+    rev: Revision,
+    row: RequirementRow,
+    objectiveText: string,
+    parentLine: string,
+    examine: string,
+    test: string,
+    frequency: Frequency,
+    frequencyNote: string | null,
+    isOdp: boolean,
+  ): void => {
+    const key = controls.controlKeyOfRow.get(row.id);
+    const controlId = key ? controls.idOfKey.get(key) : undefined;
+    if (!key || !controlId) throw new Error(`No control for row ${row.identifier}`);
     const fam = familyOfKey(key);
-    const r2Id = r2IdOfKey(key);
-    const examine = r2Id ? reqR2.get(r2Id)?.examine : rev3.slots.get(key)?.examine;
-    const objectives = objectivesByKey.get(key) ?? [];
-    const levels = objectives.filter((o) => o.level).map((o) => toCompFrequency(o.level));
-    const id = ids.task(key);
-    taskIdOfKey.set(key, id);
+    const buckets = bucketArtifacts(examine, test);
+    const id = ids.task(rev, row.identifier);
     tasks.push({
       id,
-      name: `Evidence: ${control.name}`,
+      name: taskName(row.identifier, objectiveText),
       description: [
-        `Collect and retain evidence that ${control.name} is implemented and operating.`,
-        examine ? `Suggested evidence (NIST SP 800-171A examine objects): ${examine}` : null,
-        objectives.length
-          ? 'BNI recommended monitoring per Rev 2 objective: ' +
-            objectives.map((o) => `${o.identifier} ${o.level || 'unset'}`).join('; ') +
-            ". Adjust the task frequency to this organization's cadence."
-          : 'No Rev 2 objective maps here (new in Rev 3); default cadence is quarterly until set.',
+        `Assessment objective ${row.identifier}: ${objectiveText}`,
+        parentLine,
+        isOdp ? ODP_GUIDANCE : null,
+        artifactSection(buckets) || NO_OBJECTS_NOTE,
+        frequencyNote,
       ]
-        .filter((s): s is string => s !== null)
+        .filter((s): s is string => s !== null && s !== '')
         .join('\n\n'),
-      frequency: dominantFrequency(levels, 'quarterly'),
+      frequency,
       department: fam.department,
       automationStatus: 'MANUAL',
     });
+    controlTaskPairs.push({ A: controlId, B: id });
+    taskLinks.push({
+      id: ids.taskLink(rev, row.identifier),
+      frameworkId: frameworkIdOf[rev],
+      controlTemplateId: controlId,
+      taskTemplateId: id,
+    });
+    artifactRows.push({
+      revision: rev,
+      family: row.requirementFamily,
+      requirement: splitKey(key)[1],
+      objective: row.identifier,
+      objectiveText,
+      frequency,
+      buckets,
+    });
+  };
+
+  for (const row of rev2.requirements) {
+    const r2Id = rev2.parentOf.get(row.id);
+    const req = r2Id ? reqR2.get(r2Id) : undefined;
+    if (!r2Id || !req) throw new Error(`Rev 2 row ${row.identifier} has no requirement`);
+    const objectiveText = row.name;
+    const level = frequencies.get(row.identifier);
+    const frequency = level ? toCompFrequency(level.frequency) : 'quarterly';
+    addTask(
+      'r2',
+      row,
+      objectiveText,
+      `Security requirement ${r2Id}: ${req.text}`,
+      req.examine,
+      req.test,
+      frequency,
+      level
+        ? `BNI recommended monitoring level: ${level.frequency}${level.rationale ? ` (${level.rationale})` : ''}. ` +
+            "Adjust the task frequency to this organization's cadence."
+        : null,
+      false,
+    );
   }
 
-  const controlPolicyPairs: Pair[] = [];
-  const controlTaskPairs: Pair[] = [];
-  for (const control of controls.controls) {
-    const key = keyOfId.get(control.id) ?? '';
-    const policyId = policyIdOfFamily.get(familyOfKey(key).r3);
-    const taskId = taskIdOfKey.get(key);
-    if (!policyId || !taskId) throw new Error(`Missing policy or task for ${key}`);
-    controlPolicyPairs.push({ A: control.id, B: policyId });
-    controlTaskPairs.push({ A: control.id, B: taskId });
+  for (const row of rev3.requirements) {
+    const slot = rev3.parentOf.get(row.id);
+    const req = slot ? rev3.slots.get(slot) : undefined;
+    if (!slot || !req) throw new Error(`Rev 3 row ${row.identifier} has no requirement`);
+    const isOdp = row.identifier.includes('.ODP[');
+    const det = req.determinations.find((d) => d.identifier === row.identifier);
+    const partText = det?.partLabel
+      ? req.parts.find((p) => p.label === det.partLabel)?.text
+      : undefined;
+    addTask(
+      'r3',
+      row,
+      row.name,
+      partText
+        ? `Security requirement ${slot} ${req.title}, part ${det?.partLabel}: ${partText}`
+        : `Security requirement ${slot} ${req.title}.`,
+      req.examine,
+      req.test,
+      isOdp ? 'yearly' : 'quarterly',
+      isOdp
+        ? null
+        : 'Default cadence is quarterly until BNI sets Rev 3 monitoring levels; adjust per organization.',
+      isOdp,
+    );
   }
 
+  // Policy links: every control links to its family policy, scoped to its framework.
   const policyLinks: PolicyLinkRow[] = [];
-  const taskLinks: TaskLinkRow[] = [];
-  const frameworkIdOf: Record<Revision, string> = { r2: rev2.framework.id, r3: rev3.framework.id };
+  const controlPolicyPairs: Pair[] = [];
   for (const rev of ['r2', 'r3'] as const) {
-    for (const key of [...controls.keysByRevision[rev]].sort()) {
+    for (const key of controls.keysByRevision[rev]) {
       const fam = familyOfKey(key);
       const controlTemplateId = controls.idOfKey.get(key);
       const policyTemplateId = policyIdOfFamily.get(fam.r3);
-      const taskTemplateId = taskIdOfKey.get(key);
-      if (!controlTemplateId || !policyTemplateId || !taskTemplateId) {
-        throw new Error(`Missing link endpoints for ${rev} ${key}`);
-      }
+      if (!controlTemplateId || !policyTemplateId) throw new Error(`No policy link for ${key}`);
+      controlPolicyPairs.push({ A: controlTemplateId, B: policyTemplateId });
       policyLinks.push({
-        id: ids.policyLink(rev, key, fam.r3),
+        id: ids.policyLink(rev, splitKey(key)[1], fam.r3),
         frameworkId: frameworkIdOf[rev],
         controlTemplateId,
         policyTemplateId,
       });
-      taskLinks.push({
-        id: ids.taskLink(rev, key),
-        frameworkId: frameworkIdOf[rev],
-        controlTemplateId,
-        taskTemplateId,
-      });
     }
   }
 
-  void controlById;
-  return { policies, tasks, policyLinks, taskLinks, controlPolicyPairs, controlTaskPairs };
-}
-
-export function controlsOf(controls: ControlsBuild): ControlRow[] {
-  return controls.controls;
+  return {
+    policies,
+    tasks,
+    policyLinks,
+    taskLinks,
+    controlPolicyPairs,
+    controlTaskPairs,
+    artifactRows,
+  };
 }

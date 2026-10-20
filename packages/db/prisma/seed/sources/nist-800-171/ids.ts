@@ -19,12 +19,15 @@ export const ids = {
   framework: (rev: Revision): string => makeId('frk', `fw:${rev}`),
   requirement: (rev: Revision, identifier: string): string =>
     makeId('frk_rq', `rq:${rev}:${identifier}`),
-  /** Shared control keyed to a Rev 3 slot (03.01.01) or a Rev 2-only key (r2:3.1.13). */
-  control: (controlKey: string): string => makeId('frk_ct', `ct:${controlKey}`),
+  /** One control per security requirement and revision: `r2:3.1.1`, `r3:03.01.01`. */
+  control: (rev: Revision, requirementId: string): string =>
+    makeId('frk_ct', `ct:${rev}:${requirementId}`),
   policy: (familyR3: string): string => makeId('frk_pt', `pt:${familyR3}`),
-  task: (controlKey: string): string => makeId('frk_tt', `tt:${controlKey}`),
-  policyLink: (rev: Revision, controlKey: string, familyR3: string): string =>
-    makeId('fcp', `fcp:${rev}:${controlKey}:${familyR3}`),
-  taskLink: (rev: Revision, controlKey: string): string =>
-    makeId('fct', `fct:${rev}:${controlKey}`),
+  /** One task per assessment objective: `r2:3.1.1[a]`, `r3:A.03.01.01.a[01]`. */
+  task: (rev: Revision, objectiveIdentifier: string): string =>
+    makeId('frk_tt', `tt:${rev}:${objectiveIdentifier}`),
+  policyLink: (rev: Revision, requirementId: string, familyR3: string): string =>
+    makeId('fcp', `fcp:${rev}:${requirementId}:${familyR3}`),
+  taskLink: (rev: Revision, objectiveIdentifier: string): string =>
+    makeId('fct', `fct:${rev}:${objectiveIdentifier}`),
 };

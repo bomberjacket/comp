@@ -6,6 +6,15 @@ import type { Disposition, FrequencyRow, GeneratedData, Pair, Rev2Objective } fr
 const FREQUENCIES = new Set(['monthly', 'quarterly', 'yearly']);
 const DEPARTMENTS = new Set(['none', 'admin', 'gov', 'hr', 'it', 'itsm', 'qms']);
 
+export const EXPECTED = {
+  rev2Objectives: 320,
+  rev2Requirements: 110,
+  rev3Requirements: 97,
+  rev3Determinations: 422,
+  rev3Odps: 88,
+  policies: 17,
+};
+
 export interface ValidationContext {
   rev2: Rev2Build;
   rev3: Rev3Build;
@@ -41,12 +50,13 @@ function pairsAreResolvable(pairs: Pair[], ids: Set<string>): boolean {
 export function validate(data: GeneratedData, ctx: ValidationContext): string {
   const c = new Checker();
   const { rev2, rev3, controls, dispositions, objectives, frequencies, upstreamIds } = ctx;
+  const E = EXPECTED;
 
   // Rev 2
-  c.eq('Rev 2 objectives (workbook)', objectives.length, 320);
+  c.eq('Rev 2 objectives (workbook)', objectives.length, E.rev2Objectives);
   c.eq('Rev 2 solo objectives', objectives.filter((o) => o.solo).length, 23);
-  c.eq('Rev 2 requirement rows', rev2.requirements.length, 320);
-  c.eq('Rev 2 requirements with dispositions', dispositions.size, 110);
+  c.eq('Rev 2 requirement rows', rev2.requirements.length, E.rev2Objectives);
+  c.eq('Rev 2 requirements with dispositions', dispositions.size, E.rev2Requirements);
   const kinds = countKinds(dispositions);
   c.eq('carried', kinds.carried ?? 0, 77);
   c.eq('incorporated', kinds.incorporated ?? 0, 22);
@@ -65,12 +75,12 @@ export function validate(data: GeneratedData, ctx: ValidationContext): string {
   );
 
   // Rev 3
-  c.eq('Rev 3 active slots', rev3.slots.size, 97);
+  c.eq('Rev 3 active slots', rev3.slots.size, E.rev3Requirements);
   c.eq('Rev 3 withdrawn slots', rev3.withdrawn.size, 33);
   const dets = [...rev3.slots.values()].reduce((n, s) => n + s.determinations.length, 0);
   const odps = [...rev3.slots.values()].reduce((n, s) => n + s.odps.length, 0);
-  c.eq('Rev 3 determinations', dets, 422);
-  c.eq('Rev 3 ODPs', odps, 88);
+  c.eq('Rev 3 determinations', dets, E.rev3Determinations);
+  c.eq('Rev 3 ODPs', odps, E.rev3Odps);
   c.eq('Rev 3 requirement rows', rev3.requirements.length, dets + odps);
   c.ok(
     'every Rev 3 slot has at least one determination',
@@ -83,9 +93,13 @@ export function validate(data: GeneratedData, ctx: ValidationContext): string {
   const r3Idents = rev3.requirements.map((r) => r.identifier);
   c.eq('Rev 3 identifiers unique', new Set(r3Idents).size, r3Idents.length);
 
-  // Controls
-  c.eq('controls', data.controls.length, 108);
-  c.eq('control-requirement pairs', data.controlRequirementPairs.length, 320 + dets + odps);
+  // Controls: one per requirement and revision; tasks: one per objective.
+  const totalControls = E.rev2Requirements + E.rev3Requirements;
+  const totalObjectives = E.rev2Objectives + dets + odps;
+  c.eq('controls', data.controls.length, totalControls);
+  c.eq('Rev 2 controls', controls.keysByRevision.r2.length, E.rev2Requirements);
+  c.eq('Rev 3 controls', controls.keysByRevision.r3.length, E.rev3Requirements);
+  c.eq('control-requirement pairs', data.controlRequirementPairs.length, totalObjectives);
   const rowsLinked = new Set(data.controlRequirementPairs.map((p) => p.B));
   c.eq(
     'every requirement row links to exactly one control',
@@ -94,14 +108,21 @@ export function validate(data: GeneratedData, ctx: ValidationContext): string {
   );
   const controlsUsed = new Set(data.controlRequirementPairs.map((p) => p.A));
   c.eq('every control has at least one requirement', controlsUsed.size, data.controls.length);
-  c.eq('Rev 3 uses all 97 shared controls', controls.keysByRevision.r3.size, 97);
-  c.eq('control-policy pairs', data.controlPolicyPairs.length, data.controls.length);
-  c.eq('control-task pairs', data.controlTaskPairs.length, data.controls.length);
-  c.eq('policies', data.policies.length, 17);
-  c.eq('tasks', data.tasks.length, data.controls.length);
-  const expectedLinks = controls.keysByRevision.r2.size + controls.keysByRevision.r3.size;
-  c.eq('framework-scoped policy links', data.policyLinks.length, expectedLinks);
-  c.eq('framework-scoped task links', data.taskLinks.length, expectedLinks);
+  c.eq('tasks (one per objective)', data.tasks.length, totalObjectives);
+  c.eq('control-task pairs', data.controlTaskPairs.length, totalObjectives);
+  c.eq('framework-scoped task links', data.taskLinks.length, totalObjectives);
+  c.eq(
+    'tasks with a frequency note or ODP guidance',
+    data.tasks.filter((t) => t.description.includes('objective')).length,
+    totalObjectives,
+  );
+  c.eq('policies', data.policies.length, E.policies);
+  c.eq('control-policy pairs', data.controlPolicyPairs.length, totalControls);
+  c.eq('framework-scoped policy links', data.policyLinks.length, totalControls);
+  const tasksPerControl = new Map<string, number>();
+  for (const p of data.controlTaskPairs)
+    tasksPerControl.set(p.A, (tasksPerControl.get(p.A) ?? 0) + 1);
+  c.eq('every control has at least one task', tasksPerControl.size, data.controls.length);
 
   // Integrity
   const allIds = new Set<string>();
@@ -144,6 +165,13 @@ export function validate(data: GeneratedData, ctx: ValidationContext): string {
           allIds.has(l.controlTemplateId) &&
           allIds.has(l.taskTemplateId),
       ),
+  );
+  c.ok(
+    'scoped links stay inside their framework',
+    data.taskLinks.every((l) => {
+      const ctl = data.controls.find((x) => x.id === l.controlTemplateId);
+      return ctl !== undefined;
+    }),
   );
   c.ok(
     'requirements reference a generated framework',
@@ -189,7 +217,7 @@ export function validate(data: GeneratedData, ctx: ValidationContext): string {
   return [
     `families=${data.families.length} frameworks=${data.frameworks.length}`,
     `requirements=${data.requirements.length} (rev2 ${rev2.requirements.length}, rev3 ${rev3.requirements.length})`,
-    `controls=${data.controls.length} policies=${data.policies.length} tasks=${data.tasks.length}`,
+    `controls=${data.controls.length} (rev2 ${controls.keysByRevision.r2.length}, rev3 ${controls.keysByRevision.r3.length}) policies=${data.policies.length} tasks=${data.tasks.length}`,
     `pairs: ct-rq ${data.controlRequirementPairs.length}, ct-pt ${data.controlPolicyPairs.length}, ct-tt ${data.controlTaskPairs.length}`,
     `scoped links: policy ${data.policyLinks.length}, task ${data.taskLinks.length}`,
   ].join('\n');

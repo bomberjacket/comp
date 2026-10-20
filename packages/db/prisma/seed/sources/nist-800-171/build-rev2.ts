@@ -39,7 +39,7 @@ export const REV2_FRAMEWORK: Omit<FrameworkRow, 'id' | 'familyId'> = {
   visible: true,
 };
 
-function dispositionLine(d: Disposition, r3Titles: Map<string, string>): string {
+export function dispositionLine(d: Disposition, r3Titles: Map<string, string>): string {
   const named = (slots: string[]): string =>
     slots.map((s) => `${s} ${r3Titles.get(s) ?? ''}`.trim()).join(', ');
   switch (d.kind) {

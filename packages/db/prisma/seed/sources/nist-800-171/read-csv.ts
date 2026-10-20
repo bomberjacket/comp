@@ -154,8 +154,8 @@ export function readFrequencies(path: string): Map<string, FrequencyRow> {
   return out;
 }
 
-/** Optional `objective-overrides.csv`: r2_objective, r3_control. */
-export function readOverrides(path: string): Map<string, string> {
+/** Optional `r2-titles.csv`: requirement_id, title (CMMC practice names for Rev 2 controls). */
+export function readR2Titles(path: string): Map<string, string> {
   const out = new Map<string, string>();
   let rows: string[][];
   try {
@@ -164,9 +164,9 @@ export function readOverrides(path: string): Map<string, string> {
     return out;
   }
   for (const r of rows) {
-    const obj = normalizeIdentifier(r[0] ?? '');
-    const ctl = (r[1] ?? '').trim();
-    if (obj && ctl) out.set(obj, ctl);
+    const id = normalizeIdentifier(r[0] ?? '');
+    const title = (r[1] ?? '').trim();
+    if (id && title) out.set(id, title);
   }
   return out;
 }

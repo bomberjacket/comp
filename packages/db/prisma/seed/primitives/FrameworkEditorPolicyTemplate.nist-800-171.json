@@ -270,7 +270,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -710,23 +710,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.1.13 Remote Access Confidentiality (Rev 2 only): Employ cryptographic mechanisms to protect the confidentiality of remote access sessions."
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -776,7 +759,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -1114,74 +1097,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.13.14 Voice over Internet Protocol Controls (Rev 2 only): Control and monitor the use of Voice over Internet Protocol (VoIP) technologies"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.13.2 Security Engineering Principles (Rev 2 only): Employ architectural designs, software development techniques, and systems engineering principles that promote effective information security within organizational systems."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.13.3 Separation of User and System Management Functionality (Rev 2 only): Separate user functionality from system management functionality."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.13.7 Split Tunneling (Rev 2 only): Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling)."
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -1231,7 +1146,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -1482,7 +1397,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -1784,7 +1699,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -2120,7 +2035,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -2405,7 +2320,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -2658,23 +2573,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.14.5 Periodic and Real-Time Scans (Rev 2 only): Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed."
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -2724,7 +2622,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -3062,23 +2960,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.4.9 User-Installed Software (Rev 2 only): Control and monitor user-installed software."
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -3128,7 +3009,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -3396,7 +3277,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -3698,7 +3579,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -3917,23 +3798,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.7.1 System Maintenance (Rev 2 only): Perform maintenance on organizational systems."
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -3983,7 +3847,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -4251,7 +4115,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -4555,57 +4419,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.5.6 Identifier Disabling After Inactivity (Rev 2 only): Disable identifiers after a defined period of inactivity."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.5.8 Password Reuse Restriction (Rev 2 only): Prohibit password reuse for a specified number of generations."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "listItem",
-              "content": [
-                {
-                  "type": "paragraph",
-                  "attrs": {
-                    "textAlign": null
-                  },
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "3.5.9 Temporary Passwords (Rev 2 only): Allow temporary password use for system logons with an immediate change to a permanent password"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
@@ -4655,7 +4468,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -4906,7 +4719,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -5174,7 +4987,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },
@@ -5442,7 +5255,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Compliance is verified through the evidence tasks linked to each control, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
+              "text": "Compliance is verified through the evidence tasks linked to each assessment objective, periodic self-assessment against NIST SP 800-171A, and CMMC assessments. Results are recorded in the System Security Plan and the Plan of Action and Milestones."
             }
           ]
         },

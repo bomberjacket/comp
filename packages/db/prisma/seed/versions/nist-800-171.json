@@ -8,5 +8,15 @@
     "frameworkId": "frk_062c0788fae6f9494f86b876",
     "version": "1.0.0",
     "releaseNotes": "Initial NIST SP 800-171 Rev 3 release: 422 determination statements and 88 organization-defined parameters from SP 800-171A Rev 3."
+  },
+  {
+    "frameworkId": "frk_094af66195e51e2ccd00e7e8",
+    "version": "2.0.0",
+    "releaseNotes": "Evidence per assessment objective: one control per security requirement (110) and one evidence task per objective (320), each listing the policy, procedure, configuration and operational artifacts from SP 800-171A. Rev 2 is independent of Rev 3."
+  },
+  {
+    "frameworkId": "frk_062c0788fae6f9494f86b876",
+    "version": "2.0.0",
+    "releaseNotes": "Evidence per assessment objective: one control per security requirement (97) and one evidence task per determination statement or organization-defined parameter (510), each listing the artifacts from SP 800-171A Rev 3. Rev 3 is independent of Rev 2."
   }
 ]

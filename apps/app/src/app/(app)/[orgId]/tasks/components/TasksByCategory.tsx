@@ -1,16 +1,17 @@
 'use client';
 
 import type { Member, Task, User } from '@db';
-import { ArrowLeft, Folder } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronRight, Folder } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { AutomationIndicator } from './AutomationIndicator';
+import { groupCategoriesByFamily } from './task-category-families';
 import { TaskStatusSelector } from './TaskStatusSelector';
 
 interface TasksByCategoryProps {
   tasks: (Task & {
-    controls: { id: string; name: string }[];
+    controls: { id: string; name: string; controlFamily?: string | null }[];
     evidenceAutomations?: Array<{
       id: string;
       isEnabled: boolean;
@@ -27,11 +28,15 @@ interface TasksByCategoryProps {
   })[];
   members: (Member & { user: User })[];
   statusFilter?: string | null;
+  /** Show every family open (used while a search or filter narrows the list). */
+  expandAll?: boolean;
 }
 
 interface CategoryGroup {
   id: string;
   name: string;
+  /** Control family (e.g. "AC - Access Control"); families nest the category grid. */
+  controlFamily: string | null;
   tasks: (Task & {
     controls: { id: string; name: string }[];
     evidenceAutomations?: Array<{
@@ -59,10 +64,17 @@ const statusPalette = {
   not_relevant: { indicator: 'bg-border', dot: 'bg-border', label: 'text-muted-foreground' },
 } as const;
 
-export function TasksByCategory({ tasks, members, statusFilter }: TasksByCategoryProps) {
+export function TasksByCategory({
+  tasks,
+  members,
+  statusFilter,
+  expandAll = false,
+}: TasksByCategoryProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  // Family sections are collapsed by default: a NIST SP 800-171 org has 100+ controls.
+  const [expandedFamilies, setExpandedFamilies] = useState<Set<string>>(new Set());
 
   // Group tasks by their first control, or "Uncategorized"
   const categories = useMemo(() => {
@@ -77,6 +89,7 @@ export function TasksByCategory({ tasks, members, statusFilter }: TasksByCategor
           grouped.set(control.id, {
             id: control.id,
             name: control.name,
+            controlFamily: control.controlFamily ?? null,
             tasks: [],
           });
         }
@@ -87,7 +100,7 @@ export function TasksByCategory({ tasks, members, statusFilter }: TasksByCategor
     }
 
     grouped.forEach((category) => {
-      category.tasks.sort((a, b) => a.title.localeCompare(b.title));
+      category.tasks.sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true }));
     });
 
     // Add uncategorized if there are any
@@ -96,6 +109,7 @@ export function TasksByCategory({ tasks, members, statusFilter }: TasksByCategor
       grouped.set('uncategorized', {
         id: 'uncategorized',
         name: 'Uncategorized',
+        controlFamily: null,
         tasks: uncategorized,
       });
     }
@@ -104,11 +118,31 @@ export function TasksByCategory({ tasks, members, statusFilter }: TasksByCategor
     const sortedCategories = Array.from(grouped.values()).sort((a, b) => {
       if (a.id === 'uncategorized') return 1;
       if (b.id === 'uncategorized') return -1;
-      return a.name.localeCompare(b.name);
+      return a.name.localeCompare(b.name, undefined, { numeric: true });
     });
 
     return sortedCategories;
   }, [tasks]);
+
+  // Family -> control (category) -> tasks; null when no control carries a family.
+  const familyGroups = useMemo(() => groupCategoriesByFamily(categories), [categories]);
+
+  const isFamilyExpanded = (family: string) => expandAll || expandedFamilies.has(family);
+
+  const toggleFamily = (family: string) => {
+    setExpandedFamilies((prev) => {
+      const next = new Set(prev);
+      if (next.has(family)) next.delete(family);
+      else next.add(family);
+      return next;
+    });
+  };
+
+  const toggleAllFamilies = () => {
+    if (!familyGroups) return;
+    const allOpen = familyGroups.every((group) => expandedFamilies.has(group.family));
+    setExpandedFamilies(allOpen ? new Set() : new Set(familyGroups.map((group) => group.family)));
+  };
 
   // Selected category from URL so it survives back navigation
   const categoryFromUrl = searchParams.get('category');
@@ -166,61 +200,117 @@ export function TasksByCategory({ tasks, members, statusFilter }: TasksByCategor
     );
   }
 
-  // Show category grid view
-  if (!selectedCategory) {
+  const renderCategoryCard = (category: CategoryGroup) => {
+    const stats = getCategoryStats(category.tasks);
     return (
-      <div className="space-y-6">
-        {/* Category Grid */}
-        <div>
-          <h2 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-            Categories
-          </h2>
-          <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-            {categories.map((category) => {
-              const stats = getCategoryStats(category.tasks);
-              return (
-                <button
-                  key={category.id}
-                  onClick={() => handleCategoryClick(category.id)}
-                  className="group flex flex-col gap-4 rounded-sm border border-border/60 bg-card/50 px-4 py-3 text-left transition-colors hover:bg-muted/20"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-8 w-8 place-items-center rounded-[4px] border border-border/60 bg-muted/40 text-muted-foreground transition-colors group-hover:text-foreground">
-                        <Folder className="h-3.5 w-3.5" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-semibold text-foreground">
-                          {category.name}
-                        </p>
-                        <p className="text-[11px] text-muted-foreground tabular-nums">
-                          {stats.total} tasks
-                        </p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <span
-                        className="text-[11px] font-semibold text-foreground/90 tabular-nums"
-                        title="Completion rate"
-                      >
-                        {stats.completionRate}%
-                      </span>
-                    </div>
-                  </div>
-
-                  {stats.total > 0 && (
-                    <div className="h-[2px] w-full overflow-hidden rounded-full bg-muted/40">
-                      <div
-                        className="h-full bg-primary transition-all duration-500"
-                        style={{ width: `${stats.completionRate}%` }}
-                      />
-                    </div>
-                  )}
-                </button>
-              );
-            })}
+      <button
+        key={category.id}
+        onClick={() => handleCategoryClick(category.id)}
+        className="group flex flex-col gap-4 rounded-sm border border-border/60 bg-card/50 px-4 py-3 text-left transition-colors hover:bg-muted/20"
+      >
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="grid h-8 w-8 place-items-center rounded-[4px] border border-border/60 bg-muted/40 text-muted-foreground transition-colors group-hover:text-foreground">
+              <Folder className="h-3.5 w-3.5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-foreground">{category.name}</p>
+              <p className="text-[11px] text-muted-foreground tabular-nums">
+                {stats.total} tasks
+              </p>
+            </div>
+          </div>
+          <div className="text-right">
+            <span
+              className="text-[11px] font-semibold text-foreground/90 tabular-nums"
+              title="Completion rate"
+            >
+              {stats.completionRate}%
+            </span>
           </div>
         </div>
+
+        {stats.total > 0 && (
+          <div className="h-[2px] w-full overflow-hidden rounded-full bg-muted/40">
+            <div
+              className="h-full bg-primary transition-all duration-500"
+              style={{ width: `${stats.completionRate}%` }}
+            />
+          </div>
+        )}
+      </button>
+    );
+  };
+
+  // Show category grid view
+  if (!selectedCategory) {
+    if (!familyGroups) {
+      return (
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+              Categories
+            </h2>
+            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+              {categories.map(renderCategoryCard)}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Family -> control cards (-> that control's tasks once a card is opened).
+    const allFamiliesOpen = familyGroups.every((group) => isFamilyExpanded(group.family));
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+            Control families
+          </h2>
+          {!expandAll && (
+            <button
+              type="button"
+              onClick={toggleAllFamilies}
+              className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {allFamiliesOpen ? 'Collapse all' : 'Expand all'}
+            </button>
+          )}
+        </div>
+        {familyGroups.map((group) => {
+          const open = isFamilyExpanded(group.family);
+          const stats = getCategoryStats(group.categories.flatMap((category) => category.tasks));
+          const Chevron = open ? ChevronDown : ChevronRight;
+          return (
+            <div key={group.family} className="space-y-3">
+              <button
+                type="button"
+                aria-expanded={open}
+                onClick={() => toggleFamily(group.family)}
+                className="flex w-full items-center gap-3 rounded-sm border border-border/60 bg-card/50 px-4 py-3 text-left transition-colors hover:bg-muted/20"
+              >
+                <Chevron className="h-4 w-4 shrink-0 text-muted-foreground" />
+                <span className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground">
+                  {group.label}
+                </span>
+                <span className="text-[11px] text-muted-foreground tabular-nums">
+                  {group.categories.length} controls · {stats.total} tasks
+                </span>
+                <span
+                  className="w-10 text-right text-[11px] font-semibold text-foreground/90 tabular-nums"
+                  title="Completion rate"
+                >
+                  {stats.completionRate}%
+                </span>
+              </button>
+              {open && (
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:pl-6 lg:grid-cols-3">
+                  {group.categories.map(renderCategoryCard)}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     );
   }

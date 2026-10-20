@@ -20,7 +20,7 @@ import {
 import { ChevronDown, ChevronRight, Search } from '@trycompai/design-system/icons';
 import { useParams, useRouter } from 'next/navigation';
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs';
-import { useCallback, useMemo, useState } from 'react';
+import { Fragment, useCallback, useMemo, useState } from 'react';
 import { FamilyFilterDropdown } from './FamilyFilterDropdown';
 import {
   areAllFamiliesExpanded,
@@ -31,12 +31,15 @@ import {
 import {
   buildControlItems,
   buildRequirementMap,
+  compareRequirementsByOrder,
+  findObjectiveTask,
   getFamilyDisplayLabel,
   groupByFamily,
   type ControlItem,
   type FamilyGroup,
 } from './framework-controls-shared';
 import { GroupedControlRow } from './GroupedControlRow';
+import { GroupedObjectiveRow } from './GroupedObjectiveRow';
 
 const COLUMN_COUNT = 7;
 
@@ -64,11 +67,18 @@ export function FrameworkControlsGrouped({
   const [searchTerm, setSearchTerm] = useQueryState('q', parseAsString.withDefault('').withOptions({ shallow: true, throttleMs: 300 }));
   const [familyFilterParam, setFamilyFilterParam] = useQueryState('families', parseAsArrayOf(parseAsString, '|').withDefault([]).withOptions({ shallow: true }));
   const [expandedFamilies, setExpandedFamilies] = useState<Set<string>>(new Set());
+  // Third level: controls whose requirements (assessment objectives) are shown. Collapsed by default.
+  const [expandedControls, setExpandedControls] = useState<Set<string>>(new Set());
 
   const selectedFamilyFilter = useMemo(() => new Set(familyFilterParam), [familyFilterParam]);
 
   const requirementMap = useMemo(
     () => buildRequirementMap(requirementDefinitions),
+    [requirementDefinitions],
+  );
+
+  const definitionsById = useMemo(
+    () => new Map(requirementDefinitions.map((def) => [def.id, def])),
     [requirementDefinitions],
   );
 
@@ -112,6 +122,15 @@ export function FrameworkControlsGrouped({
       toggleFamilyExpansion({ expandedFamilies: prev, family }),
     );
   };
+
+  const handleToggleControl = useCallback((controlId: string) => {
+    setExpandedControls((prev) => {
+      const next = new Set(prev);
+      if (next.has(controlId)) next.delete(controlId);
+      else next.add(controlId);
+      return next;
+    });
+  }, []);
 
   const handleToggleAll = () => {
     setExpandedFamilies((prev) =>
@@ -206,6 +225,10 @@ export function FrameworkControlsGrouped({
                 orgId={orgId}
                 frameworkInstanceId={frameworkInstanceId}
                 onRowClick={handleRowClick}
+                definitionsById={definitionsById}
+                expandedControls={expandedControls}
+                isSearching={isSearching}
+                onToggleControl={handleToggleControl}
               />
             ))
           )}
@@ -224,6 +247,10 @@ function FamilySection({
   orgId,
   frameworkInstanceId,
   onRowClick,
+  definitionsById,
+  expandedControls,
+  isSearching,
+  onToggleControl,
 }: {
   group: FamilyGroup;
   expanded: boolean;
@@ -233,6 +260,10 @@ function FamilySection({
   orgId: string;
   frameworkInstanceId: string;
   onRowClick: (controlId: string) => void;
+  definitionsById: Map<string, FrameworkEditorRequirement>;
+  expandedControls: Set<string>;
+  isSearching: boolean;
+  onToggleControl: (controlId: string) => void;
 }) {
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
@@ -261,18 +292,40 @@ function FamilySection({
         </TableCell>
       </TableRow>
       {expanded &&
-        group.items.map(({ control, requirements }) => (
-          <GroupedControlRow
-            key={control.id}
-            control={control}
-            requirements={requirements}
-            tasks={tasks}
-            evidenceSubmissions={evidenceSubmissions}
-            orgId={orgId}
-            frameworkInstanceId={frameworkInstanceId}
-            onRowClick={onRowClick}
-          />
-        ))}
+        group.items.map(({ control, requirements }) => {
+          // Family -> Control -> Requirement (assessment objective), in the framework's order.
+          const objectives = requirements
+            .map((r) => definitionsById.get(r.id) ?? { ...r, sortOrder: null })
+            .sort(compareRequirementsByOrder);
+          const expandable = objectives.length > 0;
+          const controlExpanded = expandable && (isSearching || expandedControls.has(control.id));
+          return (
+            <Fragment key={control.id}>
+              <GroupedControlRow
+                control={control}
+                requirements={requirements}
+                tasks={tasks}
+                evidenceSubmissions={evidenceSubmissions}
+                orgId={orgId}
+                frameworkInstanceId={frameworkInstanceId}
+                onRowClick={onRowClick}
+                expandable={expandable}
+                expanded={controlExpanded}
+                onToggleExpand={() => onToggleControl(control.id)}
+              />
+              {controlExpanded &&
+                objectives.map((objective) => (
+                  <GroupedObjectiveRow
+                    key={objective.id}
+                    objective={objective}
+                    task={findObjectiveTask(tasks, control.id, objective.identifier)}
+                    orgId={orgId}
+                    frameworkInstanceId={frameworkInstanceId}
+                  />
+                ))}
+            </Fragment>
+          );
+        })}
     </>
   );
 }

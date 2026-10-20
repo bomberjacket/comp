@@ -790,6 +790,7 @@ export function TaskList({
                 tasks={filteredTasks}
                 members={members}
                 statusFilter={statusFilter}
+                expandAll={searchQuery !== '' || !!statusFilter || !!assigneeFilter}
               />
             </TabsContent>
             <TabsContent value="list">

@@ -28,6 +28,8 @@ export function getStatusBadge(status: StatusType): {
       return { label: 'In Progress', variant: 'secondary' };
     case 'not_relevant':
       return { label: 'Not Relevant', variant: 'secondary' };
+    case 'failed':
+      return { label: 'Failed', variant: 'destructive' };
     default:
       return { label: 'Not Started', variant: 'destructive' };
   }
@@ -235,4 +237,67 @@ export function buildRequirementItems(
       artifactCounts: getRequirementArtifactCounts(mappedControls, tasks, evidenceSubmissions),
     };
   });
+}
+
+// ---------------------------------------------------------------------------
+// Assessment objectives (one evidence task per objective, e.g. NIST SP 800-171)
+// ---------------------------------------------------------------------------
+
+export interface ObjectiveTaskLike {
+  id: string;
+  title: string;
+  status: string;
+  controls: { id: string }[];
+}
+
+/**
+ * Find the evidence task for one assessment objective. The NIST SP 800-171 seed
+ * generator names each objective's task `<identifier> <objective text>` (for example
+ * `3.1.1[a] Authorized users are identified`) and links it to the objective's control,
+ * so the task is the one linked to the control whose title starts with the identifier.
+ * Returns undefined for frameworks that do not follow this convention.
+ */
+export function findObjectiveTask<T extends ObjectiveTaskLike>(
+  tasks: T[],
+  controlId: string,
+  identifier: string | null | undefined,
+): T | undefined {
+  const id = identifier?.trim();
+  if (!id) return undefined;
+  return tasks.find(
+    (task) =>
+      task.controls.some((control) => control.id === controlId) &&
+      (task.title === id || task.title.startsWith(`${id} `)),
+  );
+}
+
+/** Map a task status onto the shared status badge vocabulary. */
+export function taskStatusToStatusType(status: string): StatusType {
+  switch (status) {
+    case 'done':
+      return 'completed';
+    case 'not_relevant':
+      return 'not_relevant';
+    case 'in_progress':
+    case 'in_review':
+      return 'in_progress';
+    case 'failed':
+      return 'failed';
+    default:
+      return 'not_started';
+  }
+}
+
+/** Progress shown for a single objective, derived from its task status. */
+export function taskProgressPercent(status: string): number {
+  switch (status) {
+    case 'done':
+    case 'not_relevant':
+      return 100;
+    case 'in_progress':
+    case 'in_review':
+      return 50;
+    default:
+      return 0;
+  }
 }

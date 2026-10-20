@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export const dynamic = 'force-dynamic';
 
 type TaskWithRelations = Task & {
-  controls: { id: string; name: string }[];
+  controls: { id: string; name: string; controlFamily?: string | null }[];
   evidenceAutomations?: Array<{
     id: string;
     isEnabled: boolean;

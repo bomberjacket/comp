@@ -9,7 +9,7 @@ import {
 import type { FrameworkInstanceWithControls } from '@/lib/types/framework';
 import type { Control, Task } from '@db';
 import { Badge, TableCell, TableRow, Text } from '@trycompai/design-system';
-import { Launch } from '@trycompai/design-system/icons';
+import { ChevronDown, ChevronRight, Launch } from '@trycompai/design-system/icons';
 import Link from 'next/link';
 import { getStatusBadge } from './framework-controls-shared';
 
@@ -21,6 +21,9 @@ export function GroupedControlRow({
   orgId,
   frameworkInstanceId,
   onRowClick,
+  expandable = false,
+  expanded = false,
+  onToggleExpand,
 }: {
   control: FrameworkInstanceWithControls['controls'][number];
   requirements: Array<{ id: string; name: string; identifier: string }>;
@@ -29,7 +32,12 @@ export function GroupedControlRow({
   orgId: string;
   frameworkInstanceId: string;
   onRowClick: (controlId: string) => void;
+  /** Show a chevron that reveals the control's requirements (assessment objectives). */
+  expandable?: boolean;
+  expanded?: boolean;
+  onToggleExpand?: () => void;
 }) {
+  const ChevronIcon = expanded ? ChevronDown : ChevronRight;
   const policies = control.policies ?? [];
   const documentTypes = control.controlDocumentTypes ?? [];
   const counts = getRequirementArtifactCounts([control], tasks, evidenceSubmissions);
@@ -57,19 +65,37 @@ export function GroupedControlRow({
   return (
     <TableRow onClick={handleRowClick} style={{ cursor: 'pointer' }}>
       <TableCell>
-        <Link
-          href={controlHref}
-          onClick={(e) => e.stopPropagation()}
-          className="group flex items-center gap-2 pl-6"
-        >
-          <span className="block max-w-[280px] truncate text-sm" title={control.name}>
-            {control.name}
-          </span>
-          <Launch
-            size={14}
-            className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
-          />
-        </Link>
+        <div className="flex items-center gap-1 pl-4">
+          {expandable ? (
+            <button
+              type="button"
+              aria-expanded={expanded}
+              aria-label={expanded ? 'Collapse requirements' : 'Expand requirements'}
+              className="flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded text-muted-foreground hover:text-foreground"
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleExpand?.();
+              }}
+            >
+              <ChevronIcon size={14} />
+            </button>
+          ) : (
+            <span className="h-5 w-5 shrink-0" />
+          )}
+          <Link
+            href={controlHref}
+            onClick={(e) => e.stopPropagation()}
+            className="group flex min-w-0 items-center gap-2"
+          >
+            <span className="block max-w-[280px] truncate text-sm" title={control.name}>
+              {control.name}
+            </span>
+            <Launch
+              size={14}
+              className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+            />
+          </Link>
+        </div>
       </TableCell>
       <TableCell>
         {reqLabel ? (

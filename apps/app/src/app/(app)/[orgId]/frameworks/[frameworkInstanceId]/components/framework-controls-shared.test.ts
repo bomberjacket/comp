@@ -7,7 +7,10 @@ import {
   compareRequirementsByOrder,
   getStatusBadge,
   groupByFamily,
+  findObjectiveTask,
   groupRequirementsByFamily,
+  taskProgressPercent,
+  taskStatusToStatusType,
   UNCATEGORIZED_FAMILY,
   type ControlItem,
   type RequirementItem,
@@ -368,5 +371,46 @@ describe('groupRequirementsByFamily', () => {
     const families = groupRequirementsByFamily(items).map((g) => g.family);
 
     expect(families).toEqual(['Access Control', 'Zoning']);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Assessment objectives
+// ---------------------------------------------------------------------------
+
+describe('findObjectiveTask', () => {
+  const tasks = [
+    { id: 't1', title: '3.1.1[a] Authorized users are identified', status: 'done', controls: [{ id: 'c1' }] },
+    { id: 't2', title: '3.1.1[b] Processes acting on behalf of authorized users are identified', status: 'todo', controls: [{ id: 'c1' }] },
+    { id: 't3', title: '3.1.1[a] Same identifier, other control', status: 'todo', controls: [{ id: 'c2' }] },
+    { id: 't4', title: 'A.03.01.01.ODP[01] Time period is defined', status: 'todo', controls: [{ id: 'c3' }] },
+  ];
+
+  it('matches the task linked to the control whose title starts with the identifier', () => {
+    expect(findObjectiveTask(tasks, 'c1', '3.1.1[a]')?.id).toBe('t1');
+    expect(findObjectiveTask(tasks, 'c1', '3.1.1[b]')?.id).toBe('t2');
+    expect(findObjectiveTask(tasks, 'c2', '3.1.1[a]')?.id).toBe('t3');
+    expect(findObjectiveTask(tasks, 'c3', 'A.03.01.01.ODP[01]')?.id).toBe('t4');
+  });
+
+  it('requires a whole-token match and a non-empty identifier', () => {
+    expect(findObjectiveTask(tasks, 'c1', '3.1.1')).toBeUndefined();
+    expect(findObjectiveTask(tasks, 'c1', '')).toBeUndefined();
+    expect(findObjectiveTask(tasks, 'c1', null)).toBeUndefined();
+    expect(findObjectiveTask(tasks, 'c9', '3.1.1[a]')).toBeUndefined();
+  });
+});
+
+describe('taskStatusToStatusType / taskProgressPercent', () => {
+  it('maps task statuses onto badge statuses and progress', () => {
+    expect(taskStatusToStatusType('done')).toBe('completed');
+    expect(taskStatusToStatusType('not_relevant')).toBe('not_relevant');
+    expect(taskStatusToStatusType('in_review')).toBe('in_progress');
+    expect(taskStatusToStatusType('failed')).toBe('failed');
+    expect(taskStatusToStatusType('todo')).toBe('not_started');
+    expect(getStatusBadge('failed')).toEqual({ label: 'Failed', variant: 'destructive' });
+    expect(taskProgressPercent('done')).toBe(100);
+    expect(taskProgressPercent('in_progress')).toBe(50);
+    expect(taskProgressPercent('todo')).toBe(0);
   });
 });

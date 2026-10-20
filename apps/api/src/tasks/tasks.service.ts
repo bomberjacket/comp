@@ -34,6 +34,29 @@ function computeNextTaskReviewDate(
   }
 }
 
+type ControlWithFamilies = {
+  id: string;
+  name: string;
+  frameworkControlFamilies?: { controlFamily: string }[];
+};
+
+/**
+ * Replace each task control's `frameworkControlFamilies` with a flat `controlFamily`.
+ * `controls` is only present when the query included relations, which Prisma's
+ * conditional-include typing cannot express, hence the cast.
+ */
+function flattenControlFamilies<T extends object>(task: T): T {
+  const controls = (task as { controls?: ControlWithFamilies[] }).controls;
+  if (!controls) return task;
+  return {
+    ...task,
+    controls: controls.map(({ frameworkControlFamilies, ...control }) => ({
+      ...control,
+      controlFamily: frameworkControlFamilies?.[0]?.controlFamily ?? null,
+    })),
+  };
+}
+
 @Injectable()
 export class TasksService {
   private readonly logger = new Logger(TasksService.name);
@@ -113,7 +136,16 @@ export class TasksService {
           ...(options?.includeRelations && {
             include: {
               controls: {
-                select: { id: true, name: true },
+                select: {
+                  id: true,
+                  name: true,
+                  // The control's family in its framework instance, so the evidence page can
+                  // nest controls under families (e.g. NIST SP 800-171 "AC - Access Control").
+                  frameworkControlFamilies: {
+                    select: { controlFamily: true },
+                    take: 1,
+                  },
+                },
               },
               evidenceAutomations: {
                 select: {
@@ -147,7 +179,7 @@ export class TasksService {
       if (options?.includeRelations) {
         return {
           data: tasks.map((t) => ({
-            ...t,
+            ...flattenControlFamilies(t),
             description: filterDescription(t.description),
           })),
           count: tasks.length,

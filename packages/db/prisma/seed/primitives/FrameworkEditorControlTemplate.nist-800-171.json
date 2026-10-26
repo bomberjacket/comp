@@ -789,7 +789,7 @@
     "id": "frk_ct_8d3b45bb2e6316300d0d3f8a",
     "name": "3.10.1 Physical Access Authorizations",
     "description": "Limit physical access to organizational systems, equipment, and the respective operating environments to authorized individuals. (basic requirement)\n\nDiscussion: This requirement applies to employees, individuals with permanent physical access authorization credentials, and visitors. Authorized individuals have credentials that include badges, identification cards, and smart cards. Organizations determine the strength of authorization credentials needed consistent with applicable laws, directives, policies, regulations, standards, procedures, and guidelines. This requirement applies only to areas within facilities that have not been designated as publicly accessible.Limiting physical access to equipment may include placing equipment in locked rooms or other secured areas and allowing access to authorized individuals only; and placing equipment in locations that can be monitored by organizational personnel. Computing devices, external disk drives, networking devices, monitors, printers, copiers, scanners, facsimile machines, and audio devices are examples of equipment.\n\nRev 3 disposition: carried forward as 03.10.01 Physical Access Authorizations.",
-    "controlFamily": "PE - Personnel Security"
+    "controlFamily": "PE - Physical Protection"
   },
   {
     "id": "frk_ct_8d5b4131e0be2af97e5f8d6a",

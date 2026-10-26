@@ -303,7 +303,7 @@ function FamilySection({
             <Fragment key={control.id}>
               <GroupedControlRow
                 control={control}
-                requirements={requirements}
+                requirements={objectives}
                 tasks={tasks}
                 evidenceSubmissions={evidenceSubmissions}
                 orgId={orgId}

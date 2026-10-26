@@ -202,11 +202,29 @@ describe('groupByFamily', () => {
     expect(groups[1].items).toHaveLength(1);
   });
 
-  it('sorts groups alphabetically by family name', () => {
+  it('orders groups by their first control, so numbered catalogs keep catalog order', () => {
+    const items = [
+      makeControlItem({ name: '3.14.1 Flaw Remediation', controlFamily: 'SI - System and Information Integrity' }),
+      makeControlItem({ name: '3.2.1 Role-Based Risk Awareness', controlFamily: 'AT - Awareness and Training' }),
+      makeControlItem({ name: '3.10.1 Physical Access Authorizations', controlFamily: 'PE - Physical Protection' }),
+      makeControlItem({ name: '3.1.1 Authorized Access Control', controlFamily: 'AC - Access Control' }),
+    ];
+
+    const families = groupByFamily(items).map((g) => g.family);
+
+    expect(families).toEqual([
+      'AC - Access Control',
+      'AT - Awareness and Training',
+      'PE - Physical Protection',
+      'SI - System and Information Integrity',
+    ]);
+  });
+
+  it('falls back to the family label when first controls tie', () => {
     const items = [
       makeControlItem({ name: 'C1', controlFamily: 'Zoning' }),
-      makeControlItem({ name: 'C2', controlFamily: 'Access Control' }),
-      makeControlItem({ name: 'C3', controlFamily: 'Media Protection' }),
+      makeControlItem({ name: 'C1', controlFamily: 'Access Control' }),
+      makeControlItem({ name: 'C1', controlFamily: 'Media Protection' }),
     ];
 
     const families = groupByFamily(items).map((g) => g.family);

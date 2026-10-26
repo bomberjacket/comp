@@ -86,19 +86,22 @@ export function groupByFamily(items: ControlItem[]): FamilyGroup[] {
     }
   }
 
-  const sortedFamilies = Array.from(familyMap.entries()).sort(([a], [b]) =>
-    a.localeCompare(b),
-  );
+  const byName = (a: ControlItem, b: ControlItem) =>
+    a.control.name.localeCompare(b.control.name, undefined, { numeric: true });
 
-  const groups: FamilyGroup[] = sortedFamilies.map(([family, items]) => ({
-    family,
-    items: items.sort((a, b) => a.control.name.localeCompare(b.control.name, undefined, { numeric: true })),
-  }));
+  // Sort controls within each family, then order the families by their first
+  // control so numbered catalogs (3.1 → 3.14, 03.01 → 03.17) keep catalog order
+  // instead of alphabetical family labels (AC, AT, AU, CA, CM, ...).
+  const sortedFamilies = Array.from(familyMap.entries())
+    .map(([family, items]) => [family, items.sort(byName)] as const)
+    .sort(([fa, ia], [fb, ib]) => byName(ia[0], ib[0]) || fa.localeCompare(fb));
+
+  const groups: FamilyGroup[] = sortedFamilies.map(([family, items]) => ({ family, items }));
 
   if (otherItems.length > 0) {
     groups.push({
       family: UNCATEGORIZED_FAMILY,
-      items: otherItems.sort((a, b) => a.control.name.localeCompare(b.control.name, undefined, { numeric: true })),
+      items: otherItems.sort(byName),
     });
   }
 

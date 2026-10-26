@@ -90,21 +90,30 @@ export async function graphListAllOrFail<T>(
   try {
     return await graphListAll<T>(ctx, path, opts.params);
   } catch (err) {
-    const failure = toHttpReadFailure(err);
-    ctx.fail({
-      title: `Could not verify ${opts.what}`,
-      description: `${opts.what} could not be read from Microsoft Graph (${failure.error}), so this check is unverified.`,
-      resourceType: opts.resourceType,
-      resourceId: 'tenant',
-      severity: 'medium',
-      remediation: remediationForReadFailure(
-        failure,
-        `Grant the connection the ${opts.permission} permission (admin consent), then re-run the check.`,
-      ),
-      evidence: { readError: failure.error, permission: opts.permission },
-    });
+    emitUnverified(ctx, opts, err);
     return null;
   }
+}
+
+/** The "could not verify" finding for a Graph read that threw. */
+export function emitUnverified(
+  ctx: CheckContext,
+  opts: { what: string; resourceType: string; permission: string },
+  err: unknown,
+): void {
+  const failure = toHttpReadFailure(err);
+  ctx.fail({
+    title: `Could not verify ${opts.what}`,
+    description: `${opts.what} could not be read from Microsoft Graph (${failure.error}), so this check is unverified.`,
+    resourceType: opts.resourceType,
+    resourceId: 'tenant',
+    severity: 'medium',
+    remediation: remediationForReadFailure(
+      failure,
+      `Grant the connection the ${opts.permission} permission (admin consent), then re-run the check.`,
+    ),
+    evidence: { readError: failure.error, permission: opts.permission },
+  });
 }
 
 export function daysSince(iso: string | null | undefined, now = Date.now()): number | null {

@@ -1,7 +1,18 @@
 import type { IntegrationManifest } from '../../types';
 import {
   conditionalAccessMfaCheck,
+  defenderOpenAlertsCheck,
+  defenderRealTimeProtectionCheck,
+  defenderRealTimeScansCheck,
+  defenderScansCheck,
+  defenderSignaturesCheck,
   inactiveAccountsCheck,
+  intuneCompliancePoliciesCheck,
+  intuneDeviceComplianceCheck,
+  intuneDeviceEncryptionCheck,
+  intuneDeviceInventoryCheck,
+  intuneMobileEncryptionCheck,
+  intuneStaleDevicesCheck,
   mfaAllUsersCheck,
   mfaPrivilegedUsersCheck,
   privilegedAccountsForMfaCheck,
@@ -9,7 +20,13 @@ import {
   usersIdentifiedCheck,
 } from './checks';
 import { MICROSOFT_CLOUDS, type MicrosoftCloud } from './graph';
-import { inactiveDaysVariable, includeDisabledVariable, includeGuestsVariable } from './variables';
+import {
+  deviceStaleDaysVariable,
+  inactiveDaysVariable,
+  includeDisabledVariable,
+  includeGuestsVariable,
+  scanMaxDaysVariable,
+} from './variables';
 
 /** Delegated Graph permissions; an admin grants consent once when connecting. */
 const GRAPH_PERMISSIONS = [
@@ -18,11 +35,15 @@ const GRAPH_PERMISSIONS = [
   'AuditLog.Read.All',
   'UserAuthenticationMethod.Read.All',
   'Policy.Read.All',
+  'DeviceManagementManagedDevices.Read.All',
+  'DeviceManagementConfiguration.Read.All',
+  'SecurityAlert.Read.All',
 ];
 
 /**
- * Microsoft 365 tenant evidence through Microsoft Graph (Entra ID today;
- * Intune and Defender for Endpoint services are declared for later).
+ * Microsoft 365 tenant evidence through Microsoft Graph: Entra ID (users,
+ * privileged roles, MFA, Conditional Access), Intune (inventory, compliance,
+ * encryption) and Defender (antivirus state through Intune, XDR alerts).
  *
  * One factory, two manifests: commercial / GCC share endpoints, GCC High uses
  * the `.us` cloud. Checks use paths relative to the Graph host, so the same
@@ -37,8 +58,8 @@ export function createMicrosoft365Manifest(cloud: MicrosoftCloud): IntegrationMa
     id: isGov ? 'microsoft-365-gcc-high' : 'microsoft-365',
     name: label,
     description: isGov
-      ? 'Read-only evidence from a Microsoft 365 GCC High tenant (Entra ID users, privileged roles, MFA, Conditional Access) for NIST SP 800-171. ITAR / foreign military sales tenants only.'
-      : 'Read-only evidence from a Microsoft 365 or GCC tenant (Entra ID users, privileged roles, MFA registration, Conditional Access, inactive accounts) mapped to NIST SP 800-171 assessment objectives.',
+      ? 'Read-only evidence from a Microsoft 365 GCC High tenant (Entra ID, Intune, Defender) for NIST SP 800-171. ITAR / foreign military sales tenants only.'
+      : 'Read-only evidence from a Microsoft 365 or GCC tenant: Entra ID users, privileged roles, MFA and Conditional Access; Intune inventory, compliance and encryption; Defender antivirus state and open alerts. Mapped to NIST SP 800-171 assessment objectives.',
     category: 'Identity & Access',
     logoUrl:
       'https://img.logo.dev/microsoft.com?token=pk_AZatYxV5QDSfWpRDaBxzRQ&format=png&retina=true',
@@ -73,11 +94,13 @@ export function createMicrosoft365Manifest(cloud: MicrosoftCloud): IntegrationMa
 
 ### Who connects
 
-The person who clicks Connect signs in with a work account in the client tenant. Graph returns only what that account may read, so use an account holding **Global Reader** plus **Security Reader** (or a Global Administrator for the one-time consent). All calls are read-only.
+The person who clicks Connect signs in with a work account in the client tenant. Graph returns only what that account may read, so use an account holding **Global Reader** (covers Entra ID and Intune) plus **Security Reader** (covers Defender alerts), or a Global Administrator for the one-time consent. All calls are read-only.
 
 ### Licensing
 
-The MFA registration report and sign-in activity need **Entra ID P1** (included in Microsoft 365 G3/G5, E3/E5, Business Premium). Without it those two checks report "could not verify" with the reason; the directory and Conditional Access checks still run.${isGov ? '\n\n### GCC High\n\nThis manifest uses `login.microsoftonline.us` and `graph.microsoft.us`. CMMC Level 2 requires GCC, not GCC High; GCC High applies only to contracts with ITAR / foreign military sales.' : '\n\n### GCC\n\nGCC tenants use the commercial sign-in and Graph endpoints, so this manifest covers both commercial and GCC. GCC High has its own entry.'}`,
+- **Entra ID P1** (in Microsoft 365 G3/G5, E3/E5, Business Premium): the MFA registration report and sign-in activity. Without it those checks report "could not verify".
+- **Intune Plan 1** (in the same bundles): the inventory, compliance, encryption and Defender Antivirus state checks. Only devices enrolled in Intune are seen.
+- **Defender for Endpoint, Defender for Business or another Defender XDR product**: the open-alerts check. Antivirus state needs no Defender licence; it is Defender Antivirus built into Windows, reported through Intune.${isGov ? '\n\n### GCC High\n\nThis manifest uses `login.microsoftonline.us` and `graph.microsoft.us`. CMMC Level 2 requires GCC, not GCC High; GCC High applies only to contracts with ITAR / foreign military sales.' : '\n\n### GCC\n\nGCC tenants use the commercial sign-in and Graph endpoints, so this manifest covers both commercial and GCC. GCC High has its own entry.'}`,
         createAppUrl: `${portal}/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade`,
       },
     },
@@ -113,20 +136,28 @@ The MFA registration report and sign-in activity need **Entra ID P1** (included 
       {
         id: 'intune',
         name: 'Intune',
-        description: 'Device compliance and configuration (3.4.x)',
-        enabledByDefault: false,
-        implemented: false,
+        description:
+          'Device inventory and currency (3.4.1), compliance policies and enforcement (3.4.2), device encryption (3.13.16, 3.1.19)',
+        enabledByDefault: true,
+        implemented: true,
       },
       {
         id: 'defender-endpoint',
-        name: 'Defender for Endpoint',
-        description: 'Endpoint protection status (3.14.x)',
-        enabledByDefault: false,
-        implemented: false,
+        name: 'Defender',
+        description:
+          'Defender Antivirus real-time protection, signatures and scans on Windows devices (3.14.2, 3.14.4, 3.14.5) and open Defender XDR alerts (3.14.6)',
+        enabledByDefault: true,
+        implemented: true,
       },
     ],
 
-    variables: [includeGuestsVariable, includeDisabledVariable, inactiveDaysVariable],
+    variables: [
+      includeGuestsVariable,
+      includeDisabledVariable,
+      inactiveDaysVariable,
+      deviceStaleDaysVariable,
+      scanMaxDaysVariable,
+    ],
 
     checks: [
       usersIdentifiedCheck,
@@ -136,6 +167,17 @@ The MFA registration report and sign-in activity need **Entra ID P1** (included 
       mfaPrivilegedUsersCheck,
       conditionalAccessMfaCheck,
       inactiveAccountsCheck,
+      intuneDeviceInventoryCheck,
+      intuneStaleDevicesCheck,
+      intuneCompliancePoliciesCheck,
+      intuneDeviceComplianceCheck,
+      intuneDeviceEncryptionCheck,
+      intuneMobileEncryptionCheck,
+      defenderRealTimeProtectionCheck,
+      defenderRealTimeScansCheck,
+      defenderSignaturesCheck,
+      defenderScansCheck,
+      defenderOpenAlertsCheck,
     ],
   };
 }

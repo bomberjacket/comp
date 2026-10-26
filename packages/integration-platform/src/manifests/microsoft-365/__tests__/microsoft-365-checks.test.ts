@@ -1,11 +1,5 @@
 import { describe, expect, it } from 'bun:test';
 import { TASK_TEMPLATES } from '../../../task-mappings';
-import type {
-  CheckContext,
-  CheckFindingResult,
-  CheckPassingResult,
-  CheckVariableValues,
-} from '../../../types';
 import {
   conditionalAccessMfaCheck,
   inactiveAccountsCheck,
@@ -25,41 +19,9 @@ import type {
   GraphUser,
   GraphUserRegistrationDetails,
 } from '../types';
+import { DAY, denied, makeCtx } from './test-context';
 
 const GLOBAL_ADMIN_TEMPLATE = '62e90394-69f5-4237-9190-012177145e10';
-const DAY = 86_400_000;
-
-type Routes = Record<string, unknown[] | Error>;
-
-function makeCtx(routes: Routes, variables: CheckVariableValues = {}) {
-  const passed: CheckPassingResult[] = [];
-  const failed: CheckFindingResult[] = [];
-  const calls: string[] = [];
-  const lookup = (path: string): unknown[] => {
-    calls.push(path);
-    const key = Object.keys(routes).find((k) => path === k || path.startsWith(k));
-    if (!key) throw Object.assign(new Error(`HTTP 404: no route for ${path}`), { status: 404 });
-    const value = routes[key];
-    if (value instanceof Error) throw value;
-    return value;
-  };
-  const ctx = {
-    accessToken: 'tok',
-    credentials: {},
-    variables,
-    connectionId: 'conn_1',
-    organizationId: 'org_1',
-    metadata: {},
-    log: () => {},
-    warn: () => {},
-    error: () => {},
-    pass: (r: CheckPassingResult) => passed.push(r),
-    fail: (r: CheckFindingResult) => failed.push(r),
-    fetch: async (path: string) => ({ value: lookup(path) }),
-    fetchWithCursor: async (path: string) => lookup(path),
-  } as unknown as CheckContext;
-  return { ctx, passed, failed, calls };
-}
 
 const user = (overrides: Partial<GraphUser> & { userPrincipalName: string }): GraphUser => ({
   id: `id-${overrides.userPrincipalName}`,
@@ -80,10 +42,8 @@ const registration = (
   ...overrides,
 });
 
-const denied = Object.assign(new Error('HTTP 403: Authorization_RequestDenied'), { status: 403 });
-
 describe('manifest', () => {
-  it('registers two clouds with the right endpoints and seven checks', () => {
+  it('registers two clouds with the right endpoints and eighteen checks', () => {
     expect(microsoft365Manifest.id).toBe('microsoft-365');
     expect(microsoft365Manifest.baseUrl).toBe('https://graph.microsoft.com');
     expect(microsoft365GccHighManifest.id).toBe('microsoft-365-gcc-high');
@@ -95,7 +55,7 @@ describe('manifest', () => {
     expect(microsoft365GccHighManifest.auth.config.scopes).toContain(
       'https://graph.microsoft.us/User.Read.All',
     );
-    expect(microsoft365Manifest.checks).toHaveLength(7);
+    expect(microsoft365Manifest.checks).toHaveLength(18);
     expect(createMicrosoft365Manifest('commercial').checks?.map((c) => c.id)).toEqual(
       microsoft365Manifest.checks?.map((c) => c.id),
     );
@@ -113,6 +73,17 @@ describe('manifest', () => {
       'entra-mfa-privileged': TASK_TEMPLATES['3.5.3[c]'],
       'entra-conditional-access-mfa': TASK_TEMPLATES['3.5.3[d]'],
       'entra-inactive-accounts': TASK_TEMPLATES['3.5.6[b]'],
+      'intune-device-inventory': TASK_TEMPLATES['3.4.1[d]'],
+      'intune-stale-devices': TASK_TEMPLATES['3.4.1[f]'],
+      'intune-compliance-policies': TASK_TEMPLATES['3.4.2[a]'],
+      'intune-device-compliance': TASK_TEMPLATES['3.4.2[b]'],
+      'intune-device-encryption': TASK_TEMPLATES['3.13.16[a]'],
+      'intune-mobile-encryption': TASK_TEMPLATES['3.1.19[b]'],
+      'defender-realtime-protection': TASK_TEMPLATES['3.14.2[b]'],
+      'defender-realtime-scans': TASK_TEMPLATES['3.14.5[c]'],
+      'defender-signatures-current': TASK_TEMPLATES['3.14.4[a]'],
+      'defender-periodic-scans': TASK_TEMPLATES['3.14.5[b]'],
+      'defender-open-alerts': TASK_TEMPLATES['3.14.6[a]'],
     });
   });
 });

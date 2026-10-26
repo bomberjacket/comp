@@ -6,6 +6,8 @@ import {
   defenderRealTimeScansCheck,
   defenderScansCheck,
   defenderSignaturesCheck,
+  entraAuditRecordsCheck,
+  entraAuditRetentionCheck,
   inactiveAccountsCheck,
   intuneCompliancePoliciesCheck,
   intuneDeviceComplianceCheck,
@@ -21,6 +23,7 @@ import {
 } from './checks';
 import { MICROSOFT_CLOUDS, type MicrosoftCloud } from './graph';
 import {
+  auditRetentionDaysVariable,
   deviceStaleDaysVariable,
   inactiveDaysVariable,
   includeDisabledVariable,
@@ -59,7 +62,7 @@ export function createMicrosoft365Manifest(cloud: MicrosoftCloud): IntegrationMa
     name: label,
     description: isGov
       ? 'Read-only evidence from a Microsoft 365 GCC High tenant (Entra ID, Intune, Defender) for NIST SP 800-171. ITAR / foreign military sales tenants only.'
-      : 'Read-only evidence from a Microsoft 365 or GCC tenant: Entra ID users, privileged roles, MFA and Conditional Access; Intune inventory, compliance and encryption; Defender antivirus state and open alerts. Mapped to NIST SP 800-171 assessment objectives.',
+      : 'Read-only evidence from a Microsoft 365 or GCC tenant: Entra ID users, privileged roles, MFA and Conditional Access; audit log generation and retention; Intune inventory, compliance and encryption; Defender antivirus state and open alerts. Mapped to NIST SP 800-171 assessment objectives.',
     category: 'Identity & Access',
     logoUrl:
       'https://img.logo.dev/microsoft.com?token=pk_AZatYxV5QDSfWpRDaBxzRQ&format=png&retina=true',
@@ -134,6 +137,14 @@ The person who clicks Connect signs in with a work account in the client tenant.
         implemented: true,
       },
       {
+        id: 'audit',
+        name: 'Audit logging',
+        description:
+          'Entra ID audit and sign-in records generated, and how far back they reach against the defined retention period (3.3.1)',
+        enabledByDefault: true,
+        implemented: true,
+      },
+      {
         id: 'intune',
         name: 'Intune',
         description:
@@ -155,6 +166,7 @@ The person who clicks Connect signs in with a work account in the client tenant.
       includeGuestsVariable,
       includeDisabledVariable,
       inactiveDaysVariable,
+      auditRetentionDaysVariable,
       deviceStaleDaysVariable,
       scanMaxDaysVariable,
     ],
@@ -167,6 +179,8 @@ The person who clicks Connect signs in with a work account in the client tenant.
       mfaPrivilegedUsersCheck,
       conditionalAccessMfaCheck,
       inactiveAccountsCheck,
+      entraAuditRecordsCheck,
+      entraAuditRetentionCheck,
       intuneDeviceInventoryCheck,
       intuneStaleDevicesCheck,
       intuneCompliancePoliciesCheck,

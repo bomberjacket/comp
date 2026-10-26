@@ -49,6 +49,24 @@ export const scanMaxDaysVariable: CheckVariable = {
     'The scan frequency defined for 3.14.5. Windows devices whose last Defender quick or full scan is older than this are reported.',
 };
 
+export const auditRetentionDaysVariable: CheckVariable = {
+  id: 'audit_retention_days',
+  label: 'Audit record retention (days)',
+  type: 'number',
+  required: false,
+  default: 365,
+  helpText:
+    'The retention period defined for 3.3.1. Entra ID keeps at most 30 days natively; longer periods rely on export to a Log Analytics (Sentinel) workspace or storage account.',
+};
+
+export interface AuditCheckOptions {
+  retentionDays: number;
+}
+
+export function parseAuditOptions(variables: CheckVariableValues): AuditCheckOptions {
+  return { retentionDays: positiveDays(variables.audit_retention_days, 365) };
+}
+
 export interface Microsoft365CheckOptions {
   includeGuests: boolean;
   includeDisabled: boolean;

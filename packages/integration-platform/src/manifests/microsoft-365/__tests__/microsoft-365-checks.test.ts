@@ -43,7 +43,7 @@ const registration = (
 });
 
 describe('manifest', () => {
-  it('registers two clouds with the right endpoints and eighteen checks', () => {
+  it('registers two clouds with the right endpoints and twenty checks', () => {
     expect(microsoft365Manifest.id).toBe('microsoft-365');
     expect(microsoft365Manifest.baseUrl).toBe('https://graph.microsoft.com');
     expect(microsoft365GccHighManifest.id).toBe('microsoft-365-gcc-high');
@@ -55,7 +55,7 @@ describe('manifest', () => {
     expect(microsoft365GccHighManifest.auth.config.scopes).toContain(
       'https://graph.microsoft.us/User.Read.All',
     );
-    expect(microsoft365Manifest.checks).toHaveLength(18);
+    expect(microsoft365Manifest.checks).toHaveLength(20);
     expect(createMicrosoft365Manifest('commercial').checks?.map((c) => c.id)).toEqual(
       microsoft365Manifest.checks?.map((c) => c.id),
     );
@@ -73,6 +73,8 @@ describe('manifest', () => {
       'entra-mfa-privileged': TASK_TEMPLATES['3.5.3[c]'],
       'entra-conditional-access-mfa': TASK_TEMPLATES['3.5.3[d]'],
       'entra-inactive-accounts': TASK_TEMPLATES['3.5.6[b]'],
+      'entra-audit-records-generated': TASK_TEMPLATES['3.3.1[c]'],
+      'entra-audit-retention': TASK_TEMPLATES['3.3.1[f]'],
       'intune-device-inventory': TASK_TEMPLATES['3.4.1[d]'],
       'intune-stale-devices': TASK_TEMPLATES['3.4.1[f]'],
       'intune-compliance-policies': TASK_TEMPLATES['3.4.2[a]'],

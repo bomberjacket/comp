@@ -88,6 +88,24 @@ export interface GraphOrganization {
   verifiedDomains?: Array<{ name: string; isDefault?: boolean }>;
 }
 
+/** /auditLogs/directoryAudits */
+export interface GraphDirectoryAudit {
+  id: string;
+  activityDateTime: string;
+  activityDisplayName?: string | null;
+  category?: string | null;
+  loggedByService?: string | null;
+  result?: string | null;
+}
+
+/** /auditLogs/signIns (Entra ID P1) */
+export interface GraphSignIn {
+  id: string;
+  createdDateTime: string;
+  appDisplayName?: string | null;
+  userPrincipalName?: string | null;
+}
+
 /** /deviceManagement/managedDevices (Intune) */
 export interface GraphManagedDevice {
   id: string;

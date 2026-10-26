@@ -1,3 +1,4 @@
+export { entraAuditRecordsCheck, entraAuditRetentionCheck } from './audit-logging';
 export { defenderOpenAlertsCheck } from './defender-alerts';
 export {
   defenderRealTimeProtectionCheck,

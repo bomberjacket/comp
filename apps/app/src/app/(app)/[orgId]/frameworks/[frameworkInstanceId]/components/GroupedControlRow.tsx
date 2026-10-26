@@ -12,6 +12,7 @@ import { Badge, TableCell, TableRow, Text } from '@trycompai/design-system';
 import { ChevronDown, ChevronRight, Launch } from '@trycompai/design-system/icons';
 import Link from 'next/link';
 import { getStatusBadge } from './framework-controls-shared';
+import type { ScoredRequirement } from '@/types/nist-800-171-score';
 
 export function GroupedControlRow({
   control,
@@ -24,6 +25,7 @@ export function GroupedControlRow({
   expandable = false,
   expanded = false,
   onToggleExpand,
+  score,
 }: {
   control: FrameworkInstanceWithControls['controls'][number];
   requirements: Array<{ id: string; name: string; identifier: string }>;
@@ -36,6 +38,8 @@ export function GroupedControlRow({
   expandable?: boolean;
   expanded?: boolean;
   onToggleExpand?: () => void;
+  /** NIST SP 800-171 point value for this control's requirement, when scored. */
+  score?: ScoredRequirement;
 }) {
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
   const policies = control.policies ?? [];
@@ -95,6 +99,18 @@ export function GroupedControlRow({
               className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
             />
           </Link>
+          {score && (
+            <span
+              className="shrink-0 rounded-full bg-muted px-1.5 py-0.5 text-xs tabular-nums text-muted-foreground"
+              title={
+                score.sspGate
+                  ? 'System Security Plan: not scored; without it the assessment cannot be completed'
+                  : `${score.points} point${score.points === 1 ? '' : 's'} subtracted if NOT MET (32 CFR 170.24)${score.placeholder ? '; Rev 3 placeholder carried from Rev 2' : ''}`
+              }
+            >
+              {score.sspGate ? 'SSP' : `${score.points} pt${score.placeholder ? '*' : ''}`}
+            </span>
+          )}
         </div>
       </TableCell>
       <TableCell>

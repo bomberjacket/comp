@@ -107,6 +107,19 @@ export class FrameworksController {
     return this.frameworksService.findOne(id, organizationId);
   }
 
+  @Get(':id/nist-800-171-score')
+  @RequirePermission('framework', 'read')
+  @ApiOperation({
+    summary:
+      'NIST SP 800-171 score (32 CFR 170.24): per-requirement MET/NOT MET from assessment-objective tasks, SPRS-style total, Level 2 eligibility',
+  })
+  async getNist800171Score(
+    @OrganizationId() organizationId: string,
+    @Param('id') id: string,
+  ) {
+    return this.frameworksService.getNist800171Score(id, organizationId);
+  }
+
   @Get(':id/requirements/:requirementKey')
   @RequirePermission('framework', 'read')
   @ApiOperation({ summary: 'Get a specific requirement with related controls' })

@@ -35,6 +35,8 @@ import { FrameworkRequirements } from './FrameworkRequirements';
 import { FrameworkRequirementsGrouped } from './FrameworkRequirementsGrouped';
 import { FrameworkTimeline } from './FrameworkTimeline';
 import { FrameworkVersioningSection } from './FrameworkVersioningSection';
+import { Nist800171ScoreCard } from './Nist800171ScoreCard';
+import type { Nist800171ScoreResult } from '@/types/nist-800-171-score';
 import { LinkRequirementSheet } from './LinkRequirementSheet';
 import { SyncHistorySection } from './SyncHistorySection';
 
@@ -43,6 +45,7 @@ interface FrameworkDetailContentProps {
   frameworkInstanceId: string;
   initialFramework: any;
   initialUpdateStatus?: FrameworkUpdateStatus;
+  initialScore?: Nist800171ScoreResult;
 }
 
 const DEFAULT_TAB = 'controls';
@@ -52,6 +55,7 @@ export function FrameworkDetailContent({
   frameworkInstanceId,
   initialFramework,
   initialUpdateStatus,
+  initialScore,
 }: FrameworkDetailContentProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -216,6 +220,14 @@ export function FrameworkDetailContent({
           hasActiveAudit={false}
         />
 
+        {initialScore?.supported && (
+          <Nist800171ScoreCard
+            score={initialScore}
+            orgId={orgId}
+            frameworkInstanceId={frameworkInstanceId}
+          />
+        )}
+
         {!complianceTimelineEnabled && (
           <FrameworkProgress
             framework={frameworkInstanceWithControls}
@@ -238,6 +250,7 @@ export function FrameworkDetailContent({
                 requirementDefinitions={requirementDefinitions}
                 tasks={tasks}
                 evidenceSubmissions={evidenceSubmissions}
+                requirementScores={initialScore?.supported ? initialScore.requirements : undefined}
               />
             </Suspense>
           ) : (

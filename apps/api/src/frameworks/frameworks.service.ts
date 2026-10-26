@@ -13,6 +13,7 @@ import {
   computeFrameworkComplianceScore,
 } from './frameworks-scores.helper';
 import { upsertOrgFrameworkStructure } from './frameworks-upsert.helper';
+import { computeNist800171Score } from './nist-800-171/score';
 import { createTimelinesForFrameworks } from './frameworks-timeline.helper';
 import { TimelinesService } from '../timelines/timelines.service';
 import type { FrameworkManifest } from './framework-versioning/manifest.types';
@@ -420,6 +421,23 @@ export class FrameworksService {
       requirementMaps,
       evidenceSubmissions,
     };
+  }
+
+  /** SPRS-style NIST SP 800-171 score (32 CFR 170.24) for a Rev 2 or Rev 3 instance. */
+  async getNist800171Score(frameworkInstanceId: string, organizationId: string) {
+    const fi = await this.findOne(frameworkInstanceId, organizationId);
+    return computeNist800171Score({
+      frameworkId: fi.frameworkId,
+      frameworkName: fi.framework?.name ?? null,
+      requirementDefinitions: fi.requirementDefinitions,
+      // requirementId is null for per-instance custom requirements; those are not scored.
+      requirementMaps: fi.requirementMaps.flatMap((map) =>
+        map.requirementId
+          ? [{ requirementId: map.requirementId, controlId: map.controlId }]
+          : [],
+      ),
+      tasks: fi.tasks,
+    });
   }
 
   async findAvailable(organizationId?: string) {

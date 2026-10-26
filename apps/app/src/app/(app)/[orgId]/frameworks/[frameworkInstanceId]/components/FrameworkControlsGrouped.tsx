@@ -40,6 +40,7 @@ import {
 } from './framework-controls-shared';
 import { GroupedControlRow } from './GroupedControlRow';
 import { GroupedObjectiveRow } from './GroupedObjectiveRow';
+import type { ScoredRequirement } from '@/types/nist-800-171-score';
 
 const COLUMN_COUNT = 7;
 
@@ -48,12 +49,19 @@ export function FrameworkControlsGrouped({
   requirementDefinitions,
   tasks,
   evidenceSubmissions = [],
+  requirementScores,
 }: {
   frameworkInstanceWithControls: FrameworkInstanceWithControls;
   requirementDefinitions: FrameworkEditorRequirement[];
   tasks: (Task & { controls: Control[] })[];
   evidenceSubmissions?: EvidenceSubmissionInfo[];
+  /** NIST SP 800-171 scoring per requirement number, when the framework is scored. */
+  requirementScores?: ScoredRequirement[];
 }) {
+  const scoreByNumber = useMemo(
+    () => new Map((requirementScores ?? []).map((r) => [r.number, r])),
+    [requirementScores],
+  );
   const { orgId, frameworkInstanceId } = useParams<{ orgId: string; frameworkInstanceId: string }>();
   const router = useRouter();
 
@@ -229,6 +237,7 @@ export function FrameworkControlsGrouped({
                 expandedControls={expandedControls}
                 isSearching={isSearching}
                 onToggleControl={handleToggleControl}
+                scoreByNumber={scoreByNumber}
               />
             ))
           )}
@@ -251,6 +260,7 @@ function FamilySection({
   expandedControls,
   isSearching,
   onToggleControl,
+  scoreByNumber,
 }: {
   group: FamilyGroup;
   expanded: boolean;
@@ -261,6 +271,7 @@ function FamilySection({
   frameworkInstanceId: string;
   onRowClick: (controlId: string) => void;
   definitionsById: Map<string, FrameworkEditorRequirement>;
+  scoreByNumber: Map<string, ScoredRequirement>;
   expandedControls: Set<string>;
   isSearching: boolean;
   onToggleControl: (controlId: string) => void;
@@ -312,6 +323,7 @@ function FamilySection({
                 expandable={expandable}
                 expanded={controlExpanded}
                 onToggleExpand={() => onToggleControl(control.id)}
+                score={scoreByNumber.get(control.name.split(' ')[0])}
               />
               {controlExpanded &&
                 objectives.map((objective) => (

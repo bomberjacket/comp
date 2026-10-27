@@ -1,7 +1,7 @@
 import { app, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import { getAllRemediationInfo, runRemediation } from '../remediations';
-import type { CheckResult, DeviceCheckType } from '../shared/types';
+import type { AnyCheckType, CheckResult } from '../shared/types';
 import { IPC_CHANNELS } from '../shared/types';
 import { performLogin, performLogout } from './auth';
 import { initAutoLaunch } from './auto-launch';
@@ -204,7 +204,7 @@ ipcMain.handle(IPC_CHANNELS.GET_REMEDIATION_INFO, () => {
   return getAllRemediationInfo();
 });
 
-ipcMain.handle(IPC_CHANNELS.REMEDIATE_CHECK, async (_event, checkType: DeviceCheckType) => {
+ipcMain.handle(IPC_CHANNELS.REMEDIATE_CHECK, async (_event, checkType: AnyCheckType) => {
   log(`Remediation requested for: ${checkType}`);
   const result = await runRemediation(checkType);
   log(`Remediation result: ${result.success ? 'SUCCESS' : 'FAILED'} - ${result.message}`);

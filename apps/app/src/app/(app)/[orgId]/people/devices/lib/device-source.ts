@@ -94,9 +94,7 @@ export function computeSourceComplianceVerdict(
   return {
     kind: 'unverified',
     reported: reportedIds.size,
-    missing: CANONICAL_DEVICE_CHECKS.filter((c) => !reportedIds.has(c.id)).map(
-      (c) => c.label,
-    ),
+    missing: CANONICAL_DEVICE_CHECKS.filter((c) => !reportedIds.has(c.id)).map((c) => c.label),
   };
 }
 
@@ -141,6 +139,50 @@ export const CHECK_FIELDS = [
   { key: 'passwordPolicySet' as const, dbKey: 'password_policy', label: 'Password Policy' },
   { key: 'screenLockEnabled' as const, dbKey: 'screen_lock', label: 'Screen Lock' },
 ];
+
+/**
+ * Checks the agent reports beyond the four canonical ones. They are evidence
+ * for a NIST SP 800-171 requirement and never affect the compliance verdict.
+ * Unknown ids still render, with a humanised label.
+ */
+export const EXTENDED_CHECK_LABELS: Record<string, { label: string; objective: string }> = {
+  fips_mode: { label: 'FIPS Mode', objective: '3.13.11' },
+  log_forwarding: { label: 'Log Forwarding', objective: '3.3.1' },
+};
+
+export interface ExtendedCheck {
+  id: string;
+  label: string;
+  objective: string | null;
+  passed: boolean;
+  message: string | null;
+  exception: string | null;
+  checkedAt: string | null;
+}
+
+function humanise(id: string): string {
+  return id
+    .split('_')
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
+export function extendedChecks(device: DeviceWithChecks): ExtendedCheck[] {
+  const canonical = new Set<string>(CHECK_FIELDS.map((c) => c.dbKey));
+  return Object.entries(device.checkDetails ?? {})
+    .filter(([id]) => !canonical.has(id))
+    .map(([id, d]) => ({
+      id,
+      label: EXTENDED_CHECK_LABELS[id]?.label ?? humanise(id),
+      objective: EXTENDED_CHECK_LABELS[id]?.objective ?? null,
+      passed: d?.passed === true,
+      message: d?.message ?? null,
+      exception: d?.exception ?? null,
+      checkedAt: d?.checkedAt ?? null,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
 
 export function formatTimeAgo(dateString: string | null): string {
   if (!dateString) return 'Never';

@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import type { DeviceCheckType } from '../shared/types';
+import type { AnyCheckType } from '../shared/types';
 import { IPC_CHANNELS } from '../shared/types';
 
 /**
@@ -16,7 +16,7 @@ contextBridge.exposeInMainWorld('compAgent', {
 
   // Remediation APIs
   getRemediationInfo: () => ipcRenderer.invoke(IPC_CHANNELS.GET_REMEDIATION_INFO),
-  remediateCheck: (checkType: DeviceCheckType) =>
+  remediateCheck: (checkType: AnyCheckType) =>
     ipcRenderer.invoke(IPC_CHANNELS.REMEDIATE_CHECK, checkType),
 
   // Event listeners

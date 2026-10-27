@@ -3,10 +3,10 @@ import {
   IsArray,
   IsBoolean,
   IsDateString,
-  IsEnum,
   IsObject,
   IsOptional,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
   ValidateNested,
@@ -32,12 +32,15 @@ class CheckDetailsDto {
 }
 
 export class CheckResultDto {
-  @IsEnum(['disk_encryption', 'antivirus', 'password_policy', 'screen_lock'])
-  checkType:
-    | 'disk_encryption'
-    | 'antivirus'
-    | 'password_policy'
-    | 'screen_lock';
+  /**
+   * The agent's check id. The four canonical ids (disk_encryption, antivirus,
+   * password_policy, screen_lock) drive the compliance verdict; any other
+   * well-formed id is stored as evidence in checkDetails, so the agent can
+   * gain checks without an API release.
+   */
+  @IsString()
+  @Matches(/^[a-z][a-z0-9_]{2,39}$/)
+  checkType: string;
 
   @IsBoolean()
   passed: boolean;

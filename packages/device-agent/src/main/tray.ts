@@ -1,6 +1,7 @@
 import { app, BrowserWindow, Menu, nativeImage, shell, Tray } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import path from 'node:path';
+import { checkLabel } from '../shared/check-catalog';
 import type { CheckResult } from '../shared/types';
 import { isAutoLaunchEnabled, setAutoLaunch } from './auto-launch';
 import { log } from './logger';
@@ -304,13 +305,7 @@ function getStatusLabel(status: TrayStatus): string {
 }
 
 function formatCheckName(checkType: string): string {
-  const names: Record<string, string> = {
-    disk_encryption: 'Disk Encryption',
-    antivirus: 'Antivirus',
-    password_policy: 'Password Policy',
-    screen_lock: 'Screen Lock',
-  };
-  return names[checkType] ?? checkType;
+  return checkLabel(checkType);
 }
 
 export function destroyTray(): void {

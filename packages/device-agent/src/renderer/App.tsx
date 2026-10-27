@@ -11,9 +11,10 @@ import {
 } from '@trycompai/design-system';
 import { ChevronDown, ChevronUp, Launch, Renew, Settings } from '@trycompai/design-system/icons';
 import React, { useCallback, useEffect, useState } from 'react';
+import { CHECK_CATALOG, isCoreCheck } from '../shared/check-catalog';
 import type {
+  AnyCheckType,
   CheckResult,
-  DeviceCheckType,
   RemediationInfo,
   RemediationResult,
 } from '../shared/types';
@@ -37,7 +38,7 @@ declare global {
         osVersion: string;
       } | null>;
       getRemediationInfo: () => Promise<RemediationInfo[]>;
-      remediateCheck: (checkType: DeviceCheckType) => Promise<RemediationResult>;
+      remediateCheck: (checkType: AnyCheckType) => Promise<RemediationResult>;
       onAuthStateChanged: (callback: (isAuthenticated: boolean) => void) => () => void;
       onCheckResultsUpdated: (
         callback: (data: { results: CheckResult[]; isCompliant: boolean }) => void,
@@ -46,19 +47,13 @@ declare global {
   }
 }
 
-const CHECK_NAMES: Record<DeviceCheckType, string> = {
-  disk_encryption: 'Disk Encryption',
-  antivirus: 'Antivirus',
-  password_policy: 'Password Policy',
-  screen_lock: 'Screen Lock',
-};
+const CHECK_NAMES: Record<string, string> = Object.fromEntries(
+  Object.entries(CHECK_CATALOG).map(([id, def]) => [id, def.label]),
+);
 
-const CHECK_DESCRIPTIONS: Record<DeviceCheckType, string> = {
-  disk_encryption: 'FileVault or BitLocker enabled',
-  antivirus: 'Antivirus software active',
-  password_policy: 'Minimum 8 character password',
-  screen_lock: 'Screen locks within 15 minutes',
-};
+const CHECK_DESCRIPTIONS: Record<string, string> = Object.fromEntries(
+  Object.entries(CHECK_CATALOG).map(([id, def]) => [id, def.description]),
+);
 
 /** Label for the remediation button based on remediation type */
 function getRemediationButtonLabel(info: RemediationInfo): string {
@@ -132,8 +127,19 @@ function CheckCard({
               {check.details.message || CHECK_DESCRIPTIONS[check.checkType]}
             </Text>
           </Stack>
-          <div className="ml-auto shrink-0">
-            <Badge variant={check.passed ? 'default' : 'destructive'}>
+          <div className="ml-auto flex shrink-0 items-center gap-1">
+            {/* Evidence checks inform the NIST SP 800-171 record; they never
+                make the device non-compliant, so a failure is shown softly. */}
+            {!isCoreCheck(check.checkType) && <Badge variant="outline">Evidence</Badge>}
+            <Badge
+              variant={
+                check.passed
+                  ? 'default'
+                  : isCoreCheck(check.checkType)
+                    ? 'destructive'
+                    : 'secondary'
+              }
+            >
               {check.passed ? 'Pass' : 'Fail'}
             </Badge>
           </div>
@@ -162,14 +168,24 @@ function CheckCard({
                 variant={remediationInfo.type === 'auto_fix' ? 'default' : 'outline'}
                 onClick={handleRemediate}
                 loading={isRemediating}
-                iconLeft={isGuideOnly
-                  ? (isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />)
-                  : getRemediationButtonIcon(remediationInfo)}
+                iconLeft={
+                  isGuideOnly ? (
+                    isExpanded ? (
+                      <ChevronUp size={14} />
+                    ) : (
+                      <ChevronDown size={14} />
+                    )
+                  ) : (
+                    getRemediationButtonIcon(remediationInfo)
+                  )
+                }
               >
                 {isRemediating
                   ? 'Fixing...'
                   : isGuideOnly
-                    ? (isExpanded ? 'Hide Guide' : 'View Guide')
+                    ? isExpanded
+                      ? 'Hide Guide'
+                      : 'View Guide'
                     : getRemediationButtonLabel(remediationInfo)}
               </Button>
 
@@ -231,7 +247,10 @@ export default function App() {
   useEffect(() => {
     async function init() {
       try {
-        window.compAgent.getAppVersion().then(setAppVersion).catch(() => {});
+        window.compAgent
+          .getAppVersion()
+          .then(setAppVersion)
+          .catch(() => {});
         const authStatus = await window.compAgent.getAuthStatus();
         setIsAuthenticated(authStatus.isAuthenticated);
         if (authStatus.isAuthenticated) {

@@ -47,4 +47,42 @@ describe('CheckInDto', () => {
     });
     expect(errors.map((e) => e.property)).toContain('osVersion');
   });
+
+  it('accepts canonical and extended check ids', async () => {
+    const errors = await validateCheckIn({
+      deviceId: 'dev_1',
+      checks: [
+        {
+          checkType: 'disk_encryption',
+          passed: true,
+          checkedAt: '2026-10-26T12:00:00.000Z',
+        },
+        {
+          checkType: 'fips_mode',
+          passed: false,
+          checkedAt: '2026-10-26T12:00:00.000Z',
+        },
+        {
+          checkType: 'log_forwarding',
+          passed: true,
+          checkedAt: '2026-10-26T12:00:00.000Z',
+        },
+      ],
+    });
+    expect(errors).toHaveLength(0);
+  });
+
+  it('rejects a malformed check id', async () => {
+    const errors = await validateCheckIn({
+      deviceId: 'dev_1',
+      checks: [
+        {
+          checkType: 'FIPS Mode!',
+          passed: true,
+          checkedAt: '2026-10-26T12:00:00.000Z',
+        },
+      ],
+    });
+    expect(errors.map((e) => e.property)).toContain('checks');
+  });
 });

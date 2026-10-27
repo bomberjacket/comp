@@ -17,6 +17,8 @@ import { LinuxScreenLockCheck } from './linux/screen-lock';
 // Windows checks
 import { WindowsAntivirusCheck } from './windows/antivirus';
 import { WindowsDiskEncryptionCheck } from './windows/disk-encryption';
+import { WindowsFipsModeCheck } from './windows/fips-mode';
+import { WindowsLogForwardingCheck } from './windows/log-forwarding';
 import { WindowsPasswordPolicyCheck } from './windows/password-policy';
 import { WindowsScreenLockCheck } from './windows/screen-lock';
 
@@ -50,6 +52,9 @@ function getChecksForPlatform(): ComplianceCheck[] {
       new WindowsAntivirusCheck(),
       new WindowsPasswordPolicyCheck(),
       new WindowsScreenLockCheck(),
+      // Evidence checks (NIST SP 800-171); not part of the compliance verdict.
+      new WindowsFipsModeCheck(),
+      new WindowsLogForwardingCheck(),
     ];
   }
 
@@ -70,9 +75,7 @@ export async function runAllChecks(): Promise<CheckResult[]> {
       log(`Running check: ${check.displayName}`);
       const result = await check.run();
       results.push(result);
-      log(
-        `  ${check.displayName}: ${result.passed ? 'PASS' : 'FAIL'} - ${result.details.message}`,
-      );
+      log(`  ${check.displayName}: ${result.passed ? 'PASS' : 'FAIL'} - ${result.details.message}`);
     } catch (error) {
       log(`Check failed: ${check.displayName} - ${error}`, 'ERROR');
       results.push({

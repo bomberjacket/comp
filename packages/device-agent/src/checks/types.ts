@@ -1,4 +1,4 @@
-import type { CheckResult, DeviceCheckType } from '../shared/types';
+import type { AnyCheckType, CheckResult } from '../shared/types';
 
 /**
  * Interface for a platform-specific compliance check.
@@ -6,7 +6,7 @@ import type { CheckResult, DeviceCheckType } from '../shared/types';
  */
 export interface ComplianceCheck {
   /** The type of check this module performs */
-  checkType: DeviceCheckType;
+  checkType: AnyCheckType;
 
   /** Human-readable name for display */
   displayName: string;

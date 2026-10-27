@@ -1,5 +1,5 @@
 import { log } from '../main/logger';
-import type { DeviceCheckType, RemediationInfo, RemediationResult } from '../shared/types';
+import type { AnyCheckType, RemediationInfo, RemediationResult } from '../shared/types';
 import type { ComplianceRemediation } from './types';
 
 // macOS remediations
@@ -69,7 +69,7 @@ export function getAllRemediationInfo(): RemediationInfo[] {
  * Runs remediation for a specific check type.
  * Returns the remediation result.
  */
-export async function runRemediation(checkType: DeviceCheckType): Promise<RemediationResult> {
+export async function runRemediation(checkType: AnyCheckType): Promise<RemediationResult> {
   const remediations = getRemediationsForPlatform();
   const remediation = remediations.find((r) => r.checkType === checkType);
 

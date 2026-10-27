@@ -1,9 +1,15 @@
 export type DevicePlatform = 'macos' | 'windows' | 'linux';
 
+/** The four checks that decide a device's compliance verdict. */
 export type DeviceCheckType = 'disk_encryption' | 'antivirus' | 'password_policy' | 'screen_lock';
 
+/** Evidence checks: stored and shown per device, never part of the verdict. */
+export type ExtendedCheckType = 'fips_mode' | 'log_forwarding';
+
+export type AnyCheckType = DeviceCheckType | ExtendedCheckType;
+
 export interface CheckResult {
-  checkType: DeviceCheckType;
+  checkType: AnyCheckType;
   passed: boolean;
   details: {
     method: string;
@@ -65,7 +71,7 @@ export interface DeviceStatus {
   isCompliant: boolean;
   lastCheckIn: string | null;
   checks: Array<{
-    checkType: DeviceCheckType;
+    checkType: AnyCheckType;
     passed: boolean;
     details: Record<string, unknown> | null;
     checkedAt: string;
@@ -114,7 +120,7 @@ export interface RemediationInfo {
 
 /** Result returned after attempting a remediation */
 export interface RemediationResult {
-  checkType: DeviceCheckType;
+  checkType: AnyCheckType;
   success: boolean;
   message: string;
   openedSettings?: boolean;

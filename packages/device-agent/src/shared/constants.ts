@@ -14,8 +14,7 @@ export const DEFAULT_API_URL =
 export const CHECK_INTERVAL_MS = 60 * 60 * 1000; // 1 hour
 
 /** Agent version reported to the server */
-export const AGENT_VERSION =
-  typeof __AGENT_VERSION__ !== 'undefined' ? __AGENT_VERSION__ : '1.0.0';
+export const AGENT_VERSION = typeof __AGENT_VERSION__ !== 'undefined' ? __AGENT_VERSION__ : '1.0.0';
 
 /** API route paths on the NestJS API */
 export const API_ROUTES = {

@@ -154,6 +154,10 @@ export const EXTENDED_CHECK_LABELS: Record<string, { label: string; objective: s
   defender_tamper_protection: { label: 'Defender Tamper Protection', objective: '3.14.2' },
   windows_update: { label: 'Windows Update', objective: '3.14.1' },
   local_admins: { label: 'Local Administrators', objective: '3.1.6' },
+  gatekeeper: { label: 'Gatekeeper', objective: '3.4.8' },
+  system_integrity_protection: { label: 'System Integrity Protection', objective: '3.4.5' },
+  host_firewall: { label: 'Host Firewall', objective: '3.13.1' },
+  software_update: { label: 'Software Update', objective: '3.14.1' },
 };
 
 export interface ExtendedCheck {

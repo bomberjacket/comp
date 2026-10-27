@@ -91,6 +91,32 @@ export const CHECK_CATALOG: Record<AnyCheckType, CheckDefinition> = {
     objective: '3.1.6',
     core: false,
   },
+  gatekeeper: {
+    label: 'Gatekeeper',
+    description:
+      'Gatekeeper assesses downloaded software before it runs (signed and notarized only)',
+    objective: '3.4.8',
+    core: false,
+  },
+  system_integrity_protection: {
+    label: 'System Integrity Protection',
+    description: 'SIP keeps system files, processes and extensions read-only, even to root',
+    objective: '3.4.5',
+    core: false,
+  },
+  host_firewall: {
+    label: 'Host Firewall',
+    description: 'The built-in host firewall is on',
+    objective: '3.13.1',
+    core: false,
+  },
+  software_update: {
+    label: 'Software Update',
+    description:
+      'Automatic update checks on, security responses installed automatically, no recommended updates pending',
+    objective: '3.14.1',
+    core: false,
+  },
 };
 
 export function checkLabel(checkType: string): string {

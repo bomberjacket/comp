@@ -6,8 +6,12 @@ import type { ComplianceCheck } from './types';
 // macOS checks
 import { MacOSAntivirusCheck } from './macos/antivirus';
 import { MacOSDiskEncryptionCheck } from './macos/disk-encryption';
+import { MacOSFirewallCheck } from './macos/firewall';
+import { MacOSGatekeeperCheck } from './macos/gatekeeper';
 import { MacOSPasswordPolicyCheck } from './macos/password-policy';
 import { MacOSScreenLockCheck } from './macos/screen-lock';
+import { MacOSSoftwareUpdateCheck } from './macos/software-update';
+import { MacOSSystemIntegrityProtectionCheck } from './macos/system-integrity-protection';
 
 // Linux checks
 import { LinuxAntivirusCheck } from './linux/antivirus';
@@ -41,6 +45,11 @@ function getChecksForPlatform(): ComplianceCheck[] {
       new MacOSAntivirusCheck(),
       new MacOSPasswordPolicyCheck(),
       new MacOSScreenLockCheck(),
+      // Evidence checks (NIST SP 800-171); not part of the compliance verdict.
+      new MacOSGatekeeperCheck(),
+      new MacOSSystemIntegrityProtectionCheck(),
+      new MacOSFirewallCheck(),
+      new MacOSSoftwareUpdateCheck(),
     ];
   }
 

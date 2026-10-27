@@ -12,7 +12,11 @@ export type ExtendedCheckType =
   | 'smb1_disabled'
   | 'defender_tamper_protection'
   | 'windows_update'
-  | 'local_admins';
+  | 'local_admins'
+  | 'gatekeeper'
+  | 'system_integrity_protection'
+  | 'host_firewall'
+  | 'software_update';
 
 export type AnyCheckType = DeviceCheckType | ExtendedCheckType;
 

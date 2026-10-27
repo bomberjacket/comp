@@ -43,21 +43,22 @@ export const CHECK_CATALOG: Record<AnyCheckType, CheckDefinition> = {
   },
   fips_mode: {
     label: 'FIPS Mode',
-    description: 'Windows "Use FIPS compliant algorithms" policy enabled',
+    description:
+      'FIPS mode enforced: Windows "Use FIPS compliant algorithms" policy or Linux kernel fips_enabled',
     objective: '3.13.11',
     core: false,
   },
   log_forwarding: {
     label: 'Log Forwarding',
     description:
-      'A log forwarding agent or Windows Event Forwarding sends this device’s events to the SIEM',
+      'A log forwarding agent, Windows Event Forwarding or remote syslog sends this device’s events to the SIEM',
     objective: '3.3.1',
     core: false,
   },
   audit_policy: {
     label: 'Audit Policy',
     description:
-      'Advanced audit policy logs the required logon, account, privilege and process events',
+      'Advanced audit policy (Windows) or auditd rules (Linux) log the required logon, account, privilege and process events',
     objective: '3.3.1',
     core: false,
   },
@@ -87,7 +88,8 @@ export const CHECK_CATALOG: Record<AnyCheckType, CheckDefinition> = {
   },
   local_admins: {
     label: 'Local Administrators',
-    description: 'The signed-in user is not a local administrator and the group stays small',
+    description:
+      'The signed-in user is not an administrator and the admin or sudo group stays small',
     objective: '3.1.6',
     core: false,
   },
@@ -113,8 +115,15 @@ export const CHECK_CATALOG: Record<AnyCheckType, CheckDefinition> = {
   software_update: {
     label: 'Software Update',
     description:
-      'Automatic update checks on, security responses installed automatically, no recommended updates pending',
+      'Updates current: no recommended (macOS) or security (Linux) updates pending, recent installs, automatic updates on',
     objective: '3.14.1',
+    core: false,
+  },
+  ssh_hardening: {
+    label: 'SSH Hardening',
+    description:
+      'OpenSSH: no root or password-only login, system use banner, idle timeout within 15 minutes',
+    objective: '3.1.12',
     core: false,
   },
 };

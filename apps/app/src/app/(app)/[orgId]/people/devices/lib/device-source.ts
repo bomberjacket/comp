@@ -158,6 +158,7 @@ export const EXTENDED_CHECK_LABELS: Record<string, { label: string; objective: s
   system_integrity_protection: { label: 'System Integrity Protection', objective: '3.4.5' },
   host_firewall: { label: 'Host Firewall', objective: '3.13.1' },
   software_update: { label: 'Software Update', objective: '3.14.1' },
+  ssh_hardening: { label: 'SSH Hardening', objective: '3.1.12' },
 };
 
 export interface ExtendedCheck {

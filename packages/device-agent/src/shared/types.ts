@@ -16,7 +16,8 @@ export type ExtendedCheckType =
   | 'gatekeeper'
   | 'system_integrity_protection'
   | 'host_firewall'
-  | 'software_update';
+  | 'software_update'
+  | 'ssh_hardening';
 
 export type AnyCheckType = DeviceCheckType | ExtendedCheckType;
 

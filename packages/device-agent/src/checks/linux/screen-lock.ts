@@ -1,6 +1,7 @@
 import { execSync } from 'node:child_process';
 import type { CheckResult } from '../../shared/types';
 import type { ComplianceCheck } from '../types';
+import { detectLinuxProfile } from './profile';
 
 const MAX_IDLE_TIME_SECONDS = 900; // 15 minutes
 
@@ -20,6 +21,26 @@ export class LinuxScreenLockCheck implements ComplianceCheck {
 
   async run(): Promise<CheckResult> {
     try {
+      // Server profile: a host with no desktop has no screen to lock. Recorded
+      // as not applicable (passing, with the reason) so a server is not marked
+      // non-compliant for a control that cannot apply to it.
+      const profile = detectLinuxProfile();
+      if (profile.headless) {
+        return {
+          checkType: this.checkType,
+          passed: true,
+          details: {
+            method: 'headless-server-profile',
+            raw: JSON.stringify(profile.evidence),
+            message:
+              'Headless server: no interactive desktop session, screen lock is not applicable',
+            exception:
+              'Not applicable: headless server (no display, no display manager, non-graphical target)',
+          },
+          checkedAt: new Date().toISOString(),
+        };
+      }
+
       // Try GNOME first (most common desktop environment)
       const gnomeResult = this.checkGnome();
       if (gnomeResult !== null) {

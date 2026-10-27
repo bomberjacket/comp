@@ -15,9 +15,16 @@ import { MacOSSystemIntegrityProtectionCheck } from './macos/system-integrity-pr
 
 // Linux checks
 import { LinuxAntivirusCheck } from './linux/antivirus';
+import { LinuxAuditPolicyCheck } from './linux/audit-policy';
 import { LinuxDiskEncryptionCheck } from './linux/disk-encryption';
+import { LinuxFipsModeCheck } from './linux/fips-mode';
+import { LinuxFirewallCheck } from './linux/firewall';
+import { LinuxLocalAdminsCheck } from './linux/local-admins';
+import { LinuxLogForwardingCheck } from './linux/log-forwarding';
 import { LinuxPasswordPolicyCheck } from './linux/password-policy';
 import { LinuxScreenLockCheck } from './linux/screen-lock';
+import { LinuxSoftwareUpdateCheck } from './linux/software-update';
+import { LinuxSshHardeningCheck } from './linux/ssh-hardening';
 
 // Windows checks
 import { WindowsAntivirusCheck } from './windows/antivirus';
@@ -59,6 +66,16 @@ function getChecksForPlatform(): ComplianceCheck[] {
       new LinuxAntivirusCheck(),
       new LinuxPasswordPolicyCheck(),
       new LinuxScreenLockCheck(),
+      // Evidence checks (NIST SP 800-171); not part of the compliance verdict.
+      // The server profile: everything here works on a headless host as an
+      // unprivileged user and says so when root would have told it more.
+      new LinuxFipsModeCheck(),
+      new LinuxLogForwardingCheck(),
+      new LinuxAuditPolicyCheck(),
+      new LinuxFirewallCheck(),
+      new LinuxSoftwareUpdateCheck(),
+      new LinuxLocalAdminsCheck(),
+      new LinuxSshHardeningCheck(),
     ];
   }
 

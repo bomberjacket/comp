@@ -8,10 +8,15 @@ vi.mock('node:child_process', () => ({
 vi.mock('../../helper/client', () => ({ askHelper: async () => null }));
 
 import {
+  INTUNE_AUDIT_SETTINGS,
   REQUIRED_AUDIT,
   WindowsAuditPolicyCheck,
   evaluateAuditPolicy,
   parseAuditpolCsv,
+  readAuditPolicy,
+  settingFromCspValue,
+  settingsFromGpo,
+  settingsFromIntune,
 } from './audit-policy';
 import { evaluateTamperProtection } from './defender-tamper';
 import { MAX_LOCAL_ADMINS, evaluateLocalAdmins, parseNetLocalGroup } from './local-admins';
@@ -227,5 +232,76 @@ describe('local administrators', () => {
     });
     expect(r.passed).toBe(true);
     expect(evaluateLocalAdmins({ currentUser: 'x' }).message).toContain('could not be read');
+  });
+});
+
+describe('audit policy configured-policy fallback', () => {
+  const denied = () => {
+    throw new Error('Error 0x00000522 occurred: A required privilege is not held by the client.');
+  };
+
+  it('maps Intune Audit CSP values to subcategory settings', () => {
+    expect(settingFromCspValue(3)).toBe('Success and Failure');
+    expect(settingFromCspValue('1')).toBe('Success');
+    expect(settingFromCspValue(2)).toBe('Failure');
+    expect(settingFromCspValue(0)).toBe('No Auditing');
+    expect(settingFromCspValue('x')).toBeNull();
+    const m = settingsFromIntune({
+      AccountLogonLogoff_AuditLogon: 3,
+      DetailedTracking_AuditProcessCreation: 1,
+      SomethingElse: 3,
+    });
+    expect([...m.entries()]).toEqual([
+      ['Logon', 'Success and Failure'],
+      ['Process Creation', 'Success'],
+    ]);
+  });
+
+  it('reads the Intune policy when auditpol is denied and labels it as configured', async () => {
+    const intune = Object.fromEntries(
+      REQUIRED_AUDIT.map((r) => {
+        const name = Object.entries(INTUNE_AUDIT_SETTINGS).find(
+          ([, sub]) => sub === r.subcategory,
+        )![0];
+        return [name, 3];
+      }),
+    );
+    const source = await readAuditPolicy(denied, () => JSON.stringify({ intune, gpo: [] }));
+    expect(source.kind).toBe('intune');
+    if (source.kind !== 'intune') throw new Error('expected intune');
+    expect(evaluateAuditPolicy(source.settings).passed).toBe(true);
+  });
+
+  it('falls back to Group Policy audit.csv files and merges them', async () => {
+    const csv = (rows: Array<[string, string]>) =>
+      [
+        'Machine Name,Policy Target,Subcategory,Subcategory GUID,Inclusion Setting,Exclusion Setting,Setting Value',
+      ]
+        .concat(rows.map(([s, v]) => `,System,${s},{guid},${v},,3`))
+        .join('\r\n');
+    const gpo = [csv([['Logon', 'Success and Failure']]), csv([['Logoff', 'Success']])];
+    expect([...settingsFromGpo(gpo).keys()]).toEqual(['Logon', 'Logoff']);
+    const source = await readAuditPolicy(denied, () => JSON.stringify({ intune: null, gpo }));
+    expect(source.kind).toBe('gpo');
+  });
+
+  it('reports an honest error when nothing is configured either', async () => {
+    const source = await readAuditPolicy(denied, () => JSON.stringify({ gpo: [] }));
+    expect(source.kind).toBe('error');
+    if (source.kind !== 'error') throw new Error('expected error');
+    expect(source.fallbackNote).toContain('No Intune or Group Policy');
+  });
+
+  it('labels a configured-policy result in the check output', async () => {
+    execSyncMock.mockImplementation((cmd: string) => {
+      if (String(cmd).startsWith('auditpol')) denied();
+      return JSON.stringify({ intune: { AccountLogonLogoff_AuditLogon: 3 }, gpo: [] });
+    });
+    const result = await new WindowsAuditPolicyCheck().run();
+    expect(result.details.method).toContain('Intune Audit CSP');
+    expect(result.details.message).toContain('Configured by Intune');
+    expect(result.passed).toBe(false);
+    expect(JSON.parse(result.details.raw).source).toBe('intune');
+    execSyncMock.mockReset();
   });
 });

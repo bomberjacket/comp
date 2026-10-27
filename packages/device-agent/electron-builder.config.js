@@ -1,6 +1,5 @@
 // Use a space-free product name for Linux to avoid path issues
-const isLinuxBuild =
-  process.argv.includes('--linux') || process.env.BUILD_TARGET === 'linux';
+const isLinuxBuild = process.argv.includes('--linux') || process.env.BUILD_TARGET === 'linux';
 
 /** @type {import('electron-builder').Configuration} */
 module.exports = {
@@ -26,6 +25,11 @@ module.exports = {
       from: 'assets/',
       to: 'assets/',
       filter: ['**/*.png'],
+    },
+    {
+      from: 'assets/windows/',
+      to: 'assets/windows/',
+      filter: ['**/*.ps1'],
     },
   ],
   icon: 'assets/icon.png',
@@ -56,6 +60,8 @@ module.exports = {
     ],
   },
   nsis: {
+    // Registers / removes the privileged helper scheduled task (runs as SYSTEM).
+    include: 'build/installer.nsh',
     oneClick: false,
     perMachine: true,
     allowToChangeInstallationDirectory: false,

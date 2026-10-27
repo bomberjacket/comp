@@ -64,7 +64,7 @@ describe('audit policy', () => {
     const result = await new WindowsAuditPolicyCheck().run();
     expect(result.checkType).toBe('audit_policy');
     expect(result.passed).toBe(false);
-    expect(result.details.message).toContain('run as Administrator');
+    expect(result.details.message).toContain('administrator rights');
   });
 });
 

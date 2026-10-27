@@ -1,3 +1,4 @@
+import { askHelper } from '../../helper/client';
 import type { CheckResult } from '../../shared/types';
 import type { ComplianceCheck } from '../types';
 import { asNumber, errorMessage, parseJsonObject, runPowerShellScript } from './powershell';
@@ -62,12 +63,23 @@ export class WindowsSmb1Check implements ComplianceCheck {
     const checkedAt = new Date().toISOString();
     try {
       const output = runPowerShellScript(SCRIPT, 30000);
-      const result = evaluateSmb1(parseJsonObject<Smb1Snapshot>(output));
+      const snapshot = parseJsonObject<Smb1Snapshot>(output);
+      // The feature state needs administrator rights; the privileged helper
+      // (SYSTEM) supplies it when installed.
+      let method = 'Get-WindowsOptionalFeature SMB1Protocol, LanmanServer SMB1, mrxsmb10';
+      if (!snapshot.featureState) {
+        const helper = await askHelper('smb1-feature');
+        if (helper?.ok && helper.output) {
+          snapshot.featureState = helper.output.trim();
+          method += ' (feature state via privileged helper)';
+        }
+      }
+      const result = evaluateSmb1(snapshot);
       return {
         checkType: this.checkType,
         passed: result.passed,
         details: {
-          method: 'Get-WindowsOptionalFeature SMB1Protocol, LanmanServer SMB1, mrxsmb10',
+          method,
           raw: output.substring(0, 800),
           message: result.message,
         },

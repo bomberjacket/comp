@@ -1,4 +1,5 @@
 import { execSync } from 'node:child_process';
+import { askHelper } from '../../helper/client';
 import type { CheckResult } from '../../shared/types';
 import type { ComplianceCheck } from '../types';
 import { errorMessage, needsElevation } from './powershell';
@@ -78,11 +79,34 @@ export function evaluateAuditPolicy(settings: Map<string, string>): {
   };
 }
 
+/** Where the auditpol output came from. */
+type AuditSource =
+  | { kind: 'helper'; output: string }
+  | { kind: 'direct'; output: string }
+  | { kind: 'error'; message: string; helperError: string | null };
+
+/**
+ * Prefer the privileged helper (runs as SYSTEM); fall back to running
+ * auditpol in this process, which only works when the agent is elevated.
+ */
+export async function readAuditPolicy(
+  runDirect: () => string = () =>
+    execSync('auditpol /get /category:* /r', { encoding: 'utf-8', timeout: 15000 }),
+): Promise<AuditSource> {
+  const helper = await askHelper('auditpol');
+  if (helper?.ok && helper.output) return { kind: 'helper', output: helper.output };
+  try {
+    return { kind: 'direct', output: runDirect() };
+  } catch (error) {
+    return { kind: 'error', message: errorMessage(error), helperError: helper?.error ?? null };
+  }
+}
+
 /**
  * NIST SP 800-171 3.3.1 / 3.3.2: the device generates the audit records the
  * organization defined. Reads the effective advanced audit policy with
- * auditpol, which needs the agent to run elevated; without elevation the
- * check reports that honestly instead of guessing.
+ * auditpol through the privileged helper; without the helper it needs the
+ * agent to run elevated and says so instead of guessing.
  */
 export class WindowsAuditPolicyCheck implements ComplianceCheck {
   checkType = 'audit_policy' as const;
@@ -90,52 +114,49 @@ export class WindowsAuditPolicyCheck implements ComplianceCheck {
 
   async run(): Promise<CheckResult> {
     const checkedAt = new Date().toISOString();
-    try {
-      const output = execSync('auditpol /get /category:* /r', {
-        encoding: 'utf-8',
-        timeout: 15000,
-      });
-      const settings = parseAuditpolCsv(output);
-      if (settings.size === 0) {
-        return {
-          checkType: this.checkType,
-          passed: false,
-          details: {
-            method: 'auditpol /get /category:* /r',
-            raw: output.substring(0, 500),
-            message: 'auditpol returned no policy rows; the audit policy could not be read',
-          },
-          checkedAt,
-        };
-      }
-      const result = evaluateAuditPolicy(settings);
-      return {
-        checkType: this.checkType,
-        passed: result.passed,
-        details: {
-          method: 'auditpol /get /category:* /r',
-          raw: JSON.stringify({
-            satisfied: result.satisfied,
-            missing: result.missing,
-          }).substring(0, 1800),
-          message: result.message,
-        },
-        checkedAt,
-      };
-    } catch (error) {
-      const msg = errorMessage(error);
+    const source = await readAuditPolicy();
+    if (source.kind === 'error') {
+      const viaHelper = source.helperError ? ` Helper reported: ${source.helperError}.` : '';
       return {
         checkType: this.checkType,
         passed: false,
         details: {
           method: 'auditpol /get /category:* /r',
-          raw: msg.substring(0, 500),
-          message: needsElevation(msg)
-            ? 'Audit policy could not be read: auditpol needs the agent to run as Administrator. Attach the GPO or Intune audit baseline as evidence, or run the agent elevated.'
-            : 'Unable to read the audit policy',
+          raw: source.message.substring(0, 500),
+          message: needsElevation(source.message)
+            ? `Audit policy could not be read: auditpol needs administrator rights. Install the privileged helper (runs as SYSTEM) or attach the GPO or Intune audit baseline as evidence.${viaHelper}`
+            : `Unable to read the audit policy.${viaHelper}`,
         },
         checkedAt,
       };
     }
+    const method = `auditpol /get /category:* /r${source.kind === 'helper' ? ' (via privileged helper)' : ''}`;
+    const settings = parseAuditpolCsv(source.output);
+    if (settings.size === 0) {
+      return {
+        checkType: this.checkType,
+        passed: false,
+        details: {
+          method,
+          raw: source.output.substring(0, 500),
+          message: 'auditpol returned no policy rows; the audit policy could not be read',
+        },
+        checkedAt,
+      };
+    }
+    const result = evaluateAuditPolicy(settings);
+    return {
+      checkType: this.checkType,
+      passed: result.passed,
+      details: {
+        method,
+        raw: JSON.stringify({ satisfied: result.satisfied, missing: result.missing }).substring(
+          0,
+          1800,
+        ),
+        message: result.message,
+      },
+      checkedAt,
+    };
   }
 }

@@ -1,6 +1,7 @@
 import type { IntegrationManifest } from '../../types';
 import { environmentAliasesVariable } from '../environment-aliases';
 import {
+  entraLogExportCheck,
   environmentSeparationCheck,
   keyVaultProtectionCheck,
   keyVaultRbacCheck,
@@ -9,6 +10,11 @@ import {
   nsgNoOpenPortsCheck,
   postgresqlFlexibleTlsCheck,
   rbacLeastPrivilegeCheck,
+  sentinelAnalyticsRulesCheck,
+  sentinelDataConnectorsCheck,
+  sentinelDetectionCapabilityCheck,
+  sentinelLogRetentionCheck,
+  sentinelOpenIncidentsCheck,
   sqlAuditingCheck,
   sqlPublicAccessCheck,
   sqlTlsCheck,
@@ -16,6 +22,7 @@ import {
   storageHttpsTlsCheck,
   storagePublicAccessCheck,
 } from './checks';
+import { sentinelRetentionDaysVariable } from './checks/sentinel-shared';
 
 export const azureManifest: IntegrationManifest = {
   id: 'azure',
@@ -23,8 +30,7 @@ export const azureManifest: IntegrationManifest = {
   description:
     'Read-only monitoring of security posture, identity, network, and compliance in Microsoft Azure',
   category: 'Cloud',
-  logoUrl:
-    'https://img.logo.dev/azure.com?token=pk_AZatYxV5QDSfWpRDaBxzRQ',
+  logoUrl: 'https://img.logo.dev/azure.com?token=pk_AZatYxV5QDSfWpRDaBxzRQ',
   docsUrl: 'https://docs.microsoft.com/en-us/azure/defender-for-cloud/',
   supportsMultipleConnections: true,
   isActive: true,
@@ -32,10 +38,8 @@ export const azureManifest: IntegrationManifest = {
   auth: {
     type: 'oauth2',
     config: {
-      authorizeUrl:
-        'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
-      tokenUrl:
-        'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+      authorizeUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+      tokenUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
       scopes: [
         'https://management.azure.com/user_impersonation',
         'offline_access',
@@ -68,6 +72,8 @@ export const azureManifest: IntegrationManifest = {
 **Actual Access is Controlled by Azure RBAC:** The OAuth scope only enables API calls. The user can only access resources their Azure roles allow. Users connecting should have at minimum:
 - **Reader** — general resource visibility
 - **Security Reader** — Microsoft Defender for Cloud data
+- **Microsoft Sentinel Reader** on the Sentinel workspace — data connectors, analytics rules, incidents (Reader alone does not see Sentinel content)
+- An Entra ID role such as **Security Reader** or **Global Reader** — the tenant-level Entra ID diagnostic settings read by the log export check
 
 Our integration only makes read-only API calls for security scanning.`,
       createAppUrl:
@@ -80,21 +86,119 @@ Our integration only makes read-only API calls for security scanning.`,
   capabilities: ['checks'],
 
   services: [
-    { id: 'defender', name: 'Microsoft Defender for Cloud', description: 'Cloud security posture management and threat protection', enabledByDefault: true, implemented: true },
-    { id: 'entra-id', name: 'Microsoft Entra ID', description: 'Identity and access management monitoring', enabledByDefault: false, implemented: true },
-    { id: 'policy', name: 'Azure Policy', description: 'Resource compliance and governance policy evaluation', enabledByDefault: false, implemented: true },
-    { id: 'key-vault', name: 'Key Vault', description: 'Secret, key, and certificate management monitoring', enabledByDefault: false, implemented: true },
-    { id: 'monitor', name: 'Azure Monitor', description: 'Activity logs and diagnostic settings audit', enabledByDefault: false, implemented: true },
-    { id: 'network-watcher', name: 'Network Watcher', description: 'Network security group and flow log monitoring', enabledByDefault: false, implemented: true },
-    { id: 'storage-account', name: 'Storage Accounts', description: 'HTTPS enforcement, public access, TLS version, and encryption checks', enabledByDefault: false, implemented: true },
-    { id: 'sql-database', name: 'SQL Database', description: 'Auditing, TDE, firewall rules, and public access checks', enabledByDefault: false, implemented: true },
-    { id: 'mysql-flexible', name: 'Database for MySQL', description: 'Flexible Server TLS 1.2 / secure transport enforcement checks', enabledByDefault: false, implemented: true },
-    { id: 'postgresql-flexible', name: 'Database for PostgreSQL', description: 'Flexible Server TLS 1.2 / secure transport enforcement checks', enabledByDefault: false, implemented: true },
-    { id: 'virtual-machine', name: 'Virtual Machines', description: 'Disk encryption, managed identity, and secure boot checks', enabledByDefault: false, implemented: true },
-    { id: 'app-service', name: 'App Service', description: 'HTTPS enforcement, TLS, managed identity, and remote debugging checks', enabledByDefault: false, implemented: true },
-    { id: 'aks', name: 'AKS', description: 'Kubernetes RBAC, network policies, private cluster, and auto-upgrade checks', enabledByDefault: false, implemented: true },
-    { id: 'container-registry', name: 'Container Registry', description: 'Admin user, content trust, public access, and retention policy checks', enabledByDefault: false, implemented: true },
-    { id: 'cosmos-db', name: 'Cosmos DB', description: 'Public access, key-based auth, failover, and backup configuration checks', enabledByDefault: false, implemented: true },
+    {
+      id: 'defender',
+      name: 'Microsoft Defender for Cloud',
+      description: 'Cloud security posture management and threat protection',
+      enabledByDefault: true,
+      implemented: true,
+    },
+    {
+      id: 'entra-id',
+      name: 'Microsoft Entra ID',
+      description: 'Identity and access management monitoring',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'policy',
+      name: 'Azure Policy',
+      description: 'Resource compliance and governance policy evaluation',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'key-vault',
+      name: 'Key Vault',
+      description: 'Secret, key, and certificate management monitoring',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'monitor',
+      name: 'Azure Monitor',
+      description: 'Activity logs and diagnostic settings audit',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'sentinel',
+      name: 'Microsoft Sentinel',
+      description:
+        'SIEM evidence for NIST SP 800-171: log retention (3.3.1), Entra ID log export (3.3.1), data connectors (3.3.5), analytics rules (3.14.6, 3.6.1), open incidents (3.6.2)',
+      enabledByDefault: true,
+      implemented: true,
+    },
+    {
+      id: 'network-watcher',
+      name: 'Network Watcher',
+      description: 'Network security group and flow log monitoring',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'storage-account',
+      name: 'Storage Accounts',
+      description: 'HTTPS enforcement, public access, TLS version, and encryption checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'sql-database',
+      name: 'SQL Database',
+      description: 'Auditing, TDE, firewall rules, and public access checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'mysql-flexible',
+      name: 'Database for MySQL',
+      description: 'Flexible Server TLS 1.2 / secure transport enforcement checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'postgresql-flexible',
+      name: 'Database for PostgreSQL',
+      description: 'Flexible Server TLS 1.2 / secure transport enforcement checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'virtual-machine',
+      name: 'Virtual Machines',
+      description: 'Disk encryption, managed identity, and secure boot checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'app-service',
+      name: 'App Service',
+      description: 'HTTPS enforcement, TLS, managed identity, and remote debugging checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'aks',
+      name: 'AKS',
+      description: 'Kubernetes RBAC, network policies, private cluster, and auto-upgrade checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'container-registry',
+      name: 'Container Registry',
+      description: 'Admin user, content trust, public access, and retention policy checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
+    {
+      id: 'cosmos-db',
+      name: 'Cosmos DB',
+      description: 'Public access, key-based auth, failover, and backup configuration checks',
+      enabledByDefault: false,
+      implemented: true,
+    },
   ],
 
   variables: [
@@ -128,8 +232,7 @@ Our integration only makes read-only API calls for security scanning.`,
             // only follow nextLink on the ARM host, so the bearer token can't
             // be sent elsewhere
             url =
-              data.nextLink &&
-              data.nextLink.startsWith('https://management.azure.com/')
+              data.nextLink && data.nextLink.startsWith('https://management.azure.com/')
                 ? data.nextLink
                 : undefined;
             pages++;
@@ -139,9 +242,7 @@ Our integration only makes read-only API calls for security scanning.`,
             .sort((a, b) => (a.displayName ?? '').localeCompare(b.displayName ?? ''))
             .map((s) => ({
               value: s.subscriptionId,
-              label: s.displayName
-                ? `${s.displayName} (${s.subscriptionId})`
-                : s.subscriptionId,
+              label: s.displayName ? `${s.displayName} (${s.subscriptionId})` : s.subscriptionId,
             }));
         } catch {
           // Graceful empty picker (matches the GCP project_ids precedent) —
@@ -163,6 +264,7 @@ Our integration only makes read-only API calls for security scanning.`,
       placeholder: 'Auto-detected',
     },
     environmentAliasesVariable,
+    sentinelRetentionDaysVariable,
   ],
 
   checks: [
@@ -180,5 +282,11 @@ Our integration only makes read-only API calls for security scanning.`,
     rbacLeastPrivilegeCheck,
     monitorLoggingAlertingCheck,
     environmentSeparationCheck,
+    sentinelLogRetentionCheck,
+    entraLogExportCheck,
+    sentinelDataConnectorsCheck,
+    sentinelAnalyticsRulesCheck,
+    sentinelDetectionCapabilityCheck,
+    sentinelOpenIncidentsCheck,
   ],
 };

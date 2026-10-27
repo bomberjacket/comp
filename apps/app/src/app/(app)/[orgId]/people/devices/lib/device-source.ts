@@ -148,6 +148,12 @@ export const CHECK_FIELDS = [
 export const EXTENDED_CHECK_LABELS: Record<string, { label: string; objective: string }> = {
   fips_mode: { label: 'FIPS Mode', objective: '3.13.11' },
   log_forwarding: { label: 'Log Forwarding', objective: '3.3.1' },
+  audit_policy: { label: 'Audit Policy', objective: '3.3.1' },
+  removable_storage: { label: 'Removable Storage', objective: '3.8.7' },
+  smb1_disabled: { label: 'SMBv1 Disabled', objective: '3.4.6' },
+  defender_tamper_protection: { label: 'Defender Tamper Protection', objective: '3.14.2' },
+  windows_update: { label: 'Windows Update', objective: '3.14.1' },
+  local_admins: { label: 'Local Administrators', objective: '3.1.6' },
 };
 
 export interface ExtendedCheck {

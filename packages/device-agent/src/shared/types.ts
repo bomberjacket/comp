@@ -4,7 +4,15 @@ export type DevicePlatform = 'macos' | 'windows' | 'linux';
 export type DeviceCheckType = 'disk_encryption' | 'antivirus' | 'password_policy' | 'screen_lock';
 
 /** Evidence checks: stored and shown per device, never part of the verdict. */
-export type ExtendedCheckType = 'fips_mode' | 'log_forwarding';
+export type ExtendedCheckType =
+  | 'fips_mode'
+  | 'log_forwarding'
+  | 'audit_policy'
+  | 'removable_storage'
+  | 'smb1_disabled'
+  | 'defender_tamper_protection'
+  | 'windows_update'
+  | 'local_admins';
 
 export type AnyCheckType = DeviceCheckType | ExtendedCheckType;
 

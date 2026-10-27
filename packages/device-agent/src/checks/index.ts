@@ -16,11 +16,17 @@ import { LinuxScreenLockCheck } from './linux/screen-lock';
 
 // Windows checks
 import { WindowsAntivirusCheck } from './windows/antivirus';
+import { WindowsAuditPolicyCheck } from './windows/audit-policy';
+import { WindowsDefenderTamperProtectionCheck } from './windows/defender-tamper';
 import { WindowsDiskEncryptionCheck } from './windows/disk-encryption';
 import { WindowsFipsModeCheck } from './windows/fips-mode';
+import { WindowsLocalAdminsCheck } from './windows/local-admins';
 import { WindowsLogForwardingCheck } from './windows/log-forwarding';
 import { WindowsPasswordPolicyCheck } from './windows/password-policy';
+import { WindowsRemovableStorageCheck } from './windows/removable-storage';
 import { WindowsScreenLockCheck } from './windows/screen-lock';
+import { WindowsSmb1Check } from './windows/smb1';
+import { WindowsUpdateCheck } from './windows/windows-update';
 
 /**
  * Returns the appropriate compliance checks for the current platform.
@@ -55,6 +61,12 @@ function getChecksForPlatform(): ComplianceCheck[] {
       // Evidence checks (NIST SP 800-171); not part of the compliance verdict.
       new WindowsFipsModeCheck(),
       new WindowsLogForwardingCheck(),
+      new WindowsAuditPolicyCheck(),
+      new WindowsRemovableStorageCheck(),
+      new WindowsSmb1Check(),
+      new WindowsDefenderTamperProtectionCheck(),
+      new WindowsUpdateCheck(),
+      new WindowsLocalAdminsCheck(),
     ];
   }
 

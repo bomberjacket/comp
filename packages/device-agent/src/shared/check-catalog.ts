@@ -54,6 +54,43 @@ export const CHECK_CATALOG: Record<AnyCheckType, CheckDefinition> = {
     objective: '3.3.1',
     core: false,
   },
+  audit_policy: {
+    label: 'Audit Policy',
+    description:
+      'Advanced audit policy logs the required logon, account, privilege and process events',
+    objective: '3.3.1',
+    core: false,
+  },
+  removable_storage: {
+    label: 'Removable Storage',
+    description: 'Policy denies or restricts removable storage devices',
+    objective: '3.8.7',
+    core: false,
+  },
+  smb1_disabled: {
+    label: 'SMBv1 Disabled',
+    description: 'The legacy SMBv1 protocol is removed or disabled',
+    objective: '3.4.6',
+    core: false,
+  },
+  defender_tamper_protection: {
+    label: 'Defender Tamper Protection',
+    description: 'Defender tamper protection stops protection from being switched off',
+    objective: '3.14.2',
+    core: false,
+  },
+  windows_update: {
+    label: 'Windows Update',
+    description: 'Updates installed within 30 days, no critical or important updates pending',
+    objective: '3.14.1',
+    core: false,
+  },
+  local_admins: {
+    label: 'Local Administrators',
+    description: 'The signed-in user is not a local administrator and the group stays small',
+    objective: '3.1.6',
+    core: false,
+  },
 };
 
 export function checkLabel(checkType: string): string {

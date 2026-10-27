@@ -5,7 +5,7 @@
 
 .DESCRIPTION
   The helper answers a fixed set of read-only questions (audit policy, SMBv1
-  feature state) for the user-mode agent over a local named pipe. It needs
+  feature state) for the user-mode agent over a loopback TCP port. It needs
   administrator rights that the signed-in user should not have, so it runs as
   the built-in SYSTEM service account, not as any person.
 

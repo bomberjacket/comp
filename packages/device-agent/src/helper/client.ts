@@ -1,23 +1,23 @@
 import net from 'node:net';
-import { HELPER_PIPE, type HelperCommand, type HelperResponse } from './protocol';
+import { HELPER_HOST, HELPER_PORT, type HelperCommand, type HelperResponse } from './protocol';
 
 export interface AskHelperOptions {
-  pipe?: string;
+  port?: number;
   timeoutMs?: number;
 }
 
 /**
  * Ask the privileged helper one question. Resolves null when no helper is
- * running (the pipe does not exist), when it does not answer in time, or on
- * any transport error, so callers fall back to the unprivileged path.
- * Windows only; other platforms resolve null immediately.
+ * running (connection refused), when it does not answer in time, or on any
+ * transport error, so callers fall back to the unprivileged path.
+ * Windows only unless a port is given explicitly (tests).
  */
 export function askHelper(
   command: HelperCommand,
   options: AskHelperOptions = {},
 ): Promise<HelperResponse | null> {
-  if (process.platform !== 'win32' && !options.pipe) return Promise.resolve(null);
-  const pipe = options.pipe ?? HELPER_PIPE;
+  if (process.platform !== 'win32' && options.port === undefined) return Promise.resolve(null);
+  const port = options.port ?? HELPER_PORT;
   const timeoutMs = options.timeoutMs ?? 20000;
 
   return new Promise((resolve) => {
@@ -30,7 +30,7 @@ export function askHelper(
       socket.destroy();
       resolve(value);
     };
-    const socket = net.connect({ path: pipe });
+    const socket = net.connect({ host: HELPER_HOST, port });
     const timer = setTimeout(() => finish(null), timeoutMs);
     socket.setEncoding('utf-8');
     socket.on('connect', () => {

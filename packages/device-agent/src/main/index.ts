@@ -4,7 +4,7 @@
  * - default: the tray agent in the signed-in user's session (agent.ts);
  * - `--helper`: the privileged helper, started by the Windows Task Scheduler
  *   as LocalSystem, which answers a fixed set of read-only questions over a
- *   local named pipe for the checks that need administrator rights
+ *   loopback TCP port for the checks that need administrator rights
  *   (helper-main.ts). No tray, no sign-in, no network.
  */
 if (process.argv.includes('--helper')) {

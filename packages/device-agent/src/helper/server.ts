@@ -1,7 +1,8 @@
 import { execSync } from 'node:child_process';
 import net from 'node:net';
 import {
-  HELPER_PIPE,
+  HELPER_HOST,
+  HELPER_PORT,
   HELPER_PROTOCOL_VERSION,
   type HelperCommand,
   type HelperResponse,
@@ -15,7 +16,8 @@ export interface HelperRunners {
 }
 
 export interface HelperServerOptions {
-  pipe?: string;
+  /** Loopback port; tests pass 0 for an ephemeral port. */
+  port?: number;
   version: string;
   elevated: boolean;
   runners?: Partial<HelperRunners>;
@@ -78,14 +80,20 @@ function runCommand(command: HelperCommand, runners: HelperRunners): string {
 }
 
 /**
- * Listen on the named pipe. Each connection carries one newline-terminated
- * request and receives one newline-terminated response.
+ * Listen on the loopback port. Each connection carries one newline-terminated
+ * request and receives one newline-terminated response. Connections that do
+ * not originate from the loopback interface are dropped unanswered.
  */
 export function startHelperServer(options: HelperServerOptions): net.Server {
-  const pipe = options.pipe ?? HELPER_PIPE;
+  const port = options.port ?? HELPER_PORT;
   const log = options.log ?? (() => {});
   const runners: HelperRunners = { ...defaultRunners, ...options.runners };
   const server = net.createServer((socket) => {
+    if (socket.remoteAddress && !isLoopback(socket.remoteAddress)) {
+      log(`refused connection from ${socket.remoteAddress}`);
+      socket.destroy();
+      return;
+    }
     let buffer = '';
     let answered = false;
     const timer = setTimeout(() => {
@@ -131,6 +139,13 @@ export function startHelperServer(options: HelperServerOptions): net.Server {
     socket.on('error', (err) => log(`socket error: ${err.message}`));
   });
   server.on('error', (err) => log(`server error: ${err.message}`));
-  server.listen(pipe, () => log(`listening on ${pipe}`));
+  server.listen({ host: HELPER_HOST, port }, () => {
+    const addr = server.address();
+    log(`listening on ${HELPER_HOST}:${typeof addr === 'object' && addr ? addr.port : port}`);
+  });
   return server;
+}
+
+function isLoopback(address: string): boolean {
+  return address === '127.0.0.1' || address === '::1' || address === '::ffff:127.0.0.1';
 }

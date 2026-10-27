@@ -2,10 +2,16 @@
  * Wire protocol between the user-mode agent and the privileged helper.
  * One JSON request line in, one JSON response line out, connection closed.
  * The helper answers only the commands listed here; it never runs caller
- * supplied scripts, so a local user who reaches the pipe can learn nothing
- * the agent would not upload anyway.
+ * supplied scripts, so a local user who reaches it can learn nothing the
+ * agent would not upload anyway.
+ *
+ * Transport is a loopback TCP port, not a named pipe: a pipe created by
+ * LocalSystem carries a default permission set that refuses connections from
+ * a normal user (EPERM), and Node cannot set pipe permissions. Loopback is
+ * reachable by every local session and never leaves the machine.
  */
-export const HELPER_PIPE = '\\\\.\\pipe\\compai-device-agent-helper';
+export const HELPER_HOST = '127.0.0.1';
+export const HELPER_PORT = 47621;
 
 /** Bump when a request or response field changes shape. */
 export const HELPER_PROTOCOL_VERSION = 1;

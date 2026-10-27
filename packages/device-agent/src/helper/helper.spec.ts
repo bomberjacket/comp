@@ -41,30 +41,35 @@ describe('handleRequest', () => {
   });
 });
 
-describe('named pipe round trip', () => {
-  const pipe =
-    process.platform === 'win32'
-      ? `\\\\.\\pipe\\compai-helper-test-${process.pid}`
-      : `/tmp/compai-helper-test-${process.pid}.sock`;
+describe('loopback round trip', () => {
   let server: net.Server;
+  let port = 0;
 
   beforeAll(async () => {
-    server = startHelperServer({ pipe, version: '1.2.3', elevated: false, runners });
+    server = startHelperServer({ port: 0, version: '1.2.3', elevated: false, runners });
     await new Promise<void>((resolve) => server.once('listening', () => resolve()));
+    const addr = server.address();
+    if (typeof addr !== 'object' || !addr) throw new Error('no address');
+    port = addr.port;
   });
   afterAll(async () => {
     await new Promise<void>((resolve) => server.close(() => resolve()));
   });
 
-  it('delivers a response over the pipe and reports elevation state', async () => {
-    const res = await askHelper('auditpol', { pipe, timeoutMs: 5000 });
+  it('delivers a response over loopback and reports elevation state', async () => {
+    const res = await askHelper('auditpol', { port, timeoutMs: 5000 });
     expect(res?.ok).toBe(true);
     expect(res?.elevated).toBe(false);
     expect(res?.output).toContain('Success and Failure');
   });
 
   it('resolves null when no helper is listening', async () => {
-    const res = await askHelper('ping', { pipe: `${pipe}-missing`, timeoutMs: 2000 });
+    const closed = startHelperServer({ port: 0, version: 'x', elevated: false, runners });
+    await new Promise<void>((resolve) => closed.once('listening', () => resolve()));
+    const addr = closed.address();
+    const freePort = typeof addr === 'object' && addr ? addr.port : 1;
+    await new Promise<void>((resolve) => closed.close(() => resolve()));
+    const res = await askHelper('ping', { port: freePort, timeoutMs: 2000 });
     expect(res).toBeNull();
   });
 });

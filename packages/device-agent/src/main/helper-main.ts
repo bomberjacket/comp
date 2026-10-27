@@ -9,7 +9,7 @@ import { AGENT_VERSION } from '../shared/constants';
  * Privileged helper mode. The Windows Task Scheduler starts this executable
  * with `--helper` as LocalSystem at boot (see assets/windows/install-helper.ps1).
  * It opens no windows, signs nothing in, talks to no network, and answers the
- * fixed command set in helper/protocol.ts over a local named pipe.
+ * fixed command set in helper/protocol.ts over a loopback TCP port (127.0.0.1).
  */
 
 // No GPU, no windows: this process may live in session 0 with no desktop.

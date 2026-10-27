@@ -66,12 +66,12 @@ export class WindowsSmb1Check implements ComplianceCheck {
       const snapshot = parseJsonObject<Smb1Snapshot>(output);
       // The feature state needs administrator rights; the privileged helper
       // (SYSTEM) supplies it when installed.
-      let method = 'Get-WindowsOptionalFeature SMB1Protocol, LanmanServer SMB1, mrxsmb10';
+      let method = 'SMB1Protocol feature, LanmanServer SMB1, mrxsmb10 driver';
       if (!snapshot.featureState) {
         const helper = await askHelper('smb1-feature');
         if (helper?.ok && helper.output) {
           snapshot.featureState = helper.output.trim();
-          method += ' (feature state via privileged helper)';
+          method += ' (feature state via helper)';
         }
       }
       const result = evaluateSmb1(snapshot);
@@ -90,7 +90,7 @@ export class WindowsSmb1Check implements ComplianceCheck {
         checkType: this.checkType,
         passed: false,
         details: {
-          method: 'Get-WindowsOptionalFeature SMB1Protocol, LanmanServer SMB1, mrxsmb10',
+          method: 'SMB1Protocol feature, LanmanServer SMB1, mrxsmb10 driver',
           raw: errorMessage(error).substring(0, 500),
           message: 'Unable to determine the SMBv1 state',
         },

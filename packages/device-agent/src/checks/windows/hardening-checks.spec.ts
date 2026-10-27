@@ -5,6 +5,8 @@ vi.mock('node:child_process', () => ({
   execSync: (cmd: string, opts: unknown) => execSyncMock(cmd, opts),
 }));
 
+vi.mock('../../helper/client', () => ({ askHelper: async () => null }));
+
 import {
   REQUIRED_AUDIT,
   WindowsAuditPolicyCheck,

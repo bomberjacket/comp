@@ -130,7 +130,7 @@ export class WindowsAuditPolicyCheck implements ComplianceCheck {
         checkedAt,
       };
     }
-    const method = `auditpol /get /category:* /r${source.kind === 'helper' ? ' (via privileged helper)' : ''}`;
+    const method = `auditpol /get /category:* /r${source.kind === 'helper' ? ' (via helper)' : ''}`;
     const settings = parseAuditpolCsv(source.output);
     if (settings.size === 0) {
       return {

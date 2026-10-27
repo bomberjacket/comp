@@ -1,5 +1,6 @@
 import { log } from '../main/logger';
 import type { CheckResult } from '../shared/types';
+import { clampDetails } from './clamp';
 import type { ComplianceCheck } from './types';
 
 // macOS checks
@@ -85,7 +86,7 @@ export async function runAllChecks(): Promise<CheckResult[]> {
   for (const check of checks) {
     try {
       log(`Running check: ${check.displayName}`);
-      const result = await check.run();
+      const result = clampDetails(await check.run());
       results.push(result);
       log(`  ${check.displayName}: ${result.passed ? 'PASS' : 'FAIL'} - ${result.details.message}`);
     } catch (error) {

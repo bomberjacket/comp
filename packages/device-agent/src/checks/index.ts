@@ -1,4 +1,3 @@
-import { log } from '../main/logger';
 import type { CheckResult } from '../shared/types';
 import { clampDetails } from './clamp';
 import type { ComplianceCheck } from './types';
@@ -43,7 +42,7 @@ import { WindowsUpdateCheck } from './windows/windows-update';
 /**
  * Returns the appropriate compliance checks for the current platform.
  */
-function getChecksForPlatform(): ComplianceCheck[] {
+function getChecksForPlatform(log: CheckLogger): ComplianceCheck[] {
   const platform = process.platform;
 
   if (platform === 'darwin') {
@@ -101,12 +100,18 @@ function getChecksForPlatform(): ComplianceCheck[] {
   return [];
 }
 
+/** Logger shape shared by the Electron agent and the headless runtime. */
+export type CheckLogger = (message: string, level?: 'INFO' | 'WARN' | 'ERROR') => void;
+
+const silent: CheckLogger = () => {};
+
 /**
  * Runs all compliance checks for the current platform.
- * Returns an array of check results.
+ * Returns an array of check results. Electron-free so the headless runtime
+ * can bundle it; the caller supplies its own logger.
  */
-export async function runAllChecks(): Promise<CheckResult[]> {
-  const checks = getChecksForPlatform();
+export async function runAllChecks(log: CheckLogger = silent): Promise<CheckResult[]> {
+  const checks = getChecksForPlatform(log);
   const results: CheckResult[] = [];
 
   for (const check of checks) {

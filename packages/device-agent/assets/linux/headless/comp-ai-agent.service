@@ -1,0 +1,32 @@
+[Unit]
+Description=Comp AI Device Agent (headless)
+Documentation=https://github.com/bomberjacket/comp
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=comp-agent
+Group=comp-agent
+# Reads only: the checks never change the host. Evidence reads that need root
+# (auditctl -l, sshd -T, sudoers) fall back to configuration files and say so.
+SupplementaryGroups=adm systemd-journal
+Environment=COMP_AGENT_STATE_DIR=/var/lib/comp-ai-agent
+StateDirectory=comp-ai-agent
+StateDirectoryMode=0700
+ExecStart=/usr/local/bin/comp-ai-agent run
+Restart=on-failure
+RestartSec=60
+# Hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+ReadWritePaths=/var/lib/comp-ai-agent
+
+[Install]
+WantedBy=multi-user.target

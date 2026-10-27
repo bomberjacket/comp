@@ -87,7 +87,7 @@ async function runChecksAndReport(onCheckComplete: CheckCallback): Promise<void>
 
   try {
     log(`Running compliance checks (reporting to ${auth.organizations.length} org(s))...`);
-    const results = await runAllChecks();
+    const results = await runAllChecks(log);
     setLastCheckResults(results);
 
     // Report to all organizations

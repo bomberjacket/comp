@@ -104,7 +104,8 @@ model Organization {
   findings Finding[]
 
   // Device Agent
-  devices Device[]
+  devices                Device[]
+  deviceEnrollmentTokens DeviceEnrollmentToken[]
 
   // Background Checks
   backgroundCheckRequests BackgroundCheckRequest[]

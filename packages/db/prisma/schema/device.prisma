@@ -62,3 +62,29 @@ enum DeviceSource {
   fleet
   integration
 }
+
+/// A pre-shared secret that lets a headless agent (a server with no desktop
+/// and no browser) enroll itself without the portal login. Created by an org
+/// admin in the app, shown once, stored hashed. Devices enrolled with it are
+/// attributed to the member who created it.
+model DeviceEnrollmentToken {
+  id          String  @id @default(dbgenerated("generate_prefixed_cuid('det'::text)"))
+  name        String
+  tokenHash   String  @unique
+  tokenPrefix String
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  memberId       String
+  member         Member       @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  expiresAt  DateTime
+  maxUses    Int       @default(100)
+  useCount   Int       @default(0)
+  lastUsedAt DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([organizationId])
+  @@index([memberId])
+}

@@ -23,6 +23,7 @@ export const API_ROUTES = {
   STATUS: '/v1/device-agent/status',
   MY_ORGANIZATIONS: '/v1/device-agent/my-organizations',
   EXCHANGE_CODE: '/v1/device-agent/exchange-code',
+  ENROLL: '/v1/device-agent/enroll',
 } as const;
 
 /** electron-store encryption key identifier */

@@ -3,6 +3,7 @@ import { StreamableFile } from '@nestjs/common';
 import { DeviceAgentController } from './device-agent.controller';
 import { DeviceAgentAuthService } from './device-agent-auth.service';
 import { DeviceAgentService } from './device-agent.service';
+import { DeviceEnrollmentService } from './device-enrollment.service';
 import { HybridAuthGuard } from '../auth/hybrid-auth.guard';
 import { PermissionGuard } from '../auth/permission.guard';
 import type { AuthContext as AuthContextType } from '../auth/types';
@@ -55,6 +56,7 @@ describe('DeviceAgentController', () => {
       providers: [
         { provide: DeviceAgentService, useValue: mockService },
         { provide: DeviceAgentAuthService, useValue: {} },
+        { provide: DeviceEnrollmentService, useValue: {} },
       ],
     })
       .overrideGuard(HybridAuthGuard)

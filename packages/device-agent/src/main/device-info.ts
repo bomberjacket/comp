@@ -13,7 +13,8 @@ export function getDeviceInfo(): DeviceInfo {
     hostname: hostname(),
     platform,
     osVersion: getOSVersion(platform),
-    serialNumber: getSerialNumber(platform),
+    // COMP_AGENT_SERIAL lets a VM without a usable serial, or a test, pin one.
+    serialNumber: process.env.COMP_AGENT_SERIAL || getSerialNumber(platform),
     hardwareModel: getHardwareModel(platform),
   };
 }
@@ -114,10 +115,10 @@ function getSerialNumber(platform: DevicePlatform): string | undefined {
       // sub-component "Serial Number" lines added by future hardware can't
       // smuggle a second value into the output.
       return (
-        execSync(
-          "system_profiler SPHardwareDataType | awk '/Serial Number/{print $NF; exit}'",
-          { encoding: 'utf-8', timeout: 5000 },
-        ).trim() || undefined
+        execSync("system_profiler SPHardwareDataType | awk '/Serial Number/{print $NF; exit}'", {
+          encoding: 'utf-8',
+          timeout: 5000,
+        }).trim() || undefined
       );
     }
     if (platform === 'linux') {

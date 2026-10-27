@@ -8,22 +8,15 @@ import { DeviceAgentDevicesList } from './DeviceAgentDevicesList';
 import { DeviceComplianceChart } from './DeviceComplianceChart';
 import { DeviceSyncProviderSelector } from './DeviceSyncProviderSelector';
 import { EmployeeDevicesList } from './EmployeeDevicesList';
+import { ServerEnrollmentDialog } from './ServerEnrollmentDialog';
 
 interface DevicesTabContentProps {
   isCurrentUserOwner: boolean;
 }
 
 export function DevicesTabContent({ isCurrentUserOwner }: DevicesTabContentProps) {
-  const {
-    agentDevices,
-    isLoading: isAgentLoading,
-    error: agentError,
-  } = useAgentDevices();
-  const {
-    fleetHosts,
-    isLoading: isFleetLoading,
-    error: fleetError,
-  } = useFleetHosts();
+  const { agentDevices, isLoading: isAgentLoading, error: agentError } = useAgentDevices();
+  const { fleetHosts, isLoading: isFleetLoading, error: fleetError } = useFleetHosts();
 
   // Filter out Fleet hosts for members who already have a device-agent device.
   // Device agent takes priority over Fleet. Integration-imported devices are
@@ -36,9 +29,7 @@ export function DevicesTabContent({ isCurrentUserOwner }: DevicesTabContentProps
         .map((d) => d.memberId)
         .filter(Boolean),
     );
-    return fleetHosts.filter(
-      (host) => !host.member_id || !memberIdsWithAgent.has(host.member_id),
-    );
+    return fleetHosts.filter((host) => !host.member_id || !memberIdsWithAgent.has(host.member_id));
   }, [agentDevices, fleetHosts]);
 
   const error = agentError ?? fleetError;
@@ -66,15 +57,13 @@ export function DevicesTabContent({ isCurrentUserOwner }: DevicesTabContentProps
 
   return (
     <div className="space-y-6">
-      <DeviceSyncProviderSelector />
-      <DeviceComplianceChart
-        fleetDevices={filteredFleetDevices}
-        agentDevices={agentDevices}
-      />
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <DeviceSyncProviderSelector />
+        <ServerEnrollmentDialog />
+      </div>
+      <DeviceComplianceChart fleetDevices={filteredFleetDevices} agentDevices={agentDevices} />
 
-      {agentDevices.length > 0 && (
-        <DeviceAgentDevicesList devices={agentDevices} />
-      )}
+      {agentDevices.length > 0 && <DeviceAgentDevicesList devices={agentDevices} />}
 
       {isFleetLoading ? (
         <div className="flex items-center gap-2 rounded-md border border-border bg-muted/20 px-4 py-3 text-xs text-muted-foreground">

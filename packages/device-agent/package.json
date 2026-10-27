@@ -17,6 +17,10 @@
     "package:win": "electron-builder --win --config electron-builder.config.js",
     "package:linux": "electron-builder --linux --config electron-builder.config.js",
     "package:all": "electron-builder --mac --win --linux --config electron-builder.config.js",
+    "build:headless": "node scripts/build-headless.mjs",
+    "package:headless:linux": "node scripts/build-headless.mjs --compile bun-linux-x64",
+    "package:headless:linux-arm64": "node scripts/build-headless.mjs --compile bun-linux-arm64",
+    "package:headless:windows": "node scripts/build-headless.mjs --compile bun-windows-x64",
     "test": "vitest run",
     "test:watch": "vitest"
   },

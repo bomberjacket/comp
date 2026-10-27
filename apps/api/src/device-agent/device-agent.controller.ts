@@ -31,11 +31,17 @@ import { PermissionGuard } from '../auth/permission.guard';
 import { Public } from '../auth/public.decorator';
 import { RequirePermission } from '../auth/require-permission.decorator';
 import { SkipOrgCheck } from '../auth/skip-org-check.decorator';
-import type { AuthContext as AuthContextType, AuthenticatedRequest } from '../auth/types';
+import type {
+  AuthContext as AuthContextType,
+  AuthenticatedRequest,
+} from '../auth/types';
 import { DeviceAgentAuthService } from './device-agent-auth.service';
 import { DeviceAgentService } from './device-agent.service';
+import { DeviceEnrollmentService } from './device-enrollment.service';
 import { AuthCodeDto } from './dto/auth-code.dto';
 import { CheckInDto } from './dto/check-in.dto';
+import { CreateEnrollmentTokenDto } from './dto/create-enrollment-token.dto';
+import { EnrollDeviceDto } from './dto/enroll-device.dto';
 import { ExchangeCodeDto } from './dto/exchange-code.dto';
 import { RegisterDeviceDto } from './dto/register-device.dto';
 import { DEVICE_AGENT_OPERATIONS } from './schemas/device-agent-operations';
@@ -50,9 +56,21 @@ export class DeviceAgentController {
   constructor(
     private readonly deviceAgentService: DeviceAgentService,
     private readonly deviceAgentAuthService: DeviceAgentAuthService,
+    private readonly deviceEnrollmentService: DeviceEnrollmentService,
   ) {}
 
   // --- Public endpoints (no auth) ---
+
+  @Post('enroll')
+  @Public()
+  @ApiOperation({
+    summary: 'Enroll a headless device agent with an enrollment token',
+    description:
+      'For servers with no desktop or browser. The token is created by an organization admin; the response carries a long-lived device-agent session token for check-ins.',
+  })
+  async enroll(@Body() dto: EnrollDeviceDto) {
+    return this.deviceEnrollmentService.enroll(dto);
+  }
 
   @Post('exchange-code')
   @Public()
@@ -154,7 +172,11 @@ export class DeviceAgentController {
     if (!sessionId) {
       throw new UnauthorizedException('Session ID missing from request');
     }
-    return this.deviceAgentAuthService.registerDevice({ userId, sessionId, dto });
+    return this.deviceAgentAuthService.registerDevice({
+      userId,
+      sessionId,
+      dto,
+    });
   }
 
   @Post('check-in')
@@ -250,6 +272,46 @@ export class DeviceAgentController {
     });
 
     return new StreamableFile(stream);
+  }
+
+  // --- Headless enrollment tokens (admin) ---
+
+  @Post('enrollment-tokens')
+  @UseGuards(HybridAuthGuard, PermissionGuard)
+  @RequirePermission('member', 'update')
+  @ApiOperation({
+    summary: 'Create a headless-agent enrollment token (shown once)',
+  })
+  async createEnrollmentToken(
+    @OrganizationId() organizationId: string,
+    @UserId() userId: string,
+    @Body() dto: CreateEnrollmentTokenDto,
+  ) {
+    return this.deviceEnrollmentService.createToken({
+      organizationId,
+      userId,
+      dto,
+    });
+  }
+
+  @Get('enrollment-tokens')
+  @UseGuards(HybridAuthGuard, PermissionGuard)
+  @RequirePermission('member', 'read')
+  @ApiOperation({ summary: 'List headless-agent enrollment tokens' })
+  async listEnrollmentTokens(@OrganizationId() organizationId: string) {
+    return this.deviceEnrollmentService.listTokens({ organizationId });
+  }
+
+  @Delete('enrollment-tokens/:tokenId')
+  @UseGuards(HybridAuthGuard, PermissionGuard)
+  @RequirePermission('member', 'update')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Revoke a headless-agent enrollment token' })
+  async revokeEnrollmentToken(
+    @OrganizationId() organizationId: string,
+    @Param('tokenId') tokenId: string,
+  ) {
+    await this.deviceEnrollmentService.revokeToken({ organizationId, tokenId });
   }
 
   @Delete('sessions/:deviceId')

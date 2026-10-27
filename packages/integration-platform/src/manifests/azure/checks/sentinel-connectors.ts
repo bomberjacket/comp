@@ -84,7 +84,12 @@ export const sentinelDataConnectorsCheck: IntegrationCheck = {
       try {
         connectors = await armListAll<DataConnector>(
           ctx,
-          workspaceUrl(ws, 'providers/Microsoft.SecurityInsights/dataConnectors', SENTINEL_API),
+          workspaceUrl(
+            ctx,
+            ws,
+            'providers/Microsoft.SecurityInsights/dataConnectors',
+            SENTINEL_API,
+          ),
         );
       } catch (err) {
         unverified(ctx, `Sentinel data connectors in ${ws.name}`, ws.name, err);

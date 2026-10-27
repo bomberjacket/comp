@@ -9,7 +9,7 @@ import type {
 // Import all manifests (each in its own folder)
 import { manifest as aikidoManifest } from '../manifests/aikido';
 import { awsManifest } from '../manifests/aws';
-import { azureManifest } from '../manifests/azure';
+import { azureGovManifest, azureManifest } from '../manifests/azure';
 import { gcpManifest } from '../manifests/gcp';
 import { manifest as githubManifest } from '../manifests/github';
 import { githubAppManifest } from '../manifests/github-app';
@@ -145,6 +145,7 @@ class IntegrationRegistryImpl implements IntegrationRegistry {
 const allManifests: IntegrationManifest[] = [
   awsManifest,
   azureManifest,
+  azureGovManifest,
   gcpManifest,
   githubManifest,
   githubAppManifest,

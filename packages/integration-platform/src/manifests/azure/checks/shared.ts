@@ -1,7 +1,73 @@
 import type { CheckContext } from '../../../types';
 import { remediationForReadFailure, toHttpReadFailure } from '../../http-read-failure';
 
-const ARM = 'https://management.azure.com';
+/**
+ * Azure clouds. CMMC Level 2 work on GCC lives in commercial Azure; GCC High
+ * tenants (ITAR / foreign military sales only) keep their subscriptions in
+ * Azure Government, which has its own sign-in, management and portal hosts.
+ */
+export type AzureCloud = 'commercial' | 'government';
+
+export const AZURE_CLOUDS: Record<
+  AzureCloud,
+  { arm: string; login: string; portal: string; label: string }
+> = {
+  commercial: {
+    arm: 'https://management.azure.com',
+    login: 'https://login.microsoftonline.com',
+    portal: 'https://portal.azure.com',
+    label: 'Microsoft Azure',
+  },
+  government: {
+    arm: 'https://management.usgovcloudapi.net',
+    login: 'https://login.microsoftonline.us',
+    portal: 'https://portal.azure.us',
+    label: 'Microsoft Azure Government',
+  },
+};
+
+const GOVERNMENT_HOSTS = /microsoftonline\.us|usgovcloudapi\.net|usgovtrafficmanager\.net/i;
+
+/**
+ * Which cloud minted an access token, from its issuer and audience claims.
+ * The checks share one code path for both clouds, and the context does not
+ * carry the manifest, so the token itself (which is about to be sent to that
+ * cloud anyway) is the one reliable signal. Nothing is verified here; a bad
+ * token fails at the API, not in routing. Unknown or opaque tokens default to
+ * commercial.
+ */
+export function azureCloudFromToken(token: string | undefined): AzureCloud {
+  const payload = token?.split('.')[1];
+  if (!payload) return 'commercial';
+  try {
+    const json = Buffer.from(payload.replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString(
+      'utf8',
+    );
+    const claims = JSON.parse(json) as { iss?: unknown; aud?: unknown };
+    const parts = [claims.iss, ...(Array.isArray(claims.aud) ? claims.aud : [claims.aud])];
+    return GOVERNMENT_HOSTS.test(parts.filter((p) => typeof p === 'string').join(' '))
+      ? 'government'
+      : 'commercial';
+  } catch {
+    return 'commercial';
+  }
+}
+
+/** The cloud a context talks to: an explicit `metadata.azureCloud`, else the token. */
+export function azureCloud(ctx: {
+  accessToken?: string;
+  metadata?: Record<string, unknown>;
+}): AzureCloud {
+  const explicit = ctx.metadata?.azureCloud;
+  if (explicit === 'government' || explicit === 'commercial') return explicit;
+  return azureCloudFromToken(ctx.accessToken);
+}
+
+/** The Azure Resource Manager host for a context, e.g. `https://management.azure.com`. */
+export function armBase(ctx: { accessToken?: string; metadata?: Record<string, unknown> }): string {
+  return AZURE_CLOUDS[azureCloud(ctx)].arm;
+}
+
 const ARM_PAGE_CAP = 50;
 
 /** Fan-out bound for auto-discovered subscriptions (13 checks × N subs). */
@@ -12,9 +78,7 @@ const MAX_SUBSCRIPTIONS = 50;
  * connections keep their exact pre-picker scan scope. */
 function legacySubscriptionId(ctx: CheckContext): string | null {
   const configured = ctx.variables.subscription_id;
-  return typeof configured === 'string' && configured.trim().length > 0
-    ? configured.trim()
-    : null;
+  return typeof configured === 'string' && configured.trim().length > 0 ? configured.trim() : null;
 }
 
 /**
@@ -29,9 +93,7 @@ function legacySubscriptionId(ctx: CheckContext): string | null {
  * Returns [] only after emitting an explicit "could not verify" finding, so a
  * scope failure never leaves the mapped tasks silently stale.
  */
-export async function resolveAzureSubscriptionIds(
-  ctx: CheckContext,
-): Promise<string[]> {
+export async function resolveAzureSubscriptionIds(ctx: CheckContext): Promise<string[]> {
   const selected = ctx.variables.subscription_ids;
   if (Array.isArray(selected)) {
     const cleaned = selected
@@ -68,7 +130,7 @@ export async function resolveAzureSubscriptionIds(
   try {
     const data = await ctx.fetch<{
       value?: Array<{ subscriptionId: string; state?: string }>;
-    }>(`${ARM}/subscriptions?api-version=2020-01-01`);
+    }>(`${armBase(ctx)}/subscriptions?api-version=2020-01-01`);
     // Only Enabled subscriptions — a Disabled/PastDue one would fail every
     // API call and drown the run in false "could not verify" findings.
     const enabled = (data.value ?? [])
@@ -129,6 +191,7 @@ export async function armListAllWithCoverage<T>({
 }): Promise<ArmListResult<T>> {
   const out: T[] = [];
   const coverageGaps: ArmListCoverageGap[] = [];
+  const host = armBase(ctx);
   let nextUrl: string | undefined = url;
   let pages = 0;
   while (nextUrl && pages < ARM_PAGE_CAP) {
@@ -136,8 +199,8 @@ export async function armListAllWithCoverage<T>({
     if (Array.isArray(data.value)) out.push(...data.value);
     nextUrl = data.nextLink;
     // nextLink is an absolute URL from the API; only follow it if it stays on
-    // the ARM host, so the injected bearer token can't be sent elsewhere.
-    if (nextUrl && !nextUrl.startsWith(`${ARM}/`)) {
+    // this cloud's ARM host, so the injected bearer token can't be sent elsewhere.
+    if (nextUrl && !nextUrl.startsWith(`${host}/`)) {
       ctx.warn('Azure ARM nextLink pointed to an unexpected host; stopping pagination', {
         nextLink: nextUrl,
       });
@@ -192,5 +255,3 @@ export async function armListAllOrFail<T>(
     return null;
   }
 }
-
-export const ARM_BASE = ARM;

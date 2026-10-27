@@ -1,6 +1,6 @@
 import type { CheckContext, CheckVariable, CheckVariableValues } from '../../../types';
 import { remediationForReadFailure, toHttpReadFailure } from '../../http-read-failure';
-import { ARM_BASE, armListAll, resolveAzureSubscriptionIds } from './shared';
+import { armBase, armListAll, resolveAzureSubscriptionIds } from './shared';
 
 export const LOG_ANALYTICS_API = '2023-09-01';
 export const SENTINEL_API = '2024-03-01';
@@ -42,11 +42,12 @@ export function parseRetentionDays(variables: CheckVariableValues): number {
 
 /** Build an ARM URL under a workspace resource id. */
 export function workspaceUrl(
+  ctx: CheckContext,
   ws: LogAnalyticsWorkspace,
   suffix: string,
   apiVersion: string,
 ): string {
-  return `${ARM_BASE}${ws.id}/${suffix}?api-version=${apiVersion}`;
+  return `${armBase(ctx)}${ws.id}/${suffix}?api-version=${apiVersion}`;
 }
 
 /** Emit the shared "could not verify" finding for an ARM read that threw. */
@@ -94,7 +95,7 @@ async function readWorkspaces(ctx: CheckContext, subs: string[]): Promise<Worksp
     try {
       list = await armListAll<LogAnalyticsWorkspace>(
         ctx,
-        `${ARM_BASE}/subscriptions/${sub}/providers/Microsoft.OperationalInsights/workspaces?api-version=${LOG_ANALYTICS_API}`,
+        `${armBase(ctx)}/subscriptions/${sub}/providers/Microsoft.OperationalInsights/workspaces?api-version=${LOG_ANALYTICS_API}`,
       );
     } catch (error) {
       return { ok: false, subscriptionId: sub, error };
@@ -104,6 +105,7 @@ async function readWorkspaces(ctx: CheckContext, subs: string[]): Promise<Worksp
       try {
         const states = await ctx.fetch<{ value?: unknown[] }>(
           workspaceUrl(
+            ctx,
             workspace,
             'providers/Microsoft.SecurityInsights/onboardingStates',
             SENTINEL_API,

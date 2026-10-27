@@ -41,7 +41,7 @@ async function runAnalyticsRules(ctx: CheckContext): Promise<void> {
     try {
       rules = await armListAll<AlertRule>(
         ctx,
-        workspaceUrl(ws, 'providers/Microsoft.SecurityInsights/alertRules', SENTINEL_API),
+        workspaceUrl(ctx, ws, 'providers/Microsoft.SecurityInsights/alertRules', SENTINEL_API),
       );
     } catch (err) {
       unverified(ctx, `Sentinel analytics rules in ${ws.name}`, ws.name, err);

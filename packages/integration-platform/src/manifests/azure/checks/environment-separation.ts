@@ -12,7 +12,7 @@ import {
   envTagValues,
 } from '../../environment-classification';
 import { toHttpReadFailure } from '../../http-read-failure';
-import { ARM_BASE, armListAllWithCoverage, resolveAzureSubscriptionIds } from './shared';
+import { armBase, armListAllWithCoverage, resolveAzureSubscriptionIds } from './shared';
 
 const SUBSCRIPTION_API_VERSION = '2020-01-01';
 const RESOURCE_GROUPS_API_VERSION = '2021-04-01';
@@ -93,7 +93,7 @@ export const environmentSeparationCheck: IntegrationCheck = {
     for (const id of subscriptionIds) {
       try {
         const sub = await ctx.fetch<{ displayName?: string }>(
-          `${ARM_BASE}/subscriptions/${id}?api-version=${SUBSCRIPTION_API_VERSION}`,
+          `${armBase(ctx)}/subscriptions/${id}?api-version=${SUBSCRIPTION_API_VERSION}`,
         );
         const env = classifyEnvironmentWithAliases({
           candidates: [sub.displayName],
@@ -139,7 +139,7 @@ export const environmentSeparationCheck: IntegrationCheck = {
       try {
         const result = await armListAllWithCoverage<ResourceGroup>({
           ctx,
-          url: `${ARM_BASE}/subscriptions/${id}/resourcegroups?api-version=${RESOURCE_GROUPS_API_VERSION}`,
+          url: `${armBase(ctx)}/subscriptions/${id}/resourcegroups?api-version=${RESOURCE_GROUPS_API_VERSION}`,
         });
         resourceGroups = result.items;
         for (const gap of result.coverageGaps) {

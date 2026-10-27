@@ -56,7 +56,10 @@ async function evaluateWorkspace(
   const workspaceDefault = ws.properties?.retentionInDays ?? null;
   let tables: WorkspaceTable[] = [];
   try {
-    tables = await armListAll<WorkspaceTable>(ctx, workspaceUrl(ws, 'tables', LOG_ANALYTICS_API));
+    tables = await armListAll<WorkspaceTable>(
+      ctx,
+      workspaceUrl(ctx, ws, 'tables', LOG_ANALYTICS_API),
+    );
   } catch (err) {
     ctx.warn(`Could not list tables for ${ws.name}; using the workspace default only`, {
       error: String(err),

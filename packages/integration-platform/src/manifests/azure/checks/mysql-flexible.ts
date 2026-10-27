@@ -6,7 +6,7 @@ import {
   toHttpReadFailure,
   type ReadFailure,
 } from '../../http-read-failure';
-import { ARM_BASE, armListAllOrFail, resolveAzureSubscriptionIds } from './shared';
+import { armBase, armListAllOrFail, resolveAzureSubscriptionIds } from './shared';
 
 // Pinned stable api-version for Azure Database for MySQL Flexible Server.
 const MYSQL_API_VERSION = '2023-12-30';
@@ -67,7 +67,7 @@ async function listMySqlFlexibleServers(
 ): Promise<MySqlFlexibleServer[] | null> {
   return armListAllOrFail<MySqlFlexibleServer>(
     ctx,
-    `${ARM_BASE}/subscriptions/${sub}/providers/Microsoft.DBforMySQL/flexibleServers?api-version=${MYSQL_API_VERSION}`,
+    `${armBase(ctx)}/subscriptions/${sub}/providers/Microsoft.DBforMySQL/flexibleServers?api-version=${MYSQL_API_VERSION}`,
     {
       what: 'MySQL flexible servers',
       resourceType: 'azure-mysql-flexible-server',
@@ -89,7 +89,7 @@ async function readConfigValue(
 ): Promise<string | null> {
   const res = await ctx
     .fetch<MySqlConfiguration>(
-      `${ARM_BASE}${serverId}/configurations/${name}?api-version=${MYSQL_API_VERSION}`,
+      `${armBase(ctx)}${serverId}/configurations/${name}?api-version=${MYSQL_API_VERSION}`,
     )
     .catch((err) => {
       const failure = toHttpReadFailure(err);
@@ -109,69 +109,66 @@ async function readConfigValue(
  * TLS enforcement lives in server parameters rather than a top-level property.
  */
 async function runMysqlFlexibleTlsForSubscription(ctx: CheckContext, sub: string): Promise<void> {
-    const servers = await listMySqlFlexibleServers(ctx, sub);
-    if (!servers) return;
-    if (servers.length === 0) return;
-    for (const s of servers) {
-      const readFailures: ReadFailure[] = [];
-      const collect = (failure: ReadFailure) => readFailures.push(failure);
-      const requireSecureTransport = await readConfigValue(
-        ctx,
-        s.id,
-        'require_secure_transport',
-        collect,
-      );
-      const tlsVersion = await readConfigValue(ctx, s.id, 'tls_version', collect);
+  const servers = await listMySqlFlexibleServers(ctx, sub);
+  if (!servers) return;
+  if (servers.length === 0) return;
+  for (const s of servers) {
+    const readFailures: ReadFailure[] = [];
+    const collect = (failure: ReadFailure) => readFailures.push(failure);
+    const requireSecureTransport = await readConfigValue(
+      ctx,
+      s.id,
+      'require_secure_transport',
+      collect,
+    );
+    const tlsVersion = await readConfigValue(ctx, s.id, 'tls_version', collect);
 
-      if (requireSecureTransport === null || tlsVersion === null) {
-        // Couldn't read the TLS parameters — fail explicitly so the TLS task
-        // isn't falsely satisfied by other servers/checks that read cleanly.
-        const combined = combineReadFailures(readFailures);
-        ctx.fail({
-          title: `Could not verify MySQL TLS settings: ${s.name}`,
-          description: `Unable to read the TLS server parameters for MySQL flexible server "${s.name}"${combined ? ` (${combined.error})` : ''}, so TLS enforcement cannot be verified.`,
-          resourceType: 'azure-mysql-flexible-server',
-          resourceId: s.id,
-          severity: 'medium',
-          remediation: remediationForReadFailure(
-            combined,
-            'Grant read access to server configurations (Microsoft.DBforMySQL/flexibleServers/configurations/read), then re-run the check.',
-          ),
-          evidence: {
-            server: s.name,
-            requireSecureTransport,
-            tlsVersion,
-            ...(combined ? { readError: combined.error } : {}),
-          },
-        });
-        continue;
-      }
-
-      const { compliant, issues } = evaluateMySqlTls(
-        requireSecureTransport,
-        tlsVersion,
-      );
-      if (compliant) {
-        ctx.pass({
-          title: `TLS 1.2 enforced: ${s.name}`,
-          description: `MySQL flexible server "${s.name}" requires secure transport and a minimum TLS version of 1.2.`,
-          resourceType: 'azure-mysql-flexible-server',
-          resourceId: s.id,
-          evidence: { server: s.name, requireSecureTransport, tlsVersion },
-        });
-      } else {
-        ctx.fail({
-          title: `Outdated TLS configuration: ${s.name}`,
-          description: `MySQL flexible server "${s.name}": ${issues.join('; ')}.`,
-          resourceType: 'azure-mysql-flexible-server',
-          resourceId: s.id,
-          severity: 'medium',
-          remediation:
-            'Set require_secure_transport to ON and tls_version to TLSv1.2 (or TLSv1.2,TLSv1.3).',
-          evidence: { server: s.name, requireSecureTransport, tlsVersion },
-        });
-      }
+    if (requireSecureTransport === null || tlsVersion === null) {
+      // Couldn't read the TLS parameters — fail explicitly so the TLS task
+      // isn't falsely satisfied by other servers/checks that read cleanly.
+      const combined = combineReadFailures(readFailures);
+      ctx.fail({
+        title: `Could not verify MySQL TLS settings: ${s.name}`,
+        description: `Unable to read the TLS server parameters for MySQL flexible server "${s.name}"${combined ? ` (${combined.error})` : ''}, so TLS enforcement cannot be verified.`,
+        resourceType: 'azure-mysql-flexible-server',
+        resourceId: s.id,
+        severity: 'medium',
+        remediation: remediationForReadFailure(
+          combined,
+          'Grant read access to server configurations (Microsoft.DBforMySQL/flexibleServers/configurations/read), then re-run the check.',
+        ),
+        evidence: {
+          server: s.name,
+          requireSecureTransport,
+          tlsVersion,
+          ...(combined ? { readError: combined.error } : {}),
+        },
+      });
+      continue;
     }
+
+    const { compliant, issues } = evaluateMySqlTls(requireSecureTransport, tlsVersion);
+    if (compliant) {
+      ctx.pass({
+        title: `TLS 1.2 enforced: ${s.name}`,
+        description: `MySQL flexible server "${s.name}" requires secure transport and a minimum TLS version of 1.2.`,
+        resourceType: 'azure-mysql-flexible-server',
+        resourceId: s.id,
+        evidence: { server: s.name, requireSecureTransport, tlsVersion },
+      });
+    } else {
+      ctx.fail({
+        title: `Outdated TLS configuration: ${s.name}`,
+        description: `MySQL flexible server "${s.name}": ${issues.join('; ')}.`,
+        resourceType: 'azure-mysql-flexible-server',
+        resourceId: s.id,
+        severity: 'medium',
+        remediation:
+          'Set require_secure_transport to ON and tls_version to TLSv1.2 (or TLSv1.2,TLSv1.3).',
+        evidence: { server: s.name, requireSecureTransport, tlsVersion },
+      });
+    }
+  }
 }
 
 export const mysqlFlexibleTlsCheck: IntegrationCheck = {

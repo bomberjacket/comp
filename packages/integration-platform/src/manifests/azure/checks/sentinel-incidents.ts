@@ -62,7 +62,7 @@ export const sentinelOpenIncidentsCheck: IntegrationCheck = {
         const order = encodeURIComponent('properties/createdTimeUtc desc');
         incidents = await armListAll<Incident>(
           ctx,
-          `${workspaceUrl(ws, 'providers/Microsoft.SecurityInsights/incidents', SENTINEL_API)}&$filter=${filter}&$orderby=${order}&$top=1000`,
+          `${workspaceUrl(ctx, ws, 'providers/Microsoft.SecurityInsights/incidents', SENTINEL_API)}&$filter=${filter}&$orderby=${order}&$top=1000`,
         );
       } catch (err) {
         unverified(ctx, `Sentinel incidents in ${ws.name}`, ws.name, err);

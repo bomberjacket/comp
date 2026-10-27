@@ -306,7 +306,9 @@ describe('sentinelOpenIncidentsCheck', () => {
       [INCIDENTS]: { value: [] },
     });
     expect(clear.passed.map((p) => p.title)).toEqual(['No open incidents: law-sec']);
-    expect(clear.calls.find((c) => c.startsWith(INCIDENTS))).toContain('&$filter=properties%2Fstatus%20ne');
+    expect(clear.calls.find((c) => c.startsWith(INCIDENTS))).toContain(
+      '&$filter=properties%2Fstatus%20ne',
+    );
 
     resetSentinelCache();
     const open = await run(sentinelOpenIncidentsCheck, {

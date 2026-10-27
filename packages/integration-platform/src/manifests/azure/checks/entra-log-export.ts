@@ -1,7 +1,7 @@
 import { TASK_TEMPLATES } from '../../../task-mappings';
 import type { IntegrationCheck } from '../../../types';
 import { unverified } from './sentinel-shared';
-import { ARM_BASE } from './shared';
+import { armBase } from './shared';
 
 interface EntraDiagnosticSetting {
   id?: string;
@@ -61,7 +61,7 @@ export const entraLogExportCheck: IntegrationCheck = {
     let settings: EntraDiagnosticSetting[];
     try {
       const data = await ctx.fetch<{ value?: EntraDiagnosticSetting[] }>(
-        `${ARM_BASE}/providers/microsoft.aadiam/diagnosticSettings?api-version=2017-04-01-preview`,
+        `${armBase(ctx)}/providers/microsoft.aadiam/diagnosticSettings?api-version=2017-04-01-preview`,
       );
       settings = data.value ?? [];
     } catch (err) {

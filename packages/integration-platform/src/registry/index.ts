@@ -16,6 +16,7 @@ import { githubAppManifest } from '../manifests/github-app';
 import { googleWorkspaceManifest } from '../manifests/google-workspace';
 import { microsoft365GccHighManifest, microsoft365Manifest } from '../manifests/microsoft-365';
 import { ripplingManifest } from '../manifests/rippling';
+import { scubaGearManifest } from '../manifests/scubagear';
 import { vercelManifest } from '../manifests/vercel';
 
 // ============================================================================
@@ -152,6 +153,7 @@ const allManifests: IntegrationManifest[] = [
   googleWorkspaceManifest,
   microsoft365Manifest,
   microsoft365GccHighManifest,
+  scubaGearManifest,
   ripplingManifest,
   vercelManifest,
   aikidoManifest,

@@ -146,6 +146,15 @@ export {
 } from './manifests/aws/credentials';
 export type { AwsEnvironment } from './manifests/aws/credentials';
 
+// CISA ScubaGear: the app's upload component compacts the results file before
+// storing it on the connection.
+export {
+  compactScubaResults,
+  SCUBA_BASELINE_VERSION,
+  SCUBA_RESULTS_FIELD,
+} from './manifests/scubagear';
+export type { ScubaCompactResults } from './manifests/scubagear';
+
 // Shared AWS STS AssumeRole retry (transient / IAM-eventual-consistency safe),
 // reused by the Cloud Tests scanner in apps/api.
 export {

@@ -647,6 +647,10 @@ export class ConnectionsController {
       if (Array.isArray(credentials.regions)) {
         metadata.regions = credentials.regions;
       }
+      // ScubaGear: which Microsoft 365 cloud the report was run against
+      if (typeof credentials.environment === 'string') {
+        metadata.environment = credentials.environment;
+      }
       // AWS only — which scan engine the customer chose at onboarding
       // (Comp AI scanners vs Security Hub). Read on every scan by
       // cloud-security.service.ts. Customers can change it later from

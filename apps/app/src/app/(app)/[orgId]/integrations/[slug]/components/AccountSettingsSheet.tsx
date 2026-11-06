@@ -4,6 +4,7 @@ import type { IntegrationProvider } from '@/hooks/use-integration-platform';
 import { Sheet, SheetBody, SheetContent, SheetHeader, SheetTitle } from '@trycompai/design-system';
 import { AccountSettingsOAuthBody } from './account-settings-oauth';
 import { AwsAccountSettingsBody } from './aws-account-settings-body';
+import { ScubaGearAccountSettingsBody } from './scubagear-account-settings-body';
 
 interface AccountSettingsSheetProps {
   open: boolean;
@@ -23,6 +24,7 @@ export function AccountSettingsSheet({
   onUpdated,
 }: AccountSettingsSheetProps) {
   const isAws = provider.id === 'aws';
+  const isScubaGear = provider.id === 'scubagear';
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -38,6 +40,13 @@ export function AccountSettingsSheet({
               connectionId={connectionId}
               provider={provider}
               orgId={orgId}
+              onUpdated={onUpdated}
+            />
+          ) : isScubaGear ? (
+            <ScubaGearAccountSettingsBody
+              open={open}
+              connectionId={connectionId}
+              provider={provider}
               onUpdated={onUpdated}
             />
           ) : (

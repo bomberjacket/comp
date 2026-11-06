@@ -216,10 +216,13 @@ export class RequirementAnswersService {
       if (!status) continue;
       const justification =
         status === 'not_relevant'
-          ? typed
-              .filter((a) => reqIds.includes(a.requirementId) && a.justification)
-              .map((a) => a.justification as string)
-              .join('; ') || 'All items answered not applicable'
+          ? [
+              ...new Set(
+                typed
+                  .filter((a) => reqIds.includes(a.requirementId) && a.justification)
+                  .map((a) => (a.justification as string).trim()),
+              ),
+            ].join('; ') || 'All items answered not applicable'
           : null;
       for (const link of links.filter((l) => l.controlId === controlId)) {
         if (link.task.status === 'in_review' || link.task.status === status) continue;

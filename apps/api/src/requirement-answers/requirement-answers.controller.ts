@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { OrganizationId, UserId } from '../auth/auth-context.decorator';
+import { AuthContext, OrganizationId } from '../auth/auth-context.decorator';
+import type { AuthContext as AuthContextType } from '../auth/types';
 import { HybridAuthGuard } from '../auth/hybrid-auth.guard';
 import { PermissionGuard } from '../auth/permission.guard';
 import { RequirePermission } from '../auth/require-permission.decorator';
@@ -35,14 +36,14 @@ export class RequirementAnswersController {
   @ApiOperation({ summary: 'Save answers (bulk upsert); moves the controls evidence tasks' })
   upsertAnswers(
     @OrganizationId() organizationId: string,
-    @UserId() userId: string | undefined,
+    @AuthContext() auth: AuthContextType,
     @Param('frameworkInstanceId') frameworkInstanceId: string,
     @Body() dto: UpsertAnswersDto,
   ) {
     return this.service.upsertAnswers({
       frameworkInstanceId,
       organizationId,
-      userId,
+      userId: auth.userId,
       answers: dto.answers,
     });
   }
@@ -73,14 +74,14 @@ export class RequirementAnswersController {
   @ApiOperation({ summary: 'Import answers from a CSET assessment JSON export' })
   importCset(
     @OrganizationId() organizationId: string,
-    @UserId() userId: string | undefined,
+    @AuthContext() auth: AuthContextType,
     @Param('frameworkInstanceId') frameworkInstanceId: string,
     @Body() dto: ImportCsetDto,
   ) {
     return this.service.importCset({
       frameworkInstanceId,
       organizationId,
-      userId,
+      userId: auth.userId,
       payload: dto.payload as CsetPayload,
     });
   }

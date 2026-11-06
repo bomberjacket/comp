@@ -28,8 +28,19 @@ export class ConnectionAuthTeardownService {
     const providerSlug = (connection as { provider?: { slug: string } })
       .provider?.slug;
 
-    const credentials =
-      await this.credentialVaultService.getDecryptedCredentials(connectionId);
+    // A credential that no longer decrypts (ENCRYPTION_KEY rotated or lost)
+    // must not make the connection undeletable; skip revocation and carry on.
+    let credentials: Record<string, string | string[]> | null = null;
+    try {
+      credentials =
+        await this.credentialVaultService.getDecryptedCredentials(connectionId);
+    } catch (error) {
+      this.logger.warn(
+        `Could not decrypt credentials for connection ${connectionId}; skipping token revocation: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+      );
+    }
     const accessToken =
       typeof credentials?.access_token === 'string'
         ? credentials.access_token

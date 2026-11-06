@@ -46,6 +46,7 @@ import { OrgChartModule } from './org-chart/org-chart.module';
 import { TrainingModule } from './training/training.module';
 import { EvidenceFormsModule } from './evidence-forms/evidence-forms.module';
 import { FrameworksModule } from './frameworks/frameworks.module';
+import { RequirementAnswersModule } from './requirement-answers/requirement-answers.module';
 import { FrameworkVersionsModule } from './framework-editor-versions/framework-versions.module';
 import { AuditModule } from './audit/audit.module';
 import { ControlsModule } from './controls/controls.module';
@@ -120,6 +121,7 @@ import { OffboardingChecklistModule } from './offboarding-checklist/offboarding-
     OrgChartModule,
     EvidenceFormsModule,
     FrameworksModule,
+    RequirementAnswersModule,
     FrameworkVersionsModule,
     RolesModule,
     AuditModule,

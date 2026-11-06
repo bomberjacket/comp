@@ -1,0 +1,92 @@
+[
+  {
+    "id": "fap_2105b2da92767f4417c6c4e6",
+    "frameworkId": "frk_285f172f537c618481d959b9",
+    "answerOptions": [
+      "Y",
+      "A",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "tier"
+  },
+  {
+    "id": "fap_759c6973c5d7a18896240572",
+    "frameworkId": "frk_99eabe00820ad30b49f85e87",
+    "answerOptions": [
+      "Y",
+      "I",
+      "S",
+      "N"
+    ],
+    "domainMode": "it_ot",
+    "scoring": "cpg"
+  },
+  {
+    "id": "fap_76bd99cab6a6da859d3e4dc5",
+    "frameworkId": "frk_3a777761af38267b9134c5ba",
+    "answerOptions": [
+      "Y",
+      "N",
+      "NA",
+      "A"
+    ],
+    "domainMode": "single",
+    "scoring": "standard"
+  },
+  {
+    "id": "fap_796c90f936cf3c7ecd74962c",
+    "frameworkId": "frk_3be1195fcf4c9cb02782aa9b",
+    "answerOptions": [
+      "Y",
+      "I",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "mil"
+  },
+  {
+    "id": "fap_a36f1ea2bcb96febd8822924",
+    "frameworkId": "frk_f0f03f628e56b4f3a5a9ed77",
+    "answerOptions": [
+      "Y",
+      "N",
+      "NA",
+      "A"
+    ],
+    "domainMode": "single",
+    "scoring": "standard"
+  },
+  {
+    "id": "fap_ad4b96554f3d41cd6514f412",
+    "frameworkId": "frk_76bf0b250804b9648227ccaa",
+    "answerOptions": [
+      "Y",
+      "I",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "mil"
+  },
+  {
+    "id": "fap_e839371614d1d94a51057c9e",
+    "frameworkId": "frk_21cb27b3056904ff874e63b1",
+    "answerOptions": [
+      "Y",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "tier"
+  },
+  {
+    "id": "fap_ebfe2b3cd9baf095008400a1",
+    "frameworkId": "frk_8e1ab214ce8b64b9d61eb7e9",
+    "answerOptions": [
+      "Y",
+      "I",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "mil"
+  }
+]

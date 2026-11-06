@@ -15,20 +15,20 @@ model User {
   banExpires                     DateTime?
   isPlatformAdmin                Boolean   @default(false)
 
-  accounts                   Account[]
-  auditLog                   AuditLog[]
-  integrationResults         IntegrationResult[]
-  invitations                Invitation[]
-  members                    Member[]
-  sessions                   Session[]
-  fleetPolicyResults         FleetPolicyResult[]
-  evidenceSubmissions        EvidenceSubmission[] @relation("EvidenceSubmitter")
-  evidenceReviews            EvidenceSubmission[] @relation("EvidenceReviewer")
-  adminFindings              Finding[]            @relation("AdminFindingCreator")
-  timelinePhaseCompletions   TimelinePhase[]
-  lockedTimelineInstances    TimelineInstance[]   @relation("TimelineInstanceLockedBy")
-  unlockedTimelineInstances  TimelineInstance[]   @relation("TimelineInstanceUnlockedBy")
-  publishedFrameworkVersions FrameworkVersion[]   @relation("FrameworkVersionPublisher")
+  accounts                        Account[]
+  auditLog                        AuditLog[]
+  integrationResults              IntegrationResult[]
+  invitations                     Invitation[]
+  members                         Member[]
+  sessions                        Session[]
+  fleetPolicyResults              FleetPolicyResult[]
+  evidenceSubmissions             EvidenceSubmission[]             @relation("EvidenceSubmitter")
+  evidenceReviews                 EvidenceSubmission[]             @relation("EvidenceReviewer")
+  adminFindings                   Finding[]                        @relation("AdminFindingCreator")
+  timelinePhaseCompletions        TimelinePhase[]
+  lockedTimelineInstances         TimelineInstance[]               @relation("TimelineInstanceLockedBy")
+  unlockedTimelineInstances       TimelineInstance[]               @relation("TimelineInstanceUnlockedBy")
+  publishedFrameworkVersions      FrameworkVersion[]               @relation("FrameworkVersionPublisher")
   offboardingChecklistCompletions OffboardingChecklistCompletion[] @relation("OffboardingChecklistCompletedBy")
   offboardingAccessRevocations    OffboardingAccessRevocation[]    @relation("AccessRevocationRevokedBy")
 
@@ -200,45 +200,46 @@ model Member {
   role           String // Purposefully a string, since BetterAuth doesn't support enums this way
   createdAt      DateTime     @default(now())
 
-  department                      String                            @default("none")
-  jobTitle                        String?
-  isActive                        Boolean                           @default(true)
-  deactivated                     Boolean                           @default(false)
-  backgroundCheckExempt           Boolean                           @default(false)
-  backgroundCheckExemptReason     String?
-  backgroundCheckExemptJustification String?                        @db.Text
-  onboardDate                     DateTime?
-  offboardDate                    DateTime?
-  externalUserId                  String?
-  externalUserSource              String?
-  employeeTrainingVideoCompletion EmployeeTrainingVideoCompletion[]
-  fleetDmLabelId                  Int?
+  department                         String                            @default("none")
+  jobTitle                           String?
+  isActive                           Boolean                           @default(true)
+  deactivated                        Boolean                           @default(false)
+  backgroundCheckExempt              Boolean                           @default(false)
+  backgroundCheckExemptReason        String?
+  backgroundCheckExemptJustification String?                           @db.Text
+  onboardDate                        DateTime?
+  offboardDate                       DateTime?
+  externalUserId                     String?
+  externalUserSource                 String?
+  employeeTrainingVideoCompletion    EmployeeTrainingVideoCompletion[]
+  fleetDmLabelId                     Int?
 
-  assignedPolicies                 Policy[]                 @relation("PolicyAssignee") // Policies where this member is an assignee
-  approvedPolicies                 Policy[]                 @relation("PolicyApprover") // Policies where this member is an approver
-  approvedSOADocuments             SOADocument[]            @relation("SOADocumentApprover") // SOA documents where this member is an approver
-  approvedIsmsDocuments            IsmsDocument[]           @relation("IsmsDocumentApprover") // ISMS documents where this member is an approver
-  publishedIsmsVersions            IsmsDocumentVersion[]    @relation("IsmsDocumentVersionPublisher") // ISMS document versions this member published
+  assignedPolicies                 Policy[]                         @relation("PolicyAssignee") // Policies where this member is an assignee
+  approvedPolicies                 Policy[]                         @relation("PolicyApprover") // Policies where this member is an approver
+  approvedSOADocuments             SOADocument[]                    @relation("SOADocumentApprover") // SOA documents where this member is an approver
+  approvedIsmsDocuments            IsmsDocument[]                   @relation("IsmsDocumentApprover") // ISMS documents where this member is an approver
+  publishedIsmsVersions            IsmsDocumentVersion[]            @relation("IsmsDocumentVersionPublisher") // ISMS document versions this member published
   risks                            Risk[]
   riskAcceptances                  RiskAcceptance[] // acceptance events this member recorded as acceptor
   tasks                            Task[]
   vendors                          Vendor[]
   comments                         Comment[]
   auditLogs                        AuditLog[]
-  reviewedAccessRequests           TrustAccessRequest[]     @relation("TrustAccessRequestReviewer")
-  issuedGrants                     TrustAccessGrant[]       @relation("IssuedGrants")
-  revokedGrants                    TrustAccessGrant[]       @relation("RevokedGrants")
-  createdTaskItems                 TaskItem[]               @relation("TaskItemCreator")
-  updatedTaskItems                 TaskItem[]               @relation("TaskItemUpdater")
-  assignedTaskItems                TaskItem[]               @relation("TaskItemAssignee")
-  createdFindings                  Finding[]                @relation("FindingCreatedBy")
-  subjectFindings                  Finding[]                @relation("FindingSubject")
-  createdApiKeys                   ApiKey[]                 @relation("ApiKeyCreatedBy")
-  publishedPolicyVersions          PolicyVersion[]          @relation("PolicyVersionPublisher")
-  performedFrameworkSyncOperations FrameworkSyncOperation[] @relation("FrameworkSyncOperationPerformer")
-  approvedTasks                    Task[]                   @relation("TaskApprover")
+  reviewedAccessRequests           TrustAccessRequest[]             @relation("TrustAccessRequestReviewer")
+  issuedGrants                     TrustAccessGrant[]               @relation("IssuedGrants")
+  revokedGrants                    TrustAccessGrant[]               @relation("RevokedGrants")
+  createdTaskItems                 TaskItem[]                       @relation("TaskItemCreator")
+  updatedTaskItems                 TaskItem[]                       @relation("TaskItemUpdater")
+  assignedTaskItems                TaskItem[]                       @relation("TaskItemAssignee")
+  createdFindings                  Finding[]                        @relation("FindingCreatedBy")
+  subjectFindings                  Finding[]                        @relation("FindingSubject")
+  createdApiKeys                   ApiKey[]                         @relation("ApiKeyCreatedBy")
+  publishedPolicyVersions          PolicyVersion[]                  @relation("PolicyVersionPublisher")
+  performedFrameworkSyncOperations FrameworkSyncOperation[]         @relation("FrameworkSyncOperationPerformer")
+  approvedTasks                    Task[]                           @relation("TaskApprover")
   devices                          Device[]
   deviceEnrollmentTokens           DeviceEnrollmentToken[]
+  requirementAnswers               RequirementAnswer[]              @relation("RequirementAnswerAnsweredBy")
   backgroundCheckRequests          BackgroundCheckRequest[]
   offboardingChecklistCompletions  OffboardingChecklistCompletion[]
   offboardingAccessRevocations     OffboardingAccessRevocation[]

@@ -139,7 +139,9 @@ export interface ModuleBuild {
   families: Map<string, string>;
 }
 
+/** Seed row for `FrameworkAnswerProfile` (plus the module key for validation output). */
 export interface AnswerProfile {
+  id: string;
   frameworkId: string;
   module: string;
   answerOptions: string[];

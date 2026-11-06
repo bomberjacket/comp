@@ -1,0 +1,108 @@
+// Per-question answers for question-based frameworks (CISA CSET modules: CPG 2.0,
+// IMR, CRR, EDM, RRA, MVRA, HHS 405(d), AWWA). Upstream Comp AI derives requirement
+// status from tasks, policies and evidence; these frameworks are answered directly,
+// CSET-style, and the answer then drives the control's evidence task status.
+
+/// Which technology domain an answer is for. CPG 2.0 is answered separately for IT
+/// and OT; every other module uses `all`.
+enum AnswerDomain {
+  all
+  it
+  ot
+}
+
+/// The union of CSET's answer options across modules. A framework's profile says
+/// which subset applies (Y,I,S,N / Y,I,N / Y,N / Y,A,N / Y,N,NA,A).
+enum AnswerValue {
+  yes
+  incomplete
+  scoped
+  no
+  not_applicable
+  alternate
+}
+
+enum AnswerDomainMode {
+  single
+  it_ot
+}
+
+/// How a framework's answers roll up: CPG goal heatmap, MIL-style goal achievement
+/// (every practice Yes), tiered counts, or a plain standard tally.
+enum AnswerScoringModel {
+  cpg
+  mil
+  tier
+  standard
+}
+
+/// One answer to one requirement (question) of a framework instance, per domain.
+/// Absence of a row means unanswered.
+model RequirementAnswer {
+  id String @id @default(dbgenerated("generate_prefixed_cuid('rqa'::text)"))
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  frameworkInstanceId String
+  frameworkInstance   FrameworkInstance @relation(fields: [frameworkInstanceId], references: [id], onDelete: Cascade)
+
+  // Exactly one of requirementId / customRequirementId is set.
+  requirementId String?
+  requirement   FrameworkEditorRequirement? @relation(fields: [requirementId], references: [id], onDelete: Cascade)
+
+  customRequirementId String?
+  customRequirement   CustomRequirement? @relation(fields: [customRequirementId], references: [id], onDelete: Cascade)
+
+  domain        AnswerDomain @default(all)
+  answer        AnswerValue
+  /// Required by the UI for not_applicable and alternate; free text otherwise.
+  justification String?
+  comment       String?
+  markForReview Boolean      @default(false)
+
+  answeredById String?
+  answeredBy   Member?  @relation("RequirementAnswerAnsweredBy", fields: [answeredById], references: [id], onDelete: SetNull)
+  answeredAt   DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([frameworkInstanceId, requirementId, domain])
+  @@unique([frameworkInstanceId, customRequirementId, domain])
+  @@index([organizationId])
+  @@index([frameworkInstanceId])
+  @@index([requirementId])
+}
+
+/// Seeded per question-based framework: which answers it takes, whether answers are
+/// per IT/OT domain, and how results roll up. Frameworks without a profile keep the
+/// upstream task-derived status.
+model FrameworkAnswerProfile {
+  id String @id @default(dbgenerated("generate_prefixed_cuid('fap'::text)"))
+
+  frameworkId String                   @unique
+  framework   FrameworkEditorFramework @relation(fields: [frameworkId], references: [id], onDelete: Cascade)
+
+  /// CSET option codes in display order, e.g. ["Y","I","S","N"]
+  answerOptions String[]
+  domainMode    AnswerDomainMode   @default(single)
+  scoring       AnswerScoringModel @default(standard)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+/// Per-organization choice for an it_ot framework: assess IT only, OT only, or both.
+model FrameworkInstanceAnswerSetting {
+  id String @id @default(dbgenerated("generate_prefixed_cuid('fias'::text)"))
+
+  frameworkInstanceId String            @unique
+  frameworkInstance   FrameworkInstance @relation(fields: [frameworkInstanceId], references: [id], onDelete: Cascade)
+
+  /// Domains the organization answers: subset of it, ot (empty = both)
+  domains AnswerDomain[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

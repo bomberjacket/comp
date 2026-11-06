@@ -233,8 +233,20 @@ export const FrameworkEditorControlTaskTemplateLinkSchema = z.object({
   createdAt: optionalSeedDate('createdAt'),
 });
 
+/** Answer profile of a question-based (CISA CSET) framework; see requirement-answer.prisma. */
+export const FrameworkAnswerProfileSchema = z.object({
+  id: z.string().optional(), // @id @default
+  frameworkId: z.string(),
+  answerOptions: z.array(z.string()).min(2),
+  domainMode: z.enum(['single', 'it_ot']).optional(), // @default(single)
+  scoring: z.enum(['cpg', 'mil', 'tier', 'standard']).optional(), // @default(standard)
+  createdAt: optionalSeedDate('createdAt'),
+  updatedAt: optionalSeedDate('updatedAt'),
+});
+
 // For use in seed script validation
 export const frameworkEditorModelSchemas = {
+  FrameworkAnswerProfile: FrameworkAnswerProfileSchema,
   FrameworkEditorVideo: FrameworkEditorVideoSchema,
   FrameworkEditorFrameworkFamily: FrameworkEditorFrameworkFamilySchema,
   FrameworkEditorFramework: FrameworkEditorFrameworkSchema,

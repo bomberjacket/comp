@@ -44,7 +44,8 @@ model CustomRequirement {
   // can only point at an FI in its own org.
   frameworkInstance   FrameworkInstance? @relation(fields: [frameworkInstanceId, organizationId], references: [id, organizationId], onDelete: Cascade)
 
-  requirementMaps RequirementMap[]
+  requirementMaps    RequirementMap[]
+  requirementAnswers RequirementAnswer[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

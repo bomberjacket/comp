@@ -152,6 +152,7 @@ export function toRows(build: ModuleBuild, familyId: string): ModuleRows {
     controlPolicyPairs,
     controlTaskPairs,
     profile: {
+      id: ids.answerProfile(module.key),
       frameworkId,
       module: module.key,
       answerOptions: module.answerOptions,

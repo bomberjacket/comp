@@ -52,19 +52,20 @@ model FrameworkEditorFramework {
   familyId String?
   family   FrameworkEditorFrameworkFamily? @relation(fields: [familyId], references: [id], onDelete: Restrict)
 
-  requirements         FrameworkEditorRequirement[]
-  frameworkInstances   FrameworkInstance[]
-  soaConfigurations    SOAFrameworkConfiguration[] // Multiple SOA config versions per framework
-  soaDocuments         SOADocument[] // SOA documents from organizations
-  ismsDocuments        IsmsDocument[] // ISMS foundational documents from organizations
-  ismsProfiles         IsmsProfile[] // ISMS wizard profiles from organizations
+  requirements                 FrameworkEditorRequirement[]
+  frameworkInstances           FrameworkInstance[]
+  soaConfigurations            SOAFrameworkConfiguration[] // Multiple SOA config versions per framework
+  soaDocuments                 SOADocument[] // SOA documents from organizations
+  ismsDocuments                IsmsDocument[] // ISMS foundational documents from organizations
+  ismsProfiles                 IsmsProfile[] // ISMS wizard profiles from organizations
   ismsDocumentRequirementLinks FrameworkEditorIsmsDocumentRequirementLink[]
-  controlIsmsDocumentLinks FrameworkEditorControlIsmsDocumentLink[]
-  timelineTemplates    TimelineTemplate[]
-  versions             FrameworkVersion[]
-  controlPolicyLinks   FrameworkEditorControlPolicyTemplateLink[]
-  controlTaskLinks     FrameworkEditorControlTaskTemplateLink[]
-  controlDocumentLinks FrameworkEditorControlDocumentTypeLink[]
+  controlIsmsDocumentLinks     FrameworkEditorControlIsmsDocumentLink[]
+  timelineTemplates            TimelineTemplate[]
+  versions                     FrameworkVersion[]
+  controlPolicyLinks           FrameworkEditorControlPolicyTemplateLink[]
+  controlTaskLinks             FrameworkEditorControlTaskTemplateLink[]
+  controlDocumentLinks         FrameworkEditorControlDocumentTypeLink[]
+  answerProfile                FrameworkAnswerProfile? // set for question-based (CSET) frameworks
 
   // Dates
   createdAt DateTime @default(now())
@@ -79,7 +80,7 @@ model FrameworkEditorRequirement {
   framework   FrameworkEditorFramework @relation(fields: [frameworkId], references: [id])
 
   name              String // Original requirement ID within that framework, e.g., "Privacy"
-  identifier        String @default("") // Unique identifier for the requirement, e.g., "cc1-1"
+  identifier        String  @default("") // Unique identifier for the requirement, e.g., "cc1-1"
   description       String
   requirementFamily String?
   // Per-framework display order (FRAME-18). Lower numbers sort first; null rows
@@ -87,10 +88,11 @@ model FrameworkEditorRequirement {
   // like NIST CSF use their canonical order (GV → ID → PR → DE → RS → RC).
   sortOrder         Int?
 
-  controlTemplates FrameworkEditorControlTemplate[]
-  requirementMaps  RequirementMap[]
-  ismsDocuments    IsmsDocument[] // ISMS foundational documents mapped to this clause requirement
+  controlTemplates             FrameworkEditorControlTemplate[]
+  requirementMaps              RequirementMap[]
+  ismsDocuments                IsmsDocument[] // ISMS foundational documents mapped to this clause requirement
   ismsDocumentRequirementLinks FrameworkEditorIsmsDocumentRequirementLink[]
+  requirementAnswers           RequirementAnswer[] // per-org answers for question-based (CSET) frameworks
 
   // Dates
   createdAt DateTime @default(now())
@@ -201,13 +203,13 @@ model FrameworkEditorControlTemplate {
   description   String
   controlFamily String?
 
-  policyTemplates        FrameworkEditorPolicyTemplate[]
-  requirements           FrameworkEditorRequirement[]
-  taskTemplates          FrameworkEditorTaskTemplate[]
-  documentTypes          EvidenceFormType[]
-  frameworkPolicyLinks   FrameworkEditorControlPolicyTemplateLink[]
-  frameworkTaskLinks     FrameworkEditorControlTaskTemplateLink[]
-  frameworkDocumentLinks FrameworkEditorControlDocumentTypeLink[]
+  policyTemplates            FrameworkEditorPolicyTemplate[]
+  requirements               FrameworkEditorRequirement[]
+  taskTemplates              FrameworkEditorTaskTemplate[]
+  documentTypes              EvidenceFormType[]
+  frameworkPolicyLinks       FrameworkEditorControlPolicyTemplateLink[]
+  frameworkTaskLinks         FrameworkEditorControlTaskTemplateLink[]
+  frameworkDocumentLinks     FrameworkEditorControlDocumentTypeLink[]
   frameworkIsmsDocumentLinks FrameworkEditorControlIsmsDocumentLink[]
 
   // Dates

@@ -55,6 +55,14 @@ function main(): void {
     releaseNotes: `Initial ${p.framework.name} release from CISA CSET v13 content: ${p.requirements.length} requirements, ${p.controls.length} controls, ${p.policies.length} policies, ${p.tasks.length} evidence tasks.`,
   }));
   const written = writeOutputs(SEED_DIR, data, versions, SUFFIX);
+  // Answer profiles are a seed primitive of their own (FrameworkAnswerProfile), not part of
+  // the shared GeneratedData shape, so they are written here in the same deterministic form.
+  const profileRows = parts
+    .map(({ profile: { module: _module, ...row } }) => row)
+    .sort((a, b) => a.id.localeCompare(b.id));
+  const profilesFile = path.join(SEED_DIR, 'primitives', `FrameworkAnswerProfile.${SUFFIX}.json`);
+  writeFileSync(profilesFile, `${JSON.stringify(profileRows, null, 2)}\n`);
+  written.push(profilesFile);
   mkdirSync(DERIVED, { recursive: true });
   const profiles = path.join(DERIVED, 'answer-profiles.json');
   writeFileSync(profiles, `${JSON.stringify(parts.map((p) => p.profile), null, 2)}\n`);

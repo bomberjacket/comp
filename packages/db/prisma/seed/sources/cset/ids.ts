@@ -26,4 +26,5 @@ export const ids = {
   policyLink: (module: string, controlKey: string, familyKey: string): string =>
     makeId('fcp', `fcp:${module}:${controlKey}:${familyKey}`),
   taskLink: (module: string, controlKey: string): string => makeId('fct', `fct:${module}:${controlKey}`),
+  answerProfile: (module: string): string => makeId('fap', `ap:${module}`),
 };

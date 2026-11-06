@@ -1,5 +1,6 @@
 'use client';
 
+import { useFrameworkAnswers } from '@/hooks/use-framework-answers';
 import { useFrameworkInstance } from '@/hooks/use-framework-instance';
 import { usePermissions } from '@/hooks/use-permissions';
 import { getFrameworkAggregatePercent } from '@/lib/control-compliance';
@@ -39,6 +40,8 @@ import { Nist800171ScoreCard } from './Nist800171ScoreCard';
 import type { Nist800171ScoreResult } from '@/types/nist-800-171-score';
 import { LinkRequirementSheet } from './LinkRequirementSheet';
 import { SyncHistorySection } from './SyncHistorySection';
+import { AnswerResults } from './answers/AnswerResults';
+import { AssessTab } from './answers/AssessTab';
 
 interface FrameworkDetailContentProps {
   orgId: string;
@@ -83,6 +86,14 @@ export function FrameworkDetailContent({
   const evidenceSubmissions = framework.evidenceSubmissions || [];
   const requirementDefinitions = framework.requirementDefinitions || [];
 
+  // Question-based frameworks (CISA CSET modules) carry an answer profile and get
+  // Assess and Results tabs in front of the upstream ones. Custom frameworks never do.
+  const answersApi = useFrameworkAnswers(frameworkInstanceId, !!framework.framework);
+  const answerData = answersApi.data;
+  const isQuestionBased = !!answerData;
+  const answeredCount = answerData?.answers.length ?? 0;
+  const expectedAnswers = requirementDefinitions.length * (answerData?.domains.length ?? 1);
+
   const hasControlFamilies = useMemo(
     () =>
       frameworkInstanceWithControls.controls.some(
@@ -104,22 +115,24 @@ export function FrameworkDetailContent({
   // it's off, the lightweight FrameworkProgress renders above the tabs.
   const tabParam = searchParams.get('tab');
   const validTabsList: string[] = [];
+  if (isQuestionBased) validTabsList.push('assess', 'results');
   if (complianceTimelineEnabled) validTabsList.push('progress');
   validTabsList.push('controls');
   validTabsList.push('requirements');
   validTabsList.push('history');
   const validTabs = new Set(validTabsList);
-  const activeTab = tabParam && validTabs.has(tabParam) ? tabParam : DEFAULT_TAB;
+  const defaultTab = isQuestionBased ? 'assess' : DEFAULT_TAB;
+  const activeTab = tabParam && validTabs.has(tabParam) ? tabParam : defaultTab;
 
   const handleTabChange = useCallback(
     (value: string) => {
       const params = new URLSearchParams(searchParams.toString());
-      if (value === DEFAULT_TAB) params.delete('tab');
+      if (value === defaultTab) params.delete('tab');
       else params.set('tab', value);
       const q = params.toString();
       router.replace(q ? `${pathname}?${q}` : pathname, { scroll: false });
     },
-    [pathname, router, searchParams],
+    [defaultTab, pathname, router, searchParams],
   );
 
   // Tab label counts
@@ -193,6 +206,15 @@ export function FrameworkDetailContent({
             }
             tabs={
               <TabsList variant="underline">
+                {isQuestionBased && (
+                  <TabsTrigger value="assess">
+                    Assess{' '}
+                    <TabBadge>
+                      {answeredCount}/{expectedAnswers}
+                    </TabBadge>
+                  </TabsTrigger>
+                )}
+                {isQuestionBased && <TabsTrigger value="results">Results</TabsTrigger>}
                 {complianceTimelineEnabled && (
                   <TabsTrigger value="progress">
                     Progress <TabBadge>{compliancePct}%</TabBadge>
@@ -234,6 +256,23 @@ export function FrameworkDetailContent({
             tasks={tasks}
             evidenceSubmissions={evidenceSubmissions}
           />
+        )}
+
+        {isQuestionBased && (
+          <TabsContent value="assess">
+            <AssessTab
+              orgId={orgId}
+              frameworkInstanceId={frameworkInstanceId}
+              requirementDefinitions={requirementDefinitions}
+              onAnswersChanged={() => mutate()}
+            />
+          </TabsContent>
+        )}
+
+        {isQuestionBased && answerData && (
+          <TabsContent value="results">
+            <AnswerResults frameworkInstanceId={frameworkInstanceId} scoring={answerData.profile.scoring} />
+          </TabsContent>
         )}
 
         {complianceTimelineEnabled && (

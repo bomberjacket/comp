@@ -1,0 +1,2109 @@
+{
+  "kind": "standard",
+  "source": "CISA CSET v13.0.0.0 (github.com/cisagov/cset), MIT licence, Battelle Energy Alliance",
+  "setName": "AWWA 4.0",
+  "fullName": "American Water Works Association v4.0",
+  "shortName": "AWWA 4.0",
+  "requirements": [
+    {
+      "id": 352,
+      "sequence": 1,
+      "title": "IA-1",
+      "text": "Access control policies and procedures established including unique user ID for every user, appropriate passwords, privilege accounts, authentication, and management oversight.",
+      "supplemental": "Based on their knowledge of access control policies, operators do not share passwords.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 439,
+      "sequence": 2,
+      "title": "IA-2",
+      "text": "Access control for the management, monitoring, review, and audit of accounts established including access control, account roles, privilege accounts, password policies and executive oversight.",
+      "supplemental": "Upon staff termination or resignation, login credentials are disabled as part of the Human Resources process.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 355,
+      "sequence": 3,
+      "title": "IA-3",
+      "text": "Role based access control system established including policies and procedures.",
+      "supplemental": "SCADA software implements unique usernames and passwords with different levels of control based on roles.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 356,
+      "sequence": 4,
+      "title": "IA-4",
+      "text": "Access control for confidential system documentation established to prevent unauthorized access of trade secrets, program source code, documentation, and passwords (including approved policies and procedures).",
+      "supplemental": "Defined clearance requirements for individuals to access confidential information.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 357,
+      "sequence": 5,
+      "title": "IA-5",
+      "text": "Access control for diagnostic tools and resources and configuration ports.",
+      "supplemental": "PLC programming software is only available at select workstations and only accessible to SCADA technicians.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 358,
+      "sequence": 6,
+      "title": "IA-6",
+      "text": "Access control for networks shared with other parties in accordance with contracts, SLAs and internal policies.",
+      "supplemental": "Contracts with third-party equipment vendors establish security requirements for remote access to equipment.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-6",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 359,
+      "sequence": 7,
+      "title": "IA-7",
+      "text": "Wireless and guest-access framework established for the management, monitoring, review, and audit of wireless and guest access in place.",
+      "supplemental": "To use the plant guest network, users are required to accept a user agreement.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-7",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 401,
+      "sequence": 8,
+      "title": "IA-9",
+      "text": "Multifactor authentication system established for critical areas.",
+      "supplemental": "Remote access to the SCADA system requires two factor-authentication.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-9",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 400,
+      "sequence": 9,
+      "title": "IA-11",
+      "text": "Workstation and other equipment authentication framework established to secure sensitive access from certain high risk locations.",
+      "supplemental": "Access to control of critical equipment is only available at a secured terminal.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-11",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 354,
+      "sequence": 10,
+      "title": "IA-12",
+      "text": "Session controls established to inactivate idle sessions, provide web content filtering, prevent access to malware sites, etc.",
+      "supplemental": "An operator attempts to connect to a known hacking website. The connection is blocked. The operator and IT are notified of the attempt.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-12",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 360,
+      "sequence": 11,
+      "title": "PE-1",
+      "text": "Security perimeters, card controlled gates, manned booths, and procedures for entry control.",
+      "supplemental": "Personnel are required to present a badge to access the PCS.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 361,
+      "sequence": 12,
+      "title": "PE-2",
+      "text": "Secure areas protected by entry controls and procedures to ensure that only authorized personnel have access.",
+      "supplemental": "Access to the server room is restricted to authorized staff only.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 362,
+      "sequence": 13,
+      "title": "PE-3",
+      "text": "Physical security and procedures for offices, rooms, and facilities.",
+      "supplemental": "Staff lock doors that allow access to PCS assets. Security guards inspect doors to make sure they are locked properly.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 363,
+      "sequence": 14,
+      "title": "PE-4",
+      "text": "Physical protection against fire, flood, earthquake, explosion, civil unrest, etc.",
+      "supplemental": "Fire suppression unit installed around critical equipment.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 364,
+      "sequence": 15,
+      "title": "PE-5",
+      "text": "Physical security and procedures for working in secure areas.",
+      "supplemental": "Documentation for physical security procedures is included with new employee training and reviewed at regular training events.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 365,
+      "sequence": 16,
+      "title": "PE-6",
+      "text": "Physical security and procedures for mail rooms, loading areas, etc., established. These areas must be isolated from OT and enterprise system areas.",
+      "supplemental": "Server room and PLC cabinets are isolated from areas that delivery personnel and customers may visit.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-6",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 378,
+      "sequence": 17,
+      "title": "SC-2",
+      "text": "Centralized authentication system or single sign-on established to authorize access from a central system.",
+      "supplemental": "Operators have one username and password for PCS equipment which is managed from a central system.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 371,
+      "sequence": 18,
+      "title": "SC-12",
+      "text": "Remote access framework including policies and procedures established to provide secure access to telecommuting staff, established for the management, monitoring, review, and audit of remote access to the organization.",
+      "supplemental": "Remote access to the SCADA system requires two factor-authentication.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-12",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 387,
+      "sequence": 19,
+      "title": "SI-3",
+      "text": "Interactive system for managing password implemented to ensure password strength.",
+      "supplemental": "When configuring a new user's password, it must meet minimum character length requirements.",
+      "category": "Access Control",
+      "subCategory": "Access Control",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SI-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 389,
+      "sequence": 20,
+      "title": "AU-1",
+      "text": "Audit program established to ensure information systems are compliant with policies and standards and to minimize disruption of operations.",
+      "supplemental": "IT schedules an independent review and examination of records and activities to assess the adequacy of system controls and to ensure compliance with established policies.",
+      "category": "Application Security",
+      "subCategory": "Application Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 396,
+      "sequence": 21,
+      "title": "CM-3",
+      "text": "Separation of duties implemented for user processes including risk of abuse.",
+      "supplemental": "Operators are only given clearance to areas they are expected to work in. Supervisors have the ability and training to monitor SCADA tech activities in the PCS.",
+      "category": "Application Security",
+      "subCategory": "Application Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CM-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 397,
+      "sequence": 22,
+      "title": "CM-4",
+      "text": "Separation of duties implemented for development, production, and testing work.",
+      "supplemental": "A SCADA technician must have a second technician review changes made to production equipment before they are implemented.",
+      "category": "Application Security",
+      "subCategory": "Application Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CM-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 414,
+      "sequence": 23,
+      "title": "SI-5",
+      "text": "Privileged programs controls established to restrict usage of system programs that could reset passwords or override controls as well as enterprise system audit tools that can modify or delete audit data.",
+      "supplemental": "Utility has implemented tiered access so non-administrator users are unable to make changes to system security settings.",
+      "category": "Application Security",
+      "subCategory": "Application Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SI-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 393,
+      "sequence": 24,
+      "title": "AU-5",
+      "text": "Risk based business continuity framework established under the auspices of the executive team to maintain continuity of operations and consistency of policies and plans throughout the organization.  Another purpose of the framework is to ensure consistency across plans in terms of priorities, contact data, testing, and maintenance.",
+      "supplemental": "The facility has a documented and tested contingency plan to operate the facility without the use of SCADA software, in the case of attack by ransomware.",
+      "category": "Business Continuity and Disaster Recovery",
+      "subCategory": "Business Continuity and Disaster Recovery",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 395,
+      "sequence": 25,
+      "title": "AU-7",
+      "text": "Policies and procedures for system instantiation/deployment established to ensure business continuity.",
+      "supplemental": "The PCS has a testing/development environment to allow changes to be implemented without immediate effects to the production environment.",
+      "category": "Business Continuity and Disaster Recovery",
+      "subCategory": "Business Continuity and Disaster Recovery",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-7",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 446,
+      "sequence": 26,
+      "title": "DS-2",
+      "text": "A Privacy Policy as well as a Cyber Security Breach Policy are implemented.",
+      "supplemental": "An operator knows how to identify and respond to a suspected cyber breach, based on his cybersecurity training.",
+      "category": "Business Continuity and Disaster Recovery",
+      "subCategory": "Business Continuity and Disaster Recovery",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "DS-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 351,
+      "sequence": 27,
+      "title": "DS-3",
+      "text": "A program is established to ensure compliance with the minimum HIPAA requirements. Develop a Privacy Policy as well as a Cyber Security Breach Policy.",
+      "supplemental": "Current practices are reviewed by legal counsel for legal compliance with HIPAA.",
+      "category": "Business Continuity and Disaster Recovery",
+      "subCategory": "Business Continuity and Disaster Recovery",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "DS-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 417,
+      "sequence": 28,
+      "title": "CIE-1",
+      "text": "A program is in place to engage engineering staff in understanding and mitigating high-consequence and constantly evolving cyber threat throughout the engineering life-cycle including: design, implementation, maintenance, and decommissioning.",
+      "supplemental": "Engineering staff is fully aware of the potential for a cyber breach. They design electrical and mechanical systems to provide functionality in the case of a SCADA system compromise.",
+      "category": "Cyber-Informed Engineering",
+      "subCategory": "Cyber-Informed Engineering",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CIE-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 388,
+      "sequence": 29,
+      "title": "AT-1",
+      "text": "A general security awareness and response program established to ensure staff is aware of the indications of a potential incident, security policies, and incident response/notification procedures.",
+      "supplemental": "An operator finds a USB media device. Based on their cybersecurity training, they know not to use it on the company network.",
+      "category": "Education",
+      "subCategory": "Education",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AT-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 415,
+      "sequence": 30,
+      "title": "AT-2",
+      "text": "Job specific security training including incident response training for employees, contractors and third party users.",
+      "supplemental": "An operator has received what they believe to be a malicious email. They recognize that it is a phishing attack based on security training awareness programs the company has in place.",
+      "category": "Education",
+      "subCategory": "Education",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AT-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 382,
+      "sequence": 31,
+      "title": "SC-23",
+      "text": "Wireless communications links encrypted.",
+      "supplemental": "All data transferred via the wireless network is encrypted using current wireless communication best practices.",
+      "category": "Encryption",
+      "subCategory": "Encryption",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-23",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 383,
+      "sequence": 32,
+      "title": "SC-24",
+      "text": "Communications links encrypted.",
+      "supplemental": "All data transferred via the wired network is encrypted using current wired communication best practices.",
+      "category": "Encryption",
+      "subCategory": "Encryption",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-24",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 384,
+      "sequence": 33,
+      "title": "SC-25",
+      "text": "Virtual Private Network (VPN) using IPsec, SSL or SSH to encrypt communications from untrusted networks to the control system network.",
+      "supplemental": "An operator who can access the system remotely must do so through a secured VPN client configuration.",
+      "category": "Encryption",
+      "subCategory": "Encryption",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-25",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 349,
+      "sequence": 34,
+      "title": "AT-3",
+      "text": "A forensic program established to ensure that evidence is collected/handled in accordance with pertinent laws in case of an incident requiring civil or criminal action.",
+      "supplemental": "A SCADA tech believes a machine is infected. Based on their training, they remove the machine from the network and report it to IT without powering it off to avoid deleting evidence.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AT-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 390,
+      "sequence": 35,
+      "title": "AU-2",
+      "text": "Framework of information security policies, procedures, and controls including management's initial and periodic approval established to provide governance, exercise periodic review, dissemination, and coordination of information security activities.",
+      "supplemental": "The process of implementing policies and procedures is clearly defined and reviewed. Updates to this process are made by a responsible party.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 391,
+      "sequence": 36,
+      "title": "AU-3",
+      "text": "Governance framework to disseminate/decentralize decision making while maintaining executive authority and strategic control and ensure that managers follow the security policies and enforce the execution of security procedures within their area of responsibility.",
+      "supplemental": "A utility has a required number of accountable staff that must review or provide input before security policies are put in place. Periodic review that approved security policies are being followed.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 392,
+      "sequence": 37,
+      "title": "AU-4",
+      "text": "Information security responsibilities defined and assigned.",
+      "supplemental": "All staff are aware of who they would report to if they notice suspicious behavior in the system.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 394,
+      "sequence": 38,
+      "title": "AU-6",
+      "text": "Policies and procedures established to validate, test, update and audit the business continuity plan throughout the organization.",
+      "supplemental": "The business continuity plan is revised annually. Revisions are informed by planned exercises, actual events, or documented changes.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-6",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 416,
+      "sequence": 39,
+      "title": "AU-8",
+      "text": "Template for the organization's confidentiality/non-disclosure agreements defined, reviewed, and approved periodically by management.",
+      "supplemental": "Reviews of the organization's confidentiality/non-disclosure agreements are periodically scheduled by a responsible party.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "AU-8",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 418,
+      "sequence": 40,
+      "title": "CM-1",
+      "text": "Policies for defining business requirements including data validation and message authenticity established to ensure that new/upgraded systems contain appropriate security requirements and controls.",
+      "supplemental": "Policies to define minimum security features (i.e. secure protocols, active directory integration, etc.) required for new systems. This could include review and approval by change management and/or security team.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CM-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 419,
+      "sequence": 41,
+      "title": "CM-2",
+      "text": "Procedure modification tracking program in place to manage and log changes to policies and procedures.",
+      "supplemental": "The Emergency Response Plan is stored in a central repository and clearly displays the version and date of when it was implemented.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CM-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 438,
+      "sequence": 42,
+      "title": "CM-6",
+      "text": "Risk based policies and procedures for change controls, reviews, and audits of SLAs.",
+      "supplemental": "Inviting all affected parties to discussions to prevent the development of vulnerabilities in the facility.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CM-6",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 350,
+      "sequence": 43,
+      "title": "DS-1",
+      "text": "A program established to ensure compliance with the minimum PCI requirements for your associated level.",
+      "supplemental": "The company selected to perform billing is compliant with the minimum PCI requirements for the utility's associated level.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "DS-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 420,
+      "sequence": 44,
+      "title": "IA-8",
+      "text": "Policies for security of standalone, lost, and misplaced equipment in place.",
+      "supplemental": "An operator misplaces a managed phone. Based on the missing equipment policy, they contact IT to report the device lost.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-8",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 353,
+      "sequence": 45,
+      "title": "IA-10",
+      "text": "Policies and procedures for least privilege established to ensure that users only gain access to the authorized services.",
+      "supplemental": "If no user is logged in at a SCADA screen, a read-only view is presented. Individual roles created and assigned to users depending on their responsibilities.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IA-10",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 402,
+      "sequence": 46,
+      "title": "IR-1",
+      "text": "Incident response program established with a formal Emergency Response Plan to restore systems and operations based on their criticality and within time constraints and effect recovery in case of a catalogue of disruptive events.  Exercises conducted to test and revise plans and build organizational response capabilities.",
+      "supplemental": "Emergency Response Plan includes procedures for recovering SCADA system operation from system backup.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IR-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 440,
+      "sequence": 47,
+      "title": "IR-2",
+      "text": "A security program established with a formal Emergency Response Plan to respond to security incidents monitor, discover, and handle security alerts and technical vulnerabilities, collect and analyze security data, limit the organization's risk profile and ensure that management is aware of changing/emerging risks.",
+      "supplemental": "A SCADA tech believes a machine is infected and responds according to the utility's emergency response plan for cybersecurity based incidents.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IR-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 421,
+      "sequence": 48,
+      "title": "IR-3",
+      "text": "A legal/contractual/regulatory framework established with a formal Emergency Response Plan to track legal/contractual/regulatory requirements and the efforts to meet them with respect to each important system within the organization. Another purpose of the framework is to ensure compliance of policies and procedures with privacy laws, handling cryptographic products, intellectual property rights, and data retention requirements.",
+      "supplemental": "The Emergency Response Plan is reviewed and updated once a year by responsible staff.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "IR-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 442,
+      "sequence": 49,
+      "title": "MA-2",
+      "text": "Maintenance of relationships with authorities, professional associations, interest groups etc., formalized.  This is done, in part, to maintain an up-to-date situational awareness of relevant threats.",
+      "supplemental": "The utility is a member of DHS's CISA mailing list to receive frequent communications on PCS vulnerabilities discovered and patches available. SCADA techs regularly review alerts to determine if the alerts are applicable to their system.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "MA-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 422,
+      "sequence": 50,
+      "title": "MA-3",
+      "text": "Off-site equipment maintenance program including risk assessment of outside environmental conditions established.",
+      "supplemental": "The condition of offsite equipment and risk factors acting on the equipment are periodically reviewed and assessed via an independent party.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "MA-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 443,
+      "sequence": 51,
+      "title": "MP-1",
+      "text": "Storage media management and disposal program established to ensure that any sensitive data/software is used appropriately and is removed prior to media disposal (including approved policies and procedures).",
+      "supplemental": "When decommissioning a network device that was used in the production environment, IT is required to return it to factory conditions before it leaves the facility.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "MP-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 423,
+      "sequence": 52,
+      "title": "MP-2",
+      "text": "Information exit mechanisms in place to prevent data, software leaving premises without authorization or logging.",
+      "supplemental": "An approved data leakage prevention (DLP) system is implemented or manual procedures to control data and/or software leaving organization.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "MP-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 444,
+      "sequence": 53,
+      "title": "MP-3",
+      "text": "Policies and procedure repository in place to be available to all authorized staff.",
+      "supplemental": "Company policies and procedures are available in a central, secure, shared location.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "MP-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 424,
+      "sequence": 54,
+      "title": "PM-1",
+      "text": "Asset management program including a repository containing all significant assets of the organization with a responsible party for each, periodic inventories, and audits.",
+      "supplemental": "A database is used to keep track of building conditions in the facility.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PM-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 425,
+      "sequence": 55,
+      "title": "PM-2",
+      "text": "Policies and procedures for acceptable use of assets and information approved and implemented.",
+      "supplemental": "PLCs that cannot update past a specific security revision are not acceptable for use in the PCS.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PM-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 445,
+      "sequence": 56,
+      "title": "PM-5",
+      "text": "Data classification policies and procedures for handling and labeling based on confidentiality and criticality approved and implemented.",
+      "supplemental": "A policy to store and manage access to PLC programs.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PM-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 426,
+      "sequence": 57,
+      "title": "PS-1",
+      "text": "Policies and procedures for hiring/terminating processes on employees, contractors, or support companies to include background checks and contract agreements approved and implemented.",
+      "supplemental": "A background check on employees is required before they may be given access to the PCS system.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PS-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 427,
+      "sequence": 58,
+      "title": "PS-2",
+      "text": "Defined and approved security roles and responsibilities of all employees, contractors and third party users.",
+      "supplemental": "A company policy is in place limiting the access of third-party users to assets, systems, and data.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PS-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 428,
+      "sequence": 59,
+      "title": "PS-3",
+      "text": "A clear desk policy in place including clear papers, media, desktop, and computer screens.",
+      "supplemental": "Confidential documents are stored in locked file cabinets when not in use, as required by policy.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PS-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 429,
+      "sequence": 60,
+      "title": "PS-4",
+      "text": "Disciplinary process for security violations established.",
+      "supplemental": "An operator who props open doors to critical areas could face disciplinary action as outlined in the utility's policies and procedures.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PS-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 405,
+      "sequence": 61,
+      "title": "RA-1",
+      "text": "Risk assessment and approval process before granting access to the organization's information systems.",
+      "supplemental": "A third-party system integrator would need to contact IT before connecting to the system's network.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "RA-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 406,
+      "sequence": 62,
+      "title": "RA-2",
+      "text": "Third party agreement process to ensure security on access, processing, communicating, or managing the organization's information or facilities.",
+      "supplemental": "System integrators can only access the facility's equipment remotely from a VPN connection.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "RA-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 430,
+      "sequence": 63,
+      "title": "SA-1",
+      "text": "Authorization process established for new systems or changes to existing information processing systems.",
+      "supplemental": "A change management/review process is used to evaluate suggested changes to facility.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SA-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 431,
+      "sequence": 64,
+      "title": "SA-2",
+      "text": "Change controls of systems development, outsourced development, system modification, and testing established, including acceptance criteria for new systems, monitoring of internal/outsourced development, and control of system upgrades.",
+      "supplemental": "A third-party system integrator is preparing to make changes to SCADA software. The SCADA tech requires the integrator to follow the change procedure and test the changes in a sandbox environment before they are deployed in production.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SA-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 432,
+      "sequence": 65,
+      "title": "SA-3",
+      "text": "Change controls of operating systems, network configuration/topology, network security established, including changes to IDS/IPS, traffic control/monitoring, new systems, and system upgrades.",
+      "supplemental": "Automatic updates to the operating system are disabled, but monthly manual updates are reviewed and applied in coordination with operations.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SA-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 434,
+      "sequence": 66,
+      "title": "SA-5",
+      "text": "Periodic review of backup policies and procedures and testing of recovery processes.",
+      "supplemental": "System backups are tested on a regular basis by completing a system restoration to the test environment.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SA-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 369,
+      "sequence": 67,
+      "title": "SC-1",
+      "text": "Policies and procedures governing cryptography and cryptographic protocols including key/certificate-management established to maximize protection of systems and information.",
+      "supplemental": "When selecting new PLCs for a system upgrade, SCADA techs evaluate the option of using newer PLCs that offer encryption for communication.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 385,
+      "sequence": 68,
+      "title": "SC-3",
+      "text": "Policies and procedures established for network segmentation including implementation of DMZs based on type and sensitivity of equipment, user roles, and types of systems established.",
+      "supplemental": "All external communication with the PCS is implemented via DMZ.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 408,
+      "sequence": 69,
+      "title": "SC-4",
+      "text": "Intrusion detection, prevention, and recovery systems including approved policies and procedures established to protect against cyber-attacks. System includes repository of fault logging, analysis, and appropriate actions taken.",
+      "supplemental": "Monitoring of IDS is conducted to determine if ongoing attacks are occurring and incidence response actions have been documented.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 411,
+      "sequence": 70,
+      "title": "SC-7",
+      "text": "Information exchange protection program in place to protect data in-transit through any communication system including the Internet, email, and text messaging and approved policies and procedures.",
+      "supplemental": "Web applications for SCADA software use encryption to protect data in transit.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-7",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 435,
+      "sequence": 71,
+      "title": "SC-13",
+      "text": "Testing standards including test data selection, protection, and system verification established to ensure system completeness.",
+      "supplemental": "Organization has a FAT procedure that requires vendors to demonstrate security of systems before they are purchased.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-13",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 386,
+      "sequence": 72,
+      "title": "SI-1",
+      "text": "Electronic commerce infrastructure in place providing integrity, confidentiality and non-repudiation and including adherence to pertinent laws, regulations, policies, procedures, and approval by management.",
+      "supplemental": "The company selected to perform billing is compliant with pertinent laws, regulations, policies, procedures that are relevant to the utility.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SI-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 436,
+      "sequence": 73,
+      "title": "SI-2",
+      "text": "System acceptance standards including data validation (input/output), message authenticity, and system integrity established to detect information corruption during processing.",
+      "supplemental": "Acquired assets are inspected, assessed, and documented before implementation with existing systems.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SI-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 447,
+      "sequence": 74,
+      "title": "SU-1",
+      "text": "A supply chain risk management program.",
+      "supplemental": "Chain of custody documentation is required for all chemicals used in treatment.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SU-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 448,
+      "sequence": 75,
+      "title": "SU-2",
+      "text": "A supply chain risk management program that includes cybersecurity.",
+      "supplemental": "Preferred vendors for computer hardware, software and peripherals are identified and selected based on evaluation of their supply chain among other criteria.",
+      "category": "Governance and Risk Management",
+      "subCategory": "Governance and Risk Management",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SU-2",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 433,
+      "sequence": 76,
+      "title": "SA-4",
+      "text": "Risk based mobility policies and procedures established to protect against inherent risk of mobile computing and communication systems.",
+      "supplemental": "Remote access is restricted to only the most necessary applications and only allowed through secure measures.",
+      "category": "Operations Security",
+      "subCategory": "Operations Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SA-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 412,
+      "sequence": 77,
+      "title": "SC-8",
+      "text": "Routing controls established to provide logical separation of sensitive systems and enforce the organization's access control policy.",
+      "supplemental": "Within the SCADA system network, vendor systems are placed on a separate subnet rather than being on a single \"flat\" network.",
+      "category": "Operations Security",
+      "subCategory": "Operations Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-8",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 413,
+      "sequence": 78,
+      "title": "SC-9",
+      "text": "Process isolation established to provide a manual override \"air gap\" between highly sensitive systems and regular environments.",
+      "supplemental": "A manual method for disconnecting the ICS network from other networks is implemented and documented.",
+      "category": "Operations Security",
+      "subCategory": "Operations Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-9",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 372,
+      "sequence": 79,
+      "title": "SC-14",
+      "text": "Network segregation. Firewalls, deep packet inspection and/or application proxy gateways.",
+      "supplemental": "An actively managed firewall is in place to allow secure data transfer via DMZ.",
+      "category": "Operations Security",
+      "subCategory": "Operations Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-14",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 373,
+      "sequence": 80,
+      "title": "SC-15",
+      "text": "Logically separated control network. Minimal or single access points between corporate and control network. Stateful firewall between corporate and control networks filtering on TCP and UDP ports. DMZ networks for data sharing.",
+      "supplemental": "An actively managed firewall is in place to allow secure data transfer via DMZ to provide operations data to utility asset managers.",
+      "category": "Operations Security",
+      "subCategory": "Operations Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-15",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 374,
+      "sequence": 81,
+      "title": "SC-16",
+      "text": "Defense-in-depth. Multiple layers of security with overlapping functionality.",
+      "supplemental": "A utility employs multiple types of physical and cybersecurity efforts to protect assets and systems. The efforts include such things as locking doors, physical access control, and unique login requirements for each staff member.",
+      "category": "Operations Security",
+      "subCategory": "Operations Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-16",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 366,
+      "sequence": 82,
+      "title": "PE-7",
+      "text": "Physical security and procedures against equipment environmental threats and hazards or unauthorized access.",
+      "supplemental": "The utility monitors facilities using security cameras.",
+      "category": "Physical Security",
+      "subCategory": "Physical Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-7",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 367,
+      "sequence": 83,
+      "title": "PE-8",
+      "text": "Physical/logical protection against power failure of equipment (UPS).",
+      "supplemental": "Uninterruptible power supplies (UPS) are available as power backup for critical components.",
+      "category": "Physical Security",
+      "subCategory": "Physical Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-8",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 368,
+      "sequence": 84,
+      "title": "PE-9",
+      "text": "Physical/logical protection against access to power and telecommunications cabling established.",
+      "supplemental": "A utility has a standby power source with separated power cabling for critical sites.",
+      "category": "Physical Security",
+      "subCategory": "Physical Security",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PE-9",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 407,
+      "sequence": 85,
+      "title": "SC-10",
+      "text": "Program for hardening servers, workstations, routers, and other systems using levels of hardening based on criticality established. Program should include policies and procedures for whitelisting (deny-all, allow by exception).",
+      "supplemental": "Ports are disabled for all network devices when not in use.",
+      "category": "Server and Workstation Hardening",
+      "subCategory": "Server and Workstation Hardening",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-10",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 370,
+      "sequence": 86,
+      "title": "SC-11",
+      "text": "Framework for hardening of mobile code and devices established (including acceptance criteria and approved policies and procedures).",
+      "supplemental": "A water utility chooses to not allow personal mobile devices to connect to the control network. The utility does provide mobile devices managed by IT that can connect to the network.",
+      "category": "Server and Workstation Hardening",
+      "subCategory": "Server and Workstation Hardening",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-11",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 398,
+      "sequence": 87,
+      "title": "CM-5",
+      "text": "SLAs for all third parties established, including levels of service and change controls.",
+      "supplemental": "A security policy that outlines what access permissions are distributed to third party employees.",
+      "category": "Service Level Agreements (SLA)",
+      "subCategory": "Service Level Agreements (SLA)",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CM-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 441,
+      "sequence": 88,
+      "title": "MA-1",
+      "text": "Equipment maintenance/replacement program established to maintain business continuity, availability, and integrity.",
+      "supplemental": "Based on the company's controlled maintenance program, a utility will format network devices to factory settings before sending them out of the organization for maintenance.",
+      "category": "Service Level Agreements (SLA)",
+      "subCategory": "Service Level Agreements (SLA)",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "MA-1",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 404,
+      "sequence": 89,
+      "title": "PM-4",
+      "text": "SLAs for software and information exchange with internal/external parties in place including interfaces between systems and approved policies and procedures.",
+      "supplemental": "Third parties must review and sign an information exchange policy before connecting to the system.",
+      "category": "Service Level Agreements (SLA)",
+      "subCategory": "Service Level Agreements (SLA)",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PM-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 399,
+      "sequence": 90,
+      "title": "CM-7",
+      "text": "Monitoring of resources and capabilities with notifications and alarms established to alert management when resources/capabilities fall below a threshold.",
+      "supplemental": "IT monitors SCADA computers for processor usage that could indicate cryptojacking activity.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "CM-7",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 403,
+      "sequence": 91,
+      "title": "PM-3",
+      "text": "Centralized logging system including policies and procedures to collect, analyze and report to management.",
+      "supplemental": "A utility has a network intrusion detection system (NIDS) to monitor network traffic.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "PM-3",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 409,
+      "sequence": 92,
+      "title": "SC-5",
+      "text": "Anomaly based IDS/IPS established including policies and procedures.",
+      "supplemental": "The IT tech monitors IDS system exception logs daily to determine if ongoing attacks are occurring and works with SCADA tech to address any issues.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-5",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 410,
+      "sequence": 93,
+      "title": "SC-6",
+      "text": "Network management and monitoring established including deep packet inspection of traffic, QoS, port-level security, and approved policies and procedures.",
+      "supplemental": "An actively managed firewall is in place to allow secure data transfer via DMZ to provide operations data to utility asset managers.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-6",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 375,
+      "sequence": 94,
+      "title": "SC-17",
+      "text": "Virtual Local Area Network (VLAN) for logical network segregation.",
+      "supplemental": "Within the SCADA system network, vendor systems are on a separate subnet.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-17",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 376,
+      "sequence": 95,
+      "title": "SC-18",
+      "text": "Minimize wireless network coverage.",
+      "supplemental": "Tests are conducted regularly to determine if the WiFi signals reach outside the intended area of use. If the signal reaches outside the intended area, the signal is turned down accordingly.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-18",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 377,
+      "sequence": 96,
+      "title": "SC-19",
+      "text": "802.1X user authentication on wireless networks.",
+      "supplemental": "No \"open\" WiFi connections are allowed.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-19",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 379,
+      "sequence": 97,
+      "title": "SC-20",
+      "text": "Wireless equipment located on isolated network with minimal or single connection to control network.",
+      "supplemental": "WiFi equipment in the plant does not connect directly to SCADA network.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-20",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 380,
+      "sequence": 98,
+      "title": "SC-21",
+      "text": "Unique wireless network identifier (SSID) for control network.",
+      "supplemental": "The WiFi for the control system has a unique SSID from the business network.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-21",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 381,
+      "sequence": 99,
+      "title": "SC-22",
+      "text": "Separate Microsoft Windows domain for wireless (if using Windows).",
+      "supplemental": "A wireless LAN specific domain controller is in place.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SC-22",
+          "page": null,
+          "destination": null
+        }
+      ]
+    },
+    {
+      "id": 437,
+      "sequence": 100,
+      "title": "SI-4",
+      "text": "Organization-wide clock synchronization system in place.",
+      "supplemental": "All managed network devices synchronize their clocks to a known good source.",
+      "category": "Telecommunications, Network Security, and Architecture",
+      "subCategory": "Telecommunications, Network Security, and Architecture",
+      "weight": 0,
+      "implementationRecommendations": null,
+      "references": [
+        {
+          "title": "AWWA Water Sector Cybersecurity Risk Management Guidance\r\nVersion 4.0",
+          "shortName": "AWWA Risk Management Guidance",
+          "docNum": "NONE",
+          "section": "SI-4",
+          "page": null,
+          "destination": null
+        }
+      ]
+    }
+  ]
+}

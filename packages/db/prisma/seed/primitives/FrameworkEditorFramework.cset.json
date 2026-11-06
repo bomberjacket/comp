@@ -1,0 +1,66 @@
+[
+  {
+    "id": "frk_21cb27b3056904ff874e63b1",
+    "name": "CISA Ransomware Readiness Assessment (RRA)",
+    "version": "1.0",
+    "description": "CISA Ransomware Readiness Assessment: 48 practices in ten areas (data backup, web browser management and DNS filtering, phishing prevention and awareness, network perimeter monitoring, asset management, patch and update management, user and access management, application integrity and allow-listing, incident response, risk management) at three tiers (Basic, Intermediate, Advanced). Retired from CSET in v13; content from CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, No.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  },
+  {
+    "id": "frk_285f172f537c618481d959b9",
+    "name": "CISA Minimum Viable Resilience Assessment (MVRA, draft)",
+    "version": "draft",
+    "description": "CISA Minimum Viable Resilience Assessment (draft): 524 questions organised by the resilience goals Anticipate, Withstand, Recover and Adapt, then by CSF-style categories and outcome statements, at three tiers (Basic, Intermediate, Advanced); some questions carry multiple-choice detail options. Retired from CSET in v13; content from CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, Alternate, No.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  },
+  {
+    "id": "frk_3a777761af38267b9134c5ba",
+    "name": "AWWA Water Sector Cybersecurity Guidance v4.0",
+    "version": "4.0",
+    "description": "American Water Works Association Cybersecurity Risk Management Guidance v4.0 controls: 100 requirements in twelve practice categories (governance and risk management, access control, telecommunications and network security, operations security, application security, business continuity, encryption, physical security, service level agreements, education, server and workstation hardening, cyber-informed engineering). AWWA content redistributed inside CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, No, Not applicable, Alternate.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  },
+  {
+    "id": "frk_3be1195fcf4c9cb02782aa9b",
+    "name": "CISA External Dependencies Management (EDM) Assessment",
+    "version": "3.0",
+    "description": "CISA External Dependencies Management assessment: 116 practices in three domains (relationship formation; relationship management and governance; service protection and sustainment) plus maturity indicator level questions MIL-1 to MIL-5, with CERT-RMM and NIST CSF references. Retired from CSET in v13; content from CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, Incomplete, No.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  },
+  {
+    "id": "frk_76bf0b250804b9648227ccaa",
+    "name": "CISA Cyber Resilience Review (CRR)",
+    "version": "1.0",
+    "description": "CISA Cyber Resilience Review: 397 practices in ten domains (asset management, controls management, configuration and change management, vulnerability management, incident management, service continuity management, risk management, external dependencies management, training and awareness, situational awareness) and 82 goals, with CERT-RMM and NIST CSF references. Retired from CSET in v13; content from CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, Incomplete, No; a goal is achieved when every practice is Yes.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  },
+  {
+    "id": "frk_8e1ab214ce8b64b9d61eb7e9",
+    "name": "CISA Incident Management Review (IMR)",
+    "version": "1.0",
+    "description": "CISA Incident Management Review: 88 practices in six domains (event detection and handling; incident declaration, handling and response; post-incident analysis and testing; integrating organizational capabilities; protecting and sustaining the incident management function; preparing for incident response) grouped into 20 goals, with CERT-RMM and NIST references. Retired from CSET in v13; content from CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, Incomplete, No; a goal is achieved when every practice is Yes.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  },
+  {
+    "id": "frk_99eabe00820ad30b49f85e87",
+    "name": "CISA Cross-Sector Cybersecurity Performance Goals 2.0",
+    "version": "2.0",
+    "description": "CISA Cybersecurity Performance Goals (CPG) 2.0 (December 2025): 34 goals across the six NIST CSF 2.0 functions, answered separately for IT and OT where both apply. Each goal records the outcome, scope, recommended action, risk addressed, CISA's implementation criteria for IT and OT, cost, impact and complexity, and CSF 2.0 / SP 800-53 r5 / SP 800-82 r3 references. Content from CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, In progress, Scoped, No.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  },
+  {
+    "id": "frk_f0f03f628e56b4f3a5a9ed77",
+    "name": "HHS 405(d) Health Industry Cybersecurity Practices (Technical Volume 1)",
+    "version": "2023",
+    "description": "Health Industry Cybersecurity Practices (HICP), Technical Volume 1 for small organizations, from the HHS 405(d) program: 63 requirements in ten practice areas (e-mail protection, endpoint protection, access management, data protection and loss prevention, asset management, network management, vulnerability management, incident response, medical device security, cybersecurity policies), with NIST CSF 1.1 references. Content from CISA CSET v13 (Cyber Security Evaluation Tool, github.com/cisagov/cset, MIT licence, Battelle Energy Alliance). Answers: Yes, No, Not applicable, Alternate.",
+    "visible": true,
+    "familyId": "frk_fam_b5a42ebcc5df1a7f0baf7556"
+  }
+]

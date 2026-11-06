@@ -1,0 +1,2012 @@
+[
+  {
+    "id": "frk_ct_004cf9c1e80aae4d3317cd4a",
+    "name": "Integrity checking mechanisms are used to verify hardware integrity (Data Security)",
+    "description": "Integrity checking mechanisms are used to verify hardware integrity. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_019a4acb529a215505100051",
+    "name": "EDM: Goal 4 - Performance of external entities is managed",
+    "description": "Goal 4 - Performance of external entities is managed. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_025e2bcdf66b44a17d21b03e",
+    "name": "AM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_02a2b7b67d6c6e0d38706b18",
+    "name": "AM: Goal 7 - Facility assets supporting the critical service are prioritized and managed",
+    "description": "Goal 7 - Facility assets supporting the critical service are prioritized and managed. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_02b779815987398edf01f864",
+    "name": "Mechanisms (e.g., failsafe, load balancing, hot swap) are implemented to achieve resilience requirements in normal and adverse situations (Protective Technology)",
+    "description": "Mechanisms (e.g., failsafe, load balancing, hot swap) are implemented to achieve resilience requirements in normal and adverse situations. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_034c943970c011838eb6edb3",
+    "name": "Communications and control networks are protected (Protective Technology)",
+    "description": "Communications and control networks are protected. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_0478e15dd65cb2c66a833a2b",
+    "name": "VM: Goal 3 - Exposure to identified vulnerabilities is managed",
+    "description": "Goal 3 - Exposure to identified vulnerabilities is managed. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_06bff19dde9987d4b2feb520",
+    "name": "Dynamic Threat Awareness (Contextual Awareness)",
+    "description": "Dynamic Threat Awareness. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_06f5d6ff6e83c12c1a406c25",
+    "name": "EH: Goal 1 - Organizational services and assets are prioritized and supported by event detection and handling capabilities",
+    "description": "Goal 1 - Organizational services and assets are prioritized and supported by event detection and handling capabilities. Practices: see the requirements linked to this control. Family: EH - Event Detection and Handling.",
+    "controlFamily": "EH - Event Detection and Handling"
+  },
+  {
+    "id": "frk_ct_070f7b5d32974429c761f374",
+    "name": "RMG: Goal 3 – Supplier performance is governed and managed",
+    "description": "Goal 3 – Supplier performance is governed and managed. Practices: see the requirements linked to this control. Family: RMG - Relationship Management and Governance - MIL-1.",
+    "controlFamily": "RMG - Relationship Management and Governance - MIL-1"
+  },
+  {
+    "id": "frk_ct_07dbc4e01b43d5868365577c",
+    "name": "Application Integrity and Allowlist (AI)",
+    "description": "Application Integrity and Allowlist (AI). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_083e5b18512b790e8ff0a093",
+    "name": "A baseline of network operations and expected data flows for users and systems is established and managed (Anomalies and Events)",
+    "description": "A baseline of network operations and expected data flows for users and systems is established and managed. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_0844cc1df060118722a0fc28",
+    "name": "Consistency Analysis (Coordinated Protection)",
+    "description": "Consistency Analysis. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_08559d7e4ca68506402d9f96",
+    "name": "3.A Change Default Passwords",
+    "description": "3.A Change Default Passwords: Prevent threat actors from using default passwords to achieve initial access and move laterally in a network.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_0ba68310c9a0e93f437fcca3",
+    "name": "Functional Relocation of Sensors (Dynamic Positioning)",
+    "description": "Functional Relocation of Sensors. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_0bc7224fd2ed753e534fe5a5",
+    "name": "RM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_0bcd033048be83cf815e303b",
+    "name": "External information systems are catalogued (Asset Management)",
+    "description": "External information systems are catalogued. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_0c305c49a357924774d98e8c",
+    "name": "Architectural Diversity (Diversity)",
+    "description": "Architectural Diversity. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_0c59c938619634b8b9a545a5",
+    "name": "Risk responses are identified and prioritized (Risk Assessment)",
+    "description": "Risk responses are identified and prioritized. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_0cd3eb09bed0a79005878a18",
+    "name": "Non-Persistent Connectivity (Non-Persistence)",
+    "description": "Non-Persistent Connectivity. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_0e1c71e30b44f711beb192e5",
+    "name": "Offloading (Realignment 800-160)",
+    "description": "Offloading. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  },
+  {
+    "id": "frk_ct_0e2acc07f1d3cfcf3c0bdaff",
+    "name": "IM: Goal 5 - Post-incident lessons learned are translated into improvement strategies",
+    "description": "Goal 5 - Post-incident lessons learned are translated into improvement strategies. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_0e4880c2ced941c63d03b43e",
+    "name": "VM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_0fd2e99257a0a9ca7e426a12",
+    "name": "Robust Data Backup (DB)",
+    "description": "Robust Data Backup (DB). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_0fde962fafe9314be9082df4",
+    "name": "Network Management: Network Segmentation",
+    "description": "Network Segmentation requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Network Management.",
+    "controlFamily": "Network Management"
+  },
+  {
+    "id": "frk_ct_1010bc2c691e277203549987",
+    "name": "Configuration change control processes are in place (Information Protection)",
+    "description": "Configuration change control processes are in place. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_1036a56928b00e10ff278495",
+    "name": "Encryption",
+    "description": "Encryption requirements of American Water Works Association v4.0. Family: Encryption.",
+    "controlFamily": "Encryption"
+  },
+  {
+    "id": "frk_ct_1042c2a6e0e9db197a507d42",
+    "name": "IR: Goal 3 - Incident response is implemented",
+    "description": "Goal 3 - Incident response is implemented. Practices: see the requirements linked to this control. Family: IR - Incident Declaration, Handling, and Response.",
+    "controlFamily": "IR - Incident Declaration, Handling, and Response"
+  },
+  {
+    "id": "frk_ct_13beb944a4a22bf825ccf291",
+    "name": "Supply Chain Diversity (Diversity)",
+    "description": "Supply Chain Diversity. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_13f725a1b99e5374110a78e6",
+    "name": "IR: Goal 4 - Forensic handling of events and incidents is conducted",
+    "description": "Goal 4 - Forensic handling of events and incidents is conducted. Practices: see the requirements linked to this control. Family: IR - Incident Declaration, Handling, and Response.",
+    "controlFamily": "IR - Incident Declaration, Handling, and Response"
+  },
+  {
+    "id": "frk_ct_13f8ba77c162300bd44a6aa0",
+    "name": "Cyber supply chain risk management processes are identified, established, assessed, managed, and agreed to by organizational stakeholders (Supply Chain Risk Management)",
+    "description": "Cyber supply chain risk management processes are identified, established, assessed, managed, and agreed to by organizational stakeholders. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_13fc4a2f05e96cd73b9cd580",
+    "name": "Adequate capacity to ensure availability is maintained (Data Security)",
+    "description": "Adequate capacity to ensure availability is maintained. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_1528300eedc850781526f92e",
+    "name": "IR: Goal 1 - Incidents are declared",
+    "description": "Goal 1 - Incidents are declared. Practices: see the requirements linked to this control. Family: IR - Incident Declaration, Handling, and Response.",
+    "controlFamily": "IR - Incident Declaration, Handling, and Response"
+  },
+  {
+    "id": "frk_ct_15c74ef8e857dcb07762af4a",
+    "name": "EDM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_16814a55ba1eb73de7a5e7df",
+    "name": "Web Browser Management and DNS Filtering (BM)",
+    "description": "Web Browser Management and DNS Filtering (BM). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_16b02952537a23d5df62ce9f",
+    "name": "Incident alert thresholds are established (Anomalies and Events)",
+    "description": "Incident alert thresholds are established. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_17fc0197da6a13babea7bd09",
+    "name": "3.F Implement Multifactor Authentication (MFA)",
+    "description": "3.F Implement Multifactor Authentication (MFA): Add a critical, additional layer of security to protect assets' accounts.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_1b110ee8a201df2e7e8e80bd",
+    "name": "Physical Security",
+    "description": "Physical Security requirements of American Water Works Association v4.0. Family: Physical Security.",
+    "controlFamily": "Physical Security"
+  },
+  {
+    "id": "frk_ct_1b3599cc078f9b9b827cafc1",
+    "name": "A System Development Life Cycle to manage systems is implemented (Information Protection)",
+    "description": "A System Development Life Cycle to manage systems is implemented. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_1b6de4b1dd83916abbe2af4e",
+    "name": "VM: Goal 4 - The root causes of vulnerabilities are addressed",
+    "description": "Goal 4 - The root causes of vulnerabilities are addressed. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_1b8189964a84ee236a4a77cb",
+    "name": "Organizational cybersecurity policy is established and communicated (Governance)",
+    "description": "Organizational cybersecurity policy is established and communicated. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_1dcb9e838f6927a0679f9550",
+    "name": "Asset Management: Procurement",
+    "description": "Procurement requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Asset Management.",
+    "controlFamily": "Asset Management"
+  },
+  {
+    "id": "frk_ct_1e9db03f74cb300746c1d71e",
+    "name": "Network Management: Intrusion Prevention",
+    "description": "Intrusion Prevention requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Network Management.",
+    "controlFamily": "Network Management"
+  },
+  {
+    "id": "frk_ct_20aab629f3b7f1555d170a49",
+    "name": "The organization’s determination of risk tolerance is informed by its role in critical infrastructure and sector specific risk analysis (Risk Management Strategy)",
+    "description": "The organization’s determination of risk tolerance is informed by its role in critical infrastructure and sector specific risk analysis. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_21ff22bfc381739ccd273e8d",
+    "name": "IM: Goal 1 - A process for identifying, analyzing, responding to, and learning from incidents is established",
+    "description": "Goal 1 - A process for identifying, analyzing, responding to, and learning from incidents is established. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_22731089f3d4cb71345d423b",
+    "name": "RM: Goal 1 - A strategy for identifying, analyzing, and mitigating risks is developed",
+    "description": "Goal 1 - A strategy for identifying, analyzing, and mitigating risks is developed. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_246a3e6e1ce18a5ff915947e",
+    "name": "2.B Mitigate Known Vulnerabilities",
+    "description": "2.B Mitigate Known Vulnerabilities: Reduced likelihood of threat actors exploiting known vulnerabilities to breach organizational networks.",
+    "controlFamily": "Identify"
+  },
+  {
+    "id": "frk_ct_26c7b25cefcdd9f0ee648504",
+    "name": "Protection processes are improved (Information Protection)",
+    "description": "Protection processes are improved. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_27af3d624e8cea755e2ce434",
+    "name": "Replacement (Realignment 800-160)",
+    "description": "Replacement. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  },
+  {
+    "id": "frk_ct_27e3554c3ab88d3d58924d93",
+    "name": "RMG: Goal 6 – Infrastructure and governmental dependencies are managed",
+    "description": "Goal 6 – Infrastructure and governmental dependencies are managed. Practices: see the requirements linked to this control. Family: RMG - Relationship Management and Governance - MIL-1.",
+    "controlFamily": "RMG - Relationship Management and Governance - MIL-1"
+  },
+  {
+    "id": "frk_ct_2838b25f3c46431431e06cbd",
+    "name": "Recovery plan is executed during or after a cybersecurity incident (Recovery Planning)",
+    "description": "Recovery plan is executed during or after a cybersecurity incident. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  },
+  {
+    "id": "frk_ct_2866b98a8e0b3b2b535a4cb6",
+    "name": "IM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_287a6bc7964e7043d51935b5",
+    "name": "Identities and credentials are issued, managed, verified, revoked, and audited for authorized devices, users and processes (Identity and Access Control)",
+    "description": "Identities and credentials are issued, managed, verified, revoked, and audited for authorized devices, users and processes. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_28b0f262eaaf2b4a513a8efb",
+    "name": "CCM: Goal 3 - Asset configuration baselines are established",
+    "description": "Goal 3 - Asset configuration baselines are established. Practices: see the requirements linked to this control. Family: CCM - Configuration and Change Management.",
+    "controlFamily": "CCM - Configuration and Change Management"
+  },
+  {
+    "id": "frk_ct_28ff56d6ad9eef66066703ed",
+    "name": "Provenance Tracking (Sustained Integrity)",
+    "description": "Provenance Tracking. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_29c41dc16c65091e5a9bc687",
+    "name": "Monitoring and Damage Assessment (Analytic Monitoring)",
+    "description": "Monitoring and Damage Assessment. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_2c2cbf901b63a3c0529b1b34",
+    "name": "SA: Goal 2 - The requirements for communicating threat information are established",
+    "description": "Goal 2 - The requirements for communicating threat information are established. Practices: see the requirements linked to this control. Family: SA - Situational Awareness.",
+    "controlFamily": "SA - Situational Awareness"
+  },
+  {
+    "id": "frk_ct_2cc72fe4d77bb93e353e6961",
+    "name": "AM: Goal 4 - The asset inventory is managed",
+    "description": "Goal 4 - The asset inventory is managed. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_2d58334660f941c793406ac5",
+    "name": "CM: Goal 2 - Controls are implemented",
+    "description": "Goal 2 - Controls are implemented. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_2de81de41dfc12efc6c4701b",
+    "name": "Cyber-Informed Engineering",
+    "description": "Cyber-Informed Engineering requirements of American Water Works Association v4.0. Family: Cyber-Informed Engineering.",
+    "controlFamily": "Cyber-Informed Engineering"
+  },
+  {
+    "id": "frk_ct_2f1c5e0967b67d745e17fe20",
+    "name": "3.N Establish Change Management Processes",
+    "description": "3.N Establish Change Management Processes: Policies and procedures exist to manage system changes and configurations.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_2f7401523664b3343c599248",
+    "name": "2.D Maintain Vulnerability Disclosure/Reporting Process",
+    "description": "2.D Maintain Vulnerability Disclosure/Reporting Process: Organizations learn about vulnerabilities or weaknesses more rapidly.",
+    "controlFamily": "Identify"
+  },
+  {
+    "id": "frk_ct_2f82af71f68ea2c614dc5380",
+    "name": "Medical Device Security",
+    "description": "Medical Device Security requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Medical Device Security.",
+    "controlFamily": "Medical Device Security"
+  },
+  {
+    "id": "frk_ct_2ff7e1258df199db427a48bb",
+    "name": "Education",
+    "description": "Education requirements of American Water Works Association v4.0. Family: Education.",
+    "controlFamily": "Education"
+  },
+  {
+    "id": "frk_ct_3271108576873ccdef3f5711",
+    "name": "Dependencies and critical functions for delivery of critical services are established (Business Environment)",
+    "description": "Dependencies and critical functions for delivery of critical services are established. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_339082c4d29a34556b1ad2e0",
+    "name": "Threats, vulnerabilities, likelihoods, and impacts are used to determine risk (Risk Assessment)",
+    "description": "Threats, vulnerabilities, likelihoods, and impacts are used to determine risk. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_350c5fe00a099ef2c612d2f9",
+    "name": "Dynamic Segmentation and Isolation (Segmentation)",
+    "description": "Dynamic Segmentation and Isolation. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_369fd9857828bbadf15b597e",
+    "name": "IM: Goal 2 - A process for detecting, reporting, triaging, and analyzing events is established",
+    "description": "Goal 2 - A process for detecting, reporting, triaging, and analyzing events is established. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_370cc893751de24360da6129",
+    "name": "Asset Management (AM)",
+    "description": "Asset Management (AM). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_37464c6b7e1ff885675cda94",
+    "name": "IM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_378a41027823862679ea1e66",
+    "name": "RM: Goal 4 - Risks are analyzed and assigned a disposition",
+    "description": "Goal 4 - Risks are analyzed and assigned a disposition. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_39a5ed5c7d74a3bcb974c9db",
+    "name": "Path Diversity (Diversity)",
+    "description": "Path Diversity. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_3ac1dda0e3d7dfb0c4feda3a",
+    "name": "RMG: Goal 2 – Supplier risk management is continuous",
+    "description": "Goal 2 – Supplier risk management is continuous. Practices: see the requirements linked to this control. Family: RMG - Relationship Management and Governance - MIL-1.",
+    "controlFamily": "RMG - Relationship Management and Governance - MIL-1"
+  },
+  {
+    "id": "frk_ct_3b0c841250d8fb7f4b4da5c8",
+    "name": "Recovery activities are communicated to internal and external stakeholders as well as executive management teams (Communications)",
+    "description": "Recovery activities are communicated to internal and external stakeholders as well as executive management teams. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  },
+  {
+    "id": "frk_ct_3c2c24036f93f8896dcd7901",
+    "name": "EDM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_3d374a6dfe4ff78e910365ba",
+    "name": "RF: Goal 1 – Acquirer service and asset priorities are established",
+    "description": "Goal 1 – Acquirer service and asset priorities are established. Practices: see the requirements linked to this control. Family: RF - Relationship Formation - MIL-1.",
+    "controlFamily": "RF - Relationship Formation - MIL-1"
+  },
+  {
+    "id": "frk_ct_3db735d3983f82feee2b3076",
+    "name": "Malicious code is detected (Security Continuous Monitoring)",
+    "description": "Malicious code is detected. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_3e53045cf8f0b634a7293fb1",
+    "name": "Integrity Checks (Sustained Integrity)",
+    "description": "Integrity Checks. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_3ec2a91c612db17ef19caeec",
+    "name": "The physical environment is monitored to detect potential cybersecurity events (Security Continuous Monitoring)",
+    "description": "The physical environment is monitored to detect potential cybersecurity events. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_3fd0a865826a8e48fe0c3780",
+    "name": "Forensic and Behavioral Analysis (Analytic Monitoring)",
+    "description": "Forensic and Behavioral Analysis. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_4049adcec8161933606691fd",
+    "name": "IM: Goal 4 - A process for responding to and recovering from incidents is established",
+    "description": "Goal 4 - A process for responding to and recovering from incidents is established. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_40c2892a5d2ee1854e0bf17b",
+    "name": "SA: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: SA - Situational Awareness.",
+    "controlFamily": "SA - Situational Awareness"
+  },
+  {
+    "id": "frk_ct_412e4ab9f4079c521497aee6",
+    "name": "CCM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: CCM - Configuration and Change Management.",
+    "controlFamily": "CCM - Configuration and Change Management"
+  },
+  {
+    "id": "frk_ct_42505af2475d5ee08527f39d",
+    "name": "CCM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: CCM - Configuration and Change Management.",
+    "controlFamily": "CCM - Configuration and Change Management"
+  },
+  {
+    "id": "frk_ct_429fca6b4bb99da292a87326",
+    "name": "EDM: Goal 2 - Risks due to external dependencies are identified and managed",
+    "description": "Goal 2 - Risks due to external dependencies are identified and managed. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_42b0e15c1532a28e96aeb46f",
+    "name": "User and Access Management (UM)",
+    "description": "User and Access Management (UM). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_4340ed9c700c839b27c7e1af",
+    "name": "Risk Management (RM)",
+    "description": "Risk Management (RM). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_434bc1485cc4fc5ec41521cd",
+    "name": "3.R Prohibit Connection Of Unauthorized Devices",
+    "description": "3.R Prohibit Connection Of Unauthorized Devices: Prevent malicious actors from achieving initial access or data exfiltration via unauthorized portable media devices.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_45041632f545ca27402dbca3",
+    "name": "3.L Enable Email Security",
+    "description": "3.L Enable Email Security: Reduce risk from common email-based threats, such as spoofing, phishing, and interception.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_452b3b6bd6580f794acb85d4",
+    "name": "Design and Architectural Diversity (Diversity)",
+    "description": "Design and Architectural Diversity. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_45a502fe269553d2db6fc4cc",
+    "name": "EDM: Goal 3 - Relationships with external entities are formally established and maintained",
+    "description": "Goal 3 - Relationships with external entities are formally established and maintained. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_4789b038d644531a9d1c04d0",
+    "name": "3.M Disable Autorun & Macros By Default",
+    "description": "3.M Disable Autorun & Macros By Default: Reduce the risk from embedded macros and similar executable code.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_48b685ac94578e841ce2fa17",
+    "name": "Replication (Redundancy)",
+    "description": "Replication. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_4a275634436ecaf61621e1cb",
+    "name": "3.O Maintain System Backups & Restoration Ability",
+    "description": "3.O Maintain System Backups & Restoration Ability: Organizations reduce data loss and service disruption risks while efficiently managing, responding to, and recovering from incidents to maintain continuous service delivery.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_4a52319a6485d97cf7f46d72",
+    "name": "3.E Monitor Unsuccessful (Automated) Login Attempts",
+    "description": "3.E Monitor Unsuccessful (Automated) Login Attempts: Protect organizations from automated, credential-based attacks.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_4bf2a4cd9575822950e81fba",
+    "name": "Information Diversity (Diversity)",
+    "description": "Information Diversity. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_4c971a005f2a7907bd103efe",
+    "name": "3.Q Maintain Log Collection & Storage",
+    "description": "3.Q Maintain Log Collection & Storage: Enhance visibility to detect and respond to cyber incidents while ensuring security logs are protected from unauthorized access and tampering.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_4d51ad22576c0b707f90a55a",
+    "name": "Obfuscation (Deception)",
+    "description": "Obfuscation. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_4d75c8ea4b184fc2a8e47280",
+    "name": "PI: Goal 1 - Post-incident review and analysis is conducted as appropriate",
+    "description": "Goal 1 - Post-incident review and analysis is conducted as appropriate. Practices: see the requirements linked to this control. Family: PI - Post-Incident Analysis and Testing.",
+    "controlFamily": "PI - Post-Incident Analysis and Testing"
+  },
+  {
+    "id": "frk_ct_4e8489d9c342a0fd8016c6c4",
+    "name": "RMG: Goal 5 – Supplier transitions are managed",
+    "description": "Goal 5 – Supplier transitions are managed. Practices: see the requirements linked to this control. Family: RMG - Relationship Management and Governance - MIL-1.",
+    "controlFamily": "RMG - Relationship Management and Governance - MIL-1"
+  },
+  {
+    "id": "frk_ct_4e9086981909b51ac2e47d4f",
+    "name": "Personnel activity is monitored to detect potential cybersecurity events (Security Continuous Monitoring)",
+    "description": "Personnel activity is monitored to detect potential cybersecurity events. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_4ea031b3403af4da7d41a6d7",
+    "name": "Governance and risk management processes address cybersecurity risks (Governance)",
+    "description": "Governance and risk management processes address cybersecurity risks. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_4ef221b4b7b65c9dbc2106fd",
+    "name": "Dynamic Resource Awareness (Contextual Awareness)",
+    "description": "Dynamic Resource Awareness. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_4f936957563c359206e064ad",
+    "name": "SCM: Goal 2 - Service continuity plans are reviewed to resolve conflicts between plans",
+    "description": "Goal 2 - Service continuity plans are reviewed to resolve conflicts between plans. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_4fa7da7aea8744db00e35502",
+    "name": "Detection activities comply with all applicable requirements (Detection Processes)",
+    "description": "Detection activities comply with all applicable requirements. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_504736d898fa83c67995644e",
+    "name": "Protections against data leaks are implemented (Data Security)",
+    "description": "Protections against data leaks are implemented. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_5081f96b3ec8c1499e499df7",
+    "name": "Dynamic Reconfiguration (Adaptive Response)",
+    "description": "Dynamic Reconfiguration. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_5197b400a3664367bf9c0061",
+    "name": "SCM: Goal 4 - Service continuity plans are executed and reviewed",
+    "description": "Goal 4 - Service continuity plans are executed and reviewed. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_51dcda162ec1ca29a0aef8f7",
+    "name": "The development and testing environment(s) are separate from the production environment (Data Security)",
+    "description": "The development and testing environment(s) are separate from the production environment. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_52a2d0481bd376912068506e",
+    "name": "Response plans (Incident Response and Business Continuity) and recovery plans (Incident Recovery and Disaster Recovery) are in place and managed (Information Protection)",
+    "description": "Response plans (Incident Response and Business Continuity) and recovery plans (Incident Recovery and Disaster Recovery) are in place and managed. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_52c6cb178b7400d3610622f0",
+    "name": "RM: Goal 2 - Risk tolerances are identified, and the focus of risk management activities is established",
+    "description": "Goal 2 - Risk tolerances are identified, and the focus of risk management activities is established. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_52e429c04243065ae94e5e75",
+    "name": "Trust-Based Privilege Management (Privilege Restriction)",
+    "description": "Trust-Based Privilege Management. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_53fe71580046959233194b15",
+    "name": "CM: Goal 4 - The internal control system is assessed to ensure control objectives are met",
+    "description": "Goal 4 - The internal control system is assessed to ensure control objectives are met. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_5603b69021c459751cb41a23",
+    "name": "External service provider activity is monitored to detect potential cybersecurity events (Security Continuous Monitoring)",
+    "description": "External service provider activity is monitored to detect potential cybersecurity events. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_560cadad7c190087820b9339",
+    "name": "Cyber threat intelligence is received from information sharing forums and sources (Risk Assessment)",
+    "description": "Cyber threat intelligence is received from information sharing forums and sources. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_56beadd4ae1e7263c43a5308",
+    "name": "Information is shared consistent with response plans (Communications)",
+    "description": "Information is shared consistent with response plans. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_56ec1b6ff5fd0e364c6c2849",
+    "name": "Network Perimeter Monitoring (NM)",
+    "description": "Network Perimeter Monitoring (NM). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_57b8bc041d2482758b420128",
+    "name": "Resilience requirements to support delivery of critical services are established for all operating states (e.g. under duress/attack, during recovery, normal operations) (Business Environment)",
+    "description": "Resilience requirements to support delivery of critical services are established for all operating states (e.g. under duress/attack, during recovery, normal operations). Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_57cf4dc4b48c11778aaaa477",
+    "name": "SA: Goal 1 - Threat monitoring is performed",
+    "description": "Goal 1 - Threat monitoring is performed. Practices: see the requirements linked to this control. Family: SA - Situational Awareness.",
+    "controlFamily": "SA - Situational Awareness"
+  },
+  {
+    "id": "frk_ct_5850470a0df30918277c9b29",
+    "name": "Risk management processes are established, managed, and agreed to by organizational stakeholders (Risk Management Strategy)",
+    "description": "Risk management processes are established, managed, and agreed to by organizational stakeholders. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_5858fc3d9b31f1f3e51e7da3",
+    "name": "SCM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_58d28c04bd955504b601a9bf",
+    "name": "RM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_5907b5a2fb9f86935ca0d2ed",
+    "name": "IM: Goal 3 - Incidents are declared and analyzed",
+    "description": "Goal 3 - Incidents are declared and analyzed. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_590c906b9b292c28ad9cda4c",
+    "name": "RMG: Goal 4 – Change and capacity management are applied to external dependencies",
+    "description": "Goal 4 – Change and capacity management are applied to external dependencies. Practices: see the requirements linked to this control. Family: RMG - Relationship Management and Governance - MIL-1.",
+    "controlFamily": "RMG - Relationship Management and Governance - MIL-1"
+  },
+  {
+    "id": "frk_ct_5b141d71d41ae9f0a1fffb63",
+    "name": "3.D Revoke Credentials For Departing Staff",
+    "description": "3.D Revoke Credentials For Departing Staff: Prevent unauthorized access to organizational accounts or resources by former staff.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_5bbe834dcf71f03d9b42088e",
+    "name": "IM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_5c4235ed6cc4df2e237afdb7",
+    "name": "Roles and responsibilities for detection are well defined to ensure accountability (Detection Processes)",
+    "description": "Roles and responsibilities for detection are well defined to ensure accountability. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_5d62aafb86ffdf83b40f60e3",
+    "name": "Priorities for organizational mission, objectives, and activities are established and communicated (Business Environment)",
+    "description": "Priorities for organizational mission, objectives, and activities are established and communicated. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_5d8277fea3a958daabed453d",
+    "name": "Distributed Functionality (Dynamic Positioning)",
+    "description": "Distributed Functionality. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_5db0256665ef9ae271823570",
+    "name": "VM: Goal 2 - A process for identifying and analyzing vulnerabilities is established and maintained",
+    "description": "Goal 2 - A process for identifying and analyzing vulnerabilities is established and maintained. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_5ecfd5d8e811ded67d1ac3e2",
+    "name": "Coordination with stakeholders occurs consistent with response plans (Communications)",
+    "description": "Coordination with stakeholders occurs consistent with response plans. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_5ee8dc7d46f3da200980822f",
+    "name": "PR: Goal 3 - Interfaces for the exchange of incident management information are defined",
+    "description": "Goal 3 - Interfaces for the exchange of incident management information are defined. Practices: see the requirements linked to this control. Family: PR - Prepare for Incident Response.",
+    "controlFamily": "PR - Prepare for Incident Response"
+  },
+  {
+    "id": "frk_ct_60f3746c9a4be1434faad984",
+    "name": "E-mail Protection Systems: Phishing Simulations",
+    "description": "Phishing Simulations requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: E-mail Protection Systems.",
+    "controlFamily": "E-mail Protection Systems"
+  },
+  {
+    "id": "frk_ct_6183e902d5e5b643555edf54",
+    "name": "5.A Establish Incident Communication Procedures",
+    "description": "5.A Establish Incident Communication Procedures: Coordinate crisis communication methods between internal and external organization partners and critical suppliers.",
+    "controlFamily": "Respond"
+  },
+  {
+    "id": "frk_ct_61fe77124e2c065d40899cda",
+    "name": "A baseline configuration of information technology/industrial control systems is created and maintained incorporating security principles (e.g. concept of least functionality) (Information Protection)",
+    "description": "A baseline configuration of information technology/industrial control systems is created and maintained incorporating security principles (e.g. concept of least functionality). Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_621cd72244249322fb53eaea",
+    "name": "RM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_62b91b0fb0a4e09537a1dd3f",
+    "name": "Service Level Agreements (SLA)",
+    "description": "Service Level Agreements (SLA) requirements of American Water Works Association v4.0. Family: Service Level Agreements (SLA).",
+    "controlFamily": "Service Level Agreements (SLA)"
+  },
+  {
+    "id": "frk_ct_6308270a78c36a38212ecb99",
+    "name": "Detection processes are continuously improved (Detection Processes)",
+    "description": "Detection processes are continuously improved. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_634f5d1b1ba410ad7420f145",
+    "name": "Incident Response",
+    "description": "Incident Response requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Incident Response.",
+    "controlFamily": "Incident Response"
+  },
+  {
+    "id": "frk_ct_637cdbbae2f6091d47ac665f",
+    "name": "2.C Obtain Independent Validation Of Cybersecurity Controls",
+    "description": "2.C Obtain Independent Validation Of Cybersecurity Controls: Validate that implemented security controls are properly configured and working as intended.",
+    "controlFamily": "Identify"
+  },
+  {
+    "id": "frk_ct_64a7385d5b23774b7b2a76b5",
+    "name": "Misdirection (Deception)",
+    "description": "Misdirection. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_67a0814013fea7afd2b98857",
+    "name": "Protected Backup and Restore (Redundancy)",
+    "description": "Protected Backup and Restore. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_68a97ba7af3cafd4e5d4d6fd",
+    "name": "3.S Secure Internet-Facing Devices",
+    "description": "3.S Secure Internet-Facing Devices: Unauthorized users cannot gain an initial system foothold by exploiting known weaknesses in internet-facing assets.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_694f30fc66c493d6b1a28400",
+    "name": "VM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_6b6a81f6834a89ccae7d80df",
+    "name": "IR: Goal 2 - Incidents are analyzed and correlated to determine a response",
+    "description": "Goal 2 - Incidents are analyzed and correlated to determine a response. Practices: see the requirements linked to this control. Family: IR - Incident Declaration, Handling, and Response.",
+    "controlFamily": "IR - Incident Declaration, Handling, and Response"
+  },
+  {
+    "id": "frk_ct_6cc2612dead94f64ca4486ae",
+    "name": "Endpoint Protection Systems: Basic Endpoint Protection Controls",
+    "description": "Basic Endpoint Protection Controls requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Endpoint Protection Systems.",
+    "controlFamily": "Endpoint Protection Systems"
+  },
+  {
+    "id": "frk_ct_6cdb06bed547d25cdaee14db",
+    "name": "Processes are established to receive, analyze and respond to vulnerabilities disclosed to the organization from internal and external sources (e.g. internal testing, security bulletins, or security researchers) (Analysis)",
+    "description": "Processes are established to receive, analyze and respond to vulnerabilities disclosed to the organization from internal and external sources (e.g. internal testing, security bulletins, or security researchers). Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_6dc1ccfd5864bf3b0cf50b9e",
+    "name": "CM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_6e98b3be79f8f4929360b531",
+    "name": "Behavior Validation (Sustained Integrity)",
+    "description": "Behavior Validation. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_6e98da9de77977c261736f07",
+    "name": "Cybersecurity roles and responsibilities are coordinated and aligned with internal roles and external partners (Governance)",
+    "description": "Cybersecurity roles and responsibilities are coordinated and aligned with internal roles and external partners. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_6f6c7145641e9acade750f71",
+    "name": "CM: Goal 1 - Control objectives are established",
+    "description": "Goal 1 - Control objectives are established. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_6f93be66ba5f53ae87bf01fc",
+    "name": "Data Protection and Loss Prevention: Procedures",
+    "description": "Procedures requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Data Protection and Loss Prevention.",
+    "controlFamily": "Data Protection and Loss Prevention"
+  },
+  {
+    "id": "frk_ct_719a64102ecd4f7d55c7020b",
+    "name": "Voluntary information sharing occurs with external stakeholders to achieve broader cybersecurity situational awareness (Communications)",
+    "description": "Voluntary information sharing occurs with external stakeholders to achieve broader cybersecurity situational awareness. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_722b46b914235bb05aef5ff1",
+    "name": "Access permissions and authorizations are managed, incorporating the principles of least privilege and separation of duties (Identity and Access Control)",
+    "description": "Access permissions and authorizations are managed, incorporating the principles of least privilege and separation of duties. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_72ed4b20a0dd8c7a45dc0033",
+    "name": "2.E Document Network Topology",
+    "description": "2.E Document Network Topology: Respond to incidents and maintain service continuity more efficiently and effectively.",
+    "controlFamily": "Identify"
+  },
+  {
+    "id": "frk_ct_749ad8ea83a9049a0e55087d",
+    "name": "Access Control",
+    "description": "Access Control requirements of American Water Works Association v4.0. Family: Access Control.",
+    "controlFamily": "Access Control"
+  },
+  {
+    "id": "frk_ct_74d8739e3f054f4ece243419",
+    "name": "EDM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_7589afe53f67f24785eeca6d",
+    "name": "AM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_75f2af606af07f92973fed70",
+    "name": "Patch and Update Management (PM)",
+    "description": "Patch and Update Management (PM). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_76082521d7825eaf5be295dd",
+    "name": "CCM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: CCM - Configuration and Change Management.",
+    "controlFamily": "CCM - Configuration and Change Management"
+  },
+  {
+    "id": "frk_ct_769bd0326d7ff2791ef869eb",
+    "name": "Incidents are reported consistent with established criteria (Communications)",
+    "description": "Incidents are reported consistent with established criteria. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_78415873793cbc936e1d3823",
+    "name": "Detection processes are tested (Detection Processes)",
+    "description": "Detection processes are tested. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_796c527302cb20c07bee189a",
+    "name": "MIL: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: MIL - Maturity Indicator Levels.",
+    "controlFamily": "MIL - Maturity Indicator Levels"
+  },
+  {
+    "id": "frk_ct_7a4cafcadb3d2581b2000b5d",
+    "name": "RM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_7a9f42526d93c4cab8b01ebd",
+    "name": "3.I Implement Logical/Physical Network Segmentation",
+    "description": "3.I Implement Logical/Physical Network Segmentation: Limiting the impact(s) of a potential breach and preventing adversaries from accessing sensitive data, spaces, and/or critical infrastructure.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_7ad93d41e56209685a29faaa",
+    "name": "Legal and regulatory requirements regarding cybersecurity, including privacy and civil liberties obligations, are understood and managed (Governance)",
+    "description": "Legal and regulatory requirements regarding cybersecurity, including privacy and civil liberties obligations, are understood and managed. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_7b5b02173056c64c73ad3c84",
+    "name": "AM: Goal 5 - Access to assets is managed",
+    "description": "Goal 5 - Access to assets is managed. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_7cd4c37d7b4ceaf49a525732",
+    "name": "E-mail Protection Systems: Education",
+    "description": "Education requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: E-mail Protection Systems.",
+    "controlFamily": "E-mail Protection Systems"
+  },
+  {
+    "id": "frk_ct_7d6a6d0b9d93b404fb209498",
+    "name": "MIL: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: MIL - Maturity Indicator Levels.",
+    "controlFamily": "MIL - Maturity Indicator Levels"
+  },
+  {
+    "id": "frk_ct_7d9945a739b206532a360020",
+    "name": "RF: Goal 3 – Risk management includes external dependencies",
+    "description": "Goal 3 – Risk management includes external dependencies. Practices: see the requirements linked to this control. Family: RF - Relationship Formation - MIL-1.",
+    "controlFamily": "RF - Relationship Formation - MIL-1"
+  },
+  {
+    "id": "frk_ct_7db0bb4ab084e7e07fe062cd",
+    "name": "Response strategies are updated (Improvements)",
+    "description": "Response strategies are updated. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_7f68fba2963fa5d7953933de",
+    "name": "Maintenance and repair of organizational assets are performed and logged, with approved and controlled tools (Maintenance)",
+    "description": "Maintenance and repair of organizational assets are performed and logged, with approved and controlled tools. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_80d00972100062d860994582",
+    "name": "SPS: Goal 3 – Situational awareness extends to external dependencies",
+    "description": "Goal 3 – Situational awareness extends to external dependencies. Practices: see the requirements linked to this control. Family: SPS - Service Protection and Sustainment - MIL-1.",
+    "controlFamily": "SPS - Service Protection and Sustainment - MIL-1"
+  },
+  {
+    "id": "frk_ct_81d2205d76b4d5b1c743ab2a",
+    "name": "Vulnerability scans are performed (Security Continuous Monitoring)",
+    "description": "Vulnerability scans are performed. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_82b028a6bdadc52334f44c06",
+    "name": "3.G Administrators Maintain Separate User And Privileged Accounts",
+    "description": "3.G Administrators Maintain Separate User And Privileged Accounts: Make it harder for threat actors to gain access to administrator or privileged accounts, even if common user accounts are compromised.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_8302b150d1dc1d6e3772278f",
+    "name": "Access Management: Basic Access Management",
+    "description": "Basic Access Management requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Access Management.",
+    "controlFamily": "Access Management"
+  },
+  {
+    "id": "frk_ct_8332cd49a19a178b523523a3",
+    "name": "Backups of information are conducted, maintained, and tested (Information Protection)",
+    "description": "Backups of information are conducted, maintained, and tested. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_837b774e0679bbfee7e1fece",
+    "name": "PI: Goal 2 - The incident detection, handling, and response capability is tested and exercised",
+    "description": "Goal 2 - The incident detection, handling, and response capability is tested and exercised. Practices: see the requirements linked to this control. Family: PI - Post-Incident Analysis and Testing.",
+    "controlFamily": "PI - Post-Incident Analysis and Testing"
+  },
+  {
+    "id": "frk_ct_838156eb031da70f3e80ce48",
+    "name": "RF: Goal 5 – Formal agreements include resilience requirements",
+    "description": "Goal 5 – Formal agreements include resilience requirements. Practices: see the requirements linked to this control. Family: RF - Relationship Formation - MIL-1.",
+    "controlFamily": "RF - Relationship Formation - MIL-1"
+  },
+  {
+    "id": "frk_ct_83e19e6733e5324b014d2825",
+    "name": "Governance and Risk Management",
+    "description": "Governance and Risk Management requirements of American Water Works Association v4.0. Family: Governance and Risk Management.",
+    "controlFamily": "Governance and Risk Management"
+  },
+  {
+    "id": "frk_ct_83efe95322053e2915618e43",
+    "name": "SCM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_84d40e5baefd1d16e190ae8f",
+    "name": "SA: Goal 3 - Threat information is communicated",
+    "description": "Goal 3 - Threat information is communicated. Practices: see the requirements linked to this control. Family: SA - Situational Awareness.",
+    "controlFamily": "SA - Situational Awareness"
+  },
+  {
+    "id": "frk_ct_85ed5a90b86dcb944b016941",
+    "name": "Business Continuity and Disaster Recovery",
+    "description": "Business Continuity and Disaster Recovery requirements of American Water Works Association v4.0. Family: Business Continuity and Disaster Recovery.",
+    "controlFamily": "Business Continuity and Disaster Recovery"
+  },
+  {
+    "id": "frk_ct_865693e7675cf817183b0c09",
+    "name": "E-mail Protection Systems: E-mail System Configuration",
+    "description": "E-mail System Configuration requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: E-mail Protection Systems.",
+    "controlFamily": "E-mail Protection Systems"
+  },
+  {
+    "id": "frk_ct_869c2bf124d353fac3cd18f3",
+    "name": "Users, devices, and other assets are authenticated (e.g., single-factor, multi-factor) commensurate with the risk of the transaction (e.g., individuals’ security and privacy risks and other organizational risks) (Identity and Access Control)",
+    "description": "Users, devices, and other assets are authenticated (e.g., single-factor, multi-factor) commensurate with the risk of the transaction (e.g., individuals’ security and privacy risks and other organizational risks). Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_86f9dad11f5c3c308e424e11",
+    "name": "The organization’s place in critical infrastructure and its industry sector is identified and communicated (Business Environment)",
+    "description": "The organization’s place in critical infrastructure and its industry sector is identified and communicated. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_897efc754658710ab1ff133d",
+    "name": "Asset Management: Decommissioning",
+    "description": "Decommissioning requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Asset Management.",
+    "controlFamily": "Asset Management"
+  },
+  {
+    "id": "frk_ct_89a8115784259b7fef2516f6",
+    "name": "CM: Goal 3 - Control designs are analyzed to ensure they satisfy control objectives",
+    "description": "Goal 3 - Control designs are analyzed to ensure they satisfy control objectives. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_8a47a12f189cae3b941e4208",
+    "name": "Self-Challenge (Coordinated Protection)",
+    "description": "Self-Challenge. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_8a4e4848cfb2f5003e45eb87",
+    "name": "PR: Goal 2 - A documented communication plan is established",
+    "description": "Goal 2 - A documented communication plan is established. Practices: see the requirements linked to this control. Family: PR - Prepare for Incident Response.",
+    "controlFamily": "PR - Prepare for Incident Response"
+  },
+  {
+    "id": "frk_ct_8bd6ba5889d7916d9c8b5729",
+    "name": "Server and Workstation Hardening",
+    "description": "Server and Workstation Hardening requirements of American Water Works Association v4.0. Family: Server and Workstation Hardening.",
+    "controlFamily": "Server and Workstation Hardening"
+  },
+  {
+    "id": "frk_ct_8c8f8430c44043d6e734e876",
+    "name": "Physical devices and systems within the organization are inventoried (Asset Management)",
+    "description": "Physical devices and systems within the organization are inventoried. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_8d65cdcf1a58d059382b3f49",
+    "name": "Cybersecurity roles and responsibilities for the entire workforce and third-party stakeholders (e.g., suppliers, customers, partners) are established (Asset Management)",
+    "description": "Cybersecurity roles and responsibilities for the entire workforce and third-party stakeholders (e.g., suppliers, customers, partners) are established. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_8dfb0274c831c39ca96fe575",
+    "name": "SA: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: SA - Situational Awareness.",
+    "controlFamily": "SA - Situational Awareness"
+  },
+  {
+    "id": "frk_ct_8e5fc4d5bdf6bf5c54ba2c0c",
+    "name": "Privileged users understand their roles and responsibilities (Awareness and Training)",
+    "description": "Privileged users understand their roles and responsibilities. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_90b743373b950c99bf83ec4d",
+    "name": "Remote maintenance of organizational assets is approved, logged, and performed in a manner that prevents unauthorized access (Maintenance)",
+    "description": "Remote maintenance of organizational assets is approved, logged, and performed in a manner that prevents unauthorized access. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_92bc3c2a3a667e7f80742d61",
+    "name": "Telecommunications, Network Security, and Architecture",
+    "description": "Telecommunications, Network Security, and Architecture requirements of American Water Works Association v4.0. Family: Telecommunications, Network Security, and Architecture.",
+    "controlFamily": "Telecommunications, Network Security, and Architecture"
+  },
+  {
+    "id": "frk_ct_92edbeecc389ccbcd4b85e5a",
+    "name": "SA: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: SA - Situational Awareness.",
+    "controlFamily": "SA - Situational Awareness"
+  },
+  {
+    "id": "frk_ct_946b21e04df4e36fe4a9095c",
+    "name": "AM: Goal 3 - The relationship between assets and the services they support is established",
+    "description": "Goal 3 - The relationship between assets and the services they support is established. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_94d8a39a05f3c364b571b4c3",
+    "name": "EH: Goal 2 - Events are detected",
+    "description": "Goal 2 - Events are detected. Practices: see the requirements linked to this control. Family: EH - Event Detection and Handling.",
+    "controlFamily": "EH - Event Detection and Handling"
+  },
+  {
+    "id": "frk_ct_967c05b5310e103eebbc66ae",
+    "name": "RF: Goal 6 – Technology asset supply chain risks are managed",
+    "description": "Goal 6 – Technology asset supply chain risks are managed. Practices: see the requirements linked to this control. Family: RF - Relationship Formation - MIL-1.",
+    "controlFamily": "RF - Relationship Formation - MIL-1"
+  },
+  {
+    "id": "frk_ct_97f7ea7c54339af88c6846fc",
+    "name": "RMG: Goal 7 – External entity access to acquirer assets is managed",
+    "description": "Goal 7 – External entity access to acquirer assets is managed. Practices: see the requirements linked to this control. Family: RMG - Relationship Management and Governance - MIL-1.",
+    "controlFamily": "RMG - Relationship Management and Governance - MIL-1"
+  },
+  {
+    "id": "frk_ct_9b3de91bb290a330e6216a94",
+    "name": "Temporal Unpredictability (Unpredictability)",
+    "description": "Temporal Unpredictability. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_9b699c8ea492a2af78df9dce",
+    "name": "OC: Goal 3 - Incident Management Function is integrated with the organization's service continuity program",
+    "description": "Goal 3 - Incident Management Function is integrated with the organization's service continuity program. Practices: see the requirements linked to this control. Family: OC - Integrate Organizational Capabilities.",
+    "controlFamily": "OC - Integrate Organizational Capabilities"
+  },
+  {
+    "id": "frk_ct_9d248b8f3357a88eea7ab728",
+    "name": "Identities are proofed and bound to credentials and asserted in interactions (Identity and Access Control)",
+    "description": "Identities are proofed and bound to credentials and asserted in interactions. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_9d5308c1a8b87ecd05f3aa30",
+    "name": "EDM: Goal 1 - External dependencies are identified and prioritized to ensure sustained operation of high-value services",
+    "description": "Goal 1 - External dependencies are identified and prioritized to ensure sustained operation of high-value services. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_9da1a74c2305c0d2581b8ae4",
+    "name": "Event data are collected and correlated from multiple sources and sensors (Anomalies and Events)",
+    "description": "Event data are collected and correlated from multiple sources and sensors. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_9e68fe5d4b8898a64f856b31",
+    "name": "Resources (e.g., hardware, devices, data, time, personnel, and software) are prioritized based on their classification, criticality, and business value (Asset Management)",
+    "description": "Resources (e.g., hardware, devices, data, time, personnel, and software) are prioritized based on their classification, criticality, and business value. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_a0147fd2b80b55b7558d92d3",
+    "name": "VM: Goal 1 - Preparation for vulnerability analysis and resolution activities is conducted",
+    "description": "Goal 1 - Preparation for vulnerability analysis and resolution activities is conducted. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_a01f54f2167862d5895eab22",
+    "name": "Operations Security",
+    "description": "Operations Security requirements of American Water Works Association v4.0. Family: Operations Security.",
+    "controlFamily": "Operations Security"
+  },
+  {
+    "id": "frk_ct_a085df10905763f7c904677b",
+    "name": "Response and recovery planning and testing are conducted with suppliers and third-party providers (Supply Chain Risk Management)",
+    "description": "Response and recovery planning and testing are conducted with suppliers and third-party providers. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_a2115c73bb28f18b51c39bd2",
+    "name": "Non-Persistent Services (Non-Persistence)",
+    "description": "Non-Persistent Services. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_a23fa4429cccc8226e7a92d2",
+    "name": "Cybersecurity is included in human resources practices (e.g., deprovisioning, personnel screening) (Information Protection)",
+    "description": "Cybersecurity is included in human resources practices (e.g., deprovisioning, personnel screening). Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_a25891f7453d93ac61572fc5",
+    "name": "Integrity checking mechanisms are used to verify software, firmware, and information integrity (Data Security)",
+    "description": "Integrity checking mechanisms are used to verify software, firmware, and information integrity. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_a2ce35081918c3455c6b95d2",
+    "name": "Vulnerability Management",
+    "description": "Vulnerability Management requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Vulnerability Management.",
+    "controlFamily": "Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_a32c75c82999f1d3a696e513",
+    "name": "SCM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_a33d80ebe713c8dea82cc6fd",
+    "name": "TA: Goal 2 - Awareness and training activities are conducted",
+    "description": "Goal 2 - Awareness and training activities are conducted. Practices: see the requirements linked to this control. Family: TA - Training and Awareness.",
+    "controlFamily": "TA - Training and Awareness"
+  },
+  {
+    "id": "frk_ct_a4256446bfe6602b3353b457",
+    "name": "Data Protection and Loss Prevention: Education",
+    "description": "Education requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Data Protection and Loss Prevention.",
+    "controlFamily": "Data Protection and Loss Prevention"
+  },
+  {
+    "id": "frk_ct_a689d3cd1c6f3b3005430ea4",
+    "name": "IM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: IM - Incident Management.",
+    "controlFamily": "IM - Incident Management"
+  },
+  {
+    "id": "frk_ct_a6ed5b733a5a636a6b623d25",
+    "name": "MIL: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: MIL - Maturity Indicator Levels.",
+    "controlFamily": "MIL - Maturity Indicator Levels"
+  },
+  {
+    "id": "frk_ct_a82f26a83c00092f437d90a0",
+    "name": "6.A Execute Incident Recovery Plan",
+    "description": "6.A Execute Incident Recovery Plan: Organizations are capable of safely and effectively recovering from a cybersecurity incident.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_a912b53270896fcaccf10b26",
+    "name": "Recovery plans incorporate lessons learned (Improvements)",
+    "description": "Recovery plans incorporate lessons learned. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  },
+  {
+    "id": "frk_ct_a9a34cdc285744a218c10504",
+    "name": "TA: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: TA - Training and Awareness.",
+    "controlFamily": "TA - Training and Awareness"
+  },
+  {
+    "id": "frk_ct_a9d4a44900bafb0bbf7ef3b1",
+    "name": "3.H Implement The Principles Of Least Privilege",
+    "description": "3.H Implement The Principles Of Least Privilege: Minimizes unauthorized access to systems, data, and processes, reduces human error, and prevents malicious actions; helping ensure the organization's sensitive information and critical assets remain protected.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_ac4065afe7b760e0fab8f195",
+    "name": "PR: Goal 5 - Incident management personnel are trained",
+    "description": "Goal 5 - Incident management personnel are trained. Practices: see the requirements linked to this control. Family: PR - Prepare for Incident Response.",
+    "controlFamily": "PR - Prepare for Incident Response"
+  },
+  {
+    "id": "frk_ct_ac542331db839b661a4a8385",
+    "name": "EH: Goal 3 - Events are analyzed, processed, and tracked",
+    "description": "Goal 3 - Events are analyzed, processed, and tracked. Practices: see the requirements linked to this control. Family: EH - Event Detection and Handling.",
+    "controlFamily": "EH - Event Detection and Handling"
+  },
+  {
+    "id": "frk_ct_ac547bd9bca4f83964536859",
+    "name": "5.B Establish Incident Reporting Procedures",
+    "description": "5.B Establish Incident Reporting Procedures: CISA and other organizations are better able to provide assistance or understand the broader scope of a cyber incident.",
+    "controlFamily": "Respond"
+  },
+  {
+    "id": "frk_ct_ad4d9d002981184b5e374d38",
+    "name": "Event detection information is communicated (Detection Processes)",
+    "description": "Event detection information is communicated. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_ae6f36a1bbcad0ef717a4239",
+    "name": "VM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_b1fae7e1519c8fc121628cb3",
+    "name": "Suppliers and third-party partners are routinely assessed using audits, test results, or other forms of evaluations to confirm they are meeting their contractual obligations (Supply Chain Risk Management)",
+    "description": "Suppliers and third-party partners are routinely assessed using audits, test results, or other forms of evaluations to confirm they are meeting their contractual obligations. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_b2886f25c58101a33df933ec",
+    "name": "AM: Goal 6 - Information assets are categorized and managed to ensure the sustainment and protection of the critical service",
+    "description": "Goal 6 - Information assets are categorized and managed to ensure the sustainment and protection of the critical service. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_b301b815567bebb65d5cd154",
+    "name": "SA: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: SA - Situational Awareness.",
+    "controlFamily": "SA - Situational Awareness"
+  },
+  {
+    "id": "frk_ct_b43f6c356bca28076b2b9930",
+    "name": "PR: Goal 1 - A process to detect and analyze events, identify incidents, and determine an organizational response is established",
+    "description": "Goal 1 - A process to detect and analyze events, identify incidents, and determine an organizational response is established. Practices: see the requirements linked to this control. Family: PR - Prepare for Incident Response.",
+    "controlFamily": "PR - Prepare for Incident Response"
+  },
+  {
+    "id": "frk_ct_b6489dc838c7aaa473b60099",
+    "name": "Response and recovery plans are tested (Information Protection)",
+    "description": "Response and recovery plans are tested. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_b653db3ac9f60123c03de9ad",
+    "name": "Forensics are performed (Analysis)",
+    "description": "Forensics are performed. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_b68d5c795e3147d74f71e27b",
+    "name": "Orchestration (Coordinated Protection)",
+    "description": "Orchestration. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_b7de23dd5f98adbc1cab5fd6",
+    "name": "MIL: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: MIL - Maturity Indicator Levels.",
+    "controlFamily": "MIL - Maturity Indicator Levels"
+  },
+  {
+    "id": "frk_ct_b85c9e660acdddbfe89321bd",
+    "name": "Data is destroyed according to policy (Information Protection)",
+    "description": "Data is destroyed according to policy. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_b8d08db5a0ce0d9977ef0390",
+    "name": "Personnel know their roles and order of operations when a response is needed (Communications)",
+    "description": "Personnel know their roles and order of operations when a response is needed. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_b8f8d339c3775bc14a537706",
+    "name": "The organization’s role in the supply chain is identified and communicated (Business Environment)",
+    "description": "The organization’s role in the supply chain is identified and communicated. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_b99eafdc665926b9b60d595f",
+    "name": "OC: Goal 4 - Incident Management Function is integrated with the organization's threat monitoring program",
+    "description": "Goal 4 - Incident Management Function is integrated with the organization's threat monitoring program. Practices: see the requirements linked to this control. Family: OC - Integrate Organizational Capabilities.",
+    "controlFamily": "OC - Integrate Organizational Capabilities"
+  },
+  {
+    "id": "frk_ct_ba2a87a42165642123273f75",
+    "name": "Network Management: Physical Security and Guest Access",
+    "description": "Physical Security and Guest Access requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Network Management.",
+    "controlFamily": "Network Management"
+  },
+  {
+    "id": "frk_ct_bad90e48353696470599a5d2",
+    "name": "OC: Goal 1 - The Incident Management Function is integrated with the organization's change management program",
+    "description": "Goal 1 - The Incident Management Function is integrated with the organization's change management program. Practices: see the requirements linked to this control. Family: OC - Integrate Organizational Capabilities.",
+    "controlFamily": "OC - Integrate Organizational Capabilities"
+  },
+  {
+    "id": "frk_ct_bbe2375f0ac656fe5e22ec16",
+    "name": "Removable media is protected and its use restricted according to policy (Protective Technology)",
+    "description": "Removable media is protected and its use restricted according to policy. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_bc523618217b0fe5cf0044ca",
+    "name": "Response plans incorporate lessons learned (Improvements)",
+    "description": "Response plans incorporate lessons learned. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_bc8505f4ef805a5f186417fa",
+    "name": "Cybersecurity Policies: Policies",
+    "description": "Policies requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Cybersecurity Policies.",
+    "controlFamily": "Cybersecurity Policies"
+  },
+  {
+    "id": "frk_ct_bc9d7e899a9c649cc2ead64c",
+    "name": "AM: Goal 1 - Services are identified and prioritized",
+    "description": "Goal 1 - Services are identified and prioritized. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_bd7a3f1be3891ffa8ec3f2af",
+    "name": "VM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: VM - Vulnerability Management.",
+    "controlFamily": "VM - Vulnerability Management"
+  },
+  {
+    "id": "frk_ct_bde81ef0df16ab2422eb0527",
+    "name": "RM: Goal 5 - Risks to assets and services are mitigated and controlled",
+    "description": "Goal 5 - Risks to assets and services are mitigated and controlled. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_be90fc8edc62d8151bf23709",
+    "name": "All users are informed and trained (Awareness and Training)",
+    "description": "All users are informed and trained. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_bf8c6e694638ba29e8b7d2d2",
+    "name": "RMG: Goal 1 – External dependencies are identified and prioritized",
+    "description": "Goal 1 – External dependencies are identified and prioritized. Practices: see the requirements linked to this control. Family: RMG - Relationship Management and Governance - MIL-1.",
+    "controlFamily": "RMG - Relationship Management and Governance - MIL-1"
+  },
+  {
+    "id": "frk_ct_c17d04b67f971a96d74c731f",
+    "name": "Incident Response (IR)",
+    "description": "Incident Response (IR). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_c1ecda88e9df9479fcb479b7",
+    "name": "Tainting (Deception)",
+    "description": "Tainting. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_c2120d3337e6ca312e5fb387",
+    "name": "Newly identified vulnerabilities are mitigated or documented as accepted risks (Mitigation)",
+    "description": "Newly identified vulnerabilities are mitigated or documented as accepted risks. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_c2e98bfd2c9d687b31320f07",
+    "name": "PR: Goal 4 - External dependencies on which the incident management function depends are managed",
+    "description": "Goal 4 - External dependencies on which the incident management function depends are managed. Practices: see the requirements linked to this control. Family: PR - Prepare for Incident Response.",
+    "controlFamily": "PR - Prepare for Incident Response"
+  },
+  {
+    "id": "frk_ct_c431bebabe192b9255d0ba17",
+    "name": "TA: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: TA - Training and Awareness.",
+    "controlFamily": "TA - Training and Awareness"
+  },
+  {
+    "id": "frk_ct_c59748098e428f9ea8c49efc",
+    "name": "Incidents are mitigated (Mitigation)",
+    "description": "Incidents are mitigated. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_c597e99631fb5be917d01153",
+    "name": "AM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_c68c26f1356aa37febe35c5d",
+    "name": "Non-Persistent Information (Non-Persistence)",
+    "description": "Non-Persistent Information. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_c6cf82a671dd54f74ce0ff16",
+    "name": "SCM: Goal 1 - Service continuity plans for high-value services are developed",
+    "description": "Goal 1 - Service continuity plans for high-value services are developed. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_c708c7b67f4dd5435910f3f7",
+    "name": "1.A Establish Cybersecurity Responsibilities",
+    "description": "1.A Establish Cybersecurity Responsibilities: Roles, responsibilities, and authorities related to the organization's cybersecurity program are established, communicated, enforced, and aligned within the organization and external partners.",
+    "controlFamily": "Govern"
+  },
+  {
+    "id": "frk_ct_c806b4561204b845fac827e7",
+    "name": "3.K Utilize Strong Encryption",
+    "description": "3.K Utilize Strong Encryption: Encryption is deployed to maintain confidentiality and integrity of sensitive data across the organization's network to protect from unauthorized access.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_c8ec2af3929830d803f8631f",
+    "name": "The impact of the incident is understood (Analysis)",
+    "description": "The impact of the incident is understood. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_c9abeb68f2d3cef251b7ec8d",
+    "name": "SCM: Goal 3 - Service continuity plans are tested to ensure they meet their stated objectives",
+    "description": "Goal 3 - Service continuity plans are tested to ensure they meet their stated objectives. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_ca793c47661674eee6315e8f",
+    "name": "Detected events (incidents) are analyzed to understand attack targets and methods (Anomalies and Events)",
+    "description": "Detected events (incidents) are analyzed to understand attack targets and methods. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_ca9467bf25b70c5d2444cd80",
+    "name": "3.P Maintain Hardware & Software Approval Process",
+    "description": "3.P Maintain Hardware & Software Approval Process: Increase visibility into deployed technology assets and reduce the likelihood of breach by users installing unapproved hardware, firmware, or software.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_cb3ce7f6a6246384956d161b",
+    "name": "AM: Goal 2 - Assets are inventoried, and the authority and responsibility for these assets is established",
+    "description": "Goal 2 - Assets are inventoried, and the authority and responsibility for these assets is established. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_cb7b4a77a9cbce415b6c8bd7",
+    "name": "PS: Goal 1 - The Incident Management Function's assets are protected and sustained",
+    "description": "Goal 1 - The Incident Management Function's assets are protected and sustained. Practices: see the requirements linked to this control. Family: PS - Protect and Sustain the Incident Management Function.",
+    "controlFamily": "PS - Protect and Sustain the Incident Management Function"
+  },
+  {
+    "id": "frk_ct_cde3e681e8e17a276d0fba0d",
+    "name": "CCM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: CCM - Configuration and Change Management.",
+    "controlFamily": "CCM - Configuration and Change Management"
+  },
+  {
+    "id": "frk_ct_cef0c43096b05119ff74cf69",
+    "name": "Impact of events is determined (Anomalies and Events)",
+    "description": "Impact of events is determined. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_d1433e88b9a555e111631cbc",
+    "name": "1.D Supply Chain Incident Reporting & Vulnerability Disclosure",
+    "description": "1.D Supply Chain Incident Reporting & Vulnerability Disclosure: Organizations more rapidly learn about and respond to known incidents or breaches across vendors and service providers.",
+    "controlFamily": "Govern"
+  },
+  {
+    "id": "frk_ct_d1572ba709e500512732d22d",
+    "name": "Phishing Prevention and Awareness (PP)",
+    "description": "Phishing Prevention and Awareness (PP). Practices: see the requirements linked to this control. Family: Ransomware Readiness Assessment.",
+    "controlFamily": "Ransomware Readiness Assessment"
+  },
+  {
+    "id": "frk_ct_d1e2c01f9b3cb00a0619fd52",
+    "name": "Audit/log records are determined, documented, implemented, and reviewed in accordance with policy (Protective Technology)",
+    "description": "Audit/log records are determined, documented, implemented, and reviewed in accordance with policy. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_d1ea813a5af6c7381a7bddd7",
+    "name": "Physical and cybersecurity personnel understand their roles and responsibilities (Awareness and Training)",
+    "description": "Physical and cybersecurity personnel understand their roles and responsibilities. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_d218abb3e9906071795236c5",
+    "name": "Application Security",
+    "description": "Application Security requirements of American Water Works Association v4.0. Family: Application Security.",
+    "controlFamily": "Application Security"
+  },
+  {
+    "id": "frk_ct_d2b0bff457bd13dde1200f6e",
+    "name": "Surplus Capacity (Redundancy)",
+    "description": "Surplus Capacity. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_d2b2ea17dbafc3a98da69b35",
+    "name": "Design Diversity (Diversity)",
+    "description": "Design Diversity. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_d32a16b164b9a16c6e2a0433",
+    "name": "RM: Goal 3 - Risks are identified",
+    "description": "Goal 3 - Risks are identified. Practices: see the requirements linked to this control. Family: RM - Risk Management.",
+    "controlFamily": "RM - Risk Management"
+  },
+  {
+    "id": "frk_ct_d73cb5b1c17593864fe84868",
+    "name": "EDM: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_d7e1d17927f580473a63e10a",
+    "name": "Data-in-transit is protected (Data Security)",
+    "description": "Data-in-transit is protected. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_d89265d8037426894b167cb8",
+    "name": "RF: Goal 2 – Forming relationships with external entities is planned",
+    "description": "Goal 2 – Forming relationships with external entities is planned. Practices: see the requirements linked to this control. Family: RF - Relationship Formation - MIL-1.",
+    "controlFamily": "RF - Relationship Formation - MIL-1"
+  },
+  {
+    "id": "frk_ct_d930f7d7ef1001bc30048b5b",
+    "name": "Attribute-Based Usage Restriction (Privilege Restriction)",
+    "description": "Attribute-Based Usage Restriction. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_da8ab2e4b7c42c04431b518b",
+    "name": "Data-at-rest is protected (Data Security)",
+    "description": "Data-at-rest is protected. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_daa5b532bb7b65dbbff52897",
+    "name": "Incidents are contained (Mitigation)",
+    "description": "Incidents are contained. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_db43a5244e760df7f6486cab",
+    "name": "CM: MIL3 - Managed",
+    "description": "MIL3 - Managed. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_dd1e755616247620b8dd63bf",
+    "name": "Asset Management: Inventory",
+    "description": "Inventory requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Asset Management.",
+    "controlFamily": "Asset Management"
+  },
+  {
+    "id": "frk_ct_dd28c2975ad6ebd492e56838",
+    "name": "Contextual Unpredictability (Unpredictability)",
+    "description": "Contextual Unpredictability. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_deb436bc2c959d434b614f36",
+    "name": "Incident Response: ISAC/ISAO Participation",
+    "description": "ISAC/ISAO Participation requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Incident Response.",
+    "controlFamily": "Incident Response"
+  },
+  {
+    "id": "frk_ct_debbd48b0cb07a6770e64e9c",
+    "name": "OC: Goal 2 - The Incident Management Function is able to leverage the organization's vulnerability analysis and resolution activities",
+    "description": "Goal 2 - The Incident Management Function is able to leverage the organization's vulnerability analysis and resolution activities. Practices: see the requirements linked to this control. Family: OC - Integrate Organizational Capabilities.",
+    "controlFamily": "OC - Integrate Organizational Capabilities"
+  },
+  {
+    "id": "frk_ct_dee41530259b6746229667e8",
+    "name": "EDM: Goal 5 - Dependencies on public services and infrastructure service providers are identified",
+    "description": "Goal 5 - Dependencies on public services and infrastructure service providers are identified. Practices: see the requirements linked to this control. Family: EDM - External Dependencies Management.",
+    "controlFamily": "EDM - External Dependencies Management"
+  },
+  {
+    "id": "frk_ct_e1c1b001e95e93aeb1280a1d",
+    "name": "Organizational communication and data flows are mapped (Asset Management)",
+    "description": "Organizational communication and data flows are mapped. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_e1dad9e584c3077caacbcd1f",
+    "name": "SPS: Goal 2 – Planning and controls are maintained and updated",
+    "description": "Goal 2 – Planning and controls are maintained and updated. Practices: see the requirements linked to this control. Family: SPS - Service Protection and Sustainment - MIL-1.",
+    "controlFamily": "SPS - Service Protection and Sustainment - MIL-1"
+  },
+  {
+    "id": "frk_ct_e31f3b7ec8a11be7144a7439",
+    "name": "Calibrated Defense-in-Depth (Coordinated Protection)",
+    "description": "Calibrated Defense-in-Depth. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_e3631c46904115470186c67f",
+    "name": "Dynamic Privileges (Privilege Restriction)",
+    "description": "Dynamic Privileges. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_e447d23f07f46840cc61e090",
+    "name": "CCM: Goal 2 - The integrity of technology and information assets is managed",
+    "description": "Goal 2 - The integrity of technology and information assets is managed. Practices: see the requirements linked to this control. Family: CCM - Configuration and Change Management.",
+    "controlFamily": "CCM - Configuration and Change Management"
+  },
+  {
+    "id": "frk_ct_e49e39f1e1240c50ec4c404c",
+    "name": "SCM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: SCM - Service Continuity Management.",
+    "controlFamily": "SCM - Service Continuity Management"
+  },
+  {
+    "id": "frk_ct_e5290c5f9a34e72740a7ef8f",
+    "name": "SPS: Goal 1 – Disruption planning includes external dependencies",
+    "description": "Goal 1 – Disruption planning includes external dependencies. Practices: see the requirements linked to this control. Family: SPS - Service Protection and Sustainment - MIL-1.",
+    "controlFamily": "SPS - Service Protection and Sustainment - MIL-1"
+  },
+  {
+    "id": "frk_ct_e64a13f3696762cdfdc02eef",
+    "name": "Potential business impacts and likelihoods are identified (Risk Assessment)",
+    "description": "Potential business impacts and likelihoods are identified. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_e6877385bb1b30d3e7cbdd00",
+    "name": "A vulnerability management plan is developed and implemented (Information Protection)",
+    "description": "A vulnerability management plan is developed and implemented. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_e73ec80113cbc65deda1aa13",
+    "name": "Adaptive Management (Adaptive Response)",
+    "description": "Adaptive Management. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_e75af8900e586aa795a02711",
+    "name": "AM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: AM - Asset Management.",
+    "controlFamily": "AM - Asset Management"
+  },
+  {
+    "id": "frk_ct_e83caad1e15f4279a4ddf1c5",
+    "name": "Notifications from detection systems are investigated (Analysis)",
+    "description": "Notifications from detection systems are investigated. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_e9631563e8c5359b97a23048",
+    "name": "Effectiveness of protection technologies is shared (Information Protection)",
+    "description": "Effectiveness of protection technologies is shared. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_eab70c24c30a28628336bf18",
+    "name": "Public relations are managed (Communications)",
+    "description": "Public relations are managed. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  },
+  {
+    "id": "frk_ct_eb17789aa5ed9bf2cdf23c55",
+    "name": "4.B Identify Adverse Events",
+    "description": "4.B Identify Adverse Events: Organizations can identify adverse security events.",
+    "controlFamily": "Detect"
+  },
+  {
+    "id": "frk_ct_ec7a054833fb4de84e936fd2",
+    "name": "CM: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_edbf103607888c91ee116e19",
+    "name": "Policy and regulations regarding the physical operating environment for organizational assets are met (Information Protection)",
+    "description": "Policy and regulations regarding the physical operating environment for organizational assets are met. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_ee5ba5b7b422d2ee6aa79515",
+    "name": "3.J Implement Cybersecurity Training",
+    "description": "3.J Implement Cybersecurity Training: Organizational users learn and perform more secure behaviors.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_ee7ea4e4e53df1b84c6ad81c",
+    "name": "CM: MIL5 - Defined",
+    "description": "MIL5 - Defined. Practices: see the requirements linked to this control. Family: CM - Controls Management.",
+    "controlFamily": "CM - Controls Management"
+  },
+  {
+    "id": "frk_ct_eff9ea10816559951f4effdd",
+    "name": "Sensor Fusion and Analysis (Analytic Monitoring)",
+    "description": "Sensor Fusion and Analysis. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_f127ab67d27c85e2ff127b6f",
+    "name": "1.B Manage Cybersecurity Oversight",
+    "description": "1.B Manage Cybersecurity Oversight: The organization's cybersecurity risk management strategy, expectations, and policies are established.",
+    "controlFamily": "Govern"
+  },
+  {
+    "id": "frk_ct_f32836fe2d71e5bba378ec76",
+    "name": "PS: Goal 2 - The confidentiality, integrity and availability of event and incident information is managed",
+    "description": "Goal 2 - The confidentiality, integrity and availability of event and incident information is managed. Practices: see the requirements linked to this control. Family: PS - Protect and Sustain the Incident Management Function.",
+    "controlFamily": "PS - Protect and Sustain the Incident Management Function"
+  },
+  {
+    "id": "frk_ct_f484ed8c1ed88e14e3a8f885",
+    "name": "Reputation is repaired after an incident (Communications)",
+    "description": "Reputation is repaired after an incident. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  },
+  {
+    "id": "frk_ct_f5d8c0fbf2714dabd47215a8",
+    "name": "Unauthorized mobile code is detected (Security Continuous Monitoring)",
+    "description": "Unauthorized mobile code is detected. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_f60298702fe4e823b2d8fcf2",
+    "name": "2.A Manage Organizational Assets",
+    "description": "2.A Manage Organizational Assets: A maintained asset inventory to improve cybersecurity resilience by reducing downtime, aiding recovery, bolstering defenses, and improving preparedness.",
+    "controlFamily": "Identify"
+  },
+  {
+    "id": "frk_ct_f67b25d6977b0478d8a92815",
+    "name": "Predefined Segmentation (Segmentation)",
+    "description": "Predefined Segmentation. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_f694f1c8a372619a2859aa22",
+    "name": "Assets are formally managed throughout removal, transfers, and disposition (Data Security)",
+    "description": "Assets are formally managed throughout removal, transfers, and disposition. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_f6a951be37747b88103fb856",
+    "name": "3.B Establish Minimum Password Strength",
+    "description": "3.B Establish Minimum Password Strength: Organizational passwords are harder for threat actors to guess or crack.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_f6d0504e16938f417e2aaf16",
+    "name": "1.C Maintain Incident Response Plans",
+    "description": "1.C Maintain Incident Response Plans: Identify improvements by practicing cybersecurity and incident response (IR) plans to maintain and update the organization's cybersecurity program.",
+    "controlFamily": "Govern"
+  },
+  {
+    "id": "frk_ct_f79d540342db59b02e59819c",
+    "name": "The network is monitored to detect potential cybersecurity events (Security Continuous Monitoring)",
+    "description": "The network is monitored to detect potential cybersecurity events. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_f7bcfb81287d30f7bf48d1b2",
+    "name": "Data Protection and Loss Prevention: Policies",
+    "description": "Policies requirements of Healthcare 405(d) Cybersecurity Act 2015. Family: Data Protection and Loss Prevention.",
+    "controlFamily": "Data Protection and Loss Prevention"
+  },
+  {
+    "id": "frk_ct_f8fdc2f43f76d83ae6bbc714",
+    "name": "Threats, both internal and external, are identified and documented (Risk Assessment)",
+    "description": "Threats, both internal and external, are identified and documented. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_f905396af922ceb6647ecf80",
+    "name": "TA: MIL2 - Planned",
+    "description": "MIL2 - Planned. Practices: see the requirements linked to this control. Family: TA - Training and Awareness.",
+    "controlFamily": "TA - Training and Awareness"
+  },
+  {
+    "id": "frk_ct_f93fc556db70ca661abb3cde",
+    "name": "Monitoring for unauthorized personnel, connections, devices, and software is performed (Security Continuous Monitoring)",
+    "description": "Monitoring for unauthorized personnel, connections, devices, and software is performed. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_fac30484a6546d205e635cec",
+    "name": "TA: Goal 1 - Cybersecurity awareness and training programs are established",
+    "description": "Goal 1 - Cybersecurity awareness and training programs are established. Practices: see the requirements linked to this control. Family: TA - Training and Awareness.",
+    "controlFamily": "TA - Training and Awareness"
+  },
+  {
+    "id": "frk_ct_faf232c7fcf3a2e92e848b2e",
+    "name": "The principle of least functionality is incorporated by configuring systems to provide only essential capabilities (Protective Technology)",
+    "description": "The principle of least functionality is incorporated by configuring systems to provide only essential capabilities. Practices: see the requirements linked to this control. Family: Withstand.",
+    "controlFamily": "Withstand"
+  },
+  {
+    "id": "frk_ct_fb080b239a56f5b0b6483684",
+    "name": "Incidents are categorized consistent with response plans (Analysis)",
+    "description": "Incidents are categorized consistent with response plans. Practices: see the requirements linked to this control. Family: Recover.",
+    "controlFamily": "Recover"
+  },
+  {
+    "id": "frk_ct_fbd5c8ec8ea0396603271e33",
+    "name": "TA: MIL4 - Measured",
+    "description": "MIL4 - Measured. Practices: see the requirements linked to this control. Family: TA - Training and Awareness.",
+    "controlFamily": "TA - Training and Awareness"
+  },
+  {
+    "id": "frk_ct_fc317c685dc1e980aa40e3f7",
+    "name": "RF: Goal 4 – External entities are evaluated",
+    "description": "Goal 4 – External entities are evaluated. Practices: see the requirements linked to this control. Family: RF - Relationship Formation - MIL-1.",
+    "controlFamily": "RF - Relationship Formation - MIL-1"
+  },
+  {
+    "id": "frk_ct_fcbd333974b0261fbde7caa7",
+    "name": "CCM: Goal 1 - The life cycle of assets is managed",
+    "description": "Goal 1 - The life cycle of assets is managed. Practices: see the requirements linked to this control. Family: CCM - Configuration and Change Management.",
+    "controlFamily": "CCM - Configuration and Change Management"
+  },
+  {
+    "id": "frk_ct_fcced0aad702de6c1fa7da47",
+    "name": "Dynamic Resource Allocation (Adaptive Response)",
+    "description": "Dynamic Resource Allocation. Practices: see the requirements linked to this control. Family: Anticipate.",
+    "controlFamily": "Anticipate"
+  },
+  {
+    "id": "frk_ct_fd6f26eaa4784e5a7c53d28f",
+    "name": "1.E Manage Risks From Managed Service Providers",
+    "description": "1.E Manage Risks From Managed Service Providers: The risks posed by a managed service provider (MSP) are identified, recorded, assessed, prioritized, monitored, and updated over the course of the relationship.",
+    "controlFamily": "Govern"
+  },
+  {
+    "id": "frk_ct_fe769c9e79b6cd6f3b75af49",
+    "name": "3.C Create Unique Credentials",
+    "description": "3.C Create Unique Credentials: Adversaries are unable to reuse compromised credentials to move laterally across the organization, particularly between IT and OT networks.",
+    "controlFamily": "Protect"
+  },
+  {
+    "id": "frk_ct_fe7ab7389fda063272f91f04",
+    "name": "4.A Establish Malicious Code Detection",
+    "description": "4.A Establish Malicious Code Detection: Enables early threat identification, strengthens system integrity, provides insights for faster remediation, and minimizes downtime.",
+    "controlFamily": "Detect"
+  },
+  {
+    "id": "frk_ct_fed6322ecae05402f6ac2673",
+    "name": "Purposing (Realignment 800-160)",
+    "description": "Purposing. Practices: see the requirements linked to this control. Family: Adapt.",
+    "controlFamily": "Adapt"
+  }
+]

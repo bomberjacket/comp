@@ -1,0 +1,42 @@
+[
+  {
+    "frameworkId": "frk_99eabe00820ad30b49f85e87",
+    "version": "1.0.0",
+    "releaseNotes": "Initial CISA Cross-Sector Cybersecurity Performance Goals 2.0 release from CISA CSET v13 content: 34 requirements, 34 controls, 6 policies, 34 evidence tasks."
+  },
+  {
+    "frameworkId": "frk_8e1ab214ce8b64b9d61eb7e9",
+    "version": "1.0.0",
+    "releaseNotes": "Initial CISA Incident Management Review (IMR) release from CISA CSET v13 content: 88 requirements, 20 controls, 6 policies, 20 evidence tasks."
+  },
+  {
+    "frameworkId": "frk_f0f03f628e56b4f3a5a9ed77",
+    "version": "1.0.0",
+    "releaseNotes": "Initial HHS 405(d) Health Industry Cybersecurity Practices (Technical Volume 1) release from CISA CSET v13 content: 63 requirements, 19 controls, 10 policies, 19 evidence tasks."
+  },
+  {
+    "frameworkId": "frk_285f172f537c618481d959b9",
+    "version": "1.0.0",
+    "releaseNotes": "Initial CISA Minimum Viable Resilience Assessment (MVRA, draft) release from CISA CSET v13 content: 524 requirements, 138 controls, 4 policies, 138 evidence tasks."
+  },
+  {
+    "frameworkId": "frk_76bf0b250804b9648227ccaa",
+    "version": "1.0.0",
+    "releaseNotes": "Initial CISA Cyber Resilience Review (CRR) release from CISA CSET v13 content: 397 requirements, 82 controls, 10 policies, 82 evidence tasks."
+  },
+  {
+    "frameworkId": "frk_3be1195fcf4c9cb02782aa9b",
+    "version": "1.0.0",
+    "releaseNotes": "Initial CISA External Dependencies Management (EDM) Assessment release from CISA CSET v13 content: 116 requirements, 20 controls, 4 policies, 20 evidence tasks."
+  },
+  {
+    "frameworkId": "frk_21cb27b3056904ff874e63b1",
+    "version": "1.0.0",
+    "releaseNotes": "Initial CISA Ransomware Readiness Assessment (RRA) release from CISA CSET v13 content: 48 requirements, 10 controls, 1 policies, 10 evidence tasks."
+  },
+  {
+    "frameworkId": "frk_3a777761af38267b9134c5ba",
+    "version": "1.0.0",
+    "releaseNotes": "Initial AWWA Water Sector Cybersecurity Guidance v4.0 release from CISA CSET v13 content: 100 requirements, 12 controls, 12 policies, 12 evidence tasks."
+  }
+]

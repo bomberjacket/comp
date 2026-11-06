@@ -1,10 +1,41 @@
-# CISA CSET content: extractor and inputs
+# CISA CSET frameworks: extractor, inputs and seed generator
 
 CISA's Cyber Security Evaluation Tool (CSET, github.com/cisagov/cset, MIT licence,
 Battelle Energy Alliance / INL) ships its assessment content in a SQL Server database.
-This folder turns that content into JSON inputs (`inputs/cset-*.json`) that a Comp AI
-seed generator reads. The generator itself is the next step; nothing here touches the
-seed tables.
+This folder turns that content into JSON inputs (`inputs/cset-*.json`, via `extract/`)
+and then into Comp AI framework-editor seed files suffixed `.cset.json`:
+
+```bash
+bun packages/db/prisma/seed/sources/cset/index.ts
+```
+
+Eight frameworks under one family, "CISA assessments (CSET)". Ids are `sha256` of CSET
+identifiers in the `comp-cset/v1` namespace (never text), arrays are sorted, and a second
+run is byte-identical. `validate.ts` pins the counts; nothing is written if a check fails.
+
+## Data model
+
+| Row | Maturity modules (CPG 2.0, IMR, CRR, EDM, RRA, MVRA) | Standard sets (HHS 405(d), AWWA 4.0) |
+| --- | --- | --- |
+| Requirement | one per answerable question, `identifier` = CSET title (`1.A`, `EH:G1.Q1`, `AM:G2.Q1-P`). CPG 2.0's IT/OT child rows are answer slots, not questions, so they fold into the goal (34 rows); CRR/EDM facet sub-questions stay, named with their parent | one per requirement row, `identifier` = CSET title (`1.S.A.1`, `IA-1`) |
+| `requirementFamily` | top grouping, `AM - Asset Management` when CSET has a code | standard category |
+| Control | the question's goal grouping (`AM: Goal 1 - …`, `Dynamic Reconfiguration (Adaptive Response)`); CPG 2.0 has no goal level, so one control per goal question | category + sub-category (AWWA: one per category) |
+| Policy | one per family, structural TipTap draft listing the family's controls | same |
+| Task | one evidence task per control, quarterly, listing the control's items and how to answer | same |
+
+Descriptions keep CSET's guidance (question intent, criteria, work products), CPG 2.0's
+outcome / scope / risk / recommended action / IT and OT implementation criteria / cost-
+impact-complexity / CISA services, references (CSF, 800-53, 800-82, CERT-RMM) and a
+`Source:` attribution line. Counts: CPG 2.0 34 requirements / 34 controls / 6 families;
+IMR 88 / 20 / 6; HHS 405(d) 63 / 19 / 10; MVRA 524 / 138 / 4; CRR 397 / 82 / 10;
+EDM 116 / 20 / 4; RRA 48 / 10 / 1; AWWA 4.0 100 / 12 / 12.
+
+`derived/answer-profiles.json` records, per framework, the CSET answer options
+(`Y,I,S,N`, `Y,I,N`, `Y,N`, `Y,A,N`, `Y,N,NA,A`), whether answers are per IT/OT domain
+(CPG 2.0 only) and the scoring model (`cpg`, `mil`, `tier`, `standard`); the answer layer
+seeds its profile table from it.
+
+## Extractor
 
 ## Source
 

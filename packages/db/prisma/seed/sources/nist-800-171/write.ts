@@ -48,12 +48,15 @@ function readPairs(file: string): Pair[] {
   );
 }
 
-/** Ids of every record in the upstream (non-suffixed) primitives files. */
-export function readUpstreamIds(seedDir: string): Set<string> {
+/**
+ * Ids of every record in the primitives files other than this data set's own, so a
+ * generated id can be checked against upstream and against the other generators.
+ */
+export function readUpstreamIds(seedDir: string, suffix: string = SUFFIX): Set<string> {
   const dir = path.join(seedDir, 'primitives');
   const ids = new Set<string>();
   for (const file of readdirSync(dir)) {
-    if (!file.endsWith('.json') || file.includes(`.${SUFFIX}.`)) continue;
+    if (!file.endsWith('.json') || file.includes(`.${suffix}.`)) continue;
     const parsed: unknown = JSON.parse(readFileSync(path.join(dir, file), 'utf8'));
     if (!Array.isArray(parsed)) continue;
     for (const row of parsed) {
@@ -77,6 +80,7 @@ export function writeOutputs(
   seedDir: string,
   data: GeneratedData,
   versions: VersionEntry[],
+  suffix: string = SUFFIX,
 ): string[] {
   const written: string[] = [];
   const primitivesDir = path.join(seedDir, 'primitives');
@@ -85,15 +89,15 @@ export function writeOutputs(
   mkdirSync(versionsDir, { recursive: true });
 
   for (const [key, model] of PRIMITIVE_FILES) {
-    const file = path.join(primitivesDir, `${model}.${SUFFIX}.json`);
+    const file = path.join(primitivesDir, `${model}.${suffix}.json`);
     const rows = data[key] as Array<{ id: string }>;
     writeFileSync(file, stable(byId(rows) as unknown as Array<Record<string, unknown>>));
     written.push(file);
   }
 
   for (const [key, model] of RELATION_FILES) {
-    const file = path.join(relationsDir, `${model}.${SUFFIX}.json`);
-    const unlinkFile = path.join(relationsDir, `${model}.unlink.${SUFFIX}.json`);
+    const file = path.join(relationsDir, `${model}.${suffix}.json`);
+    const unlinkFile = path.join(relationsDir, `${model}.unlink.${suffix}.json`);
     const next = byPair(data[key] as Pair[]);
     const nextKeys = new Set(next.map((p) => `${p.A}|${p.B}`));
     const previous = readPairs(file);
@@ -113,7 +117,7 @@ export function writeOutputs(
     }
   }
 
-  const versionsFile = path.join(versionsDir, `${SUFFIX}.json`);
+  const versionsFile = path.join(versionsDir, `${suffix}.json`);
   writeFileSync(versionsFile, stable(versions as unknown as Array<Record<string, unknown>>));
   written.push(versionsFile);
   return written;

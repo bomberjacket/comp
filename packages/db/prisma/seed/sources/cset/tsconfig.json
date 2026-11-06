@@ -2,9 +2,9 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDir": "..",
     "noEmit": true,
     "types": ["node", "bun"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts", "../nist-800-171/text.ts", "../nist-800-171/types.ts", "../nist-800-171/write.ts"]
 }

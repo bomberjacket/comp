@@ -1,0 +1,92 @@
+[
+  {
+    "frameworkId": "frk_99eabe00820ad30b49f85e87",
+    "module": "cpg2",
+    "answerOptions": [
+      "Y",
+      "I",
+      "S",
+      "N"
+    ],
+    "domainMode": "it_ot",
+    "scoring": "cpg"
+  },
+  {
+    "frameworkId": "frk_8e1ab214ce8b64b9d61eb7e9",
+    "module": "imr",
+    "answerOptions": [
+      "Y",
+      "I",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "mil"
+  },
+  {
+    "frameworkId": "frk_f0f03f628e56b4f3a5a9ed77",
+    "module": "hhs405d",
+    "answerOptions": [
+      "Y",
+      "N",
+      "NA",
+      "A"
+    ],
+    "domainMode": "single",
+    "scoring": "standard"
+  },
+  {
+    "frameworkId": "frk_285f172f537c618481d959b9",
+    "module": "mvra",
+    "answerOptions": [
+      "Y",
+      "A",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "tier"
+  },
+  {
+    "frameworkId": "frk_76bf0b250804b9648227ccaa",
+    "module": "crr",
+    "answerOptions": [
+      "Y",
+      "I",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "mil"
+  },
+  {
+    "frameworkId": "frk_3be1195fcf4c9cb02782aa9b",
+    "module": "edm",
+    "answerOptions": [
+      "Y",
+      "I",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "mil"
+  },
+  {
+    "frameworkId": "frk_21cb27b3056904ff874e63b1",
+    "module": "rra",
+    "answerOptions": [
+      "Y",
+      "N"
+    ],
+    "domainMode": "single",
+    "scoring": "tier"
+  },
+  {
+    "frameworkId": "frk_3a777761af38267b9134c5ba",
+    "module": "awwa40",
+    "answerOptions": [
+      "Y",
+      "N",
+      "NA",
+      "A"
+    ],
+    "domainMode": "single",
+    "scoring": "standard"
+  }
+]

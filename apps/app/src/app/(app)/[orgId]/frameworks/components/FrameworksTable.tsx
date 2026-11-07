@@ -2,6 +2,7 @@
 
 import {
   Badge,
+  Button,
   HStack,
   InputGroup,
   InputGroupAddon,
@@ -16,6 +17,7 @@ import {
 } from '@trycompai/design-system';
 import { ArrowDown, ArrowUp, ArrowsVertical, Search } from '@trycompai/design-system/icons';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import type { FrameworkInstanceWithControls } from '@/lib/types/framework';
@@ -213,6 +215,7 @@ export function FrameworksTable({
                 </HStack>
               </TableHead>
               <TableHead>Status</TableHead>
+              <TableHead />
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -288,6 +291,15 @@ export function FrameworksTable({
                   </TableCell>
                   <TableCell>
                     <Badge variant={status.variant}>{status.label}</Badge>
+                  </TableCell>
+                  <TableCell onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      render={<Link href={`/${organizationId}/tasks?framework=${fw.id}`} />}
+                    >
+                      Evidence
+                    </Button>
                   </TableCell>
                 </TableRow>
               );

@@ -79,6 +79,13 @@ export default async function TasksPage({
     savedView === 'categories' || savedView === 'list'
       ? savedView
       : 'categories';
+  // The framework (assessment) the Evidence list opens on when the URL names
+  // none; set from the star next to the framework filter, kept per org.
+  const savedDefault = cookieStore.get(`evidence-default-framework-${orgId}`)?.value;
+  const defaultFrameworkId =
+    savedDefault && options.frameworkInstances.some((fw) => fw.id === savedDefault)
+      ? savedDefault
+      : null;
 
   return (
     <TasksPageClient
@@ -87,6 +94,7 @@ export default async function TasksPage({
       controls={options.controls}
       frameworkInstances={options.frameworkInstances}
       activeTab={activeTab}
+      defaultFrameworkId={defaultFrameworkId}
       orgId={orgId}
       organizationName={options.organizationName}
       hasEvidenceExportAccess={options.hasEvidenceExportAccess}

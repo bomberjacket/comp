@@ -6,6 +6,7 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  Button,
   HStack,
   InputGroup,
   InputGroupAddon,
@@ -24,10 +25,10 @@ import {
   Text,
 } from '@trycompai/design-system';
 
-import { Check, Circle, FolderTree, List, Search, XCircle } from 'lucide-react';
+import { Check, Circle, FolderTree, List, Search, Star, XCircle } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import { useQueryState } from 'nuqs';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FrameworkInstanceForTasks } from '../types';
 import { ModernTaskList } from './ModernTaskList';
 import { TasksByCategory } from './TasksByCategory';
@@ -46,6 +47,7 @@ export function TaskList({
   members,
   frameworkInstances,
   activeTab,
+  defaultFrameworkId = null,
   evidenceApprovalEnabled = false,
   afterAnalytics,
   showFiltersAndList = true,
@@ -70,6 +72,8 @@ export function TaskList({
   members: (Member & { user: User })[];
   frameworkInstances: FrameworkInstanceForTasks[];
   activeTab: 'categories' | 'list';
+  /** Framework instance the list opens on when the URL names none (cookie). */
+  defaultFrameworkId?: string | null;
   afterAnalytics?: ReactNode;
   showFiltersAndList?: boolean;
 }) {
@@ -82,6 +86,28 @@ export function TaskList({
   const [automationStatusFilter, setAutomationStatusFilter] =
     useQueryState('automationStatus');
   const [currentTab, setCurrentTab] = useState<'categories' | 'list'>(activeTab);
+  const [defaultFramework, setDefaultFramework] = useState<string | null>(defaultFrameworkId);
+
+  // Open on the default assessment once per visit; an explicit "All frameworks"
+  // afterwards stays, so the default is a starting point, not a lock.
+  const appliedDefault = useRef(false);
+  useEffect(() => {
+    if (appliedDefault.current) return;
+    appliedDefault.current = true;
+    if (!frameworkFilter && defaultFramework) {
+      void setFrameworkFilter(defaultFramework);
+    }
+  }, [frameworkFilter, defaultFramework, setFrameworkFilter]);
+
+  const toggleDefaultFramework = () => {
+    if (!frameworkFilter) return;
+    const next = defaultFramework === frameworkFilter ? null : frameworkFilter;
+    const expires = new Date();
+    if (next) expires.setFullYear(expires.getFullYear() + 1);
+    else expires.setFullYear(expires.getFullYear() - 1);
+    document.cookie = `evidence-default-framework-${orgId}=${next ?? ''}; expires=${expires.toUTCString()}; path=/`;
+    setDefaultFramework(next);
+  };
 
   // Sync activeTab prop with state when it changes
   useEffect(() => {
@@ -668,11 +694,30 @@ export function TaskList({
                             {fw.framework?.name ??
                               fw.customFramework?.name ??
                               'Framework'}
+                            {fw.id === defaultFramework ? ' (default)' : ''}
                           </span>
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
+                )}
+
+                {frameworkFilter && (
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={toggleDefaultFramework}
+                    title={
+                      defaultFramework === frameworkFilter
+                        ? 'Default assessment: Evidence opens on this framework. Click to clear.'
+                        : 'Make this the default assessment: Evidence opens on it.'
+                    }
+                    aria-label="Toggle default assessment"
+                  >
+                    <Star
+                      className={`h-4 w-4 ${defaultFramework === frameworkFilter ? 'fill-current text-amber-500' : 'text-muted-foreground'}`}
+                    />
+                  </Button>
                 )}
 
                 <Select

@@ -166,6 +166,13 @@ export function FrameworkDetailContent({
             ]}
             actions={
               <>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  render={<Link href={`/${orgId}/tasks?framework=${frameworkInstanceId}`} />}
+                >
+                  Evidence
+                </Button>
                 <LinkRequirementSheet frameworkInstanceId={frameworkInstanceId} />
                 <AddCustomRequirementSheet frameworkInstanceId={frameworkInstanceId} />
                 {(canEditCustomFramework || canDeleteFramework) && (

@@ -49,6 +49,7 @@ interface TasksPageClientProps {
   controls: { id: string; name: string }[];
   frameworkInstances: FrameworkInstanceForTasks[];
   activeTab: 'categories' | 'list';
+  defaultFrameworkId?: string | null;
   orgId: string;
   organizationName: string | null;
   hasEvidenceExportAccess: boolean;
@@ -61,6 +62,7 @@ export function TasksPageClient({
   controls,
   frameworkInstances,
   activeTab,
+  defaultFrameworkId = null,
   orgId,
   organizationName,
   hasEvidenceExportAccess,
@@ -189,6 +191,7 @@ export function TasksPageClient({
           members={members}
           frameworkInstances={frameworkInstances}
           activeTab={activeTab}
+          defaultFrameworkId={defaultFrameworkId}
           evidenceApprovalEnabled={evidenceApprovalEnabled}
           afterAnalytics={
             <div className="w-fit">

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "frk_tt_1023130a79b6feb43eb2536d",
+    "name": "Interview evidence: 3.L Enable Email Security",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 3.L Enable Email Security under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nModule 1:\n- How do employees report suspected phishing attempts or other possible cybersecurity incidents?\n- What actions does the IT department take when suspicious emails are reported?\n- What feedback do employees receive after reporting a suspicious email or event?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_34422dd5ce051ba533b8ae54",
+    "name": "Interview evidence: 3.I Implement Logical/Physical Network Segmentation",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 3.I Implement Logical/Physical Network Segmentation under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nModule 1:\n- How do you protect IT and OT networks?\n\nCyber Resilience:\n- Does your organization apply Zero Trust Architecture (ZTA)/zero-trust concepts?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_39f95dd820230cb5a3a30ede",
+    "name": "Interview evidence: 4.B Identify Adverse Events",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 4.B Identify Adverse Events under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nIncident Identification:\n- What type of hardware and/or software does your organization use to detect and prevent malicious activity on your systems/network?\n- Discuss your organization’s intrusion detection capabilities and analytics that alert you to a potential cyber incident.\n- How often is your organization’s data reviewed?\n- How would you determine whether unauthorized manipulation of data has occurred?\n\nCyber Resilience:\n- What mechanisms or processes are in place to prevent malicious activity?\n\nModule 1:\n- What cybersecurity threat information does your organization receive?\n- What cyber threat information is most useful?\n- How is information disseminated to relevant parties within your organization?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_3aad4649014b3486d8674b58",
+    "name": "Interview evidence: 1.E Manage Risks From Managed Service Providers",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 1.E Manage Risks From Managed Service Providers under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nCyber Resilience:\n- How do your service level agreements address cyber incident notification?\n- How do those entities report a breach of their systems to your office?\n- Discuss your supply chain concerns related to cybersecurity infrastructure.\n- What cybersecurity language is included within third-party vendor contracts?\n- How do you evaluate the cybersecurity posture of your vendors?\n- How often are contracts reviewed?\n- What level of access do your third-party vendors have to your organization’s network?\n\nIncident Response:\n- What are the notification requirements to your organization for breaches?\n- How would a breach of <vendor(s)> affect your organization if they potentially have access to your information?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_3ceb553670a3609a75eaaa8c",
+    "name": "Interview evidence: 1.C Maintain Incident Response Plans",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 1.C Maintain Incident Response Plans under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nCyber Resilience:\n- Describe your organization’s review process for your CIRP.\n- How often is the CIRP reviewed?\n- Which individual(s) and department(s) are responsible for reviewing and updating the plan?\n- How are updates to the plan communicated to relevant employees?\n\nTraining & Exercises:\n- How often does your organization exercise its CIRP?\n- Who is involved in the exercise?\n- How often do senior staff/leadership participate in cybersecurity exercises?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_64db82e710c0de753da3925c",
+    "name": "Interview evidence: 3.F Implement Multifactor Authentication (MFA)",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 3.F Implement Multifactor Authentication (MFA) under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nModule 1:\n- Do you deploy multi-factor authentication (MFA) as widely as possible for both OT and IT networks?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_7502fe9fd90fd2c751793390",
+    "name": "Interview evidence: 3.J Implement Cybersecurity Training",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 3.J Implement Cybersecurity Training under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nModule 1:\n- Describe your organization’s cybersecurity training program for IT and OT employees.\n- How often are employees required to complete this training?\n- What additional training is required for employees who have system administrator-level privileges?\n- What type of training methods or approaches have you found most beneficial?\n\nSenior Leaders:\n- What cybersecurity training is required for senior leadership?\n\nTraining & Exercises:\n- What training does your cybersecurity incident response team undergo to detect, analyze, and report malicious activity?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_8447ef2d0e8755f2b7ce1e80",
+    "name": "Interview evidence: 5.B Establish Incident Reporting Procedures",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 5.B Establish Incident Reporting Procedures under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nCyber Resilience:\n- If primary communications are compromised, how do you provide information to internal and external entities?\n\nIncident Response:\n- What are the processes for contacting critical personnel outside of core hours?\n- How do you proceed if critical personnel are unreachable or unavailable?\n- Who is responsible for coordinating information across different organizational-level incidents?\n- At what point would you notify the Environmental Protection Agency (EPA) and CISA?\n- What are your processes for collecting evidence and maintaining the chain of custody during a cyber incident?\n\nPublic Information:\n- What information are you sharing internally (e.g., employees, leadership)?\n- What information are you sharing externally (e.g., residents, customers, vendors)?\n- What training is provided to employees regarding reporting contact with the media?\n\nIncident Identification:\n- How are cyber incidents reported within your organization?\n- What would trigger the reporting requirements established by regulation, law, and/or organization policy?\n- What training have employees received regarding reporting requirements and your CIRP?\n- What cybersecurity incident escalation criteria are defined in your CIRP?\n- Who needs to be notified internally and externally according to the plan?\n- When is leadership notified?\n\nLegal:\n- What is the role of the legal department during a cyber incident?\n- What legal documentation should your organization have for cyber incidents?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_9ce7030cde4e2f9d1b7acbc2",
+    "name": "Interview evidence: 3.D Revoke Credentials For Departing Staff",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 3.D Revoke Credentials For Departing Staff under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nAccounts & Privileges:\n- Describe your organization’s employee off-boarding process.\n- Is this process coordinated with IT and HR?\n- What additional actions are taken if the employee’s termination is contentious?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_c1cca8a2df1bf8ffcc6910ff",
+    "name": "Interview evidence: 1.A Establish Cybersecurity Responsibilities",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 1.A Establish Cybersecurity Responsibilities under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nSenior Leaders:\n- As a leader in your organization, what cybersecurity resilience goals have you set?\n- How do these goals align with organizational objectives?\n- What is your role during a cyber incident?\n- What are the gaps in your cybersecurity workforce?\n- How does your organization recruit, develop, and retain cybersecurity staff?\n\nCyber Resilience:\n- Discuss how cyber preparedness is integrated into your current all-hazards preparedness efforts.\n- Discuss your risk management strategy.\n- How is it developed/maintained?\n- What considerations are addressed in your risk management strategy (e.g., extended downtime, impaired functionality, loss of data, etc.)?\n- How often are your cybersecurity plans, policies, and procedures externally reviewed or audited?\n- What were the most recent results and action items that followed?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_d1653eea09a04c21d98b6407",
+    "name": "Interview evidence: 3.O Maintain System Backups & Restoration Ability",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 3.O Maintain System Backups & Restoration Ability under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nCyber Resilience:\n- What policies and procedures does your organization use to decide when and how to restore backed-up data?\n- How does your organization incorporate measures for ensuring the integrity of backup data before restoration?\n- How is the integrity of your critical data protected and validated?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_d88f67f5b88d078f225450ad",
+    "name": "Interview evidence: 2.A Manage Organizational Assets",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 2.A Manage Organizational Assets under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nModule 1:\n- Describe your organization’s asset management plan and how you prioritize critical assets.\n- Describe the risks/advantages to maintaining legacy equipment/systems.\n- How do you manage technology that is no longer supported by the manufacturer?\n- Describe your organization’s equipment commissioning and decommissioning process.\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_e62ca12a1710e85010305eb0",
+    "name": "Interview evidence: 6.A Execute Incident Recovery Plan",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 6.A Execute Incident Recovery Plan under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nRecovery:\n- When does your organization determine a cyber incident is over?\n- Who makes this decision?\n- What post-incident activities would your organization conduct?\n- What actions would your organization take if your IT/incident response staff could not confirm the integrity of your systems/data?\n- What is the risk associated with re-activating critical business processes and systems?\n- How long and costly is the process to completely rebuild these systems?\n\nCyber Resilience:\n- How does your organization maintain availability of key assets (e.g., network connectivity, etc.)?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_f39b33ba1132cf5031d3c529",
+    "name": "Interview evidence: 2.B Mitigate Known Vulnerabilities",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 2.B Mitigate Known Vulnerabilities under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nCyber Resilience:\n- Describe your patch and vulnerability management plan.\n- What processes are in place to proactively evaluate each server’s criticality and applicability to software patches?\n- What is your method for tracking and identifying firmware vulnerabilities in your network?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  },
+  {
+    "id": "frk_tt_fb1f8927eee5b6c60484b098",
+    "name": "Interview evidence: 3.G Administrators Maintain Separate User And Privileged Accounts",
+    "description": "Interview or tabletop evidence for CPG 2.0 goal 3.G Administrators Maintain Separate User And Privileged Accounts under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0). Ask the questions below of the utility staff who own the practice; record who answered, the date and the answers, and attach exercise notes or the after-action report when the questions were covered in a tabletop.\n\nAccounts & Privileges:\n- What are your organization’s policies or procedures for IT account management?\n- What are the protocols for establishing, activating, modifying, disabling, and removing accounts?\n\nModule 1:\n- What are your access control measures for both OT and IT assets and associated facilities?\n\nSource: CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain); selection and goal tags by BomberJacket Networks.",
+    "frequency": "yearly",
+    "department": "it",
+    "automationStatus": "MANUAL"
+  }
+]

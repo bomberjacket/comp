@@ -1,0 +1,437 @@
+{
+  "source": "CISA Water and Wastewater Systems Cybersecurity Tabletop Exercise Package (CTEP) Situation Manual, November 2023 (public domain)",
+  "questions": [
+    {
+      "section": "Module 1",
+      "question": "What cybersecurity threat information does your organization receive?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What cyber threat information is most useful?"
+    },
+    {
+      "section": "Module 1",
+      "question": "How is information disseminated to relevant parties within your organization?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What actions would your organization take in response to an alert like the one presented in the scenario?"
+    },
+    {
+      "section": "Module 1",
+      "question": "Describe your organization’s cybersecurity training program for IT and OT employees."
+    },
+    {
+      "section": "Module 1",
+      "question": "How often are employees required to complete this training?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What additional training is required for employees who have system administrator-level privileges?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What type of training methods or approaches have you found most beneficial?"
+    },
+    {
+      "section": "Module 1",
+      "question": "Describe your organization’s asset management plan and how you prioritize critical assets."
+    },
+    {
+      "section": "Module 1",
+      "question": "How does your organization maintain availability of key assets (e.g., network connectivity, etc.)?"
+    },
+    {
+      "section": "Module 1",
+      "question": "Describe the risks/advantages to maintaining legacy equipment/systems."
+    },
+    {
+      "section": "Module 1",
+      "question": "How do you manage technology that is no longer supported by the manufacturer?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What supply chain concerns do you have regarding legacy equipment/systems?"
+    },
+    {
+      "section": "Module 1",
+      "question": "Describe your organization’s equipment commissioning and decommissioning process."
+    },
+    {
+      "section": "Module 1",
+      "question": "How do you protect IT and OT networks?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What are your access control measures for both OT and IT assets and associated facilities?"
+    },
+    {
+      "section": "Module 1",
+      "question": "Do you deploy multi-factor authentication (MFA) as widely as possible for both OT and IT networks?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What are the protocols for establishing, activating, modifying, disabling, and removing accounts?"
+    },
+    {
+      "section": "Module 1",
+      "question": "How do employees report suspected phishing attempts or other possible cybersecurity incidents?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What actions does the IT department take when suspicious emails are reported?"
+    },
+    {
+      "section": "Module 1",
+      "question": "What feedback do employees receive after reporting a suspicious email or event?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "Discuss how cyber preparedness is integrated into your current all-hazards preparedness efforts."
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How often are your cybersecurity plans, policies, and procedures externally reviewed or audited?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What were the most recent results and action items that followed?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "Describe your organization’s review process for your CIRP."
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How often is the CIRP reviewed?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "Which individual(s) and department(s) are responsible for reviewing and updating the plan?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How are updates to the plan communicated to relevant employees?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "Discuss your supply chain concerns related to cybersecurity infrastructure."
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "Discuss your risk management strategy."
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How is it developed/maintained?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "Does your organization apply Zero Trust Architecture (ZTA)/zero-trust concepts?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What considerations are addressed in your risk management strategy (e.g., extended downtime, impaired functionality, loss of data, etc.)?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What cybersecurity language is included within third-party vendor contracts?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How do you evaluate the cybersecurity posture of your vendors?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How often are contracts reviewed?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How do your service level agreements address cyber incident notification?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What level of access do your third-party vendors have to your organization’s network?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What mechanisms or processes are in place to prevent malicious activity?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "Describe your patch and vulnerability management plan."
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What risk assessments are performed on network servers?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What processes are in place to proactively evaluate each server’s criticality and applicability to software patches?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What considerations are addressed in the plan’s risk management strategy (e.g., extended downtime, loss of data, impaired functionality, etc.)?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What is your method for tracking and identifying firmware vulnerabilities in your network?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How are IT and business continuity functions coordinated with physical security?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What processes do you have to ensure that your external dependencies (e.g., contractors, power, water, etc.) are integrated into your security and continuity planning programs?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How is the integrity of your critical data protected and validated?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What external entities have access to the database?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How do those entities report a breach of their systems to your office?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What essential functions are impacted by the incidents described in the scenario?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How does your organization maintain availability of key assets (e.g., network connectivity, etc.)?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "If primary communications are compromised, how do you provide information to internal and external entities?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "What policies and procedures does your organization use to decide when and how to restore backed-up data?"
+    },
+    {
+      "section": "Cyber Resilience",
+      "question": "How does your organization incorporate measures for ensuring the integrity of backup data before restoration?"
+    },
+    {
+      "section": "Accounts & Privileges",
+      "question": "Describe your organization’s employee off-boarding process."
+    },
+    {
+      "section": "Accounts & Privileges",
+      "question": "Is this process coordinated with IT and HR?"
+    },
+    {
+      "section": "Accounts & Privileges",
+      "question": "What additional actions are taken if the employee’s termination is contentious?"
+    },
+    {
+      "section": "Accounts & Privileges",
+      "question": "How does your organization retrieve all information system-related property (e.g., authentication key, system administration's handbook/manual, keys, identification cards, etc.) during the employment termination process?"
+    },
+    {
+      "section": "Accounts & Privileges",
+      "question": "What are your organization’s policies or procedures for IT account management?"
+    },
+    {
+      "section": "Accounts & Privileges",
+      "question": "What are the protocols for establishing, activating, modifying, disabling, and removing accounts?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "How are cyber incidents reported within your organization?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "What would trigger the reporting requirements established by regulation, law, and/or organization policy?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "What training have employees received regarding reporting requirements and your CIRP?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "What cybersecurity incident escalation criteria are defined in your CIRP?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "Who is responsible and what actions would they take based on the scenario?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "Who needs to be notified internally and externally according to the plan?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "When is leadership notified?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "Discuss your organization’s intrusion detection capabilities and analytics that alert you to a potential cyber incident."
+    },
+    {
+      "section": "Incident Identification",
+      "question": "What type of hardware and/or software does your organization use to detect and prevent malicious activity on your systems/network?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "How often is your organization’s data reviewed?"
+    },
+    {
+      "section": "Incident Identification",
+      "question": "How would you determine whether unauthorized manipulation of data has occurred?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "What are your processes for collecting evidence and maintaining the chain of custody during a cyber incident?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "At what point in the scenario would you contact law enforcement?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "How would a law enforcement investigation impact containment, eradication, and recovery efforts?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "At what point would you notify the Environmental Protection Agency (EPA) and CISA?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "What are the processes for contacting critical personnel outside of core hours?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "How do you proceed if critical personnel are unreachable or unavailable?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "How would a breach of <vendor(s)> affect your organization if they potentially have access to your information?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "What are the notification requirements to your organization for breaches?"
+    },
+    {
+      "section": "Incident Response",
+      "question": "Who is responsible for coordinating information across different organizational-level incidents?"
+    },
+    {
+      "section": "Recovery",
+      "question": "When does your organization determine a cyber incident is over?"
+    },
+    {
+      "section": "Recovery",
+      "question": "Who makes this decision?"
+    },
+    {
+      "section": "Recovery",
+      "question": "What post-incident activities would your organization conduct?"
+    },
+    {
+      "section": "Recovery",
+      "question": "What actions would your organization take if your IT/incident response staff could not confirm the integrity of your systems/data?"
+    },
+    {
+      "section": "Recovery",
+      "question": "What is the risk associated with re-activating critical business processes and systems?"
+    },
+    {
+      "section": "Recovery",
+      "question": "How long and costly is the process to completely rebuild these systems?"
+    },
+    {
+      "section": "Recovery",
+      "question": "What factors do you consider when making these decisions?"
+    },
+    {
+      "section": "Training & Exercises",
+      "question": "What training does your cybersecurity incident response team undergo to detect, analyze, and report malicious activity?"
+    },
+    {
+      "section": "Training & Exercises",
+      "question": "What additional training and/or exercise requirements do you require for your incident response staff?"
+    },
+    {
+      "section": "Training & Exercises",
+      "question": "How often does your organization exercise its CIRP?"
+    },
+    {
+      "section": "Training & Exercises",
+      "question": "Who is involved in the exercise?"
+    },
+    {
+      "section": "Training & Exercises",
+      "question": "How do your organization’s training and exercise efforts address both physical and cyber risks?"
+    },
+    {
+      "section": "Training & Exercises",
+      "question": "How often do senior staff/leadership participate in cybersecurity exercises?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "As a leader in your organization, what cybersecurity resilience goals have you set?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "How do these goals align with organizational objectives?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "What cybersecurity training is required for senior leadership?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "At what point would you activate your organization’s Emergency Operations Center?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "What is your role during a cyber incident?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "What information do you need to support your decision-making process?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "What are the gaps in your cybersecurity workforce?"
+    },
+    {
+      "section": "Senior Leaders",
+      "question": "How does your organization recruit, develop, and retain cybersecurity staff?"
+    },
+    {
+      "section": "Public Information",
+      "question": "What information are you sharing internally (e.g., employees, leadership)?"
+    },
+    {
+      "section": "Public Information",
+      "question": "What information are you sharing externally (e.g., residents, customers, vendors)?"
+    },
+    {
+      "section": "Public Information",
+      "question": "What training is provided to employees regarding reporting contact with the media?"
+    },
+    {
+      "section": "Public Information",
+      "question": "How do you build and maintain trust with your customers?"
+    },
+    {
+      "section": "Legal",
+      "question": "What is the role of the legal department during a cyber incident?"
+    },
+    {
+      "section": "Legal",
+      "question": "What are the potential legal issues based on the scenario?"
+    },
+    {
+      "section": "Legal",
+      "question": "What legal documentation should your organization have for cyber incidents?"
+    }
+  ]
+}

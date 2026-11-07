@@ -1,0 +1,299 @@
+[
+  {
+    "id": "frk_rq_1924abc206e759d86282c584",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.L Does the WWS use encryption to maintain the confidentiality of stored sensitive data?",
+    "identifier": "2.L",
+    "description": "EPA checklist question 2.L: Does the WWS use encryption to maintain the confidentiality of stored sensitive data?\n\nRecommendation (EPA): Do not store sensitive data, including credentials (i.e., usernames and passwords) in plain text files.\n\nCISA CPG 2.0 goal: 3.K Utilize Strong Encryption (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Encryption of stored sensitive data.\n\nCPG 1.0.1 practice 2.L Secure Sensitive Data. Outcome: Protect sensitive information from unauthorized access.. Risk addressed: Unsecured Credentials (T1552)\nSteal or Forge Kerberos Tickets (T1558)\nOS Credential Dumping (T1003)\nData from Information Repositories (ICS T0811)\nTheft of Operational Information (T0882). Scope: All passwords, credentials, secrets, and other sensitive or controlled information. NIST CSF: PR.DS-1, PR.DS-2, PR.DS-5. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/use-encryption.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 180
+  },
+  {
+    "id": "frk_rq_1ea967f78075ba7ceb175bd5",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.I Does the WWS provide/conduct annual cybersecurity awareness training for all WWS personnel that covers basic cybersecurity concepts?",
+    "identifier": "2.I",
+    "description": "EPA checklist question 2.I (EPA priority cybersecurity practice): Does the WWS provide/conduct annual cybersecurity awareness training for all WWS personnel that covers basic cybersecurity concepts?\n\nRecommendation (EPA): Conduct cybersecurity awareness training annually, at a minimum, to help all employees understand the importance of cybersecurity and how to prevent and respond to cyberattacks.\n\nCISA CPG 2.0 goal: 3.J Implement Cybersecurity Training (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Annual cybersecurity awareness training.\n\nCPG 1.0.1 practice 2.I Basic Cybersecurity Training. Outcome: Organizational users learn and perform more secure behaviors. Risk addressed: User Training (M1017, ICS M0917). Scope: All employees and contractors. NIST CSF: PR.AT-1. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/provide-at-least.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 150
+  },
+  {
+    "id": "frk_rq_23d2308efb9eaf154961c02d",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "1.D Does the WWS provide regular opportunities to strengthen communication and coordination between OT and IT personnel, including vendors?",
+    "identifier": "1.D",
+    "description": "EPA checklist question 1.D: Does the WWS provide regular opportunities to strengthen communication and coordination between OT and IT personnel, including vendors?\n\nRecommendation (EPA): Facilitate meetings between OT and IT personnel to provide opportunities for all parties to better understand organizational security needs and to strengthen working relationships.\n\nCISA CPG 2.0 goal: 1.A Establish Cybersecurity Responsibilities (Govern); also 1.B Manage Cybersecurity Oversight. The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: IT and OT coordination is part of CPG 2.0 1.A's OT guidance.\n\nCPG 1.0.1 practice 1.D Improving IT and OT Cybersecurity Relationships. Outcome: Improve OT cybersecurity and more rapidly and effectively respond to OT cyber incidents.. Risk addressed: Poor working relationships and mutual understanding between IT and OT cybersecurity can often result in increased risk for OT cybersecurity.. Scope: All IT and OT security personnel. NIST CSF: ID.GV-2. cost $, impact Medium, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/provide-regular-opportunities.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "1 - Identify",
+    "sortOrder": 40
+  },
+  {
+    "id": "frk_rq_27de9006ce4aafb66e2e6cc6",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.W Does the WWS ensure that assets connected to the public Internet expose no unnecessary exploitable services (e.g., remote desktop protocol)?",
+    "identifier": "2.W",
+    "description": "EPA checklist question 2.W (EPA priority cybersecurity practice): Does the WWS ensure that assets connected to the public Internet expose no unnecessary exploitable services (e.g., remote desktop protocol)?\n\nRecommendation (EPA): Eliminate unnecessary exposed ports and services on public-facing assets and regularly review.\n\nCISA CPG 2.0 goal: 3.S Secure Internet-Facing Devices (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Internet-facing assets expose no unnecessary services.\n\nCPG 1.0.1 practice 2.W No Exploitable Services on the Internet. Outcome: Unauthorized users cannot gain an initial system foothold by exploiting known weaknesses in public-facing assets.. Risk addressed: Active Scanning - Vulnerability Scanning (T1595.002)\nExploit Public-Facing Application (T1190, ICS T0819)\nExploitation of Remote Service (T1210, ICS T0866)\nExternal Remote Services (T1133, ICS T0822)\nRemote Services - Remote Desktop Protocol (T1021.001). Scope: IT and OT assets on the public internet. NIST CSF: PR.PT-4. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/ensure-that-assets.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 290
+  },
+  {
+    "id": "frk_rq_354a69f3674c91867f242813",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "1.C Does the WWS have a named role/position/title that is responsible for planning, resourcing, and executing OT-specific cybersecurity activities?",
+    "identifier": "1.C",
+    "description": "EPA checklist question 1.C: Does the WWS have a named role/position/title that is responsible for planning, resourcing, and executing OT-specific cybersecurity activities?\n\nRecommendation (EPA): Identify one role/position/title responsible for ensuring planning, resourcing, and execution of OT-specific cybersecurity activities.\n\nCISA CPG 2.0 goal: 1.A Establish Cybersecurity Responsibilities (Govern). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Named role accountable for OT cybersecurity.\n\nCPG 1.0.1 practice 1.C OT Cybersecurity Leadership. Outcome: A single leader is responsible and accountable for OT-specific cybersecurity within an organization with OT assets.. Risk addressed: Lack of accountability, investment, or effectiveness of OT cybersecurity program.. Scope: N/A. NIST CSF: ID.GV1, ID.GV-2. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/have-a-named-role-ot.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "1 - Identify",
+    "sortOrder": 30
+  },
+  {
+    "id": "frk_rq_35a6ed68ff16f5ccc7ace226",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "1.E Does the WWS patch or otherwise mitigate known vulnerabilities within the recommended timeframe?",
+    "identifier": "1.E",
+    "description": "EPA checklist question 1.E (EPA priority cybersecurity practice): Does the WWS patch or otherwise mitigate known vulnerabilities within the recommended timeframe?\n\nRecommendation (EPA): Identify and patch vulnerabilities in a risk-informed manner (e.g., critical assets first) as quickly as possible.\n\nCISA CPG 2.0 goal: 2.B Mitigate Known Vulnerabilities (Identify). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Known exploited vulnerabilities mitigated in time.\n\nCPG 1.0.1 practice 1.E Mitigating Known Vulnerabilities. Outcome: Reduce the likelihood of threat actors exploiting known vulnerabilities to breach organizational networks.. Risk addressed: Active Scanning - Vulnerability Scanning (T1595.002)\nExploit Public-Facing Application (T1190, ICS T0819)\nExploitation of Remote Service (T1210, ICS T0866)\nSupply Chain Compromise (T1195, ICS T0862)\nExternal Remote Services (T1133, ICS T0822). Scope: Internet-facing assets. NIST CSF: ID.RA-1, PR.IP-12, DE.CM-8, RS.MI-3, ID.RA-6, RS.AN-5. cost $, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/patch-or-otherwise.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "1 - Identify",
+    "sortOrder": 50
+  },
+  {
+    "id": "frk_rq_3932d6d5f0019fcc3c9ce972",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.J Does the WWS offer OT-specific cybersecurity training on at least an annual basis to personnel who use OT as part of their regular duties?",
+    "identifier": "2.J",
+    "description": "EPA checklist question 2.J: Does the WWS offer OT-specific cybersecurity training on at least an annual basis to personnel who use OT as part of their regular duties?\n\nRecommendation (EPA): Provide specialized OT-focused cybersecurity training to all personnel who use OT assets.\n\nCISA CPG 2.0 goal: 3.J Implement Cybersecurity Training (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: OT-specific annual training.\n\nCPG 1.0.1 practice 2.J OT Cybersecurity Training. Outcome: Personnel responsible for securing OT assets received specialized OT-focused cybersecurity training.. Risk addressed: User Training (M1017, ICS M0917). Scope: All personnel responsible for OT security. NIST CSF: PR.AT-2, PR.AT-3, PR.AT-5. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/offer-ot-specific.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 160
+  },
+  {
+    "id": "frk_rq_3b46965aacbba07c7f6bf774",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.M Does the WWS use email security controls to reduce common email-based threats, such as spoofing, phishing, and interception?",
+    "identifier": "2.M",
+    "description": "EPA checklist question 2.M: Does the WWS use email security controls to reduce common email-based threats, such as spoofing, phishing, and interception?\n\nRecommendation (EPA): Ensure that email security controls are enabled on all corporate email infrastructure.\n\nCISA CPG 2.0 goal: 3.L Enable Email Security (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Email security controls.\n\nCPG 1.0.1 practice 2.M Email Security. Outcome: Reduce risk from common email-based threats, such as spoofing, phishing, and interception.. Risk addressed: Phishing (T1566)\nBusiness Email Compromise. Scope: All organizational email infrastructure. NIST CSF: PR.DS-1, PR.DS-2, PR.DS-5. cost $, impact Medium, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/use-email-security.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 190
+  },
+  {
+    "id": "frk_rq_3e147f7acb94ab1f5bb29903",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.S Does the WWS have a written cybersecurity incident response (IR) plan for critical threat scenarios (e.g., disabled or manipulated process control systems, the loss or theft of operational or fin…",
+    "identifier": "2.S",
+    "description": "EPA checklist question 2.S (EPA priority cybersecurity practice): Does the WWS have a written cybersecurity incident response (IR) plan for critical threat scenarios (e.g., disabled or manipulated process control systems, the loss or theft of operational or financial data, exposure of sensitive information), which is regularly practiced and updated?\n\nRecommendation (EPA): Develop, practice, and update an IR plan for cybersecurity incidents that could impact WWS operations. Participate in discussion-based (e.g., TTX) and operations-based exercises (e.g., Drill) to improve responses to potential cyber incidents.\n\nCISA CPG 2.0 goal: 1.C Maintain Incident Response Plans (Govern). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Written cybersecurity incident response plan.\n\nCPG 1.0.1 practice 2.S Incident Response (IR) Plans. Outcome: Organizations maintain, practice, and update cybersecurity incident response plans for relevant threat scenarios.. Risk addressed: Inability to quickly and effectively contain, mitigate, and communicate about cybersecurity incidents.. Scope: Organization-wide. NIST CSF: PR.IP-9, PR.IP-10. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/have-a-written.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 250
+  },
+  {
+    "id": "frk_rq_430f6bed05bb2c6a57e69f5e",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.Q Does the WWS require approval before new software is installed or deployed?",
+    "identifier": "2.Q",
+    "description": "EPA checklist question 2.Q: Does the WWS require approval before new software is installed or deployed?\n\nRecommendation (EPA): Only allow Administrators to install new software on a WWS-issued asset.\n\nCISA CPG 2.0 goal: 3.P Maintain Hardware & Software Approval Process (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Approval before software installation.\n\nCPG 1.0.1 practice 2.Q Hardware and Software Approval Process. Outcome: Increase visibility into deployed technology assets, and reduce the likelihood of breach by users installing unapproved hardware, firmware, or software.. Risk addressed: Supply Chain Compromise (T1195, ICS T0862)\nHardware Additions (T1200)\nBrowser Extensions (T1176)\nTransient Cyber Asset (ICS T0864). Scope: IT and OT assets. NIST CSF: PR.IP-3. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/require-approval-before.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 230
+  },
+  {
+    "id": "frk_rq_47aa82248cbd8a674d571f0b",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.H Does the WWS require multi-factor authentication (MFA) wherever possible, but at a minimum to remotely access WWS Operational Technology (OT)/Information Technology (IT) networks?",
+    "identifier": "2.H",
+    "description": "EPA checklist question 2.H (EPA priority cybersecurity practice): Does the WWS require multi-factor authentication (MFA) wherever possible, but at a minimum to remotely access WWS Operational Technology (OT)/Information Technology (IT) networks?\n\nRecommendation (EPA): Deploy MFA as widely as possible for both operational technology (OT) and information technology (IT) networks. At a minimum, MFA should be used for remote access to the OT network.\n\nCISA CPG 2.0 goal: 3.F Implement Multifactor Authentication (MFA) (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Multifactor authentication.\n\nCPG 1.0.1 practice 2.H Phishing-Resistant Multifactor Authentication (MFA). Outcome: Add a critical, additional layer of security to protect assets accounts whose credentials have been compromised.. Risk addressed: Brute Force (T1110)\nRemote Services - Remote Desktop Protocol (T1021.001)\nRemote Services - SSH (T1021.004)\nValid Accounts (T1078, ICS T0859)\nExternal Remote Services (ICS T0822). Scope: IT and OT assets with remote access, such as workstations and human-machine interfaces (HMIs), where safe and technically capable. NIST CSF: PR.AC-7. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/require-multi-factor.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 140
+  },
+  {
+    "id": "frk_rq_4ef1e35bafffeaab9b9b6c25",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.K Does the WWS use effective encryption to maintain the confidentiality of data in transit?",
+    "identifier": "2.K",
+    "description": "EPA checklist question 2.K: Does the WWS use effective encryption to maintain the confidentiality of data in transit?\n\nRecommendation (EPA): When sending information and data, use Transport Layer Security (TLS) or Secure Socket Layer (SSL) encryption standards.\n\nCISA CPG 2.0 goal: 3.K Utilize Strong Encryption (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Encryption of data in transit.\n\nCPG 1.0.1 practice 2.K Strong and Agile Encryption. Outcome: Effective encryption deployed to maintain confidentiality of sensitive data and integrity of IT and OT traffic. Risk addressed: Adversary-in-the-Middle (T1557)\nAutomated Collection (T1119)\nNetwork Sniffing (T1040, ICS T0842)\nWireless Compromise (ICS T0860)\nWireless Sniffing (ICS T0887). Scope: All IT traffic and remote OT assets (those that communicate with external entities). NIST CSF: PR.DS-1, PR.DS-2. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/use-effective-encryption_0.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 170
+  },
+  {
+    "id": "frk_rq_66e08dd3ec6d36187b78b971",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "1.I Does the WWS include cybersecurity as an evaluation criterion for the procurement of OT and IT assets and services?",
+    "identifier": "1.I",
+    "description": "EPA checklist question 1.I: Does the WWS include cybersecurity as an evaluation criterion for the procurement of OT and IT assets and services?\n\nRecommendation (EPA): Include cybersecurity as an evaluation criterion when procuring assets and services. Where feasible, seek out systems that are secure by design and secure by default.\n\nCISA CPG 2.0 goal: 1.E Manage Risks From Managed Service Providers (Govern); also 3.P Maintain Hardware & Software Approval Process. The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Cybersecurity as a procurement criterion for OT/IT assets and services.\n\nCPG 1.0.1 practice 1.I Vendor/Supplier Cybersecurity Requirements. Outcome: Reduce risk by buying more secure products and services from more secure suppliers.. Risk addressed: Supply Chain Compromise (T1195, ICS T0862). Scope: Suppliers of IT and OT assets and services. NIST CSF: ID.SC-3. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/include-cybersecurity.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "1 - Identify",
+    "sortOrder": 60
+  },
+  {
+    "id": "frk_rq_700b85a86b2e9393691b3f70",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "4.A Does the WWS have a written procedure for reporting cybersecurity incidents, including how (e.g., phone call, Internet submission) and to whom (e.g., FBI or other law enforcement, CISA, state reg…",
+    "identifier": "4.A",
+    "description": "EPA checklist question 4.A: Does the WWS have a written procedure for reporting cybersecurity incidents, including how (e.g., phone call, Internet submission) and to whom (e.g., FBI or other law enforcement, CISA, state regulators, WaterISAC, cyber insurance provider)?*\n\nUnder the Cyber Incident Reporting for Critical Infrastructure Act of 2022 (CIRCIA), CISA is required to issue regulations, through notice-and-comment rulemaking, requiring covered entities to report covered cyber incidents and ransom payments made as a result of a ransomware attack to CISA. CISA’s Notice of Proposed Rulemaking proposes applying these requirements to at least some entities in the Water and Wastewater Sector. This recommendation will be revised as necessary when the CIRCIA Final Rule is issued.\n\nRecommendation (EPA): Document the procedure for reporting cybersecurity incidents to better aid law enforcement, receive assistance with response and recovery, and to promote water sector awareness of cybersecurity threats.\n\nCISA CPG 2.0 goal: 5.B Establish Incident Reporting Procedures (Respond). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Written incident reporting procedure.\n\nCPG 1.0.1 practice 4.A Incident Reporting. Outcome: CISA and other organizations are better able to provide assistance or understand the broader scope of a cyberattack.. Risk addressed: Without timely incident reporting, CISA and other groups are less able to assist affected organizations and lack critical insight into the broader threat landscape (such as whether a broader attack is occurring against a specific sector).. Scope: Organization-wide. NIST CSF: RS.CO-2, RS.CO-4. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/have-a-written-procedure.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "4 - Respond",
+    "sortOrder": 320
+  },
+  {
+    "id": "frk_rq_8b0aa4b178481ca35778e010",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.G Does the WWS detect and block repeated unsuccessful login attempts?",
+    "identifier": "2.G",
+    "description": "EPA checklist question 2.G: Does the WWS detect and block repeated unsuccessful login attempts?\n\nRecommendation (EPA): Enable System Administrator notification after a specific number of consecutive, unsuccessful login attempts in a short amount of time. At that point, future login attempts by the suspicious account should be blocked for a specified time or until re-enabled by an Administrator.\n\nCISA CPG 2.0 goal: 3.E Monitor Unsuccessful (Automated) Login Attempts (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Repeated unsuccessful logins detected and blocked.\n\nCPG 1.0.1 practice 2.G Detection of Unsuccessful (Automated) Login Attempts. Outcome: Protect organizations from automated, credential-based attacks.. Risk addressed: Brute Force - Password Guessing (T1110.001) \nBrute Force - Password Cracking (T1110.002) \nBrute Force - Password Spraying (T1110.003) \nBrute Force - Credential Stuffing (T1110.004). Scope: Password-protected IT and OT assets, where safe and technically capable. NIST CSF: PR.AC-7. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/detect-and-block.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 130
+  },
+  {
+    "id": "frk_rq_92bd83da68957a3cffeea2ba",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "1.A Does the WWS maintain an updated inventory of all OT and IT network assets?",
+    "identifier": "1.A",
+    "description": "EPA checklist question 1.A (EPA priority cybersecurity practice): Does the WWS maintain an updated inventory of all OT and IT network assets?\n\nRecommendation (EPA): Regularly review (no less than quarterly) and maintain a list of all OT and IT assets with an IP address. This includes third-party and legacy (i.e., older) equipment.\n\nCISA CPG 2.0 goal: 2.A Manage Organizational Assets (Identify). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Asset inventory of OT and IT assets.\n\nCPG 1.0.1 practice 1.A Asset Inventory. Outcome: Better identify known, unknown (shadow), and unmanaged assets, and more rapidly detect and respond to new vulnerabilities.. Risk addressed: Hardware Additions (T1200)\nExploit Public-Facing Application (T0819, ICS T0819)\nInternet Accessible Device (ICS T0883). Scope: IT and OT assets. NIST CSF: ID.AM-1. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/maintain-an-updated-inventory.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "1 - Identify",
+    "sortOrder": 10
+  },
+  {
+    "id": "frk_rq_96d285c2fac17374f36090be",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.U Does the WWS protect security logs from unauthorized access and tampering?",
+    "identifier": "2.U",
+    "description": "EPA checklist question 2.U: Does the WWS protect security logs from unauthorized access and tampering?\n\nRecommendation (EPA): Store security logs in a central system or database that can only be accessed by authorized and authenticated users.\n\nCISA CPG 2.0 goal: 3.Q Maintain Log Collection & Storage (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Security logs protected from tampering.\n\nCPG 1.0.1 practice 2.U Secure Log Storage. Outcome: Organizations' security logs are protected from unauthorized access and tampering.. Risk addressed: Indicator Removal on Host - Clear Windows Event Logs (T1070.001)\nIndicator Removal on Host - Clear Linux or Mac System Logs (T1070.002)\nIndicator Removal on Host - File Deletion (T1070.004)\nIndicator Removal on Host (ICS T0872). Scope: IT and OT assets. NIST CSF: PR.PT-1. cost $$$, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/protect-security-logs.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 270
+  },
+  {
+    "id": "frk_rq_9a4f62115ca3a190524796d7",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.T Does the WWS collect security logs (e.g., system and network access, malware detection) to use in both incident detection and investigation?",
+    "identifier": "2.T",
+    "description": "EPA checklist question 2.T: Does the WWS collect security logs (e.g., system and network access, malware detection) to use in both incident detection and investigation?\n\nRecommendation (EPA): Collect and store logs and/or network traffic data to aid in detecting cyberattacks and investigating suspicious activity.\n\nCISA CPG 2.0 goal: 3.Q Maintain Log Collection & Storage (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Security log collection.\n\nCPG 1.0.1 practice 2.T Log Collection. Outcome: Achieve better visibility to detect and effectively respond to cyberattacks.. Risk addressed: Delayed, insufficient, or incomplete ability to detect and respond to potential cyber incidents \nImpair Defenses (T1562). Scope: IT and OT assets. NIST CSF: PR.PT-1. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/collect-security-logs.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 260
+  },
+  {
+    "id": "frk_rq_9b4c7c627816a36d6ca93d01",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.X Does the WWS eliminate connections between OT assets and the Internet?",
+    "identifier": "2.X",
+    "description": "EPA checklist question 2.X (EPA priority cybersecurity practice): Does the WWS eliminate connections between OT assets and the Internet?\n\nRecommendation (EPA): Eliminate OT asset connections to the public Internet unless explicitly required for operations.\n\nCISA CPG 2.0 goal: 3.S Secure Internet-Facing Devices (Protect); also 3.I Implement Logical/Physical Network Segmentation. The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: OT assets not connected to the Internet.\n\nCPG 1.0.1 practice 2.X Limit OT Connections to Public Internet. Outcome: Reduce the risk of threat actors exploiting or interrupting OT assets connected to the public internet.. Risk addressed: Active Scanning - Vulnerability Scanning (T1595.002)\nExploit Public-Facing Application (T1190, ICS T0819)\nExploitation of Remote Service (T1210, ICS T0866)\nExternal Remote Services (T1133, ICS T0822). Scope: OT assets on the public internet. NIST CSF: PR.PT-4. cost $$$, impact Medium, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/eliminate-connections-between.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 300
+  },
+  {
+    "id": "frk_rq_a961b4581ccee2517aa249c7",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "5.A Does the WWS have the ability to safely and effectively recover from a cybersecurity incident?",
+    "identifier": "5.A",
+    "description": "EPA checklist question 5.A: Does the WWS have the ability to safely and effectively recover from a cybersecurity incident?\n\nRecommendation (EPA): Develop, maintain, and execute plans to recover and restore to service business- or mission-critical assets or systems that might be impacted by a cybersecurity incident.\n\nCISA CPG 2.0 goal: 6.A Execute Incident Recovery Plan (Recover); also 3.O Maintain System Backups & Restoration Ability. The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Ability to recover safely from an incident.\n\nCPG 1.0.1 practice 5.A Incident Planning and Preparedness. Outcome: Organizations are capable of safely and effectively recovering from a cybersecurity incident.. Risk addressed: Disruption to availability of an asset, service, or system.. Scope: IT and OT assets. NIST CSF: RC.RP-1, PR.IP-9, PR.IP-10. cost $, impact Medium, complexity low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/have-the-ability.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "5 - Recover",
+    "sortOrder": 330
+  },
+  {
+    "id": "frk_rq_b2327ee5a60c78afd23eff49",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.O Does the WWS maintain current documentation detailing the set-up and settings (i.e., configuration) of critical OT and IT assets?",
+    "identifier": "2.O",
+    "description": "EPA checklist question 2.O (EPA priority cybersecurity practice): Does the WWS maintain current documentation detailing the set-up and settings (i.e., configuration) of critical OT and IT assets?\n\nRecommendation (EPA): Maintain accurate documentation of the original and current configuration of OT and IT assets, including software and firmware version.\n\nCISA CPG 2.0 goal: 3.N Establish Change Management Processes (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Current configuration documentation (CPG 1.0.1 device configuration documentation).\n\nCPG 1.0.1 practice 2.O Document device configurations. Outcome: More efficiently and effectively manage, respond to, and recover from cyberattacks against the organization and maintain service continuity.. Risk addressed: Delayed, insufficient, or incomplete ability to maintain or restore functionality of critical devices and service operations.. Scope: IT and OT assets. NIST CSF: PR.IP-1. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/maintain-current-documentation.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 210
+  },
+  {
+    "id": "frk_rq_c8a6f2d42895ef49d2fa8b27",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.F Does the WWS segment OT and IT networks and deny connections to the OT network by default unless explicitly allowed (e.g., by IP address and port)?",
+    "identifier": "2.F",
+    "description": "EPA checklist question 2.F: Does the WWS segment OT and IT networks and deny connections to the OT network by default unless explicitly allowed (e.g., by IP address and port)?\n\nRecommendation (EPA): Require connections between the OT and IT networks to pass through an intermediary, such as a firewall, bastion host, jump box, or demilitarized zone, which is monitored and logged.\n\nCISA CPG 2.0 goal: 3.I Implement Logical/Physical Network Segmentation (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: OT and IT network segmentation with deny-by-default.\n\nCPG 1.0.1 practice 2.F Network Segmentation. Outcome: Reduce the likelihood of adversaries accessing the OT network after compromising the IT network.. Risk addressed: Network Service Discovery (T1046)\nTrusted Relationship (T1199)\nNetwork Connection Enumeration (ICS T0840)\nNetwork Sniffing (T1040, ICS T0842). Scope: IT and OT assets, where safe and technically capable. NIST CSF: PR.AC-5, PR.PT-4, DE.CM-1. cost $$$, impact High, complexity High.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/segment-ot-and-it.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 120
+  },
+  {
+    "id": "frk_rq_cef430018a0c9ea1a155e94e",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.N Does the WWS disable Microsoft Office macros, or similar embedded code, by default on all assets?",
+    "identifier": "2.N",
+    "description": "EPA checklist question 2.N: Does the WWS disable Microsoft Office macros, or similar embedded code, by default on all assets?\n\nRecommendation (EPA): Disable embedded macros and similar executable code by default on all assets.\n\nCISA CPG 2.0 goal: 3.M Disable Autorun & Macros By Default (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Macros and embedded code disabled by default.\n\nCPG 1.0.1 practice 2.N Disable Macros by Default. Outcome: Reduce the risk from embedded macros and similar executive code, a common and highly effective threat actor TTP.. Risk addressed: Phishing - Spearphishing Attachment (T1566.001)\nUser Execution - Malicious FIle (T1204.002). Scope: IT assets. NIST CSF: PR.IP-1, PR.IP-3. cost $, impact Medium, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/disable-microsoft-office.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 200
+  },
+  {
+    "id": "frk_rq_d329a1b6a703f9748f62e15d",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.E Does the WWS separate user and privileged (e.g., System Administrator) accounts?",
+    "identifier": "2.E",
+    "description": "EPA checklist question 2.E (EPA priority cybersecurity practice): Does the WWS separate user and privileged (e.g., System Administrator) accounts?\n\nRecommendation (EPA): Restrict System Administrator privileges to separate user accounts for administrative actions only and evaluate administrative privileges on a recurring basis to ensure accurate information for the individuals who have these privileges.\n\nCISA CPG 2.0 goal: 3.G Administrators Maintain Separate User And Privileged Accounts (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Separate user and privileged accounts.\n\nCPG 1.0.1 practice 2.E Separating User and Privileged Accounts. Outcome: Make it harder for threat actors to gain access to administrator or privileged accounts, even if common user accounts are compromised.. Risk addressed: Valid Accounts (T1078, ICS T0859). Scope: IT and OT assets, where safe and technically capable. NIST CSF: PR.AC-4. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/separate-user.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 110
+  },
+  {
+    "id": "frk_rq_d610dcf1466917b701a10716",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.C Does the WWS require unique and separate credentials for users to access OT and IT networks?",
+    "identifier": "2.C",
+    "description": "EPA checklist question 2.C (EPA priority cybersecurity practice): Does the WWS require unique and separate credentials for users to access OT and IT networks?\n\nRecommendation (EPA): Require a single user to have two different usernames and passwords; one account to access the IT network, and the other account to access the OT network to reduce the risk of an attacker being able to move between both networks using a single login.\n\nCISA CPG 2.0 goal: 3.C Create Unique Credentials (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Unique credentials for OT and IT access.\n\nCPG 1.0.1 practice 2.C Unique Credentials. Outcome: Attackers are unable to reuse compromised credentials to move laterally across the organization, particularly between IT and OT networks.. Risk addressed: Valid Accounts (T1078, ICS T0859)\nBrute Force - Password Guessing (T1110.001). Scope: IT and OT assets. NIST CSF: PR.AC-1. cost $$, impact Medium, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/require-unique.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 90
+  },
+  {
+    "id": "frk_rq_d6938dc64f1d98cab0e9589a",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "1.B Does the WWS have a named role/position/title that is responsible for planning, resourcing, and executing cybersecurity activities within the WWS?",
+    "identifier": "1.B",
+    "description": "EPA checklist question 1.B (EPA priority cybersecurity practice): Does the WWS have a named role/position/title that is responsible for planning, resourcing, and executing cybersecurity activities within the WWS?\n\nRecommendation (EPA): Identify one role/position/title responsible for cybersecurity within the WWS. Whoever fills this role/position/title is then in charge of all WWS cybersecurity activities.\n\nCISA CPG 2.0 goal: 1.A Establish Cybersecurity Responsibilities (Govern). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Named role accountable for cybersecurity.\n\nCPG 1.0.1 practice 1.B Organizational Cybersecurity Leadership. Outcome: A single leader is responsible and accountable for cybersecurity within an organization.. Risk addressed: Lack of sufficient cybersecurity accountability, investment, or effectiveness.. Scope: N/A. NIST CSF: ID.GV-1, ID.GV-2. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/have-a-named-role.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "1 - Identify",
+    "sortOrder": 20
+  },
+  {
+    "id": "frk_rq_dde38bd714de92b504d91ac4",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.D Does the WWS immediately disable access to an account or network when access is no longer required due to retirement, change of role, termination, or other factors?",
+    "identifier": "2.D",
+    "description": "EPA checklist question 2.D (EPA priority cybersecurity practice): Does the WWS immediately disable access to an account or network when access is no longer required due to retirement, change of role, termination, or other factors?\n\nRecommendation (EPA): Terminate access immediately to accounts or networks upon a change in an individual’s status making access unnecessary (i.e., retirement, change in position, etc.).\n\nCISA CPG 2.0 goal: 3.D Revoke Credentials For Departing Staff (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Access disabled when no longer needed.\n\nCPG 1.0.1 practice 2.D Revoking Credentials for Departing Employees. Outcome: Prevent unauthorized access to organizational accounts or resources by former employees.. Risk addressed: Valid Accounts (T1078, ICS T0859). Scope: Departing/Departed Employees. NIST CSF: PR.AC-1. cost $, impact Medium, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/immediately-disable-access.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 100
+  },
+  {
+    "id": "frk_rq_e29fa7fa0c8e664a3c9f3f83",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.R Does the WWS backup systems necessary for operations (e.g., network configurations, PLC logic, engineering drawings, personnel records) on a regular schedule, store backups separately from the so…",
+    "identifier": "2.R",
+    "description": "EPA checklist question 2.R (EPA priority cybersecurity practice): Does the WWS backup systems necessary for operations (e.g., network configurations, PLC logic, engineering drawings, personnel records) on a regular schedule, store backups separately from the source systems, and test backups on a regular basis?\n\nRecommendation (EPA): Regularly backup OT/IT systems so you can recover to a known and safe state in the event of a compromise. Test backup procedures and isolate backups from network connections. Implement the NIST 3-2-1 rule: \n3) Keep three copies: one primary and two backups; \n2) Keep the backups on two different media types; \n1) Store one copy offsite.\n\nCISA CPG 2.0 goal: 3.O Maintain System Backups & Restoration Ability (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Backups of systems necessary for operations.\n\nCPG 1.0.1 practice 2.R System Backups. Outcome: Organizations reduce the likelihood and duration of data loss at loss of service delivery or operations.. Risk addressed: Data Destruction (T1485, ICS T0809)\nData Encrypted for Impact (T1486)\nDisk Wipe (T1561)\nInhibit System Recovery (T1490)\nDenial of Control (ICS T0813)\nDenial/Loss of View (ICS T0815, T0829)\nLoss of Availability (T0826)\nLoss/Manipulation of Control (T0828, T0831). Scope: IT and OT assets necessary for business operations. NIST CSF: PR.IP-4. cost $$, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/backup-systems-necessary_0.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 240
+  },
+  {
+    "id": "frk_rq_e5b35de3636619d1bfa63c6f",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.P Does the WWS maintain updated documentation describing network topology (i.e., connections between all network components) across WWS OT and IT networks?",
+    "identifier": "2.P",
+    "description": "EPA checklist question 2.P: Does the WWS maintain updated documentation describing network topology (i.e., connections between all network components) across WWS OT and IT networks?\n\nRecommendation (EPA): Maintain complete and accurate documentation of all WWS OT and IT network topologies to facilitate incident response and recovery.\n\nCISA CPG 2.0 goal: 2.E Document Network Topology (Identify). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Network topology documentation.\n\nCPG 1.0.1 practice 2.P Document Network Topology. Outcome: More efficiently and effectively respond to cyberattacks and maintain service continuity.. Risk addressed: Incomplete or inaccurate understanding of network topology inhibits effective incident response and recovery.. Scope: All IT and OT networks. NIST CSF: PR.IP-1. cost $$, impact Medium, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/maintain-updated-documentation.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 220
+  },
+  {
+    "id": "frk_rq_f394860bb92af24f961453c8",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.B Does the WWS require a minimum length for passwords?",
+    "identifier": "2.B",
+    "description": "EPA checklist question 2.B (EPA priority cybersecurity practice): Does the WWS require a minimum length for passwords?\n\nRecommendation (EPA): Implement a minimum length requirement for passwords through a policy and/or administrative controls set in the system.\n\nCISA CPG 2.0 goal: 3.B Establish Minimum Password Strength (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Minimum password length.\n\nCPG 1.0.1 practice 2.B Minimum Password Strength. Outcome: Organizational passwords are harder for threat actors to guess or crack.. Risk addressed: Brute Force - Password Guessing (T1110.001) \nBrute Force - Password Cracking (T1110.002) \nBrute Force - Password Spraying (T1110.003) \nBrute Force - Credential Stuffing (T1110.004). Scope: Password-protected IT and Windows-based OT assets. NIST CSF: PR.AC-1. cost $, impact High, complexity Low.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/require-a-minimum.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 80
+  },
+  {
+    "id": "frk_rq_f5228c3eae0fad2bc7b87b47",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "3.A Does the WWS keep a list of threats and adversary tactics, techniques, and procedures (TTPs) for cyberattacks relevant to the WWS?",
+    "identifier": "3.A",
+    "description": "EPA checklist question 3.A: Does the WWS keep a list of threats and adversary tactics, techniques, and procedures (TTPs) for cyberattacks relevant to the WWS?\n\nRecommendation (EPA): Receive CISA alerts, prioritize the Known Exploited Vulnerabilities (KEV) list, and maintain documentation of TTPs relevant to the WWS.\n\nCISA CPG 2.0 goal: 4.B Identify Adverse Events (Detect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Threat and TTP list relevant to the utility.\n\nCPG 1.0.1 practice 3.A Detecting Relevant Threats and TTPs. Outcome: Organizations are aware of and able to detect relevant threats and TTPs.. Risk addressed: Without the knowledge of relevant threats and ability to detect them, organizations risk that threat actors may exist undetected in their networks for long periods.. Scope: N/A. NIST CSF: ID.RA-3, DE.CM-1. cost $$$, impact Medium, complexity High.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/keep-a-list.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "3 - Detect",
+    "sortOrder": 310
+  },
+  {
+    "id": "frk_rq_f8c22cafbbab50c9644cb59e",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.V Does the WWS prohibit the connection of unauthorized hardware (e.g., USB devices, removable media, laptops brought in by others) to OT and IT assets?",
+    "identifier": "2.V",
+    "description": "EPA checklist question 2.V (EPA priority cybersecurity practice): Does the WWS prohibit the connection of unauthorized hardware (e.g., USB devices, removable media, laptops brought in by others) to OT and IT assets?\n\nRecommendation (EPA): When feasible, remove, disable, or otherwise secure physical ports (e.g., USB ports on a laptop) to prevent unauthorized assets from connecting.\n\nCISA CPG 2.0 goal: 3.R Prohibit Connection Of Unauthorized Devices (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Unauthorized hardware connections prohibited.\n\nCPG 1.0.1 practice 2.V Prohibit Connection of Unauthorized Devices. Outcome: Prevent malicious actors from achieving initial access or data exfiltration via unauthorized portable media devices.. Risk addressed: Hardware Additions (T1200)\nReplication Through Removable Media (T1091, ICS T0847). Scope: IT and OT assets. NIST CSF: PR.PT-2. cost $$$, impact High, complexity High.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/prohibit-the-connection_0.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 280
+  },
+  {
+    "id": "frk_rq_fea88f529a43ed9025acee02",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "name": "2.A Does the WWS change default passwords?",
+    "identifier": "2.A",
+    "description": "EPA checklist question 2.A (EPA priority cybersecurity practice): Does the WWS change default passwords?\n\nRecommendation (EPA): Change all default manufacturer or vendor passwords before equipment or software is put into service.\n\nCISA CPG 2.0 goal: 3.A Change Default Passwords (Protect). The control and its evidence task are shared with the CPG 2.0 framework, so evidence collected once counts for both. Crosswalk note: Default passwords changed.\n\nCPG 1.0.1 practice 2.A Changing Default Passwords. Outcome: Prevent threat actors from using default passwords to achieve initial access or move laterally in a network.. Risk addressed: Valid Accounts - Default Accounts (T1078.001)\nValid Accounts (ICS T0859). Scope: Password-protected IT assets and newly acquired OT assets.. NIST CSF: PR.AC-1. cost $, impact High, complexity Medium.\n\nEPA fact sheet: https://www.epa.gov/system/files/documents/2024-07/change-default-passwords.pdf\n\nSource: EPA Water Cybersecurity Assessment Tool 3.1 (public domain); CISA CPG 1.0.1 component listing (public domain); crosswalk to CISA CPG 2.0 by BomberJacket Networks.",
+    "requirementFamily": "2 - Protect",
+    "sortOrder": 70
+  }
+]

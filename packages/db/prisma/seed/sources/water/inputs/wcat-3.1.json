@@ -1,0 +1,308 @@
+{
+  "source": "EPA Water Cybersecurity Assessment Tool (WCAT) 3.1, EPA Cybersecurity Checklist for Drinking Water and Wastewater Systems (public domain)",
+  "answerOptions": [
+    "Yes",
+    "No",
+    "In Progress",
+    "Not Applicable"
+  ],
+  "items": [
+    {
+      "id": "1.A",
+      "function": "Identify",
+      "functionNumber": 1,
+      "question": "Does the WWS maintain an updated inventory of all OT and IT network assets?",
+      "epaPriority": true,
+      "recommendation": "Regularly review (no less than quarterly) and maintain a list of all OT and IT assets with an IP address. This includes third-party and legacy (i.e., older) equipment.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/maintain-an-updated-inventory.pdf"
+    },
+    {
+      "id": "1.B",
+      "function": "Identify",
+      "functionNumber": 1,
+      "question": "Does the WWS have a named role/position/title that is responsible for planning, resourcing, and executing cybersecurity activities within the WWS?",
+      "epaPriority": true,
+      "recommendation": "Identify one role/position/title responsible for cybersecurity within the WWS. Whoever fills this role/position/title is then in charge of all WWS cybersecurity activities.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/have-a-named-role.pdf"
+    },
+    {
+      "id": "1.C",
+      "function": "Identify",
+      "functionNumber": 1,
+      "question": "Does the WWS have a named role/position/title that is responsible for planning, resourcing, and executing OT-specific cybersecurity activities?",
+      "epaPriority": false,
+      "recommendation": "Identify one role/position/title responsible for ensuring planning, resourcing, and execution of OT-specific cybersecurity activities.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/have-a-named-role-ot.pdf"
+    },
+    {
+      "id": "1.D",
+      "function": "Identify",
+      "functionNumber": 1,
+      "question": "Does the WWS provide regular opportunities to strengthen communication and coordination between OT and IT personnel, including vendors?",
+      "epaPriority": false,
+      "recommendation": "Facilitate meetings between OT and IT personnel to provide opportunities for all parties to better understand organizational security needs and to strengthen working relationships.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/provide-regular-opportunities.pdf"
+    },
+    {
+      "id": "1.E",
+      "function": "Identify",
+      "functionNumber": 1,
+      "question": "Does the WWS patch or otherwise mitigate known vulnerabilities within the recommended timeframe?",
+      "epaPriority": true,
+      "recommendation": "Identify and patch vulnerabilities in a risk-informed manner (e.g., critical assets first) as quickly as possible.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/patch-or-otherwise.pdf"
+    },
+    {
+      "id": "1.I",
+      "function": "Identify",
+      "functionNumber": 1,
+      "question": "Does the WWS include cybersecurity as an evaluation criterion for the procurement of OT and IT assets and services?",
+      "epaPriority": false,
+      "recommendation": "Include cybersecurity as an evaluation criterion when procuring assets and services. Where feasible, seek out systems that are secure by design and secure by default.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/include-cybersecurity.pdf"
+    },
+    {
+      "id": "2.A",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS change default passwords?",
+      "epaPriority": true,
+      "recommendation": "Change all default manufacturer or vendor passwords before equipment or software is put into service.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/change-default-passwords.pdf"
+    },
+    {
+      "id": "2.B",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS require a minimum length for passwords?",
+      "epaPriority": true,
+      "recommendation": "Implement a minimum length requirement for passwords through a policy and/or administrative controls set in the system.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/require-a-minimum.pdf"
+    },
+    {
+      "id": "2.C",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS require unique and separate credentials for users to access OT and IT networks?",
+      "epaPriority": true,
+      "recommendation": "Require a single user to have two different usernames and passwords; one account to access the IT network, and the other account to access the OT network to reduce the risk of an attacker being able to move between both networks using a single login.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/require-unique.pdf"
+    },
+    {
+      "id": "2.D",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS immediately disable access to an account or network when access is no longer required due to retirement, change of role, termination, or other factors?",
+      "epaPriority": true,
+      "recommendation": "Terminate access immediately to accounts or networks upon a change in an individual’s status making access unnecessary (i.e., retirement, change in position, etc.).",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/immediately-disable-access.pdf"
+    },
+    {
+      "id": "2.E",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS separate user and privileged (e.g., System Administrator) accounts?",
+      "epaPriority": true,
+      "recommendation": "Restrict System Administrator privileges to separate user accounts for administrative actions only and evaluate administrative privileges on a recurring basis to ensure accurate information for the individuals who have these privileges.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/separate-user.pdf"
+    },
+    {
+      "id": "2.F",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS segment OT and IT networks and deny connections to the OT network by default unless explicitly allowed (e.g., by IP address and port)?",
+      "epaPriority": false,
+      "recommendation": "Require connections between the OT and IT networks to pass through an intermediary, such as a firewall, bastion host, jump box, or demilitarized zone, which is monitored and logged.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/segment-ot-and-it.pdf"
+    },
+    {
+      "id": "2.G",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS detect and block repeated unsuccessful login attempts?",
+      "epaPriority": false,
+      "recommendation": "Enable System Administrator notification after a specific number of consecutive, unsuccessful login attempts in a short amount of time. At that point, future login attempts by the suspicious account should be blocked for a specified time or until re-enabled by an Administrator.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/detect-and-block.pdf"
+    },
+    {
+      "id": "2.H",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS require multi-factor authentication (MFA) wherever possible, but at a minimum to remotely access WWS Operational Technology (OT)/Information Technology (IT) networks?",
+      "epaPriority": true,
+      "recommendation": "Deploy MFA as widely as possible for both operational technology (OT) and information technology (IT) networks. At a minimum, MFA should be used for remote access to the OT network.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/require-multi-factor.pdf"
+    },
+    {
+      "id": "2.I",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS provide/conduct annual cybersecurity awareness training for all WWS personnel that covers basic cybersecurity concepts?",
+      "epaPriority": true,
+      "recommendation": "Conduct cybersecurity awareness training annually, at a minimum, to help all employees understand the importance of cybersecurity and how to prevent and respond to cyberattacks.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/provide-at-least.pdf"
+    },
+    {
+      "id": "2.J",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS offer OT-specific cybersecurity training on at least an annual basis to personnel who use OT as part of their regular duties?",
+      "epaPriority": false,
+      "recommendation": "Provide specialized OT-focused cybersecurity training to all personnel who use OT assets.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/offer-ot-specific.pdf"
+    },
+    {
+      "id": "2.K",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS use effective encryption to maintain the confidentiality of data in transit?",
+      "epaPriority": false,
+      "recommendation": "When sending information and data, use Transport Layer Security (TLS) or Secure Socket Layer (SSL) encryption standards.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/use-effective-encryption_0.pdf"
+    },
+    {
+      "id": "2.L",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS use encryption to maintain the confidentiality of stored sensitive data?",
+      "epaPriority": false,
+      "recommendation": "Do not store sensitive data, including credentials (i.e., usernames and passwords) in plain text files.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/use-encryption.pdf"
+    },
+    {
+      "id": "2.M",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS use email security controls to reduce common email-based threats, such as spoofing, phishing, and interception?",
+      "epaPriority": false,
+      "recommendation": "Ensure that email security controls are enabled on all corporate email infrastructure.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/use-email-security.pdf"
+    },
+    {
+      "id": "2.N",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS disable Microsoft Office macros, or similar embedded code, by default on all assets?",
+      "epaPriority": false,
+      "recommendation": "Disable embedded macros and similar executable code by default on all assets.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/disable-microsoft-office.pdf"
+    },
+    {
+      "id": "2.O",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS maintain current documentation detailing the set-up and settings (i.e., configuration) of critical OT and IT assets?",
+      "epaPriority": true,
+      "recommendation": "Maintain accurate documentation of the original and current configuration of OT and IT assets, including software and firmware version.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/maintain-current-documentation.pdf"
+    },
+    {
+      "id": "2.P",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS maintain updated documentation describing network topology (i.e., connections between all network components) across WWS OT and IT networks?",
+      "epaPriority": false,
+      "recommendation": "Maintain complete and accurate documentation of all WWS OT and IT network topologies to facilitate incident response and recovery.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/maintain-updated-documentation.pdf"
+    },
+    {
+      "id": "2.Q",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS require approval before new software is installed or deployed?",
+      "epaPriority": false,
+      "recommendation": "Only allow Administrators to install new software on a WWS-issued asset.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/require-approval-before.pdf"
+    },
+    {
+      "id": "2.R",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS backup systems necessary for operations (e.g., network configurations, PLC logic, engineering drawings, personnel records) on a regular schedule, store backups separately from the source systems, and test backups on a regular basis?",
+      "epaPriority": true,
+      "recommendation": "Regularly backup OT/IT systems so you can recover to a known and safe state in the event of a compromise. Test backup procedures and isolate backups from network connections. Implement the NIST 3-2-1 rule: \n3) Keep three copies: one primary and two backups; \n2) Keep the backups on two different media types; \n1) Store one copy offsite.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/backup-systems-necessary_0.pdf"
+    },
+    {
+      "id": "2.S",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS have a written cybersecurity incident response (IR) plan for critical threat scenarios (e.g., disabled or manipulated process control systems, the loss or theft of operational or financial data, exposure of sensitive information), which is regularly practiced and updated?",
+      "epaPriority": true,
+      "recommendation": "Develop, practice, and update an IR plan for cybersecurity incidents that could impact WWS operations. Participate in discussion-based (e.g., TTX) and operations-based exercises (e.g., Drill) to improve responses to potential cyber incidents.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/have-a-written.pdf"
+    },
+    {
+      "id": "2.T",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS collect security logs (e.g., system and network access, malware detection) to use in both incident detection and investigation?",
+      "epaPriority": false,
+      "recommendation": "Collect and store logs and/or network traffic data to aid in detecting cyberattacks and investigating suspicious activity.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/collect-security-logs.pdf"
+    },
+    {
+      "id": "2.U",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS protect security logs from unauthorized access and tampering?",
+      "epaPriority": false,
+      "recommendation": "Store security logs in a central system or database that can only be accessed by authorized and authenticated users.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/protect-security-logs.pdf"
+    },
+    {
+      "id": "2.V",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS prohibit the connection of unauthorized hardware (e.g., USB devices, removable media, laptops brought in by others) to OT and IT assets?",
+      "epaPriority": true,
+      "recommendation": "When feasible, remove, disable, or otherwise secure physical ports (e.g., USB ports on a laptop) to prevent unauthorized assets from connecting.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/prohibit-the-connection_0.pdf"
+    },
+    {
+      "id": "2.W",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS ensure that assets connected to the public Internet expose no unnecessary exploitable services (e.g., remote desktop protocol)?",
+      "epaPriority": true,
+      "recommendation": "Eliminate unnecessary exposed ports and services on public-facing assets and regularly review.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/ensure-that-assets.pdf"
+    },
+    {
+      "id": "2.X",
+      "function": "Protect",
+      "functionNumber": 2,
+      "question": "Does the WWS eliminate connections between OT assets and the Internet?",
+      "epaPriority": true,
+      "recommendation": "Eliminate OT asset connections to the public Internet unless explicitly required for operations.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/eliminate-connections-between.pdf"
+    },
+    {
+      "id": "3.A",
+      "function": "Detect",
+      "functionNumber": 3,
+      "question": "Does the WWS keep a list of threats and adversary tactics, techniques, and procedures (TTPs) for cyberattacks relevant to the WWS?",
+      "epaPriority": false,
+      "recommendation": "Receive CISA alerts, prioritize the Known Exploited Vulnerabilities (KEV) list, and maintain documentation of TTPs relevant to the WWS.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/keep-a-list.pdf"
+    },
+    {
+      "id": "4.A",
+      "function": "Respond",
+      "functionNumber": 4,
+      "question": "Does the WWS have a written procedure for reporting cybersecurity incidents, including how (e.g., phone call, Internet submission) and to whom (e.g., FBI or other law enforcement, CISA, state regulators, WaterISAC, cyber insurance provider)?*\n\nUnder the Cyber Incident Reporting for Critical Infrastructure Act of 2022 (CIRCIA), CISA is required to issue regulations, through notice-and-comment rulemaking, requiring covered entities to report covered cyber incidents and ransom payments made as a result of a ransomware attack to CISA. CISA’s Notice of Proposed Rulemaking proposes applying these requirements to at least some entities in the Water and Wastewater Sector. This recommendation will be revised as necessary when the CIRCIA Final Rule is issued.",
+      "epaPriority": false,
+      "recommendation": "Document the procedure for reporting cybersecurity incidents to better aid law enforcement, receive assistance with response and recovery, and to promote water sector awareness of cybersecurity threats.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/have-a-written-procedure.pdf"
+    },
+    {
+      "id": "5.A",
+      "function": "Recover",
+      "functionNumber": 5,
+      "question": "Does the WWS have the ability to safely and effectively recover from a cybersecurity incident?",
+      "epaPriority": false,
+      "recommendation": "Develop, maintain, and execute plans to recover and restore to service business- or mission-critical assets or systems that might be impacted by a cybersecurity incident.",
+      "factsheetUrl": "https://www.epa.gov/system/files/documents/2024-07/have-the-ability.pdf"
+    }
+  ]
+}

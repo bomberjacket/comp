@@ -1,0 +1,686 @@
+[
+  {
+    "id": "frk_pt_128039a155273c7783165d34",
+    "name": "Cyber Incident Response Plan (water utility, AWWA CIRP structure)",
+    "description": "Cyber incident response plan structured after the AWWA 2025 Cyber Incident Response Plan template: response team, detection, severity matrix, action checklist and post-incident actions. Backs the Detect, Respond and Recover goals and the written-plan item of the EPA checklist (2.S). Part of the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0).",
+    "frequency": "yearly",
+    "department": "it",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Purpose"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "This document is {{COMPANY}}'s cyber incident response plan, maintained under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0)."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Incident Response Team"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Roles, alternates, 24x7 contact methods (including when primary communications are down); integrator/MSP and vendor contacts; legal, insurer, public information."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Detecting an Incident"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Sources of alerts (logs 2.T/2.U, malicious code detection, operator observations); how staff report suspected incidents and phishing; threat and TTP list in use (3.A)."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Severity Matrix"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Severity levels tied to effects on water or wastewater service, public health and safety, and data; who declares each level."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Cyber-Incident Action Checklist"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Containment steps for OT and IT; manual operations; evidence preservation and chain of custody; notifications to EPA, CISA, state primacy agency, law enforcement and customers (4.A); vendor and MSP engagement."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Post Incident Actions"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Recovery and restoration from backups with integrity checks (5.A); criteria for declaring the incident closed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Evidence Retention"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "What is retained, where, for how long, and who may release it."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Lessons Learned / After Action Report (AAR)"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "AAR within 30 days; tabletop exercises at least annually (CISA water CTEP) with senior leadership."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Implementing Improvements/Corrective Actions"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Corrective action tracker with owners and dates; feed into the risk management plan."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Source"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates (American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); section prompts by BomberJacket Networks. Replace the prompts with the utility's own text."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "frk_pt_6a7ba685071773722f1806b2",
+    "name": "Cybersecurity Risk Management Plan (water utility, AWWA CRMP structure)",
+    "description": "Utility-wide cybersecurity risk management plan structured after the AWWA 2025 Cybersecurity Risk Management Plan template: team, risk assessment and reporting, training, third-party risk, incident response, continuity and plan maintenance. Backs the Govern, Identify and Protect goals. Part of the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0).",
+    "frequency": "yearly",
+    "department": "it",
+    "content": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Purpose"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "This document is {{COMPANY}}'s cybersecurity risk management plan, maintained under the Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0)."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "1. Introduction"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Purpose, scope (which treatment, distribution, collection and business systems) and the authority that approved this plan."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "2. Cybersecurity Team"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Named role accountable for cybersecurity and for OT cybersecurity (EPA checklist 1.B, 1.C); members, deputies and contact details; how IT and OT staff coordinate (1.D)."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "3. Risk Assessment, Monitoring, and Reporting"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Asset inventory method and refresh cadence (1.A); vulnerability and KEV handling timelines (1.E); the EPA checklist / CPG assessment schedule and who receives results."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "4. Employee Training and Awareness"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Annual awareness training for all personnel (2.I) and OT-specific training (2.J); records kept."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "5. Third-Party Risk Management"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Cybersecurity criteria in procurement (1.I); the EPA procurement evaluation checklist for suppliers and integrators/MSPs; remote access and contract language."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "6. Incident Response Plan"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Reference to the Cyber Incident Response Plan (2.S); reporting path to EPA, CISA and state primacy agency (4.A)."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "7. Business Continuity and Disaster Recovery"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Backups of systems necessary for operations and restoration tests (2.R); manual operation fallback; recovery priorities (5.A)."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "8. Plan Maintenance and Review"
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Annual review, after incidents and exercises; change log and approval."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "attrs": {
+            "level": 2,
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Source"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates (American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); section prompts by BomberJacket Networks. Replace the prompts with the utility's own text."
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

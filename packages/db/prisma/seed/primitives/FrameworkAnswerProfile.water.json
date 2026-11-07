@@ -1,0 +1,14 @@
+[
+  {
+    "id": "fap_8bda4d809cd48c193456ae58",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "answerOptions": [
+      "Y",
+      "I",
+      "N",
+      "NA"
+    ],
+    "domainMode": "single",
+    "scoring": "standard"
+  }
+]

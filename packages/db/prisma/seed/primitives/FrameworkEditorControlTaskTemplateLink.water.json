@@ -1,0 +1,254 @@
+[
+  {
+    "id": "fct_0089c62e7e036f83241aa5ea",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_5b141d71d41ae9f0a1fffb63",
+    "taskTemplateId": "frk_tt_12cb6e3796942a452ae78cf6"
+  },
+  {
+    "id": "fct_092b7cf07687c6edf4b133eb",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4a52319a6485d97cf7f46d72",
+    "taskTemplateId": "frk_tt_37ba0ea5f8daf2bf7f6e3f15"
+  },
+  {
+    "id": "fct_0b599169f84a9587dc158f44",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_a82f26a83c00092f437d90a0",
+    "taskTemplateId": "frk_tt_b4f47991eedea796c6b95d3b"
+  },
+  {
+    "id": "fct_0cddd72f491334b57ea68359",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_fd6f26eaa4784e5a7c53d28f",
+    "taskTemplateId": "frk_tt_3aad4649014b3486d8674b58"
+  },
+  {
+    "id": "fct_10bbfc6cc3d377209a1eb2b4",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_fd6f26eaa4784e5a7c53d28f",
+    "taskTemplateId": "frk_tt_e92cda2c40070b36d97288cd"
+  },
+  {
+    "id": "fct_1261fa92ae18990d72dea8ae",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4a275634436ecaf61621e1cb",
+    "taskTemplateId": "frk_tt_d1653eea09a04c21d98b6407"
+  },
+  {
+    "id": "fct_1c62333b3ca1cfe84514a9be",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_08559d7e4ca68506402d9f96",
+    "taskTemplateId": "frk_tt_8b445d78271251f9f5d842c6"
+  },
+  {
+    "id": "fct_204b55ff2b3912bb07dddac1",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_82b028a6bdadc52334f44c06",
+    "taskTemplateId": "frk_tt_266354310f5dc157dfbe1e17"
+  },
+  {
+    "id": "fct_25b3cfc1bc17d11df8de31ec",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_82b028a6bdadc52334f44c06",
+    "taskTemplateId": "frk_tt_fb1f8927eee5b6c60484b098"
+  },
+  {
+    "id": "fct_2681985b4d5f0880ad6f0e56",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_fe769c9e79b6cd6f3b75af49",
+    "taskTemplateId": "frk_tt_802a41273de31c266f95cd03"
+  },
+  {
+    "id": "fct_27222d835c57962f9beed8f9",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_45041632f545ca27402dbca3",
+    "taskTemplateId": "frk_tt_1023130a79b6feb43eb2536d"
+  },
+  {
+    "id": "fct_2bbf2aaaaf6a15819e29e8ba",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f6d0504e16938f417e2aaf16",
+    "taskTemplateId": "frk_tt_75a164892e4ddda8e17393ee"
+  },
+  {
+    "id": "fct_30aaf3fec4cebee2252b2e97",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_17fc0197da6a13babea7bd09",
+    "taskTemplateId": "frk_tt_e7b184d62178b16c543c6a9b"
+  },
+  {
+    "id": "fct_41a4326cf81f47e2c6f0b4f7",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_eb17789aa5ed9bf2cdf23c55",
+    "taskTemplateId": "frk_tt_39f95dd820230cb5a3a30ede"
+  },
+  {
+    "id": "fct_51261818857ebee1b1a86c34",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_246a3e6e1ce18a5ff915947e",
+    "taskTemplateId": "frk_tt_f39b33ba1132cf5031d3c529"
+  },
+  {
+    "id": "fct_53f653990671e9a8f7901bc5",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ee5ba5b7b422d2ee6aa79515",
+    "taskTemplateId": "frk_tt_7502fe9fd90fd2c751793390"
+  },
+  {
+    "id": "fct_56022f6c5dedc7fa5aeb8684",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ac547bd9bca4f83964536859",
+    "taskTemplateId": "frk_tt_8447ef2d0e8755f2b7ce1e80"
+  },
+  {
+    "id": "fct_5c8a7d238864ab295e3c6d67",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_68a97ba7af3cafd4e5d4d6fd",
+    "taskTemplateId": "frk_tt_bdb302eac1b5d84536db467a"
+  },
+  {
+    "id": "fct_62629916067dd41ebf627df8",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_434bc1485cc4fc5ec41521cd",
+    "taskTemplateId": "frk_tt_eb58dac4b84a92b9573656b5"
+  },
+  {
+    "id": "fct_64e4dcc7c57fa9d62e678ab5",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_246a3e6e1ce18a5ff915947e",
+    "taskTemplateId": "frk_tt_e4535b13da61965f87bc91a2"
+  },
+  {
+    "id": "fct_6967ab5f9d3b3be305b29a80",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ac547bd9bca4f83964536859",
+    "taskTemplateId": "frk_tt_bc869f37176615e9bb122f4d"
+  },
+  {
+    "id": "fct_6d7083093731818e5774438d",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_45041632f545ca27402dbca3",
+    "taskTemplateId": "frk_tt_b558489d8166dab4f641b831"
+  },
+  {
+    "id": "fct_7a24e9c98a9d8597877c3a8f",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f60298702fe4e823b2d8fcf2",
+    "taskTemplateId": "frk_tt_d88f67f5b88d078f225450ad"
+  },
+  {
+    "id": "fct_7d3bc209f311391ab07cc458",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_c708c7b67f4dd5435910f3f7",
+    "taskTemplateId": "frk_tt_c1cca8a2df1bf8ffcc6910ff"
+  },
+  {
+    "id": "fct_7feb09a976d06fab89c796c2",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_eb17789aa5ed9bf2cdf23c55",
+    "taskTemplateId": "frk_tt_b308f71c07bf18ebb6882fea"
+  },
+  {
+    "id": "fct_8215171b570a1ab95cf0b048",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_5b141d71d41ae9f0a1fffb63",
+    "taskTemplateId": "frk_tt_9ce7030cde4e2f9d1b7acbc2"
+  },
+  {
+    "id": "fct_9bed246919d561c5ca35908b",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ca9467bf25b70c5d2444cd80",
+    "taskTemplateId": "frk_tt_7da74e59b0eb0fa6aaec52d9"
+  },
+  {
+    "id": "fct_a163f50299b4fa674cda7380",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f60298702fe4e823b2d8fcf2",
+    "taskTemplateId": "frk_tt_fbf59f9ed724f45ea738d27e"
+  },
+  {
+    "id": "fct_af52695f5a2a061ddef75389",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ee5ba5b7b422d2ee6aa79515",
+    "taskTemplateId": "frk_tt_e6d55723c35306a034f27b16"
+  },
+  {
+    "id": "fct_b30ab812d823f23e9341b5cd",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4c971a005f2a7907bd103efe",
+    "taskTemplateId": "frk_tt_79889dfeec7b7a9f05697b7f"
+  },
+  {
+    "id": "fct_b818567c4080b57a52a2b3ab",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_c806b4561204b845fac827e7",
+    "taskTemplateId": "frk_tt_e371b7a48170a626854841b7"
+  },
+  {
+    "id": "fct_bbf58180525defb17011beeb",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4a275634436ecaf61621e1cb",
+    "taskTemplateId": "frk_tt_b864b08ff9d3fa1f72703c78"
+  },
+  {
+    "id": "fct_be9d51fd0ac5c4a5b866d786",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f6a951be37747b88103fb856",
+    "taskTemplateId": "frk_tt_d0be4610479d72e71271c423"
+  },
+  {
+    "id": "fct_c666b5e5352aad06f731d0c7",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f6d0504e16938f417e2aaf16",
+    "taskTemplateId": "frk_tt_3ceb553670a3609a75eaaa8c"
+  },
+  {
+    "id": "fct_c7c720288219a6b9cf3d735a",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_72ed4b20a0dd8c7a45dc0033",
+    "taskTemplateId": "frk_tt_7bb2f1ec59f8333ad881fbc0"
+  },
+  {
+    "id": "fct_c9b672eb23f28f2107f0b354",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_7a9f42526d93c4cab8b01ebd",
+    "taskTemplateId": "frk_tt_c100cc564df5c6c67d658f61"
+  },
+  {
+    "id": "fct_d529dbde43f3436959546869",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_c708c7b67f4dd5435910f3f7",
+    "taskTemplateId": "frk_tt_abf47b633fdb42a868e36604"
+  },
+  {
+    "id": "fct_dbec27d10ab9f136f268f027",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_2f1c5e0967b67d745e17fe20",
+    "taskTemplateId": "frk_tt_bd0aead5b11d17c01afd00ce"
+  },
+  {
+    "id": "fct_dd68401b388088af0535f9bb",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_17fc0197da6a13babea7bd09",
+    "taskTemplateId": "frk_tt_64db82e710c0de753da3925c"
+  },
+  {
+    "id": "fct_f7ba83391cd9d8a8ba9f988f",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4789b038d644531a9d1c04d0",
+    "taskTemplateId": "frk_tt_cd23d661ad0575a33601119c"
+  },
+  {
+    "id": "fct_fb1c7492f854f04de1d00be4",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_a82f26a83c00092f437d90a0",
+    "taskTemplateId": "frk_tt_e62ca12a1710e85010305eb0"
+  },
+  {
+    "id": "fct_fc4fcdc1c17944712c4584e4",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_7a9f42526d93c4cab8b01ebd",
+    "taskTemplateId": "frk_tt_34422dd5ce051ba533b8ae54"
+  }
+]

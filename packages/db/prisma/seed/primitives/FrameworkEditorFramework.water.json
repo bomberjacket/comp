@@ -1,0 +1,10 @@
+[
+  {
+    "id": "frk_1d3256a64aeccf2765842f80",
+    "name": "Water and Wastewater Cybersecurity (EPA checklist on CISA CPG 2.0)",
+    "version": "WCAT 3.1 / CPG 2.0",
+    "description": "EPA's Cybersecurity Checklist for Drinking Water and Wastewater Systems (WCAT 3.1, 33 questions, 16 EPA priority practices) answered Yes / In progress / No / Not applicable, each question mapped to the CISA CPG 2.0 goal that owns its control and evidence task. Includes a Cybersecurity Risk Management Plan and a Cyber Incident Response Plan structured after the AWWA 2025 templates, and interview questions from the CISA water-sector tabletop exercise package. Sources are public domain (EPA, CISA); crosswalk by BomberJacket Networks.",
+    "visible": true,
+    "familyId": "frk_fam_6009abf36e28b806334bfa2c"
+  }
+]

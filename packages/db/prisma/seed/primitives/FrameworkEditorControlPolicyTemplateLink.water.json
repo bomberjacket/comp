@@ -1,0 +1,164 @@
+[
+  {
+    "id": "fcp_04f45994b2b06d81935d9883",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_eb17789aa5ed9bf2cdf23c55",
+    "policyTemplateId": "frk_pt_128039a155273c7783165d34"
+  },
+  {
+    "id": "fcp_0a00b2bcb2277131efbbb27e",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_68a97ba7af3cafd4e5d4d6fd",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_12adfe75ff0a63658e6a5347",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_7a9f42526d93c4cab8b01ebd",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_167e9b74f357c8aae7e1b2a6",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ac547bd9bca4f83964536859",
+    "policyTemplateId": "frk_pt_128039a155273c7783165d34"
+  },
+  {
+    "id": "fcp_22c44145a1600f30444ca637",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_c708c7b67f4dd5435910f3f7",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_2690501990959a3880fd5300",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4789b038d644531a9d1c04d0",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_28b10863c3cc1feded2a0b5d",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_a82f26a83c00092f437d90a0",
+    "policyTemplateId": "frk_pt_128039a155273c7783165d34"
+  },
+  {
+    "id": "fcp_2ab08611762bdbe7e5860b12",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_434bc1485cc4fc5ec41521cd",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_2d5ac4941206bc37fb019ef0",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_45041632f545ca27402dbca3",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_309139064e4c37711e859812",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4a52319a6485d97cf7f46d72",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_326b3a3c0ae11ab0bab92f92",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_17fc0197da6a13babea7bd09",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_332b72450b82bb995d6bd419",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ee5ba5b7b422d2ee6aa79515",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_3347f51c8bfb5492892c099b",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f60298702fe4e823b2d8fcf2",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_3e7ae47e44624f4bcf945453",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_fd6f26eaa4784e5a7c53d28f",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_3ec0bfd948bab3b1a7a70a71",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_82b028a6bdadc52334f44c06",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_8a22ff437aa7833f7ea88782",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_246a3e6e1ce18a5ff915947e",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_9bc36a8994ae2433e37e5642",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4c971a005f2a7907bd103efe",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_aef7d42fda61004392757741",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_5b141d71d41ae9f0a1fffb63",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_b397fe10615df429d30d1c42",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_2f1c5e0967b67d745e17fe20",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_d138da2695816f18f9345cc8",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_fe769c9e79b6cd6f3b75af49",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_d31b7af03e7d468c86c220f2",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_c806b4561204b845fac827e7",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_d9c9c846fb0e39b007ffa13e",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_08559d7e4ca68506402d9f96",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_dc6d17f388505c5870476948",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_72ed4b20a0dd8c7a45dc0033",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_e19c152d55a0ed9ac3d11e7e",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f6d0504e16938f417e2aaf16",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_f476fa05773c031be53140ad",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_ca9467bf25b70c5d2444cd80",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_fa762c1703bc670ffff5c6f2",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_4a275634436ecaf61621e1cb",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  },
+  {
+    "id": "fcp_fdb84476cf23612a0130fcba",
+    "frameworkId": "frk_1d3256a64aeccf2765842f80",
+    "controlTemplateId": "frk_ct_f6a951be37747b88103fb856",
+    "policyTemplateId": "frk_pt_6a7ba685071773722f1806b2"
+  }
+]

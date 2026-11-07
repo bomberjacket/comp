@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const INPUT = join(__dirname, '../inputs/epa-procurement-checklist.json');
-const OUTPUT = join(__dirname, '../../../../../../apps/api/src/vendor-checklists/checklists.generated.ts');
+const OUTPUT = join(__dirname, '../../../../../../../apps/api/src/vendor-checklists/checklists.generated.ts');
 
 interface Item {
   id: string;

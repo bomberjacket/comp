@@ -17,6 +17,7 @@ import { VendorResearchBadges, VendorResearchLinks } from './VendorResearchSecti
 import { VendorResearchFeed } from './VendorResearchFeed';
 import { VendorInherentRiskChart } from './VendorInherentRiskChart';
 import { VendorResidualRiskChart } from './VendorResidualRiskChart';
+import { VendorProcurementChecklist } from './procurement/VendorProcurementChecklist';
 import { ResidualAcceptanceCard } from '@/components/risks/acceptance/ResidualAcceptanceCard';
 import { TreatmentPlanTab } from '@/components/risks/treatment-plan/TreatmentPlanTab';
 import type { Member, RiskTreatmentType, User, Vendor } from '@db';
@@ -488,6 +489,7 @@ export function VendorDetailTabs({
               <TabsTrigger value="risk-matrix">Risk Matrix</TabsTrigger>
               <TabsTrigger value="risk-assessment">Risk Assessment</TabsTrigger>
               <TabsTrigger value="tasks">Tasks</TabsTrigger>
+              <TabsTrigger value="procurement">Cyber procurement</TabsTrigger>
               <TabsTrigger value="comments">Comments</TabsTrigger>
               <TabsTrigger value="activity">Activity</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -496,6 +498,12 @@ export function VendorDetailTabs({
             {activeTab === 'overview' && (
               <TabsContent value="overview">
                 <SecondaryFields vendor={resolvedVendor} assignees={assignees} onUpdate={refreshVendor} />
+              </TabsContent>
+            )}
+
+            {activeTab === 'procurement' && (
+              <TabsContent value="procurement">
+                <VendorProcurementChecklist vendorId={vendorId} canEdit={hasPermission('vendor', 'update')} />
               </TabsContent>
             )}
 

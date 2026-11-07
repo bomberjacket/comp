@@ -1,6 +1,8 @@
 'use client';
 
+import { usePermissions } from '@/hooks/use-permissions';
 import { useWaterProgram, type StepStatus, type WaterProgramStep } from '@/hooks/use-water-program';
+import { WaterPlanWriter } from './WaterPlanWriter';
 import { Badge, Button, Text } from '@trycompai/design-system';
 import { CheckCircle2, Circle, CircleDot } from 'lucide-react';
 import Link from 'next/link';
@@ -27,8 +29,19 @@ function StepIcon({ status }: { status: StepStatus }) {
   return <Circle className="h-5 w-5 text-muted-foreground" />;
 }
 
-function StepCard({ step, index, orgId }: { step: WaterProgramStep; index: number; orgId: string }) {
+function StepCard({
+  step,
+  index,
+  orgId,
+  wizard,
+}: {
+  step: WaterProgramStep;
+  index: number;
+  orgId: string;
+  wizard?: { label: string; node: React.ReactNode };
+}) {
   const [open, setOpen] = useState(step.status === 'in_progress');
+  const [showWizard, setShowWizard] = useState(false);
   const pct = step.total > 0 ? Math.round((step.done / step.total) * 100) : 0;
   const meta = STATUS[step.status];
   return (
@@ -52,6 +65,11 @@ function StepCard({ step, index, orgId }: { step: WaterProgramStep; index: numbe
             <span className="text-xs tabular-nums text-muted-foreground">{step.summary}</span>
           </div>
           <div className="flex flex-wrap items-center gap-2">
+            {wizard && (
+              <Button size="sm" onClick={() => setShowWizard((v) => !v)}>
+                {showWizard ? 'Close' : wizard.label}
+              </Button>
+            )}
             <Button size="sm" variant="outline" render={<Link href={`/${orgId}/${step.href}`} />}>
               {ACTION[step.key]}
             </Button>
@@ -61,6 +79,7 @@ function StepCard({ step, index, orgId }: { step: WaterProgramStep; index: numbe
               </Button>
             )}
           </div>
+          {showWizard && wizard?.node}
           {open && step.details.length > 0 && (
             <ul className="divide-y rounded-md border text-sm">
               {step.details.map((d, i) => (
@@ -89,7 +108,9 @@ function StepCard({ step, index, orgId }: { step: WaterProgramStep; index: numbe
  * answers, policies, vendor checklists and interview tasks of this organization.
  */
 export function WaterProgramGuide({ orgId, frameworkInstanceId }: { orgId: string; frameworkInstanceId: string }) {
-  const { data, error, isLoading } = useWaterProgram(frameworkInstanceId);
+  const { data, error, isLoading, mutate } = useWaterProgram(frameworkInstanceId);
+  const { hasPermission } = usePermissions();
+  const canEditPolicies = hasPermission('policy', 'update');
   if (error) return <Text variant="muted">The program guide could not be loaded: {error.message}</Text>;
   if (isLoading || !data) return <Text variant="muted">Loading the program guide…</Text>;
   const done = data.steps.filter((s) => s.status === 'done').length;
@@ -106,7 +127,27 @@ export function WaterProgramGuide({ orgId, frameworkInstanceId }: { orgId: strin
         </Badge>
       </div>
       {data.steps.map((step, i) => (
-        <StepCard key={step.key} step={step} index={i} orgId={orgId} />
+        <StepCard
+          key={step.key}
+          step={step}
+          index={i}
+          orgId={orgId}
+          wizard={
+            step.key === 'plans'
+              ? {
+                  label: 'Write the plans here',
+                  node: (
+                    <WaterPlanWriter
+                      orgId={orgId}
+                      frameworkInstanceId={frameworkInstanceId}
+                      canEdit={canEditPolicies}
+                      onChanged={() => void mutate()}
+                    />
+                  ),
+                }
+              : undefined
+          }
+        />
       ))}
     </div>
   );

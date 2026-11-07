@@ -3,10 +3,11 @@ import { db } from '@db';
 import { RequirementAnswersService } from '../requirement-answers/requirement-answers.service';
 import { VENDOR_CHECKLISTS, type VendorChecklistKind } from '../vendor-checklists/checklists.generated';
 import { scoreChecklist, type ChecklistItemAnswer } from '../vendor-checklists/vendor-checklists.service';
+import { PLAN_SECTIONS } from './plan-sections.generated';
+import { readPlanSections, type TipTapNode } from './plan-writer';
 import {
   EPA_PRIORITY_MARK,
   INTERVIEW_TASK_PREFIX,
-  PLAN_PROMPT_TEXT,
   WATER_FRAMEWORK_ID,
   WATER_PLAN_TEMPLATES,
 } from './water-program.constants';
@@ -43,20 +44,13 @@ function statusOf(done: number, total: number, started = done > 0): StepStatus {
   return started ? 'in_progress' : 'not_started';
 }
 
-function countPrompts(content: unknown): number {
-  let n = 0;
-  const walk = (node: unknown): void => {
-    if (Array.isArray(node)) {
-      node.forEach(walk);
-      return;
-    }
-    if (!node || typeof node !== 'object') return;
-    const obj = node as { type?: string; text?: string; content?: unknown };
-    if (obj.type === 'text' && obj.text === PLAN_PROMPT_TEXT) n += 1;
-    if (obj.content) walk(obj.content);
-  };
-  walk(content);
-  return n;
+/** Sections of a plan policy that carry the utility's own record. */
+function sectionsWritten(content: unknown, key: 'crmp' | 'cirp'): { written: number; total: number } {
+  const sections = readPlanSections(
+    (Array.isArray(content) ? content : []) as TipTapNode[],
+    PLAN_SECTIONS[key].sections.map((s) => s.prompts),
+  );
+  return { written: sections.filter((s) => s.done).length, total: sections.length };
 }
 
 @Injectable()
@@ -148,17 +142,20 @@ export class WaterProgramService {
         details.push({ label: plan.label, status: 'Not created (add the framework)' });
         continue;
       }
-      const prompts = countPrompts(policy.content);
-      const complete = policy.status === 'published' && prompts === 0;
+      const { written, total } = sectionsWritten(policy.content, plan.key);
+      const complete = policy.status === 'published' && written === total;
       if (complete) done += 1;
       const state = policy.status === 'published' ? 'Published' : policy.status === 'needs_review' ? 'In review' : 'Draft';
       details.push({
         label: plan.label,
-        status: prompts > 0 ? `${state}, ${prompts} sections still carry the prompt` : state,
+        status: `${state}, ${written} of ${total} sections written`,
         href: `policies/${policy.id}`,
       });
     }
-    const started = policies.some((p) => p.status !== 'draft' || countPrompts(p.content) < 8);
+    const started = policies.some((p) => {
+      const plan = WATER_PLAN_TEMPLATES.find((t) => t.id === p.policyTemplateId);
+      return p.status !== 'draft' || (plan ? sectionsWritten(p.content, plan.key).written > 0 : false);
+    });
     return {
       key: 'plans',
       title: 'Write the policies: the two plans',
@@ -166,7 +163,7 @@ export class WaterProgramService {
       status: statusOf(done, WATER_PLAN_TEMPLATES.length, started),
       done,
       total: WATER_PLAN_TEMPLATES.length,
-      summary: `${done} of ${WATER_PLAN_TEMPLATES.length} plans published without open prompts`,
+      summary: `${done} of ${WATER_PLAN_TEMPLATES.length} plans written and published`,
       href: 'policies',
       details,
     };

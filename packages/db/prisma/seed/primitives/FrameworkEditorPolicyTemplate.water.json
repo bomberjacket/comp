@@ -47,6 +47,205 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "The incident commander is the cybersecurity lead named in the risk management plan, with the OT cybersecurity lead as alternate. The commander declares the incident and its severity, runs the checklist below, decides on isolation and manual operations with the operations lead, and approves every external notification. No one else speaks for the utility about the incident."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Incident commander and alternate."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "OT lead: control-system isolation, manual operations handover, PLC and HMI recovery."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "IT lead or provider: business network containment, identity and email, backups."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Operations lead: plant and distribution status, water quality checks, staffing for manual operations."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Communications lead: staff, board, customers, media; works from the public information section of the plan."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Legal and insurance contact: notification obligations, evidence handling, insurer engagement."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Executive: resources, decisions on service restrictions or public notices."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "The roster holds each person's office, mobile and home numbers and a personal email, because the utility's phones and email may be unavailable or unsafe to use. A printed copy is kept in the control room and with the on-call supervisor. A separate list holds the integrator, the managed service provider, the SCADA vendor's support line, the internet and cellular carriers and the electric utility."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "External partners: state primacy agency; EPA Water Sector Cybersecurity Program; CISA (report@cisa.gov, 1-844-SAY-CISA); the FBI field office; WaterISAC; MS-ISAC for public utilities; the cyber insurance carrier's breach line."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Out-of-band channel for the team: a group text or a conference bridge that does not depend on the utility network."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -78,6 +277,98 @@
             {
               "type": "text",
               "text": "Detecting an Incident"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Anyone at the utility can raise a suspected incident, and no one is faulted for a false alarm. Report immediately to the on-call supervisor or the incident commander when you see any of the following: setpoints, alarms or pump states that change without an operator action; an HMI or workstation that behaves oddly, shows a ransom message or will not log you in; accounts locked out or new accounts you do not recognize; a phishing message that someone acted on; a USB device or laptop connected without approval; a vendor reporting that their systems were breached; or logs showing logins from unexpected places or hours."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Detection sources the utility maintains: security logs from servers, firewalls, remote access gateways and the SCADA application, collected centrally and protected from tampering [2.T, 2.U]; malware detection on every workstation and server that can run it; alerts from the remote access system for sessions outside approved windows; the threat list of tactics and techniques the utility watches for, updated from CISA and WaterISAC advisories [3.A]."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "First questions: what was seen, where, when, by whom; which systems and sites are affected; is water quality or service affected now; is the control system still responding correctly."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Do not power off affected equipment unless safety requires it; disconnect network cables or disable the link instead, so memory and logs survive."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Write down the time of every observation and action from the first call onward."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -117,6 +408,115 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "The incident commander assigns a severity level at declaration and re-assesses as facts change. The level sets who is notified and how fast."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Level 1, Low: a single business device or account affected; no control-system involvement; no customer data exposed. Handle by IT; commander informed; record in the incident log."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Level 2, Moderate: several business systems affected, or a credible threat to the control network (phishing success by an operator, suspicious remote access) without loss of control; no effect on service. Team activated; leadership informed the same day; state primacy agency informed if required."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Level 3, High: control-system compromise or loss of visibility, data theft, ransomware on business systems, or a vendor breach with access to the utility. Full team; manual operations readiness; executive and board informed within hours; primacy agency, EPA and CISA notified; law enforcement and insurer engaged."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Level 4, Critical: actual or imminent effect on water quality, pressure, treatment or public health, or safety of staff. Manual operations now; emergency operations activated; immediate notification of the primacy agency, EPA, CISA, law enforcement and public health authorities; public notice as required."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Notification clocks start at declaration. Whatever the level, regulatory notification deadlines in state rules and in the utility's permits take precedence over this matrix."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -148,6 +548,225 @@
             {
               "type": "text",
               "text": "Cyber-Incident Action Checklist"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "The commander works through these steps in order, skipping none; each step is logged with the time and the person who did it."
+            }
+          ]
+        },
+        {
+          "type": "orderedList",
+          "attrs": {
+            "start": 1
+          },
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Declare the incident, assign the severity level, open the incident log and start the team's out-of-band channel."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Confirm the state of treatment and distribution with the operations lead; if control or visibility is in doubt, switch to manual operations and increase sampling."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Contain: isolate the OT network from the business network and the internet at the boundary; disable remote access for everyone, including vendors; disconnect affected devices from the network without powering them off."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Preserve evidence: keep logs, images and screenshots; note what was observed; do not wipe or rebuild anything before the evidence section below is satisfied."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Notify internally: team, executive, board chair and on-call staff per the severity level."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Notify externally per the severity level: state primacy agency, EPA Water Sector Cybersecurity Program, CISA, law enforcement, the insurer's breach line, and the integrator or MSP whose systems are involved [4.A]."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Investigate: identify the entry point, affected accounts and systems, and whether backups and engineering files are intact; engage the integrator, the SCADA vendor and outside responders through the insurer or CISA as needed."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Eradicate: reset every credential that could have been exposed, remove unauthorized accounts, software and persistence, patch or block the entry point, and rebuild compromised systems from known-good media."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Recover: restore PLC programs, HMI and server configurations and data from verified backups; return to automatic control one process at a time with an operator watching; keep enhanced monitoring for at least 30 days."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Communicate: give staff, customers and the public accurate updates through the communications lead; answer regulators' questions; keep the incident log current."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Close the incident when the commander, the OT lead and the operations lead agree that control and data integrity are verified, then schedule the after-action review."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -187,6 +806,103 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Recovery is complete only when the utility can show that each restored system matches its approved configuration, that PLC and HMI programs match the last known-good copies, that no unauthorized account or connection remains, and that logging and detection are working again. The OT lead signs off on control systems, the IT lead on business systems, and the operations lead confirms that treatment and distribution are normal."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Return to automatic control one process at a time, with manual checks of levels, pressures and dosing for at least one full operating cycle."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Extra monitoring and log review for 30 days after closure."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Final notifications to regulators, the insurer and customers, closing the loop on what was reported."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Costs and hours recorded for insurance and for the board."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -218,6 +934,86 @@
             {
               "type": "text",
               "text": "Evidence Retention"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Evidence is anything that shows what happened: logs, firewall and remote access records, disk images of affected machines, screenshots, ransom notes, phishing emails with headers, the incident log and interview notes. The IT lead collects business-system evidence and the OT lead collects control-system evidence; each item is labelled with what it is, where it came from, who collected it and when, and every hand-off is recorded."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Store evidence on media that is not connected to the affected networks, with a second copy off site."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Keep evidence for at least one year after closure, or longer when legal counsel, the insurer, a regulator or law enforcement asks."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Only the incident commander or legal counsel releases evidence outside the utility."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -257,6 +1053,86 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Within 30 days of closing an incident, and after every exercise, the team meets to write an after-action report. The report states what happened and when, what worked, what did not, how long detection, containment and recovery took, which notifications were made and whether they were on time, and what the incident cost. It ends with corrective actions, each with an owner and a date."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Exercise the plan at least once a year with a tabletop based on CISA's water and wastewater exercise package; the interview questions on the evidence tasks in this platform can be used as the discussion guide."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Senior leadership and the board chair take part in at least one exercise a year."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Exercise findings are treated like incident findings and get corrective actions."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -288,6 +1164,86 @@
             {
               "type": "text",
               "text": "Implementing Improvements/Corrective Actions"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Corrective actions from incidents and exercises are tracked in one list with the action, the owner, the due date, the status and the evidence that it was done. The cybersecurity lead reviews the list monthly until every item is closed and reports open items to leadership in the quarterly status."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Actions that change controls or risk are added to the risk management plan's risk register and reflected in the next EPA checklist self-assessment."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Actions that change this plan produce a new plan version with the change noted."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Actions that need money or contract changes go to the executive with a cost and a deadline."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -334,7 +1290,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates (American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); section prompts by BomberJacket Networks. Replace the prompts with the utility's own text."
+              "text": "Section structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates (American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); guidance text and prompts by BomberJacket Networks, aligned to the EPA Cybersecurity Checklist for Drinking Water and Wastewater Systems (item numbers in brackets) and CISA CPG 2.0. Edit every section to match the utility."
             }
           ]
         }
@@ -389,6 +1345,127 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "This plan states how {{COMPANY}} finds, judges and reduces cybersecurity risk to the systems that treat, move and account for water and wastewater, and to the business systems that support them. It is the parent document for the Cyber Incident Response Plan and for the annual self-assessment against the EPA Cybersecurity Checklist for Drinking Water and Wastewater Systems."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Scope. The plan covers every system whose failure or misuse could affect water quality, service continuity, public health, worker safety or customer data. That includes operational technology (SCADA servers, HMIs, PLCs, RTUs, radios and cellular links, historians, engineering workstations and the networks between them), the business network (finance, billing, email, file storage), remote access paths used by staff, integrators and vendors, cloud services, and any contractor or utility-district connection into these systems."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Utility name, population served and the regulatory primacy agency."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Systems and facilities in scope, by site (treatment, wells, pump and lift stations, storage, administrative offices)."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Name and title of the official who approved this plan and the approval date."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Where the current version is kept and who may change it."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Authority. The governing board or utility director approves this plan and the resources it needs. The cybersecurity lead named in section 2 owns its content and reports progress to leadership at least quarterly."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -420,6 +1497,149 @@
             {
               "type": "text",
               "text": "2. Cybersecurity Team"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "One named role is accountable for cybersecurity across the utility, and one named role is accountable for operational technology cybersecurity; they may be the same person at a small utility, but each responsibility must be written against a named position with a named alternate [1.B, 1.C]. Contracted operators, integrators and managed service providers support the team under contract; accountability stays with the utility."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Cybersecurity lead: owns this plan, the risk register, the annual assessment and reporting to leadership."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "OT cybersecurity lead: owns the control-system inventory, configuration baselines, OT network boundaries and OT change approval."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Operations lead: speaks for treatment and distribution needs, manual operations and safety."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "IT lead or provider: owns the business network, identity and email, backups of business systems."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Finance and procurement contact: applies the cybersecurity procurement checklist and contract language (section 5)."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Alternates for each role, with contact details kept in the incident response plan roster."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "IT and OT staff meet at least quarterly to review changes, open vulnerabilities, remote access accounts and lessons from incidents or exercises; a short written note of each meeting is kept [1.D]. Any integrator or MSP that holds administrative access attends when their systems are discussed."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -459,6 +1679,110 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Asset inventory. The utility keeps a list of every OT and IT asset with an IP address or a control role: make, model, firmware or OS version, location, owner, network segment, remote access path and whether the vendor still supports it. The list is reviewed at least quarterly and after every project [1.A]. Unsupported equipment is flagged with the compensating controls that protect it and a replacement date."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Vulnerabilities. Vendor and CISA advisories are reviewed as they arrive. Entries on CISA's Known Exploited Vulnerabilities catalog that apply to utility assets are mitigated by CISA's due date, internet-facing assets first; where a control-system patch cannot be applied in time, the asset is isolated or otherwise protected and the exception is recorded with a date [1.E]."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Assessment. The cybersecurity lead answers the EPA checklist in this platform at least once a year and after a major change; every No or In progress becomes a risk register entry with an owner, a planned action and a target date. An independent assessment by a qualified third party is obtained at least every three years, or sooner when the utility connects a new system to the internet or changes operators."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Risk register fields: asset or process, threat, weakness, likelihood, consequence to water service and public health, current controls, planned action, owner, target date, status."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Monitoring: security logs are collected and reviewed (see the Cyber Incident Response Plan), remote access sessions are reviewed monthly, and the OT boundary rules are reviewed quarterly."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Reporting: a one-page status to leadership each quarter with open high risks, checklist progress, incidents and exercise results; a written annual report to the board."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -490,6 +1814,98 @@
             {
               "type": "text",
               "text": "4. Employee Training and Awareness"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Everyone with a utility account or access to a control room completes cybersecurity awareness training within 30 days of starting and at least once a year afterwards. Training covers recognizing and reporting phishing, safe handling of credentials and removable media, what to do when something on the HMI looks wrong, and how to reach the incident response team [2.I]."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Operators, maintenance staff and anyone who touches control systems also receive OT-specific training each year: how the SCADA and PLC environment is segmented, why default and shared passwords are prohibited, how remote access is granted and ended, how to run the plant manually, and how to preserve evidence after a suspected incident [2.J]. System administrators and integrators receive additional training on secure configuration and change control."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Training records: name, role, course, date, provider; kept for at least three years."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Phishing exercises at least twice a year where email is in use, with results used to tune the training, never to punish."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Contractors with accounts are trained to the same standard or attest to equivalent training before access is granted."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -529,6 +1945,103 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Cybersecurity is an evaluation criterion in every purchase of OT or IT equipment, software and services [1.I]. Before award, procurement and the cybersecurity lead score the supplier with the EPA Cybersecurity Procurement Evaluation Checklist (the Cyber procurement tab on the vendor record): the supplier sheet for products and services, the integrator sheet for system integrators and managed service providers. Scores and the supplier's written responses are kept with the contract."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Contract language the utility requires: notification of a security incident affecting the utility within 24 hours of discovery; no default or shared credentials delivered; support for unique accounts and multifactor authentication; remote access only through the utility's approved path, per session, logged; disclosure of known vulnerabilities and support timelines; return or destruction of utility data at contract end."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Integrators and MSPs: an inventory of every account and connection they hold, reviewed quarterly; access ends the day the engagement ends [2.D]."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Supply chain: product suppliers and service providers are asked about their own incident history and secure-by-design commitments; findings go on the risk register."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Review: every vendor with network access is re-scored at renewal and at least every two years."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -560,6 +2073,42 @@
             {
               "type": "text",
               "text": "6. Incident Response Plan"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "The utility maintains a written Cyber Incident Response Plan for threats to the control system and the business network, exercised at least annually [2.S]. The plan names the team, the severity levels, the action checklist and the reporting path: the state primacy agency and the EPA Water Sector Cybersecurity Program as required, CISA for significant incidents, law enforcement for criminal activity, the cyber insurer per policy terms, and customers when service or data is affected [4.A]."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Incident records, after-action reports and corrective actions feed back into this plan's risk register and into the next EPA checklist answers."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -599,6 +2148,103 @@
           ]
         },
         {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "The utility backs up everything needed to restore operations: PLC and RTU programs, HMI and SCADA server configurations, historian data, network device configurations, engineering project files, and the business systems that bill customers and pay staff. Backups follow a 3-2-1 pattern with at least one copy offline or otherwise unreachable from the production network, and a restore is tested at least annually and after major changes [2.R]."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Manual operations: written procedures and staffing to run treatment, pumping and storage without SCADA for at least 72 hours; chemical dosing, level and pressure checks by hand; call-out list."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Recovery priorities: public health and water quality first, then service continuity, then business systems; a target recovery time for each system in scope."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Dependencies: electric power, communications carriers, chemical deliveries, laboratories and the integrator; each has a contact and a workaround."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Rebuild media: installation media, licence keys and vendor contacts kept offline with the backups."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
+            }
+          ]
+        },
+        {
           "type": "bulletList",
           "content": [
             {
@@ -630,6 +2276,86 @@
             {
               "type": "text",
               "text": "8. Plan Maintenance and Review"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "The cybersecurity lead reviews this plan at least once a year, after every incident or exercise, and when the utility adds or retires a system, changes operators or integrators, or receives new guidance from EPA, CISA or the state. Each revision records what changed, who approved it and the date; superseded versions are kept for three years."
+            }
+          ]
+        },
+        {
+          "type": "bulletList",
+          "content": [
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Version log: version, date, author, approver, summary of changes."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Distribution: where staff and contractors can read the current plan."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "listItem",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "textAlign": null
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Related documents: Cyber Incident Response Plan, asset inventory, risk register, training records, vendor checklists, EPA checklist answers in this platform."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "What to record here:"
             }
           ]
         },
@@ -676,7 +2402,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates (American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); section prompts by BomberJacket Networks. Replace the prompts with the utility's own text."
+              "text": "Section structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates (American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); guidance text and prompts by BomberJacket Networks, aligned to the EPA Cybersecurity Checklist for Drinking Water and Wastewater Systems (item numbers in brackets) and CISA CPG 2.0. Edit every section to match the utility."
             }
           ]
         }

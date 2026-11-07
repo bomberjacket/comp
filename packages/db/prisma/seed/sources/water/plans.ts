@@ -1,28 +1,14 @@
-import type { Department, Frequency, PolicyRow } from './types';
+import { CIRP_GUIDANCE } from './cirp-guidance';
+import { CRMP_GUIDANCE } from './crmp-guidance';
 import { ids } from './ids';
-
-type Node = { type: string; attrs?: Record<string, unknown>; content?: Node[]; text?: string };
-
-const heading = (text: string): Node => ({
-  type: 'heading',
-  attrs: { level: 2, textAlign: null },
-  content: [{ type: 'text', text }],
-});
-const paragraph = (text: string): Node => ({
-  type: 'paragraph',
-  attrs: { textAlign: null },
-  content: [{ type: 'text', text }],
-});
-const bullets = (items: string[]): Node => ({
-  type: 'bulletList',
-  content: items.map((t) => ({ type: 'listItem', content: [paragraph(t)] })),
-});
+import { bullets, heading, paragraph, renderBlocks, type Block } from './plan-blocks';
+import type { Department, Frequency, PolicyRow } from './types';
 
 /**
- * Plan skeletons for a water or wastewater utility. Section order follows AWWA's 2025
- * Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates (the
- * headings only; the prompts under each are BNI's). Utilities download AWWA's own
- * templates from awwa.org for the full guidance text.
+ * Plan documents for a water or wastewater utility. Section order follows AWWA's 2025
+ * Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates; the
+ * guidance under each heading (crmp-guidance.ts, cirp-guidance.ts) and the "what to
+ * record" prompts are BNI's own text. AWWA's template text is not reproduced.
  */
 export interface PlanDef {
   key: string;
@@ -75,9 +61,12 @@ export const PLANS: PlanDef[] = [
 ];
 
 const ATTRIBUTION =
-  'Structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan templates ' +
-  '(American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); section prompts by ' +
-  'BomberJacket Networks. Replace the prompts with the utility\'s own text.';
+  'Section structure after the AWWA Cybersecurity Risk Management Plan and Cyber Incident Response Plan ' +
+  'templates (American Water Works Association, 2025 v1, https://www.awwa.org/cybersecurity); guidance text ' +
+  'and prompts by BomberJacket Networks, aligned to the EPA Cybersecurity Checklist for Drinking Water and ' +
+  'Wastewater Systems (item numbers in brackets) and CISA CPG 2.0. Edit every section to match the utility.';
+
+const GUIDANCE: Record<string, Record<string, Block[]>> = { crmp: CRMP_GUIDANCE, cirp: CIRP_GUIDANCE };
 
 export function buildPlanPolicies(frameworkName: string, department: Department, frequency: Frequency): PolicyRow[] {
   return PLANS.map((plan) => ({
@@ -91,7 +80,16 @@ export function buildPlanPolicies(frameworkName: string, department: Department,
       content: [
         heading('Purpose'),
         paragraph(`This document is {{COMPANY}}'s ${plan.name.split(' (')[0]?.toLowerCase() ?? 'plan'}, maintained under the ${frameworkName}.`),
-        ...plan.sections.flatMap((s) => [heading(s.title), bullets(s.prompts)]),
+        ...plan.sections.flatMap((s) => {
+          const guidance = GUIDANCE[plan.key]?.[s.title];
+          if (!guidance) throw new Error(`${plan.key}: no guidance for section "${s.title}"`);
+          return [
+            heading(s.title),
+            ...renderBlocks(guidance),
+            paragraph('What to record here:'),
+            bullets(s.prompts),
+          ];
+        }),
         heading('Source'),
         paragraph(ATTRIBUTION),
       ],

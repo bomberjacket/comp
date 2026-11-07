@@ -48,6 +48,7 @@ import { EvidenceFormsModule } from './evidence-forms/evidence-forms.module';
 import { FrameworksModule } from './frameworks/frameworks.module';
 import { RequirementAnswersModule } from './requirement-answers/requirement-answers.module';
 import { VendorChecklistsModule } from './vendor-checklists/vendor-checklists.module';
+import { WaterProgramModule } from './water-program/water-program.module';
 import { FrameworkVersionsModule } from './framework-editor-versions/framework-versions.module';
 import { AuditModule } from './audit/audit.module';
 import { ControlsModule } from './controls/controls.module';
@@ -124,6 +125,7 @@ import { OffboardingChecklistModule } from './offboarding-checklist/offboarding-
     FrameworksModule,
     RequirementAnswersModule,
     VendorChecklistsModule,
+    WaterProgramModule,
     FrameworkVersionsModule,
     RolesModule,
     AuditModule,

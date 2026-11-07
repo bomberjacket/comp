@@ -24,6 +24,8 @@ import {
   DropdownMenuTrigger,
 } from '@trycompai/ui/dropdown-menu';
 import Link from 'next/link';
+import { WATER_FRAMEWORK_ID } from '@/hooks/use-water-program';
+import { WaterProgramGuide } from './WaterProgramGuide';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useCallback, useMemo, useState } from 'react';
 import { AddCustomRequirementSheet } from './AddCustomRequirementSheet';
@@ -91,6 +93,8 @@ export function FrameworkDetailContent({
   const answersApi = useFrameworkAnswers(frameworkInstanceId, !!framework.framework);
   const answerData = answersApi.data;
   const isQuestionBased = !!answerData;
+  // The water and wastewater framework opens on its program guide (five ordered steps).
+  const isWaterProgram = framework.framework?.id === WATER_FRAMEWORK_ID;
   const answeredCount = answerData?.answers.length ?? 0;
   const expectedAnswers = requirementDefinitions.length * (answerData?.domains.length ?? 1);
 
@@ -115,13 +119,14 @@ export function FrameworkDetailContent({
   // it's off, the lightweight FrameworkProgress renders above the tabs.
   const tabParam = searchParams.get('tab');
   const validTabsList: string[] = [];
+  if (isWaterProgram) validTabsList.push('program');
   if (isQuestionBased) validTabsList.push('assess', 'results');
   if (complianceTimelineEnabled) validTabsList.push('progress');
   validTabsList.push('controls');
   validTabsList.push('requirements');
   validTabsList.push('history');
   const validTabs = new Set(validTabsList);
-  const defaultTab = isQuestionBased ? 'assess' : DEFAULT_TAB;
+  const defaultTab = isWaterProgram ? 'program' : isQuestionBased ? 'assess' : DEFAULT_TAB;
   const activeTab = tabParam && validTabs.has(tabParam) ? tabParam : defaultTab;
 
   const handleTabChange = useCallback(
@@ -213,6 +218,7 @@ export function FrameworkDetailContent({
             }
             tabs={
               <TabsList variant="underline">
+                {isWaterProgram && <TabsTrigger value="program">Program guide</TabsTrigger>}
                 {isQuestionBased && (
                   <TabsTrigger value="assess">
                     Assess{' '}
@@ -263,6 +269,12 @@ export function FrameworkDetailContent({
             tasks={tasks}
             evidenceSubmissions={evidenceSubmissions}
           />
+        )}
+
+        {isWaterProgram && (
+          <TabsContent value="program">
+            <WaterProgramGuide orgId={orgId} frameworkInstanceId={frameworkInstanceId} />
+          </TabsContent>
         )}
 
         {isQuestionBased && (

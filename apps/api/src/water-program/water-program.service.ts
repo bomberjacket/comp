@@ -21,7 +21,7 @@ export interface StepDetail {
 }
 
 export interface WaterProgramStep {
-  key: 'assess' | 'gaps' | 'plans' | 'vendors' | 'tabletop';
+  key: 'plans' | 'assess' | 'gaps' | 'evidence' | 'vendors' | 'tabletop';
   title: string;
   description: string;
   status: StepStatus;
@@ -69,14 +69,21 @@ export class WaterProgramService {
       select: { id: true, framework: { select: { name: true } } },
     });
     if (!instance) throw new NotFoundException('Water framework instance not found');
-    const [assess, gaps, plans, vendors, tabletop] = await Promise.all([
+    // Order: policies and plans first, then implementation status, fixes, operational
+    // evidence, third parties; the tabletop validates the program on a cadence, last.
+    const [plans, assess, gaps, evidence, vendors, tabletop] = await Promise.all([
+      this.plansStep(organizationId),
       this.assessStep(frameworkInstanceId, organizationId),
       this.gapsStep(frameworkInstanceId, organizationId),
-      this.plansStep(organizationId),
+      this.evidenceStep(organizationId),
       this.vendorsStep(organizationId),
       this.tabletopStep(frameworkInstanceId, organizationId),
     ]);
-    return { frameworkInstanceId, frameworkName: instance.framework?.name ?? 'Water framework', steps: [assess, gaps, plans, vendors, tabletop] };
+    return {
+      frameworkInstanceId,
+      frameworkName: instance.framework?.name ?? 'Water framework',
+      steps: [plans, assess, gaps, evidence, vendors, tabletop],
+    };
   }
 
   private async assessStep(instanceId: string, organizationId: string): Promise<WaterProgramStep> {
@@ -84,8 +91,8 @@ export class WaterProgramService {
     const { answered, expected } = results;
     return {
       key: 'assess',
-      title: 'Answer the EPA checklist',
-      description: "EPA's 33 questions for drinking water and wastewater systems, each tied to a CISA CPG 2.0 goal. Answer Yes, In progress, No or Not applicable; unknown counts as No.",
+      title: 'Record implementation status with the EPA checklist',
+      description: "EPA's 33 questions for drinking water and wastewater systems, each tied to a CISA CPG 2.0 goal, answered against what the plans say and what is configured today. Yes, In progress, No or Not applicable; unknown counts as No.",
       status: statusOf(answered, expected),
       done: answered,
       total: expected,
@@ -113,8 +120,8 @@ export class WaterProgramService {
     const answered = await db.requirementAnswer.count({ where: { frameworkInstanceId: instanceId, organizationId } });
     return {
       key: 'gaps',
-      title: 'Work the gaps, EPA priority practices first',
-      description: 'Every No or In progress is a gap. The evidence task of its CPG goal is where the fix is recorded; the Results tab shows the picture by function.',
+      title: 'Configure and fix the gaps, EPA priority practices first',
+      description: 'Every No or In progress is a gap to close by configuration or procedure. The evidence task of its CPG goal is where the fix is recorded; the Results tab shows the picture by function.',
       status: answered === 0 ? 'not_started' : gaps.length === 0 ? 'done' : 'in_progress',
       done: Math.max(answered - gaps.length, 0),
       total: answered,
@@ -154,8 +161,8 @@ export class WaterProgramService {
     const started = policies.some((p) => p.status !== 'draft' || countPrompts(p.content) < 8);
     return {
       key: 'plans',
-      title: 'Write the two plans',
-      description: 'The Cybersecurity Risk Management Plan and the Cyber Incident Response Plan follow the AWWA section order with guidance under each heading. Replace the "What to record here" prompts with the utility\'s own facts, then publish.',
+      title: 'Write the policies: the two plans',
+      description: 'Start with the documents the rest of the program points to. The Cybersecurity Risk Management Plan and the Cyber Incident Response Plan follow the AWWA section order with guidance under each heading; replace the "What to record here" prompts with the utility\'s own facts and procedures, then publish.',
       status: statusOf(done, WATER_PLAN_TEMPLATES.length, started),
       done,
       total: WATER_PLAN_TEMPLATES.length,
@@ -193,6 +200,30 @@ export class WaterProgramService {
     };
   }
 
+  private async evidenceStep(organizationId: string): Promise<WaterProgramStep> {
+    const links = await db.frameworkEditorControlTaskTemplateLink.findMany({
+      where: { frameworkId: WATER_FRAMEWORK_ID, taskTemplate: { name: { startsWith: 'Evidence:' } } },
+      select: { taskTemplateId: true },
+    });
+    const tasks = await db.task.findMany({
+      where: { organizationId, taskTemplateId: { in: links.map((l) => l.taskTemplateId) } },
+      select: { id: true, title: true, status: true },
+      orderBy: { title: 'asc' },
+    });
+    const done = tasks.filter((t) => t.status === 'done').length;
+    return {
+      key: 'evidence',
+      title: 'Collect the operational evidence',
+      description: 'One evidence task per CPG 2.0 goal: inventories, configuration exports, logs, training records, backup tests. Attach the artefact that shows the practice is running; a Yes on the checklist moves the task to done, and the evidence keeps it there.',
+      status: statusOf(done, tasks.length, tasks.some((t) => t.status !== 'todo')),
+      done,
+      total: tasks.length,
+      summary: `${done} of ${tasks.length} evidence tasks done`,
+      href: 'tasks',
+      details: tasks.map((t) => ({ label: t.title.replace(/^Evidence: /, ''), status: t.status.replace('_', ' '), href: `tasks/${t.id}` })),
+    };
+  }
+
   private async tabletopStep(instanceId: string, organizationId: string): Promise<WaterProgramStep> {
     const links = await db.frameworkEditorControlTaskTemplateLink.findMany({
       where: { frameworkId: WATER_FRAMEWORK_ID, taskTemplate: { name: { startsWith: INTERVIEW_TASK_PREFIX } } },
@@ -206,8 +237,8 @@ export class WaterProgramService {
     const done = tasks.filter((t) => t.status === 'done').length;
     return {
       key: 'tabletop',
-      title: 'Run the tabletop and record the interviews',
-      description: "Each interview task carries the CISA water-sector tabletop questions for one CPG goal. Walk them with the people who own the practice, or cover them in an annual exercise, and attach the notes or after-action report.",
+      title: 'Validate with a tabletop, on a cadence',
+      description: "Once the program is in place, exercise it at least yearly. Each interview task carries the CISA water-sector tabletop questions for one CPG goal: walk them with the people who own the practice, record the answers, attach the after-action report, and repeat on the cadence set in the plan.",
       status: statusOf(done, tasks.length, tasks.some((t) => t.status !== 'todo')),
       done,
       total: tasks.length,

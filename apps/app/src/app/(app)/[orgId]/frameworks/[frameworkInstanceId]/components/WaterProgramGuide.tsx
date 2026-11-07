@@ -13,9 +13,10 @@ const STATUS: Record<StepStatus, { label: string; variant: 'default' | 'secondar
 };
 
 const ACTION: Record<WaterProgramStep['key'], string> = {
+  plans: 'Open policies',
   assess: 'Open the checklist',
   gaps: 'See results',
-  plans: 'Open policies',
+  evidence: 'Open evidence tasks',
   vendors: 'Open vendors',
   tabletop: 'Open interview tasks',
 };
@@ -96,8 +97,9 @@ export function WaterProgramGuide({ orgId, frameworkInstanceId }: { orgId: strin
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <Text size="sm" variant="muted">
-          Five steps, in the order a utility works them. Each card reads the live state of its screen; nothing here
-          is answered twice.
+          Six steps, in the order a utility builds the program: policies and plans, implementation status, fixes,
+          operational evidence, third parties, then validation by tabletop on a cadence. Each card reads the live
+          state of its screen; nothing here is answered twice.
         </Text>
         <Badge variant="secondary">
           {done} of {data.steps.length} steps done

@@ -9,7 +9,7 @@ export const WATER_FRAMEWORK_ID = 'frk_1d3256a64aeccf2765842f80';
 export type StepStatus = 'not_started' | 'in_progress' | 'done';
 
 export interface WaterProgramStep {
-  key: 'assess' | 'gaps' | 'plans' | 'vendors' | 'tabletop';
+  key: 'plans' | 'assess' | 'gaps' | 'evidence' | 'vendors' | 'tabletop';
   title: string;
   description: string;
   status: StepStatus;

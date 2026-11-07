@@ -1,0 +1,41 @@
+// EPA Cybersecurity Procurement Evaluation Checklist (water sector) answered per vendor:
+// a weighted 0–3 score sheet for a product/service supplier or an integrator / managed
+// service provider. The checklist items themselves are code (apps/api, generated from
+// packages/db/prisma/seed/sources/water/inputs/epa-procurement-checklist.json); this
+// table keeps one filled sheet per vendor and checklist kind.
+
+/// Which EPA checklist the sheet follows.
+enum VendorChecklistKind {
+  epa_supplier
+  epa_integrator_msp
+}
+
+model VendorChecklistAssessment {
+  id String @id @default(dbgenerated("generate_prefixed_cuid('vca'::text)"))
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  vendorId       String
+  vendor         Vendor       @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  kind VendorChecklistKind
+
+  /// Contract name or number and the agreed re-evaluation cadence, as on EPA's sheet.
+  contractReference   String?
+  evaluationFrequency String?
+  notes               String?
+
+  /// One entry per checklist item: { itemId, weight 0-3, score 0-3, supplierResponse,
+  /// inContract (true/false/null), explanation }. Items absent from the array are unscored.
+  items Json @default("[]")
+
+  assessedAt   DateTime?
+  assessedById String?
+  assessedBy   Member?   @relation("VendorChecklistAssessor", fields: [assessedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([vendorId, kind])
+  @@index([organizationId])
+}

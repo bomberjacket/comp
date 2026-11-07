@@ -240,6 +240,7 @@ model Member {
   devices                          Device[]
   deviceEnrollmentTokens           DeviceEnrollmentToken[]
   requirementAnswers               RequirementAnswer[]              @relation("RequirementAnswerAnsweredBy")
+  vendorChecklistAssessments       VendorChecklistAssessment[]      @relation("VendorChecklistAssessor")
   backgroundCheckRequests          BackgroundCheckRequest[]
   offboardingChecklistCompletions  OffboardingChecklistCompletion[]
   offboardingAccessRevocations     OffboardingAccessRevocation[]

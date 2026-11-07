@@ -47,6 +47,7 @@ import { TrainingModule } from './training/training.module';
 import { EvidenceFormsModule } from './evidence-forms/evidence-forms.module';
 import { FrameworksModule } from './frameworks/frameworks.module';
 import { RequirementAnswersModule } from './requirement-answers/requirement-answers.module';
+import { VendorChecklistsModule } from './vendor-checklists/vendor-checklists.module';
 import { FrameworkVersionsModule } from './framework-editor-versions/framework-versions.module';
 import { AuditModule } from './audit/audit.module';
 import { ControlsModule } from './controls/controls.module';
@@ -122,6 +123,7 @@ import { OffboardingChecklistModule } from './offboarding-checklist/offboarding-
     EvidenceFormsModule,
     FrameworksModule,
     RequirementAnswersModule,
+    VendorChecklistsModule,
     FrameworkVersionsModule,
     RolesModule,
     AuditModule,

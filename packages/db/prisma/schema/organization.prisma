@@ -109,6 +109,7 @@ model Organization {
 
   // Question-based frameworks (CISA CSET modules)
   requirementAnswers RequirementAnswer[]
+  vendorChecklistAssessments VendorChecklistAssessment[]
 
   // Background Checks
   backgroundCheckRequests BackgroundCheckRequest[]

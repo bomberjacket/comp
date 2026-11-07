@@ -51,8 +51,8 @@ import {
   capLogs,
   capResultsForList,
 } from '../utils/run-history-limits';
-import { db } from '@db';
-import type { IntegrationConnection, Prisma } from '@db';
+import { db, TaskAutomationStatus } from '@db';
+import type { IntegrationConnection, Prisma, Task } from '@db';
 
 /** Manifest + check types derived from the integration-platform registry. */
 type IntegrationManifest = NonNullable<ReturnType<typeof getManifest>>;
@@ -69,6 +69,19 @@ interface ConnectionCheckOutcome {
    *  comp does not classify — the self-heal agent decides our-bug vs real fail. */
   failures: FailingFinding[];
 }
+
+/** Aggregate of one task's checks across every active account of a provider. */
+interface TaskRunOutcome {
+  accountsRun: number;
+  totalPassing: number;
+  totalFindings: number;
+  hadErrors: boolean;
+  checkRunId?: string;
+  taskStatus?: string | null;
+}
+
+/** Active finding exceptions, loaded once per request. */
+type ExceptionSet = Awaited<ReturnType<typeof loadActiveExceptionSet>>;
 
 interface TaskIntegrationCheck {
   integrationId: string;
@@ -414,6 +427,159 @@ export class TaskIntegrationsController {
           select: { id: true },
         }));
 
+    const exceptions = await loadActiveExceptionSet(organizationId);
+    const outcome = await this.runChecksAndUpdateTask({
+      task,
+      connections,
+      manifest,
+      checkDefs: [checkDef],
+      organizationId,
+      isDynamic,
+      exceptions,
+    });
+
+    if (outcome.accountsRun === 0) {
+      throw new HttpException(
+        'This check is disconnected from the task. Reconnect it before running.',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return { success: true, ...outcome };
+  }
+
+  @Post('run-connection/:connectionId')
+  @ApiOperation({
+    summary:
+      'Run every check of one connection against the tasks they map to and update those tasks (manual counterpart of the daily schedule)',
+  })
+  @RequirePermission('integration', 'update')
+  async runConnectionChecksForTasks(
+    @Param('connectionId') connectionId: string,
+    @OrganizationId() organizationId: string,
+  ): Promise<{
+    success: boolean;
+    tasksRun: number;
+    tasksDone: number;
+    tasksFailed: number;
+    totalPassing: number;
+    totalFindings: number;
+  }> {
+    const connection = await this.connectionRepository.findById(connectionId);
+    if (!connection || connection.organizationId !== organizationId) {
+      throw new HttpException('Connection not found', HttpStatus.NOT_FOUND);
+    }
+    if (connection.status !== 'active') {
+      throw new HttpException(
+        'Connection is not active',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const provider = await this.providerRepository.findById(
+      connection.providerId,
+    );
+    const manifest = provider ? getManifest(provider.slug) : undefined;
+    if (!provider || !manifest) {
+      throw new HttpException('Manifest not found', HttpStatus.NOT_FOUND);
+    }
+
+    // Same task selection as the daily schedule, minus its "due today" filter:
+    // the customer asked for a run now (e.g. after uploading a new report).
+    const checkDefs = manifest.checks ?? [];
+    const taskTemplateIds = [
+      ...new Set(
+        checkDefs.flatMap((c) =>
+          c.taskMapping ? [c.taskMapping as string] : [],
+        ),
+      ),
+    ];
+    const tasks =
+      taskTemplateIds.length === 0
+        ? []
+        : await db.task.findMany({
+            where: {
+              organizationId,
+              taskTemplateId: { in: taskTemplateIds },
+              automationStatus: { not: TaskAutomationStatus.MANUAL },
+            },
+            select: {
+              id: true,
+              status: true,
+              frequency: true,
+              taskTemplateId: true,
+            },
+          });
+
+    const activeConnections =
+      await this.connectionRepository.findActiveByProviderAndOrg(
+        provider.id,
+        organizationId,
+      );
+    const connections =
+      activeConnections.length > 0 ? activeConnections : [connection];
+    const isDynamic = !isCodeManifest(provider.slug);
+    const exceptions = await loadActiveExceptionSet(organizationId);
+
+    const summary = {
+      success: true,
+      tasksRun: 0,
+      tasksDone: 0,
+      tasksFailed: 0,
+      totalPassing: 0,
+      totalFindings: 0,
+    };
+    for (const task of tasks) {
+      const defs = checkDefs.filter(
+        (c) => c.taskMapping === task.taskTemplateId,
+      );
+      if (defs.length === 0) continue;
+      const outcome = await this.runChecksAndUpdateTask({
+        task,
+        connections,
+        manifest,
+        checkDefs: defs,
+        organizationId,
+        isDynamic,
+        exceptions,
+      });
+      if (outcome.accountsRun === 0) continue;
+      summary.tasksRun += 1;
+      summary.totalPassing += outcome.totalPassing;
+      summary.totalFindings += outcome.totalFindings;
+      if (outcome.taskStatus === 'done') summary.tasksDone += 1;
+      if (outcome.taskStatus === 'failed') summary.tasksFailed += 1;
+    }
+    this.logger.log(
+      `Ran ${checkDefs.length} check(s) of ${provider.slug} connection ${connectionId} for ${summary.tasksRun} task(s): ${summary.tasksFailed} failed, ${summary.tasksDone} done`,
+    );
+    return summary;
+  }
+
+  /**
+   * Run the given checks of one task against every connection (account) and
+   * decide the task's status once from the aggregate — the shared core of the
+   * single-check manual run and the whole-connection run.
+   */
+  private async runChecksAndUpdateTask(params: {
+    task: Pick<Task, 'id' | 'status' | 'frequency'>;
+    connections: IntegrationConnection[];
+    manifest: IntegrationManifest;
+    checkDefs: IntegrationCheckDef[];
+    organizationId: string;
+    isDynamic: boolean;
+    exceptions: ExceptionSet;
+  }): Promise<TaskRunOutcome> {
+    const {
+      task,
+      connections,
+      manifest,
+      checkDefs,
+      organizationId,
+      isDynamic,
+      exceptions,
+    } = params;
+    const taskId = task.id;
+
     let totalFindings = 0;
     let totalPassing = 0;
     let accountsRun = 0;
@@ -428,35 +594,40 @@ export class TaskIntegrationsController {
 
     // Sequential so each per-account run commits as it completes — a slow or
     // failing account still leaves the earlier accounts' results persisted.
-    for (const conn of connections) {
-      // Respect a check that was disconnected from this task for this account.
-      if (isCheckDisabledForTask(conn.metadata, taskId, checkId)) {
-        continue;
+    for (const checkDef of checkDefs) {
+      for (const conn of connections) {
+        // Respect a check that was disconnected from this task for this account.
+        if (isCheckDisabledForTask(conn.metadata, taskId, checkDef.id)) {
+          continue;
+        }
+        const outcome = await this.runCheckForConnection({
+          connection: conn,
+          manifest,
+          checkDef,
+          taskId,
+          organizationId,
+          isDynamic,
+        });
+        accountsRun += 1;
+        totalFindings += outcome.findings;
+        totalPassing += outcome.passing;
+        if (outcome.status === 'error') hasExecutionError = true;
+        // For dynamic, any non-success account run was held (pending) — count it so
+        // an error-only account (no findings) still keeps the task pending.
+        if (isDynamic && outcome.status !== 'success') heldRunCount++;
+        failingFindings.push(...outcome.failures);
+        lastCheckRunId = outcome.checkRunId;
       }
-      const outcome = await this.runCheckForConnection({
-        connection: conn,
-        manifest,
-        checkDef,
-        taskId,
-        organizationId,
-        isDynamic,
-      });
-      accountsRun += 1;
-      totalFindings += outcome.findings;
-      totalPassing += outcome.passing;
-      if (outcome.status === 'error') hasExecutionError = true;
-      // For dynamic, any non-success account run was held (pending) — count it so
-      // an error-only account (no findings) still keeps the task pending.
-      if (isDynamic && outcome.status !== 'success') heldRunCount++;
-      failingFindings.push(...outcome.failures);
-      lastCheckRunId = outcome.checkRunId;
     }
 
     if (accountsRun === 0) {
-      throw new HttpException(
-        'This check is disconnected from the task. Reconnect it before running.',
-        HttpStatus.BAD_REQUEST,
-      );
+      return {
+        accountsRun,
+        totalPassing,
+        totalFindings,
+        hadErrors: false,
+        taskStatus: null,
+      };
     }
 
     // Aggregate task status across ALL accounts, HONORING active finding
@@ -464,7 +635,6 @@ export class TaskIntegrationsController {
     // matched with the scheduled run and the Cloud Tests findings view (one
     // rule, via the shared helpers). Any real (non-excepted) finding → failed;
     // else any passing result → done; else leave unchanged.
-    const exceptions = await loadActiveExceptionSet(organizationId);
     // For DYNAMIC integrations EVERY failure is held (pending) — comp never
     // classifies; the self-heal agent decides our-bug vs real fail. So none fail
     // the task here. Static/AWS behavior is unchanged (no holding).
@@ -518,7 +688,6 @@ export class TaskIntegrationsController {
     }
 
     return {
-      success: true,
       accountsRun,
       totalPassing,
       totalFindings,

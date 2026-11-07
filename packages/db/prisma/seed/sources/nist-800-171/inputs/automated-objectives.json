@@ -1,0 +1,314 @@
+{
+  "generatedBy": "packages/integration-platform/scripts/export-automated-objectives.ts",
+  "description": "NIST SP 800-171 assessment objectives with at least one integration check; their task templates are seeded AUTOMATED.",
+  "objectives": [
+    {
+      "objective": "3.1.19[b]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.1.1[a]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.1.1[d]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.1[e]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.1[f]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.20[e]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.2[b]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.3[b]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.3[e]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.5[a]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.1.5[b]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.7[c]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.1.7[d]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.13.12[c]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.13.13[a]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.13.16[a]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.13.1[g]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.14.2[b]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high",
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.14.4[a]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.14.5[b]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.14.5[c]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.14.6[a]",
+      "providers": [
+        "azure",
+        "azure-gov",
+        "microsoft-365",
+        "microsoft-365-gcc-high",
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.2.1[c]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.2.1[d]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.3.1[c]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high",
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.3.1[f]",
+      "providers": [
+        "azure",
+        "azure-gov",
+        "microsoft-365",
+        "microsoft-365-gcc-high",
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.3.5[a]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.3.5[b]",
+      "providers": [
+        "azure",
+        "azure-gov"
+      ]
+    },
+    {
+      "objective": "3.4.1[d]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.4.1[f]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.4.2[a]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.4.2[b]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.4.7[f]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.4.7[l]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.4.8[c]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.4.9[b]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.5.2[a]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.5.2[b]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.5.3[a]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.5.3[c]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high",
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.5.3[d]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high",
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.5.4[a]",
+      "providers": [
+        "scubagear"
+      ]
+    },
+    {
+      "objective": "3.5.6[b]",
+      "providers": [
+        "microsoft-365",
+        "microsoft-365-gcc-high"
+      ]
+    },
+    {
+      "objective": "3.6.1[c]",
+      "providers": [
+        "azure",
+        "azure-gov"
+      ]
+    },
+    {
+      "objective": "3.6.2[a]",
+      "providers": [
+        "azure",
+        "azure-gov"
+      ]
+    },
+    {
+      "objective": "3.8.7[a]",
+      "providers": [
+        "scubagear"
+      ]
+    }
+  ]
+}

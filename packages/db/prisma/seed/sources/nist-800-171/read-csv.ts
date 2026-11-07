@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { normalizeIdentifier } from './text';
 import type { ChangeRow, FrequencyRow, Rev2Objective, Rev2Requirement } from './types';
 
@@ -169,4 +169,18 @@ export function readR2Titles(path: string): Map<string, string> {
     if (id && title) out.set(id, title);
   }
   return out;
+}
+
+/**
+ * Objectives with at least one integration check (written by
+ * packages/integration-platform/scripts/export-automated-objectives.ts). Their
+ * task templates are seeded AUTOMATED so Comp AI runs the checks and shows the
+ * Automations tab; everything else stays MANUAL. Missing file = none automated.
+ */
+export function readAutomatedObjectives(file: string): Set<string> {
+  if (!existsSync(file)) return new Set();
+  const parsed = JSON.parse(readFileSync(file, 'utf8')) as {
+    objectives: Array<{ objective: string }>;
+  };
+  return new Set(parsed.objectives.map((o) => o.objective));
 }

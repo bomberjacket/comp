@@ -75,11 +75,19 @@ export function ScubaGearAccountSettingsBody({
           scubaPolicyCount: compact.policies.length,
           scubaUploadedAt: new Date().toISOString(),
         });
-        const run = await api.post(`/v1/integrations/checks/connections/${connectionId}/run`, {});
-        if (run.error) {
-          toast.warning(`Report stored, but the checks did not run: ${run.error}`);
+        // Run every policy check against the evidence tasks it maps to, so the
+        // results and status changes show on each task's page (the daily
+        // schedule's path, run now).
+        const run = await api.post<{ tasksRun: number; tasksFailed: number; tasksDone: number }>(
+          `/v1/integrations/tasks/run-connection/${connectionId}`,
+          {},
+        );
+        if (run.error || !run.data) {
+          toast.warning(`Report stored, but the checks did not run: ${run.error ?? 'no response'}`);
         } else {
-          toast.success(`Report stored (${compact.policies.length} policies); checks are running`);
+          toast.success(
+            `Report stored (${compact.policies.length} policies). ${run.data.tasksRun} evidence tasks checked: ${run.data.tasksFailed} failed, ${run.data.tasksDone} done.`,
+          );
         }
         await refresh();
         onUpdated?.();
@@ -160,7 +168,10 @@ export function ScubaGearAccountSettingsBody({
               <AccountSettingsInfoRow label="ScubaGear" value={metadata.scubaToolVersion} />
             )}
             {Array.isArray(metadata.scubaProducts) && (
-              <AccountSettingsInfoRow label="Products" value={(metadata.scubaProducts as string[]).join(', ')} />
+              <div className="py-1">
+                <p className="text-xs text-muted-foreground">Products</p>
+                <p className="text-xs">{(metadata.scubaProducts as string[]).join(', ')}</p>
+              </div>
             )}
             {typeof metadata.scubaPolicyCount === 'number' && (
               <AccountSettingsInfoRow label="Policies" value={String(metadata.scubaPolicyCount)} />

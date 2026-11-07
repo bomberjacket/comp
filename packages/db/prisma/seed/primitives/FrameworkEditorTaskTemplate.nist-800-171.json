@@ -149,7 +149,7 @@
     "description": "Assessment objective 3.1.20[e]: Connections to external systems are controlled/limited\n\nSecurity requirement 3.1.20: Verify and control/limit connections to and use of external systems.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing the use of external systems; security plan\n- Configuration evidence: mechanisms implementing terms and conditions on use of external systems; system configuration settings and associated documentation\n- Operational evidence: list of types of applications accessible from external systems; terms and conditions for external systems\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_0787a78116c5f2c58783395a",
@@ -325,7 +325,7 @@
     "description": "Assessment objective 3.14.2[b]: Protection from malicious code at designated locations is provided\n\nSecurity requirement 3.14.2: Provide protection from malicious code at designated locations within organizational systems.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy and procedures; system and information integrity policy\n- Procedure / SOP: configuration management policy and procedures; procedures addressing malicious code protection; security plan\n- Configuration evidence: malicious code protection mechanisms; mechanisms supporting or implementing employing, updating, and configuring malicious code protection mechanisms; mechanisms supporting or implementing malicious code scanning and subsequent actions; organizational process for addressing false positives and resulting potential impact; system configuration settings and associated documentation; system design documentation\n- Operational evidence: organizational processes for employing, updating, and configuring malicious code protection mechanisms; record of actions initiated by malicious code protection mechanisms in response to malicious code detection; records of malicious code protection updates; scan results from malicious code protection mechanisms; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_0f14049cbe8518b3620d0f28",
@@ -381,7 +381,7 @@
     "description": "Assessment objective 3.4.1[f]: The inventory is maintained (reviewed and updated) throughout the system development life cycle\n\nSecurity requirement 3.4.1: Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; procedures addressing system inventory; procedures addressing the baseline configuration of the system; security plan\n- Configuration evidence: enterprise architecture documentation; mechanisms implementing updating of the system inventory; mechanisms supporting configuration control of the baseline configuration; mechanisms supporting or implementing the system inventory; system architecture and configuration documentation; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records; inventory review and update records; organizational processes for developing and documenting an inventory of system components; organizational processes for managing baseline configurations; organizational processes for updating inventory of system components; system component installation records; system component removal records; system inventory records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring recommended: moderate total score (8) with balanced automation (0), technical (3), and procedural (3) elements). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_10cb4ad46fb90ae3a721ac86",
@@ -445,7 +445,7 @@
     "description": "Assessment objective 3.1.1[e]: System access is limited to processes acting on behalf of authorized users\n\nSecurity requirement 3.1.1: Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing account management; security plan\n- Configuration evidence: mechanisms for implementing account management; system configuration settings and associated documentation; system design documentation\n- Operational evidence: access authorization records; account management compliance reviews; list of active system accounts and the name of the individual associated with each account; list of conditions for group and role membership; list of devices and other systems authorized to connect to organizational systems; list of recently disabled system accounts along with the name of the individual associated with each account; notifications or records of recently transferred, separated, or terminated employees; organizational processes for managing system accounts; system audit logs and records; system monitoring records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_123942d0933384b397c1034a",
@@ -509,7 +509,7 @@
     "description": "Assessment objective 3.6.1[c]: The operational incident-handling capability includes detection\n\nSecurity requirement 3.6.1: Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: contingency planning policy; incident response policy\n- Procedure / SOP: contingency plan; incident response plan; incident response training curriculum; incident response training materials; procedures addressing incident handling; procedures addressing incident response assistance; procedures addressing incident response training; security plan\n- Configuration evidence: incident-handling capability for the organization; mechanisms supporting or implementing incident response assistance\n- Operational evidence: incident response training records; organizational processes for incident response assistance\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (4) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_1611c1247ff7ca7772d368ba",
@@ -525,7 +525,7 @@
     "description": "Assessment objective 3.4.8[c]: Whitelisting to allow the execution of authorized software or blacklisting to prevent the use of unauthorized software is implemented as specified\n\nSecurity requirement 3.4.8: Apply deny-by-exception (blacklisting) policy to prevent the use of unauthorized software or deny-all, permit-by-exception (whitelisting) policy to allow the execution of authorized software.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; procedures addressing least functionality in the system; security configuration checklists; security plan\n- Configuration evidence: mechanisms supporting or implementing blacklisting or whitelisting; organizational process for identifying, reviewing, and updating programs authorized or not authorized to execute on the system; process for implementing blacklisting or whitelisting; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records; list of software programs authorized to execute on the system; list of software programs not authorized to execute on the system; review and update records associated with list of authorized or unauthorized software programs; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring recommended: moderate total score (8) with balanced automation (0), technical (3), and procedural (5) elements). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_166a4b658c70e711211be6b3",
@@ -573,7 +573,7 @@
     "description": "Assessment objective 3.5.4[a]: Replay-resistant authentication mechanisms are implemented for all network account access to privileged and non-privileged accounts\n\nSecurity requirement 3.5.4: Employ replay-resistant authentication mechanisms for network access to privileged and non-privileged accounts.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: identification and authentication policy\n- Procedure / SOP: procedures addressing user identification and authentication; security plan\n- Configuration evidence: mechanisms supporting or implementing identification and authentication capability or replay resistant authentication mechanisms; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of privileged system accounts; system audit logs and records\n\nBNI recommended monitoring level: bi-annual (Bi-annual monitoring recommended: moderate total score (7) suggests semi-regular review cycle). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_1789024b5e523d32c7410b50",
@@ -589,7 +589,7 @@
     "description": "Assessment objective 3.2.1[c]: Managers, systems administrators, and users of the system are made aware of the security risks associated with their activities\n\nSecurity requirement 3.2.1: Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: security awareness and training policy\n- Procedure / SOP: procedures addressing security awareness training implementation; relevant codes of federal regulations; security awareness training curriculum; security awareness training materials; security plan\n- Configuration evidence: mechanisms managing role-based security training; mechanisms managing security awareness training\n- Operational evidence: training records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "hr",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_17cc3efaa3952dad31fd91c8",
@@ -797,7 +797,7 @@
     "description": "Assessment objective 3.1.7[c]: Non-privileged users are prevented from executing privileged functions\n\nSecurity requirement 3.1.7: Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing least privilege; security plan\n- Configuration evidence: mechanisms auditing the execution of privileged functions; mechanisms implementing least privilege functions for non-privileged users; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of privileged functions and associated user account assignments; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_1e48648f7a7d08d91de8eb33",
@@ -829,7 +829,7 @@
     "description": "Assessment objective 3.1.3[e]: Approved authorizations for controlling the flow of CUI are enforced\n\nSecurity requirement 3.1.3: Control the flow of CUI in accordance with approved authorizations.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy; information flow control policies\n- Procedure / SOP: procedures addressing information flow enforcement; security plan\n- Configuration evidence: mechanisms implementing information flow enforcement policy; system baseline configuration; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of information flow authorizations; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_1f15cebf28a147df752a3ae6",
@@ -925,7 +925,7 @@
     "description": "Assessment objective 3.5.2[b]: The identity of each process acting on behalf of a user is authenticated or verified as a prerequisite to system access\n\nSecurity requirement 3.5.2: Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: identification and authentication policy\n- Procedure / SOP: procedures addressing authenticator management; security plan\n- Configuration evidence: mechanisms supporting or implementing authenticator management capability; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records associated with managing system authenticators; list of system authenticator types; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_222f87a5ffde9c3929235544",
@@ -981,7 +981,7 @@
     "description": "Assessment objective 3.1.3[b]: Methods and enforcement mechanisms for controlling the flow of CUI are defined\n\nSecurity requirement 3.1.3: Control the flow of CUI in accordance with approved authorizations.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy; information flow control policies\n- Procedure / SOP: procedures addressing information flow enforcement; security plan\n- Configuration evidence: mechanisms implementing information flow enforcement policy; system baseline configuration; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of information flow authorizations; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring recommended: moderate total score (9) with balanced automation (1), technical (3), and procedural (2) elements). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_248475fcd49b69189e980876",
@@ -1101,7 +1101,7 @@
     "description": "Assessment objective 3.2.1[d]: Managers, systems administrators, and users of the system are made aware of the applicable policies, standards, and procedures related to the security of the system\n\nSecurity requirement 3.2.1: Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: security awareness and training policy\n- Procedure / SOP: procedures addressing security awareness training implementation; relevant codes of federal regulations; security awareness training curriculum; security awareness training materials; security plan\n- Configuration evidence: mechanisms managing role-based security training; mechanisms managing security awareness training\n- Operational evidence: training records\n\nBNI recommended monitoring level: bi-annual (Bi-annual monitoring recommended: moderate total score (7) suggests semi-regular review cycle). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "hr",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_2a1c6bfea0697ba57cd06ae6",
@@ -1421,7 +1421,7 @@
     "description": "Assessment objective 3.14.5[c]: Real-time malicious code scans of files from external sources as files are downloaded, opened, or executed are performed\n\nSecurity requirement 3.14.5: Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy and procedures; system and information integrity policy\n- Procedure / SOP: configuration management policy and procedures; procedures addressing malicious code protection; security plan\n- Configuration evidence: malicious code protection mechanisms; mechanisms supporting or implementing malicious code protection mechanisms (including updates and configurations); mechanisms supporting or implementing malicious code scanning and subsequent actions; organizational process for addressing false positives and resulting potential impact; system configuration settings and associated documentation; system design documentation\n- Operational evidence: organizational processes for employing, updating, and configuring malicious code protection mechanisms; record of actions initiated by malicious code protection mechanisms in response to malicious code detection; records of malicious code protection updates; scan results from malicious code protection mechanisms; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_3624422f31fb81e41b5c7832",
@@ -1589,7 +1589,7 @@
     "description": "Assessment objective 3.5.3[a]: Privileged accounts are identified\n\nSecurity requirement 3.5.3: Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: identification and authentication policy\n- Procedure / SOP: procedures addressing user identification and authentication; security plan\n- Configuration evidence: mechanisms supporting or implementing multifactor authentication capability; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of system accounts; system audit logs and records\n\nBNI recommended monitoring level: bi-annual (Bi-annual monitoring recommended: moderate total score (7) suggests semi-regular review cycle). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_3d249c4302730b1cc5f492b9",
@@ -1621,7 +1621,7 @@
     "description": "Assessment objective 3.8.7[a]: The use of removable media on system components containing CUI is controlled\n\nSecurity requirement 3.8.7: Control the use of removable media on system components.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: system media protection policy; system use policy\n- Procedure / SOP: procedures addressing media usage restrictions; rules of behavior; security plan\n- Configuration evidence: mechanisms restricting or prohibiting use of system media on systems or system components; system configuration settings and associated documentation; system design documentation\n- Operational evidence: organizational processes for media use; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_3f6ae27e36339710e76b32d1",
@@ -1661,7 +1661,7 @@
     "description": "Assessment objective 3.1.19[b]: Encryption is employed to protect CUI on identified mobile devices and mobile computing platforms\n\nSecurity requirement 3.1.19: Encrypt CUI on mobile devices and mobile computing platforms.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing access control for mobile devices; system security plan\n- Configuration evidence: encryption mechanisms and associated configuration documentation; encryption mechanisms protecting confidentiality of information on mobile devices; system configuration settings and associated documentation; system design documentation\n- Operational evidence: system audit logs and records\n\nBNI recommended monitoring level: monthly (Monthly monitoring recommended: high total score (11) indicates well-rounded control coverage). Adjust the task frequency to this organization's cadence.",
     "frequency": "monthly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_411d2d4968e8dfcf64d374d9",
@@ -1757,7 +1757,7 @@
     "description": "Assessment objective 3.3.5[a]: Audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity are defined\n\nSecurity requirement 3.3.5: Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: audit and accountability policy\n- Procedure / SOP: procedures addressing audit record review, analysis, and reporting; security plan\n- Configuration evidence: : mechanisms supporting analysis and correlation of audit records; system configuration settings and associated documentation; system design documentation\n- Operational evidence: system audit logs and records across different repositories\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_43f6f13c977ef543deeb53ef",
@@ -1997,7 +1997,7 @@
     "description": "Assessment objective 3.4.7[l]: The use of nonessential protocols is restricted, disabled, or prevented as defined\n\nSecurity requirement 3.4.7: Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; procedures addressing least functionality in the system; security configuration checklists; security plan\n- Configuration evidence: mechanisms implementing review and handling of nonessential programs, functions, ports, protocols, or services; mechanisms preventing program execution on the system; mechanisms supporting or implementing software program usage and restrictions; specifications for preventing software program execution; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records; documented reviews of programs, functions, ports, protocols, and/or services; organizational processes for reviewing and disabling nonessential programs, functions, ports, protocols, or services; organizational processes for software program usage and restrictions; organizational processes preventing program execution on the system; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_4f8bf104ac6d49388d1cf01f",
@@ -2037,7 +2037,7 @@
     "description": "Assessment objective 3.13.12[c]: Remote activation of collaborative computing devices is prohibited\n\nSecurity requirement 3.13.12: \n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy and procedures; system and communications protection policy\n- Procedure / SOP: access control policy and procedures; procedures addressing collaborative computing; security plan\n- Configuration evidence: mechanisms providing an indication of use of collaborative computing devices; mechanisms supporting or implementing management of remote activation of collaborative computing devices; system configuration settings and associated documentation; system design documentation\n- Operational evidence: system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_51e01d1607a143ee9a806252",
@@ -2053,7 +2053,7 @@
     "description": "Assessment objective 3.1.5[b]: Access to privileged accounts is authorized in accordance with the principle of least privilege\n\nSecurity requirement 3.1.5: Employ the principle of least privilege, including for specific security functions and privileged accounts.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing account management; procedures addressing least privilege; security plan\n- Configuration evidence: mechanisms for implementing account management; mechanisms implementing least privilege functions; mechanisms prohibiting privileged access to the system; system configuration settings and associated documentation; system design documentation\n- Operational evidence: access authorization records; account management compliance reviews; list of active system accounts and the name of the individual associated with each account; list of conditions for group and role membership; list of recently disabled system accounts along with the name of the individual associated with each account; list of security functions (deployed in hardware, software, and firmware) and security-relevant information for which access must be explicitly authorized; list of system administration personnel; list of system-generated privileged accounts; notifications or records of recently transferred, separated, or terminated employees; organizational processes for managing system accounts; system monitoring/audit records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_5265642ed8ec254389b136ff",
@@ -2157,7 +2157,7 @@
     "description": "Assessment objective 3.3.5[b]: Defined audit record review, analysis, and reporting processes are correlated\n\nSecurity requirement 3.3.5: Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: audit and accountability policy\n- Procedure / SOP: procedures addressing audit record review, analysis, and reporting; security plan\n- Configuration evidence: : mechanisms supporting analysis and correlation of audit records; system configuration settings and associated documentation; system design documentation\n- Operational evidence: system audit logs and records across different repositories\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_55efb126e3a4b89af67f4c6f",
@@ -2237,7 +2237,7 @@
     "description": "Assessment objective 3.1.7[d]: The execution of privileged functions is captured in audit logs\n\nSecurity requirement 3.1.7: Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing least privilege; security plan\n- Configuration evidence: mechanisms auditing the execution of privileged functions; mechanisms implementing least privilege functions for non-privileged users; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of privileged functions and associated user account assignments; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (4) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_5908d7cd800a7790af832f67",
@@ -2541,7 +2541,7 @@
     "description": "Assessment objective 3.14.6[a]: The system is monitored to detect attacks and indicators of potential attacks\n\nSecurity requirement 3.14.6: Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: system and information integrity policy\n- Procedure / SOP: continuous monitoring strategy; procedures addressing system monitoring tools and techniques; security plan\n- Configuration evidence: facility diagram or layout; mechanisms supporting or implementing intrusion detection capability and system monitoring; mechanisms supporting or implementing system monitoring capability; mechanisms supporting or implementing the monitoring of inbound and outbound communications traffic; system configuration settings and associated documentation; system design documentation\n- Operational evidence: locations within system where monitoring devices are deployed; organizational processes for intrusion detection and system monitoring; organizational processes for system monitoring; system audit logs and records; system monitoring tools and techniques documentation; system protocols\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_6322de9f3dcaecb31a9f26b3",
@@ -2581,7 +2581,7 @@
     "description": "Assessment objective 3.4.1[d]: A system inventory is established\n\nSecurity requirement 3.4.1: Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; procedures addressing system inventory; procedures addressing the baseline configuration of the system; security plan\n- Configuration evidence: enterprise architecture documentation; mechanisms implementing updating of the system inventory; mechanisms supporting configuration control of the baseline configuration; mechanisms supporting or implementing the system inventory; system architecture and configuration documentation; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records; inventory review and update records; organizational processes for developing and documenting an inventory of system components; organizational processes for managing baseline configurations; organizational processes for updating inventory of system components; system component installation records; system component removal records; system inventory records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_656d6613080370a836502210",
@@ -3005,7 +3005,7 @@
     "description": "Assessment objective 3.5.6[b]: Identifiers are disabled after the defined period of inactivity\n\nSecurity requirement 3.5.6: Disable identifiers after a defined period of inactivity.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: identification and authentication policy\n- Procedure / SOP: procedures addressing account management; procedures addressing identifier management; security plan\n- Configuration evidence: mechanisms supporting or implementing identifier management; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of identifiers generated from physical access control devices; list of system accounts\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_743d6034fe102d9c5f9b76bf",
@@ -3149,7 +3149,7 @@
     "description": "Assessment objective 3.3.1[f]: Audit records are retained as defined\n\nSecurity requirement 3.3.1: Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: audit and accountability policy\n- Procedure / SOP: procedures addressing auditable events; security plan\n- Configuration evidence: mechanisms implementing system audit logging; system configuration settings and associated documentation; system design documentation\n- Operational evidence: system audit logs and records; system auditable events; system incident reports\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_7bacbd586e86e0c76b23bcbf",
@@ -3221,7 +3221,7 @@
     "description": "Assessment objective 3.1.1[d]: System access is limited to authorized users\n\nSecurity requirement 3.1.1: Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing account management; security plan\n- Configuration evidence: mechanisms for implementing account management; system configuration settings and associated documentation; system design documentation\n- Operational evidence: access authorization records; account management compliance reviews; list of active system accounts and the name of the individual associated with each account; list of conditions for group and role membership; list of devices and other systems authorized to connect to organizational systems; list of recently disabled system accounts along with the name of the individual associated with each account; notifications or records of recently transferred, separated, or terminated employees; organizational processes for managing system accounts; system audit logs and records; system monitoring records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_7f05b8696fce3718f6ad6b0c",
@@ -3429,7 +3429,7 @@
     "description": "Assessment objective 3.4.9[b]: Installation of software by users is controlled based on the established policy\n\nSecurity requirement 3.4.9: Control and monitor user-installed software.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; continuous monitoring strategy; procedures addressing user installed software; security plan\n- Configuration evidence: mechanisms enforcing rules or methods for governing the installation of software by users; mechanisms monitoring policy compliance; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of rules governing user-installed software; organizational processes governing user-installed software on the system; system audit logs and records; system monitoring records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_84762fb42a134fffb6bd8117",
@@ -3669,7 +3669,7 @@
     "description": "Assessment objective 3.4.2[b]: Security configuration settings for information technology products employed in the system are enforced\n\nSecurity requirement 3.4.2: Establish and enforce security configuration settings for information technology products employed in organizational systems.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; procedures addressing configuration settings for the system; security configuration checklists; security plan\n- Configuration evidence: evidence supporting approved deviations from established configuration settings; mechanisms that identify and/or document deviations from established configuration settings; mechanisms that implement, monitor, and/or control system configuration settings; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records; organizational processes for managing configuration settings; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring recommended: moderate total score (8) with balanced automation (2), technical (3), and procedural (2) elements). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_8e6108f8841e1a3f3dd956eb",
@@ -3685,7 +3685,7 @@
     "description": "Assessment objective 3.14.5[b]: Malicious code scans are performed with the defined frequency\n\nSecurity requirement 3.14.5: Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy and procedures; system and information integrity policy\n- Procedure / SOP: configuration management policy and procedures; procedures addressing malicious code protection; security plan\n- Configuration evidence: malicious code protection mechanisms; mechanisms supporting or implementing malicious code protection mechanisms (including updates and configurations); mechanisms supporting or implementing malicious code scanning and subsequent actions; organizational process for addressing false positives and resulting potential impact; system configuration settings and associated documentation; system design documentation\n- Operational evidence: organizational processes for employing, updating, and configuring malicious code protection mechanisms; record of actions initiated by malicious code protection mechanisms in response to malicious code detection; records of malicious code protection updates; scan results from malicious code protection mechanisms; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_8e8ae5adc0776891f38183fa",
@@ -3757,7 +3757,7 @@
     "description": "Assessment objective 3.14.4[a]: Malicious code protection mechanisms are updated when new releases are available\n\nSecurity requirement 3.14.4: Update malicious code protection mechanisms when new releases are available.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy and procedures; system and information integrity policy\n- Procedure / SOP: configuration management policy and procedures; procedures addressing malicious code protection; security plan\n- Configuration evidence: malicious code protection mechanisms; mechanisms supporting or implementing malicious code protection mechanisms (including updates and configurations); mechanisms supporting or implementing malicious code scanning and subsequent actions; organizational process for addressing false positives and resulting potential impact; system configuration settings and associated documentation; system design documentation\n- Operational evidence: organizational processes for employing, updating, and configuring malicious code protection mechanisms; record of actions initiated by malicious code protection mechanisms in response to malicious code detection; records of malicious code protection updates; scan results from malicious code protection mechanisms; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_910e7c3173b4b788f6107d64",
@@ -3805,7 +3805,7 @@
     "description": "Assessment objective 3.1.5[a]: Privileged accounts are identified\n\nSecurity requirement 3.1.5: Employ the principle of least privilege, including for specific security functions and privileged accounts.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing account management; procedures addressing least privilege; security plan\n- Configuration evidence: mechanisms for implementing account management; mechanisms implementing least privilege functions; mechanisms prohibiting privileged access to the system; system configuration settings and associated documentation; system design documentation\n- Operational evidence: access authorization records; account management compliance reviews; list of active system accounts and the name of the individual associated with each account; list of conditions for group and role membership; list of recently disabled system accounts along with the name of the individual associated with each account; list of security functions (deployed in hardware, software, and firmware) and security-relevant information for which access must be explicitly authorized; list of system administration personnel; list of system-generated privileged accounts; notifications or records of recently transferred, separated, or terminated employees; organizational processes for managing system accounts; system monitoring/audit records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (4) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_91866c4a4a59aeb85bc9a274",
@@ -3829,7 +3829,7 @@
     "description": "Assessment objective 3.3.1[c]: Audit records are created (generated)\n\nSecurity requirement 3.3.1: Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: audit and accountability policy\n- Procedure / SOP: procedures addressing auditable events; security plan\n- Configuration evidence: mechanisms implementing system audit logging; system configuration settings and associated documentation; system design documentation\n- Operational evidence: system audit logs and records; system auditable events; system incident reports\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_936652715364e9996e9664bc",
@@ -4549,7 +4549,7 @@
     "description": "Assessment objective 3.1.1[a]: Authorized users are identified\n\nSecurity requirement 3.1.1: Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing account management; security plan\n- Configuration evidence: mechanisms for implementing account management; system configuration settings and associated documentation; system design documentation\n- Operational evidence: access authorization records; account management compliance reviews; list of active system accounts and the name of the individual associated with each account; list of conditions for group and role membership; list of devices and other systems authorized to connect to organizational systems; list of recently disabled system accounts along with the name of the individual associated with each account; notifications or records of recently transferred, separated, or terminated employees; organizational processes for managing system accounts; system audit logs and records; system monitoring records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (5) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_ae05e638cc6fdd7621853726",
@@ -4581,7 +4581,7 @@
     "description": "Assessment objective 3.5.2[a]: The identity of each user is authenticated or verified as a prerequisite to system access\n\nSecurity requirement 3.5.2: Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: identification and authentication policy\n- Procedure / SOP: procedures addressing authenticator management; security plan\n- Configuration evidence: mechanisms supporting or implementing authenticator management capability; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records associated with managing system authenticators; list of system authenticator types; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_af7829516d25b29bfd6c63f4",
@@ -4829,7 +4829,7 @@
     "description": "Assessment objective 3.13.13[a]: Use of mobile code is controlled\n\nSecurity requirement 3.13.13: Control and monitor the use of mobile code.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: mobile code usage restrictions, mobile code implementation policy and procedures; system and communications protection policy\n- Procedure / SOP: mobile code usage restrictions, mobile code implementation policy and procedures; procedures addressing mobile code; security plan\n- Configuration evidence: mechanisms supporting or implementing the management of mobile code; mechanisms supporting or implementing the monitoring of mobile code; organizational process for controlling, authorizing, monitoring, and restricting mobile code\n- Operational evidence: authorization records; list of acceptable mobile code and mobile code technologies; list of unacceptable mobile code and mobile technologies; system audit logs and records; system monitoring records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_ba18d77ee4b40e54dcd2329c",
@@ -4965,7 +4965,7 @@
     "description": "Assessment objective 3.13.1[g]: Communications are protected at the external system boundary\n\nSecurity requirement 3.13.1: Monitor, control, and protect communications (i.e., information transmitted or received by organizational systems) at the external boundaries and key internal boundaries of organizational systems.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: system and communications protection policy\n- Procedure / SOP: procedures addressing boundary protection; security plan\n- Configuration evidence: boundary protection hardware and software; enterprise security architecture documentation; mechanisms implementing boundary protection capability; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of key internal boundaries of the system; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_bfc0221ca59a9f08d25465d8",
@@ -4973,7 +4973,7 @@
     "description": "Assessment objective 3.1.2[b]: System access is limited to the defined types of transactions and functions for authorized users\n\nSecurity requirement 3.1.2: Limit system access to the types of transactions and functions that authorized users are permitted to execute.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing access enforcement; security plan\n- Configuration evidence: mechanisms implementing access control policy; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of approved authorizations (user privileges) including remote access authorizations; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (4) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_bfeebe7b64570666e28e63c5",
@@ -5629,7 +5629,7 @@
     "description": "Assessment objective 3.4.7[f]: The use of nonessential functions is restricted, disabled, or prevented as defined\n\nSecurity requirement 3.4.7: Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; procedures addressing least functionality in the system; security configuration checklists; security plan\n- Configuration evidence: mechanisms implementing review and handling of nonessential programs, functions, ports, protocols, or services; mechanisms preventing program execution on the system; mechanisms supporting or implementing software program usage and restrictions; specifications for preventing software program execution; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records; documented reviews of programs, functions, ports, protocols, and/or services; organizational processes for reviewing and disabling nonessential programs, functions, ports, protocols, or services; organizational processes for software program usage and restrictions; organizational processes preventing program execution on the system; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_d69bfa9c3345e1101a23ca6b",
@@ -5749,7 +5749,7 @@
     "description": "Assessment objective 3.6.2[a]: Incidents are tracked\n\nSecurity requirement 3.6.2: Track, document, and report incidents to designated officials and/or authorities both internal and external to the organization.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: incident response policy\n- Procedure / SOP: incident response plan; procedures addressing incident monitoring; procedures addressing incident reporting; security plan\n- Configuration evidence: incident monitoring capability for the organization; mechanisms supporting or implementing incident reporting; mechanisms supporting or implementing tracking and documenting of system security incidents\n- Operational evidence: incident reporting records and documentation; incident response records and documentation; organizational processes for incident reporting\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring (default): total score (3) suggests standard baseline monitoring frequency). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_da37a325a62ad0b88ad308f0",
@@ -5837,7 +5837,7 @@
     "description": "Assessment objective 3.5.3[c]: Multifactor authentication is implemented for network access to privileged accounts\n\nSecurity requirement 3.5.3: Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: identification and authentication policy\n- Procedure / SOP: procedures addressing user identification and authentication; security plan\n- Configuration evidence: mechanisms supporting or implementing multifactor authentication capability; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of system accounts; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_dea6e86268f0a9aadbfb8df4",
@@ -5877,7 +5877,7 @@
     "description": "Assessment objective 3.5.3[d]: Multifactor authentication is implemented for network access to non-privileged accounts\n\nSecurity requirement 3.5.3: Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: identification and authentication policy\n- Procedure / SOP: procedures addressing user identification and authentication; security plan\n- Configuration evidence: mechanisms supporting or implementing multifactor authentication capability; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of system accounts; system audit logs and records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_e065b530708d54a400c10ffe",
@@ -5989,7 +5989,7 @@
     "description": "Assessment objective 3.1.1[f]: System access is limited to authorized devices (including other systems)\n\nSecurity requirement 3.1.1: Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: access control policy\n- Procedure / SOP: procedures addressing account management; security plan\n- Configuration evidence: mechanisms for implementing account management; system configuration settings and associated documentation; system design documentation\n- Operational evidence: access authorization records; account management compliance reviews; list of active system accounts and the name of the individual associated with each account; list of conditions for group and role membership; list of devices and other systems authorized to connect to organizational systems; list of recently disabled system accounts along with the name of the individual associated with each account; notifications or records of recently transferred, separated, or terminated employees; organizational processes for managing system accounts; system audit logs and records; system monitoring records\n\nBNI recommended monitoring level: annual (Annual monitoring recommended: lower total score (6) suggests stable, less dynamic control). Adjust the task frequency to this organization's cadence.",
     "frequency": "yearly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_e389b684451a6002b154d220",
@@ -5997,7 +5997,7 @@
     "description": "Assessment objective 3.13.16[a]: The confidentiality of CUI at rest is protected\n\nSecurity requirement 3.13.16: Protect the confidentiality of CUI at rest.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: system and communications protection policy\n- Procedure / SOP: procedures addressing protection of information at rest; security plan\n- Configuration evidence: cryptographic mechanisms and associated configuration documentation; mechanisms supporting or implementing confidentiality protections for information at rest; system configuration settings and associated documentation; system design documentation\n- Operational evidence: list of information at rest requiring confidentiality protections\n\nBNI recommended monitoring level: bi-annual (Bi-annual monitoring recommended: moderate total score (7) suggests semi-regular review cycle). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_e38f9aa2446bd43ad87993eb",
@@ -6325,7 +6325,7 @@
     "description": "Assessment objective 3.4.2[a]: Security configuration settings for information technology products employed in the system are established and included in the baseline configuration\n\nSecurity requirement 3.4.2: Establish and enforce security configuration settings for information technology products employed in organizational systems.\n\nArtifacts that satisfy this objective (from NIST SP 800-171A), by category:\n- Policy: configuration management policy\n- Procedure / SOP: configuration management plan; procedures addressing configuration settings for the system; security configuration checklists; security plan\n- Configuration evidence: evidence supporting approved deviations from established configuration settings; mechanisms that identify and/or document deviations from established configuration settings; mechanisms that implement, monitor, and/or control system configuration settings; system configuration settings and associated documentation; system design documentation\n- Operational evidence: change control records; organizational processes for managing configuration settings; system audit logs and records\n\nBNI recommended monitoring level: quarterly (Quarterly monitoring recommended: moderate total score (8) with balanced automation (2), technical (3), and procedural (2) elements). Adjust the task frequency to this organization's cadence.",
     "frequency": "quarterly",
     "department": "it",
-    "automationStatus": "MANUAL"
+    "automationStatus": "AUTOMATED"
   },
   {
     "id": "frk_tt_f21d23feac7b33322e1a2aa9",

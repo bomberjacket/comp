@@ -68,8 +68,10 @@ export function buildPoliciesAndTasks(args: {
   rev3: Rev3Build;
   requirementsR2: Rev2Requirement[];
   frequencies: Map<string, FrequencyRow>;
+  /** Objective identifiers that have at least one integration check. */
+  automated: Set<string>;
 }): PolicyTaskBuild {
-  const { controls, rev2, rev3, requirementsR2, frequencies } = args;
+  const { controls, rev2, rev3, requirementsR2, frequencies, automated } = args;
   const reqR2 = new Map(requirementsR2.map((r) => [r.id, r]));
   const keyOfId = new Map([...controls.idOfKey.entries()].map(([k, v]) => [v, k]));
   const frameworkIdOf: Record<Revision, string> = { r2: rev2.framework.id, r3: rev3.framework.id };
@@ -137,7 +139,7 @@ export function buildPoliciesAndTasks(args: {
         .join('\n\n'),
       frequency,
       department: fam.department,
-      automationStatus: 'MANUAL',
+      automationStatus: automated.has(row.identifier) ? 'AUTOMATED' : 'MANUAL',
     });
     controlTaskPairs.push({ A: controlId, B: id });
     taskLinks.push({

@@ -22,7 +22,13 @@ import { buildRev2 } from './build-rev2';
 import { buildRev3 } from './build-rev3';
 import { ids } from './ids';
 import { readCprt } from './read-cprt';
-import { readChangeAnalysis, readFrequencies, readR2Titles, readRev2Workbook } from './read-csv';
+import {
+  readAutomatedObjectives,
+  readChangeAnalysis,
+  readFrequencies,
+  readR2Titles,
+  readRev2Workbook,
+} from './read-csv';
 import type { FamilyRow, GeneratedData } from './types';
 import { validate } from './validate';
 import { readUpstreamIds, writeOutputs, type VersionEntry } from './write';
@@ -47,6 +53,7 @@ function main(): void {
   const workbook = readRev2Workbook(path.join(INPUTS, '171a-r2-objectives.csv'));
   const changes = readChangeAnalysis(path.join(INPUTS, 'r2-to-r3-change-analysis.csv'));
   const frequencies = readFrequencies(path.join(INPUTS, 'frequencies.csv'));
+  const automated = readAutomatedObjectives(path.join(INPUTS, 'automated-objectives.json'));
   const r2Titles = readR2Titles(path.join(INPUTS, 'r2-titles.csv'));
 
   const rev3 = buildRev3({ familyId: FAMILY.id, cprt: cprt3 });
@@ -78,6 +85,7 @@ function main(): void {
     rev3,
     requirementsR2: workbook.requirements,
     frequencies,
+    automated,
   });
 
   const data: GeneratedData = {

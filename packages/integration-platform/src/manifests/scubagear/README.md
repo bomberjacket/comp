@@ -36,6 +36,14 @@ metadata for display.
 Policies are matched by versionless id (`MS.AAD.3.2v3` still hits `MS.AAD.3.2`), so a
 wording bump in a later ScubaGear does not orphan the check.
 
+Results are shown per evidence task (task page → Automations tab), never per
+connection: the upload calls `POST /v1/integrations/tasks/run-connection/:id`, which
+runs every check against the tasks its objective maps to and sets each task's status
+(failed / done) the same way the daily schedule does. Comp AI skips tasks marked
+MANUAL, so the NIST seed marks the task templates of every objective with a check
+AUTOMATED (`inputs/automated-objectives.json`, written by
+`scripts/export-automated-objectives.ts`).
+
 ## Mapping
 
 `objective-map.ts` is hand-curated: one Rev 2 objective per policy, chosen from the

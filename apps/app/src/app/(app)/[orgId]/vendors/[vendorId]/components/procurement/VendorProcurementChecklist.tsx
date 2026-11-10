@@ -31,6 +31,7 @@ const KIND_LABEL: Record<VendorChecklistKind, string> = {
 interface Props {
   vendorId: string;
   canEdit: boolean;
+  onSaved?: () => void;
 }
 
 function emptyAnswers(def: VendorChecklistDef, saved: ChecklistItemAnswer[]): Record<string, ChecklistItemAnswer> {
@@ -45,7 +46,7 @@ function emptyAnswers(def: VendorChecklistDef, saved: ChecklistItemAnswer[]): Re
  * (supplier or integrator/MSP), weight each item 0–3 and score the supplier's response
  * 0–3; EPA's total value is weight × score and the section gap is target minus actual.
  */
-export function VendorProcurementChecklist({ vendorId, canEdit }: Props) {
+export function VendorProcurementChecklist({ vendorId, canEdit, onSaved }: Props) {
   const { data: defs, error: defsError } = useVendorChecklistDefinitions();
   const { assessments, isLoading, save } = useVendorChecklists(vendorId);
   const [kind, setKind] = useState<VendorChecklistKind>('epa_supplier');
@@ -93,6 +94,7 @@ export function VendorProcurementChecklist({ vendorId, canEdit }: Props) {
       const items = Object.values(answers).filter((a) => a.weight > 0 || a.supplierResponse || a.explanation || a.inContract !== null);
       await save(kind, { items, contractReference, evaluationFrequency });
       setDirty(false);
+      onSaved?.();
       toast.success('Checklist saved');
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Could not save the checklist');

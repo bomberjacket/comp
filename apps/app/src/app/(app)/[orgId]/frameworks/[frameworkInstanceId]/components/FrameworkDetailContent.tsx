@@ -273,7 +273,7 @@ export function FrameworkDetailContent({
 
         {isWaterProgram && (
           <TabsContent value="program">
-            <WaterProgramGuide orgId={orgId} frameworkInstanceId={frameworkInstanceId} />
+            <WaterProgramGuide orgId={orgId} frameworkInstanceId={frameworkInstanceId} requirementDefinitions={requirementDefinitions} />
           </TabsContent>
         )}
 

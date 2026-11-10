@@ -6,6 +6,7 @@ import { CheckCircle2, Circle } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { VoiceDirection } from './water/VoiceDirection';
 
 interface Props {
   orgId: string;
@@ -48,6 +49,11 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   if (isLoading || !plan || !section) return <Text variant="muted">Loading the plans…</Text>;
 
   const dirty = text.trim() !== (section.record ?? '').trim();
+  const planName = plan.name.split(' (')[0];
+  const direction =
+    plan.written === plan.total && plan.status !== 'published'
+      ? `Every section of the ${planName} is written. Read it once more in the policy editor, then choose Publish plan.`
+      : `${planName}, section ${index + 1} of ${plan.sections.length}: ${section.title.replace(/^\d+\.\s*/, '')}. Read the guidance, then answer each point under What to record here in the utility's own words. Leave a blank line between paragraphs. Choose Save and next when the section is written.`;
 
   const save = async (thenNext: boolean) => {
     setSaving(true);
@@ -78,6 +84,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
 
   return (
     <div className="space-y-4 rounded-lg border p-4">
+      <VoiceDirection direction={direction} />
       <div className="flex flex-wrap items-center gap-2">
         {plans.map((p) => (
           <Button

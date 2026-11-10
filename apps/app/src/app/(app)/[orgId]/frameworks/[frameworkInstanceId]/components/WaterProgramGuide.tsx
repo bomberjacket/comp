@@ -2,7 +2,12 @@
 
 import { usePermissions } from '@/hooks/use-permissions';
 import { useWaterProgram, type StepStatus, type WaterProgramStep } from '@/hooks/use-water-program';
+import type { FrameworkEditorRequirement } from '@db';
 import { WaterPlanWriter } from './WaterPlanWriter';
+import { WaterChecklistPager } from './water/WaterChecklistPager';
+import { WaterEvidenceCollector } from './water/WaterEvidenceCollector';
+import { WaterTabletopRecorder } from './water/WaterTabletopRecorder';
+import { WaterVendorScorer } from './water/WaterVendorScorer';
 import { Badge, Button, Text } from '@trycompai/design-system';
 import { CheckCircle2, Circle, CircleDot } from 'lucide-react';
 import Link from 'next/link';
@@ -103,14 +108,55 @@ function StepCard({
 }
 
 /**
- * The water and wastewater program in order: answer EPA's checklist, work the gaps,
- * write the two plans, score vendors, run the tabletop. Progress comes live from the
- * answers, policies, vendor checklists and interview tasks of this organization.
+ * The water and wastewater program in the order it is built: write the two plans,
+ * answer EPA's checklist, fix the gaps, collect evidence, score vendors, then validate
+ * by tabletop on a cadence. Each step has a wizard that works on the same records as
+ * its full screen, with a written direction that can also be spoken.
  */
-export function WaterProgramGuide({ orgId, frameworkInstanceId }: { orgId: string; frameworkInstanceId: string }) {
+export function WaterProgramGuide({
+  orgId,
+  frameworkInstanceId,
+  requirementDefinitions,
+}: {
+  orgId: string;
+  frameworkInstanceId: string;
+  requirementDefinitions: FrameworkEditorRequirement[];
+}) {
   const { data, error, isLoading, mutate } = useWaterProgram(frameworkInstanceId);
   const { hasPermission } = usePermissions();
   const canEditPolicies = hasPermission('policy', 'update');
+  const changed = () => void mutate();
+  const wizards: Partial<Record<WaterProgramStep['key'], { label: string; node: React.ReactNode }>> = {
+    plans: {
+      label: 'Write the plans here',
+      node: <WaterPlanWriter orgId={orgId} frameworkInstanceId={frameworkInstanceId} canEdit={canEditPolicies} onChanged={changed} />,
+    },
+    assess: {
+      label: 'Answer question by question',
+      node: (
+        <WaterChecklistPager
+          frameworkInstanceId={frameworkInstanceId}
+          requirementDefinitions={requirementDefinitions}
+          canEdit={hasPermission('framework', 'update')}
+          onChanged={changed}
+        />
+      ),
+    },
+    evidence: {
+      label: 'Collect evidence here',
+      node: (
+        <WaterEvidenceCollector orgId={orgId} frameworkInstanceId={frameworkInstanceId} canEdit={hasPermission('task', 'update')} onChanged={changed} />
+      ),
+    },
+    vendors: {
+      label: 'Score vendors here',
+      node: <WaterVendorScorer orgId={orgId} canEdit={hasPermission('vendor', 'update')} onChanged={changed} />,
+    },
+    tabletop: {
+      label: 'Run a tabletop session',
+      node: <WaterTabletopRecorder frameworkInstanceId={frameworkInstanceId} canEdit={hasPermission('framework', 'update')} onChanged={changed} />,
+    },
+  };
   if (error) return <Text variant="muted">The program guide could not be loaded: {error.message}</Text>;
   if (isLoading || !data) return <Text variant="muted">Loading the program guide…</Text>;
   const done = data.steps.filter((s) => s.status === 'done').length;
@@ -132,21 +178,7 @@ export function WaterProgramGuide({ orgId, frameworkInstanceId }: { orgId: strin
           step={step}
           index={i}
           orgId={orgId}
-          wizard={
-            step.key === 'plans'
-              ? {
-                  label: 'Write the plans here',
-                  node: (
-                    <WaterPlanWriter
-                      orgId={orgId}
-                      frameworkInstanceId={frameworkInstanceId}
-                      canEdit={canEditPolicies}
-                      onChanged={() => void mutate()}
-                    />
-                  ),
-                }
-              : undefined
-          }
+          wizard={wizards[step.key]}
         />
       ))}
     </div>

@@ -1637,7 +1637,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Assessment. The cybersecurity lead answers the EPA checklist in this platform at least once a year and after a major change; every No or In progress becomes a risk register entry with an owner, a planned action and a target date. An independent assessment by a qualified third party is obtained at least every three years, or sooner when the utility connects a new system to the internet or changes operators."
+              "text": "Assessment. The cybersecurity lead answers the EPA checklist in this platform at least once a year and after a major change; every No or In progress becomes a risk register entry with an owner, a planned action and a target date. The utility may also choose to have an independent assessment by a qualified third party, for example after connecting a new system to the internet or changing operators; it is optional, and where one is done its provider and date are recorded below."
             }
           ]
         },

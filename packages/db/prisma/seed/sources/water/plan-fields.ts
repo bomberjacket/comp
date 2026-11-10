@@ -9,6 +9,10 @@ export interface PlanField {
   hint?: string;
   /** Multi-line box. */
   long?: boolean;
+  /** The platform fills this box in from its own records; the utility does not type it. */
+  auto?: 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
+  /** Not counted in the plan's completeness. */
+  optional?: boolean;
 }
 
 const f = (label: string, hint?: string, long?: boolean): PlanField => ({ label, ...(hint ? { hint } : {}), ...(long ? { long } : {}) });
@@ -39,9 +43,10 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
       f('Inventory review schedule', 'For example: every quarter and after every project'),
       f('Who reviews vendor and CISA advisories, and how often'),
       f('Unsupported equipment and how it is protected', 'Each item, its protection and its replacement date; or "None"', true),
-      f('Annual EPA checklist assessment', 'Who answers it and in which month'),
-      f('Independent assessment', 'Provider and the date of the last or next one'),
-      f('Where the risk register is kept'),
+      { label: 'Annual EPA checklist assessment', auto: 'epa_assessment' },
+      f('Who answers the EPA checklist, and the month it is repeated', 'For example: the cybersecurity lead, every November'),
+      { label: 'Independent assessment (optional)', hint: 'Provider and date, if the utility chooses to have one', optional: true },
+      { label: 'Where the risk register is kept', auto: 'risk_register' },
       f('Who receives the quarterly status and the annual report', 'For example: general manager quarterly; board annually'),
     ],
     '4. Employee Training and Awareness': [
@@ -64,7 +69,7 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
       f('Where the plan is kept, including the printed copy'),
       f('State primacy agency reporting contact', 'Office and phone'),
       f('Cyber insurance carrier', 'Carrier, policy number, breach line; or "None"'),
-      f('Date of the last exercise', 'Or "Not yet exercised"'),
+      { label: 'Date of the last exercise', auto: 'last_exercise' },
     ],
     '7. Business Continuity and Disaster Recovery': [
       f('What is backed up', 'PLC and RTU programs, HMI and SCADA configurations, historian, network devices, billing and payroll', true),
@@ -131,7 +136,7 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
     'Lessons Learned / After Action Report (AAR)': [
       f('Who calls the after-action meeting'),
       f('Where after-action reports are kept'),
-      f('Month of the annual tabletop exercise'),
+      { label: 'When the next tabletop exercise is due', auto: 'next_exercise' },
       f('Leadership who take part', 'Names or roles'),
     ],
     'Implementing Improvements/Corrective Actions': [

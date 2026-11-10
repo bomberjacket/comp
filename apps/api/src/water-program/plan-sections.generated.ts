@@ -6,10 +6,16 @@
 
 export type WaterPlanKey = 'crmp' | 'cirp';
 
+export type PlanAutoKey = 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
+
 export interface PlanFieldDef {
   label: string;
   hint?: string;
   long?: boolean;
+  /** Filled in by the platform from its own records. */
+  auto?: PlanAutoKey;
+  /** Not counted in the plan's completeness. */
+  optional?: boolean;
 }
 
 export interface PlanSectionDef {
@@ -124,14 +130,20 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
           },
           {
             "label": "Annual EPA checklist assessment",
-            "hint": "Who answers it and in which month"
+            "auto": "epa_assessment"
           },
           {
-            "label": "Independent assessment",
-            "hint": "Provider and the date of the last or next one"
+            "label": "Who answers the EPA checklist, and the month it is repeated",
+            "hint": "For example: the cybersecurity lead, every November"
           },
           {
-            "label": "Where the risk register is kept"
+            "label": "Independent assessment (optional)",
+            "hint": "Provider and date, if the utility chooses to have one",
+            "optional": true
+          },
+          {
+            "label": "Where the risk register is kept",
+            "auto": "risk_register"
           },
           {
             "label": "Who receives the quarterly status and the annual report",
@@ -219,7 +231,7 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
           },
           {
             "label": "Date of the last exercise",
-            "hint": "Or \"Not yet exercised\""
+            "auto": "last_exercise"
           }
         ]
       },
@@ -480,7 +492,8 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
             "label": "Where after-action reports are kept"
           },
           {
-            "label": "Month of the annual tabletop exercise"
+            "label": "When the next tabletop exercise is due",
+            "auto": "next_exercise"
           },
           {
             "label": "Leadership who take part",

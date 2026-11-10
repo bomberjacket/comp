@@ -62,8 +62,8 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   if (error) return <Text variant="muted">The plans could not be loaded: {error.message}</Text>;
   if (isLoading || !plan || !section) return <Text variant="muted">Loading the plans…</Text>;
 
-  const dirty = section.fields.some((f) => (values[f.label] ?? '').trim() !== f.value.trim()) || notes.trim() !== section.notes.trim();
-  const filledNow = section.fields.filter((f) => (values[f.label] ?? '').trim()).length;
+  const dirty = section.fields.some((f) => !f.auto && (values[f.label] ?? '').trim() !== f.value.trim()) || notes.trim() !== section.notes.trim();
+  const filledNow = section.fields.filter((f) => !f.optional && (f.auto || (values[f.label] ?? '').trim())).length;
   const planName = plan.name.split(' (')[0] ?? plan.name;
   const percent = plan.totalFields > 0 ? Math.round((plan.filledFields / plan.totalFields) * 100) : 0;
   const incomplete = plan.sections.filter((s) => !s.done);
@@ -83,7 +83,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
     setSaving(true);
     try {
       await saveSection(plan.policyId, index, {
-        fields: section.fields.map((f) => ({ label: f.label, value: (values[f.label] ?? '').trim() })),
+        fields: section.fields.filter((f) => !f.auto).map((f) => ({ label: f.label, value: (values[f.label] ?? '').trim() })),
         notes: notes.trim(),
       });
       onChanged?.();
@@ -150,7 +150,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
                 <SectionIcon section={s} />
                 <span className="min-w-0 flex-1 truncate">{s.title}</span>
                 <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
-                  {s.filled}/{s.fields.length}
+                  {s.filled}/{s.total}
                 </span>
               </button>
             </li>
@@ -172,12 +172,17 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
 
           <div className="space-y-3">
             <Text size="sm" variant="muted">
-              Your part: fill in each box for this utility ({filledNow} of {section.fields.length} filled)
+              Your part: fill in each box for this utility ({filledNow} of {section.total} filled)
             </Text>
             {section.fields.map((f) => (
               <label key={f.label} className="block space-y-1">
                 <span className="text-sm font-medium">{f.label}</span>
-                {f.long ? (
+                {f.auto ? (
+                  <div className="rounded-md border border-dashed bg-muted/30 px-3 py-2 text-sm">
+                    {f.value}
+                    <div className="mt-1 text-xs text-muted-foreground">Filled in by the platform from its own records. Nothing to type.</div>
+                  </div>
+                ) : f.long ? (
                   <Textarea
                     value={values[f.label] ?? ''}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValues({ ...values, [f.label]: e.target.value })}
@@ -246,7 +251,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
               <ul className="space-y-0.5 text-sm">
                 {incomplete.map((s) => (
                   <li key={s.index} className="ml-4 list-disc">
-                    {s.title}: {s.fields.length - s.filled} of {s.fields.length} empty
+                    {s.title}: {s.total - s.filled} of {s.total} empty
                   </li>
                 ))}
               </ul>

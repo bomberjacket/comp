@@ -1,4 +1,4 @@
-import type { PlanFieldDef, PlanSectionDef } from './plan-sections.generated';
+import type { PlanAutoKey, PlanFieldDef, PlanSectionDef } from './plan-sections.generated';
 import { PLAN_PROMPT_TEXT } from './water-program.constants';
 
 /** TipTap node as stored in Policy.content (an array of top-level nodes). */
@@ -31,8 +31,10 @@ export interface PlanSectionView {
   fields: PlanFieldView[];
   /** Free text beyond the fields (also where text written before fields existed lands). */
   notes: string;
+  /** Required boxes with a value (boxes the platform fills in always count), and how many are required. */
   filled: number;
-  /** Every field has a value. */
+  total: number;
+  /** Every required box has a value. */
   done: boolean;
 }
 
@@ -130,14 +132,16 @@ function parseRecord(record: TipTapNode[], labels: Set<string>): { values: Map<s
   return { values, notes: notes.join('\n\n').trim() };
 }
 
-export function readPlanSections(content: TipTapNode[], defs: PlanSectionDef[]): PlanSectionView[] {
+/** `auto` carries the platform's live values for auto-filled boxes; without it they read from the document. */
+export function readPlanSections(content: TipTapNode[], defs: PlanSectionDef[], auto?: Record<PlanAutoKey, string>): PlanSectionView[] {
   return sectionRanges(content).map((r, index) => {
     const { guidance, prompts, record } = splitSection(content.slice(r.start, r.end));
     const def = defs[index];
     const fieldDefs = def?.fields ?? [];
     const { values, notes } = parseRecord(record, new Set(fieldDefs.map((f) => f.label)));
-    const fields = fieldDefs.map((f) => ({ ...f, value: values.get(f.label) ?? '' }));
-    const filled = fields.filter((f) => f.value.trim()).length;
+    const fields = fieldDefs.map((f) => ({ ...f, value: (f.auto && auto ? auto[f.auto] : values.get(f.label)) ?? '' }));
+    const required = fields.filter((f) => !f.optional);
+    const filled = required.filter((f) => f.auto || f.value.trim()).length;
     return {
       index,
       title: r.title,
@@ -146,7 +150,8 @@ export function readPlanSections(content: TipTapNode[], defs: PlanSectionDef[]):
       fields,
       notes,
       filled,
-      done: fields.length > 0 ? filled === fields.length : notes.length > 0,
+      total: required.length,
+      done: required.length > 0 ? filled === required.length : notes.length > 0,
     };
   });
 }

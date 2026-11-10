@@ -34,9 +34,11 @@ export interface WaterPlanSection {
   guidance: string[];
   prompts: string[];
   /** One fill-in box per fact the utility supplies. */
-  fields: Array<{ label: string; hint?: string; long?: boolean; value: string }>;
+  fields: Array<{ label: string; hint?: string; long?: boolean; auto?: string; optional?: boolean; value: string }>;
   notes: string;
+  /** Required boxes filled, and how many are required. */
   filled: number;
+  total: number;
   /** Every field has a value. */
   done: boolean;
 }
@@ -93,11 +95,14 @@ export function useWaterPlans(frameworkInstanceId: string, enabled = true) {
 
   const publish = useCallback(
     async (policyId: string) => {
+      // The boxes the platform fills in are written into the document first.
+      const synced = await apiClient.post(`/v1/water-program/${frameworkInstanceId}/plans/${policyId}/sync`, {});
+      if (synced.error) throw new Error(synced.error);
       const res = await apiClient.post(`/v1/policies/${policyId}/versions/publish`, {});
       if (res.error) throw new Error(res.error);
       await mutate();
     },
-    [mutate],
+    [frameworkInstanceId, mutate],
   );
 
   return { plans: data ?? [], error, isLoading, saveSection, publish, refresh: mutate };

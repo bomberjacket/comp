@@ -50,7 +50,7 @@ function sectionsWritten(content: unknown, key: 'crmp' | 'cirp'): { written: num
     (Array.isArray(content) ? content : []) as TipTapNode[],
     PLAN_SECTIONS[key].sections,
   );
-  return { written: sections.reduce((n, s) => n + s.filled, 0), total: sections.reduce((n, s) => n + s.fields.length, 0) };
+  return { written: sections.reduce((n, s) => n + s.filled, 0), total: sections.reduce((n, s) => n + s.total, 0) };
 }
 
 @Injectable()

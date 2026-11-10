@@ -60,6 +60,17 @@ export class WaterProgramController {
     });
   }
 
+  @Post(':frameworkInstanceId/plans/:policyId/sync')
+  @RequirePermission('policy', 'update')
+  @ApiOperation({ summary: "Write the platform's current values into the plan's auto-filled boxes (before publishing)" })
+  syncPlan(
+    @OrganizationId() organizationId: string,
+    @Param('frameworkInstanceId') frameworkInstanceId: string,
+    @Param('policyId') policyId: string,
+  ) {
+    return this.plans.syncAuto(frameworkInstanceId, organizationId, policyId);
+  }
+
   @Get(':frameworkInstanceId/report')
   @RequirePermission('framework', 'read')
   @ApiOperation({ summary: 'Assessment report, risk mitigation plan and tabletop after-action data in one read' })

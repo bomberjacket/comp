@@ -37,10 +37,16 @@ writeFileSync(
 
 export type WaterPlanKey = 'crmp' | 'cirp';
 
+export type PlanAutoKey = 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
+
 export interface PlanFieldDef {
   label: string;
   hint?: string;
   long?: boolean;
+  /** Filled in by the platform from its own records. */
+  auto?: PlanAutoKey;
+  /** Not counted in the plan's completeness. */
+  optional?: boolean;
 }
 
 export interface PlanSectionDef {

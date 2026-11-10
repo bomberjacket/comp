@@ -8,12 +8,23 @@
  */
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { PLAN_FIELDS } from '../plan-fields';
 import { PLANS } from '../plans';
 
 const OUTPUT = join(__dirname, '../../../../../../../apps/api/src/water-program/plan-sections.generated.ts');
 
 const sections = Object.fromEntries(
-  PLANS.map((p) => [p.key, { name: p.name, sections: p.sections.map((s) => ({ title: s.title, prompts: s.prompts })) }]),
+  PLANS.map((p) => [
+    p.key,
+    {
+      name: p.name,
+      sections: p.sections.map((s) => {
+        const fields = PLAN_FIELDS[p.key]?.[s.title];
+        if (!fields?.length) throw new Error(`${p.key}: no fill-in fields for section "${s.title}"`);
+        return { title: s.title, prompts: s.prompts, fields };
+      }),
+    },
+  ]),
 );
 
 writeFileSync(
@@ -26,9 +37,16 @@ writeFileSync(
 
 export type WaterPlanKey = 'crmp' | 'cirp';
 
+export interface PlanFieldDef {
+  label: string;
+  hint?: string;
+  long?: boolean;
+}
+
 export interface PlanSectionDef {
   title: string;
   prompts: string[];
+  fields: PlanFieldDef[];
 }
 
 export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanSectionDef[] }> = ${JSON.stringify(sections, null, 2)};

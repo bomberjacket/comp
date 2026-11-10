@@ -48,7 +48,7 @@ function statusOf(done: number, total: number, started = done > 0): StepStatus {
 function sectionsWritten(content: unknown, key: 'crmp' | 'cirp'): { written: number; total: number } {
   const sections = readPlanSections(
     (Array.isArray(content) ? content : []) as TipTapNode[],
-    PLAN_SECTIONS[key].sections.map((s) => s.prompts),
+    PLAN_SECTIONS[key].sections,
   );
   return { written: sections.filter((s) => s.done).length, total: sections.length };
 }
@@ -162,7 +162,7 @@ export class WaterProgramService {
     return {
       key: 'plans',
       title: 'Write the policies: the two plans',
-      description: 'Start with the documents the rest of the program points to. The Cybersecurity Risk Management Plan and the Cyber Incident Response Plan follow the AWWA section order with guidance under each heading; replace the "What to record here" prompts with the utility\'s own facts and procedures, then publish.',
+      description: 'Start with the documents the rest of the program points to. The Cybersecurity Risk Management Plan and the Cyber Incident Response Plan follow the AWWA section order with standard wording under each heading; fill in the utility\'s own facts for each section, then publish.',
       status: statusOf(done, WATER_PLAN_TEMPLATES.length, started),
       done,
       total: WATER_PLAN_TEMPLATES.length,

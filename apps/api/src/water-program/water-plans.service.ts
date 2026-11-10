@@ -49,8 +49,7 @@ export class WaterPlansService {
     key: WaterPlanKey,
     company: string,
   ): WaterPlanView {
-    const fallback = PLAN_SECTIONS[key].sections.map((s) => s.prompts);
-    const sections = readPlanSections(this.substitute(policy.content as unknown as TipTapNode[], company), fallback);
+    const sections = readPlanSections(this.substitute(policy.content as unknown as TipTapNode[], company), PLAN_SECTIONS[key].sections);
     return {
       key,
       policyId: policy.id,
@@ -78,15 +77,16 @@ export class WaterPlansService {
     return views;
   }
 
-  /** Save the utility's text for one section (blank lines separate paragraphs; empty text clears it). */
+  /** Save the utility's facts for one section: a value per fill-in field plus optional notes; all empty clears it. */
   async writeSection(args: {
     frameworkInstanceId: string;
     organizationId: string;
     policyId: string;
     index: number;
-    text: string;
+    fields: Array<{ label: string; value: string }>;
+    notes: string;
   }): Promise<WaterPlanView> {
-    const { frameworkInstanceId, organizationId, policyId, index, text } = args;
+    const { frameworkInstanceId, organizationId, policyId, index, fields, notes } = args;
     await this.assertInstance(frameworkInstanceId, organizationId);
     const policy = await db.policy.findFirst({
       where: { id: policyId, organizationId, isArchived: false, policyTemplateId: { in: WATER_PLAN_TEMPLATES.map((p) => p.id) } },
@@ -96,13 +96,17 @@ export class WaterPlansService {
     const plan = WATER_PLAN_TEMPLATES.find((p) => p.id === policy.policyTemplateId);
     if (!plan) throw new NotFoundException('Plan policy not found');
     const def = PLAN_SECTIONS[plan.key];
-    const prompts = def.sections[index]?.prompts;
-    if (!prompts) throw new BadRequestException(`Section ${index} does not exist; the plan has ${def.sections.length} sections`);
+    const section = def.sections[index];
+    if (!section) throw new BadRequestException(`Section ${index} does not exist; the plan has ${def.sections.length} sections`);
+    const known = new Set(section.fields.map((f) => f.label));
+    const stray = fields.find((f) => !known.has(f.label));
+    if (stray) throw new BadRequestException(`"${stray.label}" is not a field of section ${index}`);
+    const values = Object.fromEntries(fields.map((f) => [f.label, f.value]));
     const company = await this.companyName(organizationId);
     let content: TipTapNode[];
     try {
       // Writing a section also settles the {{COMPANY}} placeholder in the stored document.
-      content = writePlanSection(this.substitute(policy.content as unknown as TipTapNode[], company), index, text, prompts);
+      content = writePlanSection(this.substitute(policy.content as unknown as TipTapNode[], company), index, { values, notes }, section);
     } catch (err) {
       throw new BadRequestException(err instanceof Error ? err.message : 'Could not update the section');
     }

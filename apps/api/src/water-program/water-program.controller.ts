@@ -42,7 +42,7 @@ export class WaterProgramController {
 
   @Put(':frameworkInstanceId/plans/:policyId/sections/:index')
   @RequirePermission('policy', 'update')
-  @ApiOperation({ summary: "Save the utility's text for one plan section" })
+  @ApiOperation({ summary: "Save the utility's fill-in fields and notes for one plan section" })
   writeSection(
     @OrganizationId() organizationId: string,
     @Param('frameworkInstanceId') frameworkInstanceId: string,
@@ -50,7 +50,14 @@ export class WaterProgramController {
     @Param('index', ParseIntPipe) index: number,
     @Body() dto: WriteSectionDto,
   ) {
-    return this.plans.writeSection({ frameworkInstanceId, organizationId, policyId, index, text: dto.text });
+    return this.plans.writeSection({
+      frameworkInstanceId,
+      organizationId,
+      policyId,
+      index,
+      fields: dto.fields ?? [],
+      notes: dto.notes ?? dto.text ?? '',
+    });
   }
 
   @Get(':frameworkInstanceId/report')

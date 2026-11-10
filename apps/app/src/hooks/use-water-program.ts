@@ -33,8 +33,17 @@ export interface WaterPlanSection {
   title: string;
   guidance: string[];
   prompts: string[];
-  record: string;
+  /** One fill-in box per fact the utility supplies. */
+  fields: Array<{ label: string; hint?: string; long?: boolean; value: string }>;
+  notes: string;
+  filled: number;
+  /** Every field has a value. */
   done: boolean;
+}
+
+export interface WaterSectionInput {
+  fields: Array<{ label: string; value: string }>;
+  notes: string;
 }
 
 export interface WaterPlan {
@@ -67,10 +76,10 @@ export function useWaterPlans(frameworkInstanceId: string, enabled = true) {
   });
 
   const saveSection = useCallback(
-    async (policyId: string, index: number, text: string) => {
+    async (policyId: string, index: number, input: WaterSectionInput) => {
       const res = await apiClient.put<WaterPlan>(
         `/v1/water-program/${frameworkInstanceId}/plans/${policyId}/sections/${index}`,
-        { text },
+        input,
       );
       if (res.error || !res.data) throw new Error(res.error ?? 'Could not save the section');
       const saved = res.data;

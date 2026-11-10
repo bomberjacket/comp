@@ -38,21 +38,21 @@ export function planGuidance(args: {
   index: number;
   total: number;
   sectionTitle: string;
-  promptCount: number;
+  fieldCount: number;
   written: number;
   published: boolean;
 }): PageGuidance {
-  const { planKey, planName, index, total, sectionTitle, promptCount, written, published } = args;
+  const { planKey, planName, index, total, sectionTitle, fieldCount, written, published } = args;
   const title = sectionTitle.replace(/^\d+\.\s*/, '');
   if (written === total && !published) {
     return {
-      about: `Every section of the ${planName} now has the utility's own text. The plan is ready to become official.`,
+      about: `Every box in every section of the ${planName} is filled in. The plan is ready to become official.`,
       steps: [
         'Choose "Open in the policy editor" and read the whole plan once.',
         'Come back and choose "Publish plan".',
         'Then pick the other plan at the top, if it is not written yet.',
       ],
-      narration: `Every section of the ${planName} now has the utility's own text, so the plan is ready to become official. Before you publish, open it in the policy editor and read it from top to bottom once, the way an auditor would. Then come back here and choose Publish plan. Publishing records this version as the approved one. After that, pick the other plan at the top of this box if it is not written yet.`,
+      narration: `Every box in every section of the ${planName} is filled in, so the plan is ready to become official. Before you publish, open it in the policy editor and read it from top to bottom once, the way an auditor would. Then come back here and choose Publish plan. Publishing records this version as the approved one. After that, pick the other plan at the top of this box if it is not written yet.`,
     };
   }
   const purpose = SECTION_PURPOSE[planKey][index] ?? '';
@@ -64,15 +64,15 @@ export function planGuidance(args: {
     about: `Section ${index + 1} of ${total} of the ${planName}: ${title}. ${purpose}`,
     steps: [
       'Read the grey box. That standard wording is already in the plan; you do not retype it.',
-      `Under "Your part", read the ${promptCount === 1 ? 'point' : `${promptCount} points`} only the utility can answer.`,
-      'Type the answers in the white box, in your own words, one paragraph per point.',
-      'Choose "Save and next". Your text goes into the plan under the heading "Utility record".',
+      `Under "Your part", fill in the ${fieldCount} boxes. Each asks for one fact about the utility; the grey text in a box is an example.`,
+      'If you do not know one yet, write who will find out and by when.',
+      'Choose "Save and next". Your answers go into the plan under the heading "Utility record".',
     ],
     narration:
       `${intro}You are on section ${index + 1} of ${total}, ${title}. ${purpose} ` +
       'The page has three parts. First, the grey box. That is standard wording that BomberJacket wrote for this section. It is already in the plan and it stays there, so you do not retype it. Read it so you know what the section says. ' +
-      `Second, under Your part, there ${promptCount === 1 ? 'is one point' : `are ${promptCount} points`} that only the utility can answer. ` +
-      'Third, the white box at the bottom. Type your answers there in plain words, one paragraph for each point, with a blank line between paragraphs. If you do not know an answer yet, write who will find out and by when. ' +
-      `When you are done, choose Save and next. Your text is added to the plan under the heading Utility record, and the circle beside the section turns green. When all ${total} sections are green, the Publish plan button becomes available.`,
+      `Second, under Your part, there are ${fieldCount} boxes to fill in. Each box asks for one fact that only the utility knows, such as a name, a date or a place. The grey text inside an empty box is an example of the kind of answer expected. ` +
+      'Type short, plain answers. If you do not know an answer yet, write who will find out and by when. The last box, Additional notes, is optional and is for anything the other boxes do not cover. ' +
+      `When you are done, choose Save and next. Your answers are added to the plan under the heading Utility record, each with its label. The circle beside the section turns green when every box is filled. When all ${total} sections are green, the Publish plan button becomes available.`,
   };
 }

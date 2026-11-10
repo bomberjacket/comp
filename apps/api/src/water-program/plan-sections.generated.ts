@@ -6,9 +6,16 @@
 
 export type WaterPlanKey = 'crmp' | 'cirp';
 
+export interface PlanFieldDef {
+  label: string;
+  hint?: string;
+  long?: boolean;
+}
+
 export interface PlanSectionDef {
   title: string;
   prompts: string[];
+  fields: PlanFieldDef[];
 }
 
 export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanSectionDef[] }> = {
@@ -19,48 +26,261 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
         "title": "1. Introduction",
         "prompts": [
           "Purpose, scope (which treatment, distribution, collection and business systems) and the authority that approved this plan."
+        ],
+        "fields": [
+          {
+            "label": "Utility name",
+            "hint": "Legal name of the utility or district"
+          },
+          {
+            "label": "Population served and service area",
+            "hint": "For example: 4,200 connections in the City of Example"
+          },
+          {
+            "label": "Regulatory primacy agency",
+            "hint": "The state agency that regulates the utility"
+          },
+          {
+            "label": "Systems and facilities in scope, by site",
+            "hint": "Treatment plants, wells, pump and lift stations, storage, administrative offices",
+            "long": true
+          },
+          {
+            "label": "Plan approved by",
+            "hint": "Name and title of the official"
+          },
+          {
+            "label": "Approval date",
+            "hint": "For example: 9 November 2026"
+          },
+          {
+            "label": "Where the current version is kept and who may change it",
+            "hint": "For example: this platform; the cybersecurity lead"
+          }
         ]
       },
       {
         "title": "2. Cybersecurity Team",
         "prompts": [
           "Named role accountable for cybersecurity and for OT cybersecurity (EPA checklist 1.B, 1.C); members, deputies and contact details; how IT and OT staff coordinate (1.D)."
+        ],
+        "fields": [
+          {
+            "label": "Cybersecurity lead",
+            "hint": "Name, title, phone"
+          },
+          {
+            "label": "Alternate for the cybersecurity lead",
+            "hint": "Name, title, phone"
+          },
+          {
+            "label": "OT cybersecurity lead",
+            "hint": "Name, title, phone; may be the same person at a small utility"
+          },
+          {
+            "label": "Operations lead",
+            "hint": "Name, title, phone"
+          },
+          {
+            "label": "IT lead or provider",
+            "hint": "Name or company, phone"
+          },
+          {
+            "label": "Finance and procurement contact",
+            "hint": "Name, title"
+          },
+          {
+            "label": "Integrators and managed service providers with access",
+            "hint": "Company, what they manage, contact",
+            "long": true
+          },
+          {
+            "label": "IT and OT coordination meeting",
+            "hint": "How often, who attends, where the notes are kept"
+          }
         ]
       },
       {
         "title": "3. Risk Assessment, Monitoring, and Reporting",
         "prompts": [
           "Asset inventory method and refresh cadence (1.A); vulnerability and KEV handling timelines (1.E); the EPA checklist / CPG assessment schedule and who receives results."
+        ],
+        "fields": [
+          {
+            "label": "Where the asset inventory is kept and who updates it",
+            "hint": "For example: spreadsheet on the shared drive; the OT lead"
+          },
+          {
+            "label": "Inventory review schedule",
+            "hint": "For example: every quarter and after every project"
+          },
+          {
+            "label": "Who reviews vendor and CISA advisories, and how often"
+          },
+          {
+            "label": "Unsupported equipment and how it is protected",
+            "hint": "Each item, its protection and its replacement date; or \"None\"",
+            "long": true
+          },
+          {
+            "label": "Annual EPA checklist assessment",
+            "hint": "Who answers it and in which month"
+          },
+          {
+            "label": "Independent assessment",
+            "hint": "Provider and the date of the last or next one"
+          },
+          {
+            "label": "Where the risk register is kept"
+          },
+          {
+            "label": "Who receives the quarterly status and the annual report",
+            "hint": "For example: general manager quarterly; board annually"
+          }
         ]
       },
       {
         "title": "4. Employee Training and Awareness",
         "prompts": [
           "Annual awareness training for all personnel (2.I) and OT-specific training (2.J); records kept."
+        ],
+        "fields": [
+          {
+            "label": "Awareness training course or provider"
+          },
+          {
+            "label": "When training is given",
+            "hint": "For example: within 30 days of hire and every March"
+          },
+          {
+            "label": "OT-specific training",
+            "hint": "Who gives it and who attends"
+          },
+          {
+            "label": "Where training records are kept"
+          },
+          {
+            "label": "Phishing exercises",
+            "hint": "How often and who runs them; or \"Email is not in use\""
+          },
+          {
+            "label": "How contractors with accounts are trained"
+          }
         ]
       },
       {
         "title": "5. Third-Party Risk Management",
         "prompts": [
           "Cybersecurity criteria in procurement (1.I); the EPA procurement evaluation checklist for suppliers and integrators/MSPs; remote access and contract language."
+        ],
+        "fields": [
+          {
+            "label": "Who scores vendors before a purchase",
+            "hint": "Names or roles"
+          },
+          {
+            "label": "Vendors, integrators and service providers with network or remote access",
+            "hint": "Company and what they can reach",
+            "long": true
+          },
+          {
+            "label": "Approved remote access method",
+            "hint": "For example: VPN with multifactor, enabled per session by the operator"
+          },
+          {
+            "label": "Where the standard contract language is kept"
+          },
+          {
+            "label": "Vendor re-scoring schedule",
+            "hint": "For example: at renewal and at least every two years"
+          }
         ]
       },
       {
         "title": "6. Incident Response Plan",
         "prompts": [
           "Reference to the Cyber Incident Response Plan (2.S); reporting path to EPA, CISA and state primacy agency (4.A)."
+        ],
+        "fields": [
+          {
+            "label": "Who may activate the Cyber Incident Response Plan",
+            "hint": "Names or roles"
+          },
+          {
+            "label": "Where the plan is kept, including the printed copy"
+          },
+          {
+            "label": "State primacy agency reporting contact",
+            "hint": "Office and phone"
+          },
+          {
+            "label": "Cyber insurance carrier",
+            "hint": "Carrier, policy number, breach line; or \"None\""
+          },
+          {
+            "label": "Date of the last exercise",
+            "hint": "Or \"Not yet exercised\""
+          }
         ]
       },
       {
         "title": "7. Business Continuity and Disaster Recovery",
         "prompts": [
           "Backups of systems necessary for operations and restoration tests (2.R); manual operation fallback; recovery priorities (5.A)."
+        ],
+        "fields": [
+          {
+            "label": "What is backed up",
+            "hint": "PLC and RTU programs, HMI and SCADA configurations, historian, network devices, billing and payroll",
+            "long": true
+          },
+          {
+            "label": "Where backups are kept, including the offline copy"
+          },
+          {
+            "label": "Backup schedule and who checks it"
+          },
+          {
+            "label": "Date and result of the last restore test"
+          },
+          {
+            "label": "Manual operation",
+            "hint": "How long the utility can run without SCADA and where the procedures are kept",
+            "long": true
+          },
+          {
+            "label": "Recovery order and target times",
+            "hint": "Which systems come back first and how fast",
+            "long": true
+          },
+          {
+            "label": "Outside dependencies and contacts",
+            "hint": "Power, carriers, chemical supplier, laboratory, integrator",
+            "long": true
+          }
         ]
       },
       {
         "title": "8. Plan Maintenance and Review",
         "prompts": [
           "Annual review, after incidents and exercises; change log and approval."
+        ],
+        "fields": [
+          {
+            "label": "Review month and reviewer",
+            "hint": "For example: every November; the cybersecurity lead"
+          },
+          {
+            "label": "Events that force an early review",
+            "hint": "Or \"As written above\""
+          },
+          {
+            "label": "Where staff and contractors read the current plan"
+          },
+          {
+            "label": "Version log entry for this version",
+            "hint": "Version, date, author, approver, what changed"
+          }
         ]
       }
     ]
@@ -72,48 +292,217 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
         "title": "Incident Response Team",
         "prompts": [
           "Roles, alternates, 24x7 contact methods (including when primary communications are down); integrator/MSP and vendor contacts; legal, insurer, public information."
+        ],
+        "fields": [
+          {
+            "label": "Incident commander",
+            "hint": "Name, mobile, personal email"
+          },
+          {
+            "label": "Alternate commander",
+            "hint": "Name, mobile, personal email"
+          },
+          {
+            "label": "OT lead",
+            "hint": "Name, mobile"
+          },
+          {
+            "label": "IT lead or provider",
+            "hint": "Name or company, mobile"
+          },
+          {
+            "label": "Operations lead",
+            "hint": "Name, mobile"
+          },
+          {
+            "label": "Communications lead",
+            "hint": "Name, mobile"
+          },
+          {
+            "label": "Executive who approves spending and public statements",
+            "hint": "Name, title, mobile"
+          },
+          {
+            "label": "Integrator, service provider and SCADA vendor support contacts",
+            "hint": "Company, contact, 24-hour number",
+            "long": true
+          },
+          {
+            "label": "External partners and numbers",
+            "hint": "State agency, FBI field office, insurer breach line, WaterISAC",
+            "long": true
+          },
+          {
+            "label": "Out-of-band channel for the team",
+            "hint": "For example: group text on personal phones"
+          },
+          {
+            "label": "Where the printed roster is kept",
+            "hint": "For example: control room binder and with the on-call supervisor"
+          }
         ]
       },
       {
         "title": "Detecting an Incident",
         "prompts": [
           "Sources of alerts (logs 2.T/2.U, malicious code detection, operator observations); how staff report suspected incidents and phishing; threat and TTP list in use (3.A)."
+        ],
+        "fields": [
+          {
+            "label": "Who staff report a suspected incident to",
+            "hint": "Role and 24-hour number"
+          },
+          {
+            "label": "How phishing emails are reported"
+          },
+          {
+            "label": "Where security logs are collected and who reviews them"
+          },
+          {
+            "label": "Malware detection in use",
+            "hint": "Product and which machines it covers"
+          },
+          {
+            "label": "After-hours coverage",
+            "hint": "Who is on call and how alarms reach them"
+          }
         ]
       },
       {
         "title": "Severity Matrix",
         "prompts": [
           "Severity levels tied to effects on water or wastewater service, public health and safety, and data; who declares each level."
+        ],
+        "fields": [
+          {
+            "label": "Who declares the severity level",
+            "hint": "Normally the incident commander"
+          },
+          {
+            "label": "Changes to the standard levels",
+            "hint": "Or \"None, adopted as written\"",
+            "long": true
+          },
+          {
+            "label": "Who is notified at each level and how fast",
+            "hint": "Level 1 to Level 4",
+            "long": true
+          },
+          {
+            "label": "State or permit notification deadlines",
+            "hint": "For example: primacy agency within 24 hours"
+          }
         ]
       },
       {
         "title": "Cyber-Incident Action Checklist",
         "prompts": [
           "Containment steps for OT and IT; manual operations; evidence preservation and chain of custody; notifications to EPA, CISA, state primacy agency, law enforcement and customers (4.A); vendor and MSP engagement."
+        ],
+        "fields": [
+          {
+            "label": "Who can isolate the OT network, and how",
+            "hint": "The person, the device and the physical step",
+            "long": true
+          },
+          {
+            "label": "Where the manual operation procedures are kept"
+          },
+          {
+            "label": "Who makes each external notification",
+            "hint": "Regulator, CISA, law enforcement, insurer, customers",
+            "long": true
+          },
+          {
+            "label": "Where the incident log is kept",
+            "hint": "For example: paper log in the control room"
+          },
+          {
+            "label": "Changes to the standard checklist",
+            "hint": "Or \"None, adopted as written\"",
+            "long": true
+          }
         ]
       },
       {
         "title": "Post Incident Actions",
         "prompts": [
           "Recovery and restoration from backups with integrity checks (5.A); criteria for declaring the incident closed."
+        ],
+        "fields": [
+          {
+            "label": "Who signs off recovery",
+            "hint": "For control systems, business systems and operations"
+          },
+          {
+            "label": "Where known-good PLC and HMI copies are kept"
+          },
+          {
+            "label": "Who declares the incident closed"
+          },
+          {
+            "label": "Who records costs and hours"
+          }
         ]
       },
       {
         "title": "Evidence Retention",
         "prompts": [
           "What is retained, where, for how long, and who may release it."
+        ],
+        "fields": [
+          {
+            "label": "Who collects evidence",
+            "hint": "For business systems and for control systems"
+          },
+          {
+            "label": "Where evidence is stored, and the second copy"
+          },
+          {
+            "label": "How long evidence is kept",
+            "hint": "At least one year after closure"
+          },
+          {
+            "label": "Who may release evidence outside the utility"
+          }
         ]
       },
       {
         "title": "Lessons Learned / After Action Report (AAR)",
         "prompts": [
           "AAR within 30 days; tabletop exercises at least annually (CISA water CTEP) with senior leadership."
+        ],
+        "fields": [
+          {
+            "label": "Who calls the after-action meeting"
+          },
+          {
+            "label": "Where after-action reports are kept"
+          },
+          {
+            "label": "Month of the annual tabletop exercise"
+          },
+          {
+            "label": "Leadership who take part",
+            "hint": "Names or roles"
+          }
         ]
       },
       {
         "title": "Implementing Improvements/Corrective Actions",
         "prompts": [
           "Corrective action tracker with owners and dates; feed into the risk management plan."
+        ],
+        "fields": [
+          {
+            "label": "Where the corrective action list is kept"
+          },
+          {
+            "label": "Who reviews it and how often"
+          },
+          {
+            "label": "Who approves money or contract changes"
+          }
         ]
       }
     ]

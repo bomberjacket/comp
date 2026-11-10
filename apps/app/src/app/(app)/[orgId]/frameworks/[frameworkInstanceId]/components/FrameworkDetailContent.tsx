@@ -26,6 +26,7 @@ import {
 import Link from 'next/link';
 import { WATER_FRAMEWORK_ID } from '@/hooks/use-water-program';
 import { WaterProgramGuide } from './WaterProgramGuide';
+import { WaterReport } from './water/WaterReport';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useCallback, useMemo, useState } from 'react';
 import { AddCustomRequirementSheet } from './AddCustomRequirementSheet';
@@ -121,6 +122,7 @@ export function FrameworkDetailContent({
   const validTabsList: string[] = [];
   if (isWaterProgram) validTabsList.push('program');
   if (isQuestionBased) validTabsList.push('assess', 'results');
+  if (isWaterProgram) validTabsList.push('report');
   if (complianceTimelineEnabled) validTabsList.push('progress');
   validTabsList.push('controls');
   validTabsList.push('requirements');
@@ -228,6 +230,7 @@ export function FrameworkDetailContent({
                   </TabsTrigger>
                 )}
                 {isQuestionBased && <TabsTrigger value="results">Results</TabsTrigger>}
+                {isWaterProgram && <TabsTrigger value="report">Report</TabsTrigger>}
                 {complianceTimelineEnabled && (
                   <TabsTrigger value="progress">
                     Progress <TabBadge>{compliancePct}%</TabBadge>
@@ -269,6 +272,12 @@ export function FrameworkDetailContent({
             tasks={tasks}
             evidenceSubmissions={evidenceSubmissions}
           />
+        )}
+
+        {isWaterProgram && (
+          <TabsContent value="report">
+            <WaterReport frameworkInstanceId={frameworkInstanceId} />
+          </TabsContent>
         )}
 
         {isWaterProgram && (

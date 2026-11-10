@@ -9,6 +9,7 @@ import { WriteSectionDto } from './dto/write-section.dto';
 import { WaterEvidenceService } from './water-evidence.service';
 import { WaterPlansService } from './water-plans.service';
 import { WaterProgramService } from './water-program.service';
+import { WaterReportService } from './water-report.service';
 import { WaterTabletopService } from './water-tabletop.service';
 
 /** Progress of the water and wastewater program steps for one framework instance. */
@@ -22,6 +23,7 @@ export class WaterProgramController {
     private readonly plans: WaterPlansService,
     private readonly evidence: WaterEvidenceService,
     private readonly tabletop: WaterTabletopService,
+    private readonly report: WaterReportService,
   ) {}
 
   @Get(':frameworkInstanceId')
@@ -49,6 +51,13 @@ export class WaterProgramController {
     @Body() dto: WriteSectionDto,
   ) {
     return this.plans.writeSection({ frameworkInstanceId, organizationId, policyId, index, text: dto.text });
+  }
+
+  @Get(':frameworkInstanceId/report')
+  @RequirePermission('framework', 'read')
+  @ApiOperation({ summary: 'Assessment report, risk mitigation plan and tabletop after-action data in one read' })
+  getReport(@OrganizationId() organizationId: string, @Param('frameworkInstanceId') frameworkInstanceId: string) {
+    return this.report.getReport(frameworkInstanceId, organizationId);
   }
 
   @Get(':frameworkInstanceId/evidence')

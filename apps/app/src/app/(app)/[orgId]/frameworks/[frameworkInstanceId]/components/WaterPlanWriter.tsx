@@ -6,6 +6,7 @@ import { CheckCircle2, Circle } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { planGuidance } from './water/guidance-plans';
 import { VoiceDirection } from './water/VoiceDirection';
 
 interface Props {
@@ -50,10 +51,16 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
 
   const dirty = text.trim() !== (section.record ?? '').trim();
   const planName = plan.name.split(' (')[0];
-  const direction =
-    plan.written === plan.total && plan.status !== 'published'
-      ? `Every section of the ${planName} is written. Read it once more in the policy editor, then choose Publish plan.`
-      : `${planName}, section ${index + 1} of ${plan.sections.length}: ${section.title.replace(/^\d+\.\s*/, '')}. Read the guidance, then answer each point under What to record here in the utility's own words. Leave a blank line between paragraphs. Choose Save and next when the section is written.`;
+  const guidance = planGuidance({
+    planKey: plan.key,
+    planName,
+    index,
+    total: plan.sections.length,
+    sectionTitle: section.title,
+    promptCount: section.prompts.length,
+    written: plan.written,
+    published: plan.status === 'published',
+  });
 
   const save = async (thenNext: boolean) => {
     setSaving(true);
@@ -84,7 +91,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
 
   return (
     <div className="space-y-4 rounded-lg border p-4">
-      <VoiceDirection direction={direction} />
+      <VoiceDirection guidance={guidance} />
       <div className="flex flex-wrap items-center gap-2">
         {plans.map((p) => (
           <Button
@@ -127,7 +134,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
           <h3 className="text-base font-semibold">{section.title}</h3>
           <div className="space-y-2 rounded-md bg-muted/30 p-3">
             <Text size="sm" variant="muted">
-              Guidance
+              Standard wording, already in the plan. Read it; you do not retype it.
             </Text>
             <ul className="space-y-1">
               {section.guidance.map((line, i) => (
@@ -138,7 +145,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
           {section.prompts.length > 0 && (
             <div className="space-y-1">
               <Text size="sm" variant="muted">
-                What to record here
+                Your part: add these facts about the utility in the box below
               </Text>
               <ul className="space-y-1">
                 {section.prompts.map((p, i) => (
@@ -152,7 +159,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
           <Textarea
             value={text}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setText(e.target.value)}
-            placeholder="The utility's own text for this section. Leave a blank line between paragraphs."
+            placeholder="Type the utility's answers to the points above, in your own words. One paragraph per point, with a blank line between paragraphs."
             rows={10}
             disabled={!canEdit || saving}
           />

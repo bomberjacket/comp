@@ -9,6 +9,7 @@ import { CheckCircle2, Circle, CircleDot, Paperclip } from 'lucide-react';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
+import { evidenceGuidance } from './guidance-steps';
 import { VoiceDirection } from './VoiceDirection';
 
 interface Props {
@@ -123,13 +124,17 @@ export function WaterEvidenceCollector({ orgId, frameworkInstanceId, canEdit, on
     }
   };
 
-  const direction = `Goal ${index + 1} of ${tasks.length}: ${task.title}. Read what to collect. Attach the document, export or screenshot that shows the practice is running, then set the status to Done. ${
-    task.attachments === 0 ? 'Nothing is attached yet.' : `${task.attachments} ${task.attachments === 1 ? 'file is' : 'files are'} attached.`
-  } Choose Next for the following goal.`;
+  const guidance = evidenceGuidance({
+    index,
+    total: tasks.length,
+    title: task.title,
+    attachments: task.attachments,
+    questions: task.questions.length,
+  });
 
   return (
     <div className="space-y-4 rounded-lg border p-4">
-      <VoiceDirection direction={direction} />
+      <VoiceDirection guidance={guidance} />
       <div className="grid gap-4 md:grid-cols-[260px_1fr]">
         <ol className="max-h-[32rem] space-y-1 overflow-y-auto">
           {tasks.map((t, i) => (

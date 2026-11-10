@@ -5,6 +5,7 @@ import { useVendors } from '@/hooks/use-vendors';
 import { Button, Text } from '@trycompai/design-system';
 import Link from 'next/link';
 import { useState } from 'react';
+import { vendorGuidance } from './guidance-steps';
 import { VoiceDirection } from './VoiceDirection';
 
 interface Props {
@@ -27,7 +28,7 @@ export function WaterVendorScorer({ orgId, canEdit, onChanged }: Props) {
   if (!vendor) {
     return (
       <div className="space-y-3 rounded-lg border p-4">
-        <VoiceDirection direction="No vendors are recorded yet. Open the Vendors page and add each supplier, integrator and managed service provider that touches the utility's systems. Then come back here to score them." />
+        <VoiceDirection guidance={vendorGuidance(null)} />
         <Button size="sm" variant="outline" render={<Link href={`/${orgId}/vendors`} />}>
           Open vendors
         </Button>
@@ -35,11 +36,9 @@ export function WaterVendorScorer({ orgId, canEdit, onChanged }: Props) {
     );
   }
 
-  const direction = `Scoring ${vendor.name}. Choose the supplier sheet for a product or service, or the integrator sheet for a system integrator or managed service provider. For each question set a weight from 0 to 3 for how much it matters to the utility, then a score from 0 to 3 for the vendor's response. Weight 0 leaves the question out. Record what goes into the contract, then choose Save checklist and pick the next vendor.`;
-
   return (
     <div className="space-y-4 rounded-lg border p-4">
-      <VoiceDirection direction={direction} />
+      <VoiceDirection guidance={vendorGuidance(vendor.name)} />
       <div className="flex flex-wrap items-center gap-2">
         {list.map((v) => (
           <Button key={v.id} size="sm" variant={v.id === vendor.id ? 'default' : 'outline'} onClick={() => setVendorId(v.id)}>

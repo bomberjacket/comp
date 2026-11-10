@@ -3,37 +3,58 @@
 import { useVoiceGuide } from '@/hooks/use-voice-guide';
 import { Button } from '@trycompai/design-system';
 import { Volume2, VolumeX } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import type { PageGuidance } from './guidance-plans';
 
 /**
- * The direction for the current wizard page: always shown as text, and spoken when
- * voice guidance is on. It speaks again whenever the direction changes (a new page),
- * and "Repeat" says it once more.
+ * Orientation for the current wizard page. On screen: what the page is for and the
+ * steps to take. By voice, when voice guidance is on: a fuller explanation of the
+ * purpose, the parts of the screen and what happens next, spoken on each new page.
+ * The spoken text can always be read under "Read the full explanation".
  */
-export function VoiceDirection({ direction }: { direction: string }) {
-  const { supported, on, setOn, speak } = useVoiceGuide();
+export function VoiceDirection({ guidance }: { guidance: PageGuidance }) {
+  const { supported, on, setOn, speak, stop } = useVoiceGuide();
+  const [showText, setShowText] = useState(false);
+  const { about, steps, narration } = guidance;
 
   useEffect(() => {
-    if (on) speak(direction);
-  }, [on, direction, speak]);
+    if (on) speak(narration);
+  }, [on, narration, speak]);
 
   return (
-    <div className="flex flex-wrap items-start justify-between gap-3 rounded-md border border-dashed bg-muted/20 p-3">
-      <div className="min-w-0 flex-1 space-y-1">
-        <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">What to do now</div>
-        <p className="text-sm leading-relaxed">{direction}</p>
-      </div>
-      {supported && (
-        <div className="flex shrink-0 gap-2">
-          <Button size="sm" variant={on ? 'default' : 'outline'} onClick={() => setOn(!on)} aria-pressed={on}>
-            {on ? <Volume2 className="mr-1 h-4 w-4" /> : <VolumeX className="mr-1 h-4 w-4" />}
-            Voice guidance {on ? 'on' : 'off'}
-          </Button>
-          <Button size="sm" variant="outline" onClick={() => speak(direction)}>
-            Repeat
-          </Button>
+    <div className="space-y-3 rounded-md border border-dashed bg-muted/20 p-3">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0 flex-1 space-y-1">
+          <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">What this page is for</div>
+          <p className="text-sm leading-relaxed">{about}</p>
         </div>
-      )}
+        {supported && (
+          <div className="flex shrink-0 flex-wrap gap-2">
+            <Button size="sm" variant={on ? 'default' : 'outline'} onClick={() => setOn(!on)} aria-pressed={on}>
+              {on ? <Volume2 className="mr-1 h-4 w-4" /> : <VolumeX className="mr-1 h-4 w-4" />}
+              Voice guidance {on ? 'on' : 'off'}
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => speak(narration)}>
+              Explain this page
+            </Button>
+            <Button size="sm" variant="ghost" onClick={stop}>
+              Stop
+            </Button>
+          </div>
+        )}
+      </div>
+      <div className="space-y-1">
+        <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">What to do now</div>
+        <ol className="ml-5 list-decimal space-y-0.5 text-sm leading-relaxed">
+          {steps.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ol>
+      </div>
+      <button type="button" className="text-xs text-primary underline underline-offset-2" onClick={() => setShowText((v) => !v)}>
+        {showText ? 'Hide the full explanation' : 'Read the full explanation'}
+      </button>
+      {showText && <p className="text-sm leading-relaxed text-muted-foreground">{narration}</p>}
     </div>
   );
 }

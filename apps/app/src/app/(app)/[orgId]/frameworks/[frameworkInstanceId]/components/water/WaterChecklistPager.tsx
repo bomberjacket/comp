@@ -7,6 +7,7 @@ import { Badge, Button, Text, Textarea } from '@trycompai/design-system';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { groupByFamily } from '../answers/AssessTab';
+import { checklistGuidance } from './guidance-steps';
 import { VoiceDirection } from './VoiceDirection';
 
 const PRIORITY_MARK = '(EPA priority cybersecurity practice)';
@@ -58,12 +59,15 @@ export function WaterChecklistPager({ frameworkInstanceId, requirementDefinition
     setNote(saved?.comment ?? '');
   }, [q?.id, saved?.answer, saved?.justification, saved?.comment]);
 
-  const direction = useMemo(() => {
-    if (!q || index === null) return '';
-    const text = q.name.replace(/^\S+\s/, '');
-    const first =
-      'Read the question and the fact sheet text under it. Choose Yes when the practice is fully in place, In progress when it is partly in place, No when it is not or you do not know, and Not applicable only with a reason. Add a note on what you saw, then choose Save and next.';
-    return `Question ${index + 1} of ${questions.length}, in ${q.requirementFamily ?? 'the checklist'}. ${text} ${index === 0 ? first : 'Choose the answer, add a note if useful, then Save and next.'}`;
+  const guidance = useMemo(() => {
+    if (!q || index === null) return null;
+    return checklistGuidance({
+      index,
+      total: questions.length,
+      question: q.name.replace(/^\S+\s/, ''),
+      family: (q.requirementFamily ?? 'the checklist').replace(/^\d+\s*-\s*/, ''),
+      priority: (q.description ?? '').includes(PRIORITY_MARK),
+    });
   }, [q, index, questions.length]);
 
   if (api.isLoading || index === null) return <Text variant="muted">Loading the checklist…</Text>;
@@ -96,7 +100,7 @@ export function WaterChecklistPager({ frameworkInstanceId, requirementDefinition
 
   return (
     <div className="space-y-4 rounded-lg border p-4">
-      <VoiceDirection direction={direction} />
+      {guidance && <VoiceDirection guidance={guidance} />}
       <div className="flex flex-wrap items-center gap-2">
         <Badge variant="secondary">
           Question {index + 1} of {questions.length}

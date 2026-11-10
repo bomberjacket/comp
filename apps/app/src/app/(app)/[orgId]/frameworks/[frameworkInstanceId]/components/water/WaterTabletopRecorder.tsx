@@ -5,6 +5,7 @@ import { Badge, Button, Input, Text, Textarea } from '@trycompai/design-system';
 import { CheckCircle2, Circle } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
+import { tabletopGuidance } from './guidance-steps';
 import { Field, toDraft, today, type Draft } from './tabletop-draft';
 import { VoiceDirection } from './VoiceDirection';
 
@@ -45,15 +46,16 @@ export function WaterTabletopRecorder({ frameworkInstanceId, canEdit, onChanged 
   const lastPage = topics.length + 1;
   const topic = page >= 1 && page <= topics.length ? topics[page - 1] : undefined;
 
-  const direction = useMemo(() => {
-    if (page === 0) {
-      return 'Set the session up. Give it a title, describe the incident scenario the group will walk through, name the facilitator and the participants, and set how many months until the next exercise. Choose Save, then Next to start the first topic.';
-    }
-    if (topic) {
-      return `Topic ${page} of ${topics.length}: ${topic.title}. Ask the group the questions shown. Write what was said under Discussion, and any weakness or follow-up action under Gaps. Then choose Save and next.`;
-    }
-    return 'Write the after-action summary: what worked, what did not, and who will fix each gap by when. Enter the date the session was held, then choose Record as held. That sets the date the next exercise is due.';
-  }, [page, topic, topics.length]);
+  const guidance = useMemo(
+    () =>
+      tabletopGuidance({
+        page: page === 0 ? 'setup' : topic ? 'topic' : 'after',
+        topicIndex: page - 1,
+        topics: topics.length,
+        topicTitle: topic?.title,
+      }),
+    [page, topic, topics.length],
+  );
 
   if (error) return <Text variant="muted">The tabletop could not be loaded: {error.message}</Text>;
   if (isLoading || !data || !draft) return <Text variant="muted">Loading the tabletop…</Text>;
@@ -124,7 +126,7 @@ export function WaterTabletopRecorder({ frameworkInstanceId, canEdit, onChanged 
 
   return (
     <div className="space-y-4 rounded-lg border p-4">
-      <VoiceDirection direction={direction} />
+      <VoiceDirection guidance={guidance} />
       <div className="flex flex-wrap items-center gap-2">
         {sessions.map((s) => (
           <Button key={s.id} size="sm" variant={s.id === activeId ? 'default' : 'outline'} disabled={dirty} onClick={() => { setSessionId(s.id); setPage(0); }}>

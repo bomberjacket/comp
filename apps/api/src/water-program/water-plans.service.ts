@@ -15,6 +15,9 @@ export interface WaterPlanView {
   sections: PlanSectionView[];
   written: number;
   total: number;
+  /** Fill-in boxes with a value, and how many the plan asks for. */
+  filledFields: number;
+  totalFields: number;
 }
 
 @Injectable()
@@ -58,6 +61,8 @@ export class WaterPlansService {
       sections,
       written: sections.filter((s) => s.done).length,
       total: sections.length,
+      filledFields: sections.reduce((n, s) => n + s.filled, 0),
+      totalFields: sections.reduce((n, s) => n + s.fields.length, 0),
     };
   }
 

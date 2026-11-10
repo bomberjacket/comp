@@ -54,6 +54,8 @@ export interface WaterPlan {
   sections: WaterPlanSection[];
   written: number;
   total: number;
+  filledFields: number;
+  totalFields: number;
 }
 
 async function fetchJson<T>(url: string): Promise<T> {

@@ -47,6 +47,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   const [values, setValues] = useState<Record<string, string>>({});
   const [notes, setNotes] = useState('');
   const [saving, setSaving] = useState(false);
+  const [confirmPublish, setConfirmPublish] = useState(false);
 
   const plan = plans.find((p) => p.key === planKey) ?? plans[0];
   const section: WaterPlanSection | undefined = plan?.sections[index];
@@ -64,6 +65,8 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   const dirty = section.fields.some((f) => (values[f.label] ?? '').trim() !== f.value.trim()) || notes.trim() !== section.notes.trim();
   const filledNow = section.fields.filter((f) => (values[f.label] ?? '').trim()).length;
   const planName = plan.name.split(' (')[0] ?? plan.name;
+  const percent = plan.totalFields > 0 ? Math.round((plan.filledFields / plan.totalFields) * 100) : 0;
+  const incomplete = plan.sections.filter((s) => !s.done);
   const guidance = planGuidance({
     planKey: plan.key,
     planName,
@@ -73,6 +76,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
     fieldCount: section.fields.length,
     written: plan.written,
     published: plan.status === 'published',
+    publishPercent: confirmPublish ? percent : undefined,
   });
 
   const save = async (thenNext: boolean) => {
@@ -93,11 +97,12 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   };
 
   const doPublish = async () => {
+    setConfirmPublish(false);
     setSaving(true);
     try {
       await publish(plan.policyId);
       onChanged?.();
-      toast.success(`${planName} published`);
+      toast.success(percent < 100 ? `${planName} published with ${percent}% of the requested information` : `${planName} published`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Could not publish');
     } finally {
@@ -124,6 +129,9 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
           </Button>
         ))}
         <Badge variant={plan.status === 'published' ? 'default' : 'secondary'}>{plan.status.replace('_', ' ')}</Badge>
+        <Badge variant="outline">
+          {percent}% filled in ({plan.filledFields} of {plan.totalFields} boxes)
+        </Badge>
         <Link href={`/${orgId}/policies/${plan.policyId}`} className="text-xs text-primary underline underline-offset-2">
           Open in the policy editor
         </Link>
@@ -219,15 +227,46 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
                 <Button
                   size="sm"
                   variant="default"
-                  onClick={() => void doPublish()}
-                  disabled={saving || dirty || plan.written < plan.total || plan.status === 'published'}
-                  title={plan.written < plan.total ? 'Fill in every box of every section first' : 'Publish this plan'}
+                  onClick={() => (percent < 100 ? setConfirmPublish(true) : void doPublish())}
+                  disabled={saving || dirty || plan.status === 'published' || confirmPublish}
+                  title={dirty ? 'Save this section first' : 'Publish this plan'}
                 >
                   Publish plan
                 </Button>
               </div>
             )}
           </div>
+
+          {confirmPublish && (
+            <div role="alert" className="space-y-3 rounded-md border border-amber-500/60 bg-amber-500/10 p-3">
+              <p className="text-sm font-medium">
+                This plan has {percent}% of the requested information: {plan.filledFields} of {plan.totalFields} boxes are filled in.
+              </p>
+              <p className="text-sm">You can publish it as it is, or go back and fill in the rest. Sections with empty boxes:</p>
+              <ul className="space-y-0.5 text-sm">
+                {incomplete.map((s) => (
+                  <li key={s.index} className="ml-4 list-disc">
+                    {s.title}: {s.fields.length - s.filled} of {s.fields.length} empty
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    setConfirmPublish(false);
+                    if (incomplete[0]) setIndex(incomplete[0].index);
+                  }}
+                >
+                  Go back and fill in
+                </Button>
+                <Button size="sm" onClick={() => void doPublish()} disabled={saving}>
+                  Publish anyway
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -80,7 +80,7 @@ export interface WaterReportData {
   expected: number;
   functions: Array<{ label: string; yes: number; inProgress: number; no: number; notApplicable: number; unanswered: number; percent: number }>;
   questions: WaterReportQuestion[];
-  plans: Array<{ name: string; status: string; written: number; total: number }>;
+  plans: Array<{ name: string; status: string; filled: number; total: number }>;
   tabletop: {
     cadence: TabletopData['cadence'];
     session: {

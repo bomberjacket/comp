@@ -28,7 +28,7 @@ export interface WaterReport {
   expected: number;
   functions: Array<{ label: string; yes: number; inProgress: number; no: number; notApplicable: number; unanswered: number; percent: number }>;
   questions: ReportQuestion[];
-  plans: Array<{ name: string; status: string; written: number; total: number }>;
+  plans: Array<{ name: string; status: string; filled: number; total: number }>;
   tabletop: {
     cadence: TabletopCadence;
     session: {
@@ -144,7 +144,7 @@ export class WaterReportService {
         percent: f.percent,
       })),
       questions,
-      plans: plans.map((p) => ({ name: p.name, status: p.status, written: p.written, total: p.total })),
+      plans: plans.map((p) => ({ name: p.name, status: p.status, filled: p.filledFields, total: p.totalFields })),
       tabletop: {
         cadence: cadenceOf(sessions),
         session: held

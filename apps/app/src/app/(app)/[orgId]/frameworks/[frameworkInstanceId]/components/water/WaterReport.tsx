@@ -169,7 +169,8 @@ export function WaterReport({ frameworkInstanceId }: { frameworkInstanceId: stri
         <ul className="space-y-1 text-sm">
           {data.plans.map((p) => (
             <li key={p.name}>
-              {p.name.split(' (')[0]}: {p.status.replace('_', ' ')}, {p.written} of {p.total} sections written
+              {p.name.split(' (')[0]}: {p.status.replace('_', ' ')}, {p.total > 0 ? Math.round((p.filled / p.total) * 100) : 0}% of the requested information
+              filled in ({p.filled} of {p.total})
             </li>
           ))}
         </ul>

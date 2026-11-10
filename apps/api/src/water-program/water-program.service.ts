@@ -44,13 +44,13 @@ function statusOf(done: number, total: number, started = done > 0): StepStatus {
   return started ? 'in_progress' : 'not_started';
 }
 
-/** Sections of a plan policy that carry the utility's own record. */
+/** How much of the requested information a plan policy carries: fill-in boxes with a value. */
 function sectionsWritten(content: unknown, key: 'crmp' | 'cirp'): { written: number; total: number } {
   const sections = readPlanSections(
     (Array.isArray(content) ? content : []) as TipTapNode[],
     PLAN_SECTIONS[key].sections,
   );
-  return { written: sections.filter((s) => s.done).length, total: sections.length };
+  return { written: sections.reduce((n, s) => n + s.filled, 0), total: sections.reduce((n, s) => n + s.fields.length, 0) };
 }
 
 @Injectable()
@@ -146,12 +146,13 @@ export class WaterProgramService {
         continue;
       }
       const { written, total } = sectionsWritten(policy.content, plan.key);
-      const complete = policy.status === 'published' && written === total;
-      if (complete) done += 1;
+      // Publishing is the utility's call; how complete the plan is shows beside it.
+      if (policy.status === 'published') done += 1;
+      const percent = total > 0 ? Math.round((written / total) * 100) : 0;
       const state = policy.status === 'published' ? 'Published' : policy.status === 'needs_review' ? 'In review' : 'Draft';
       details.push({
         label: plan.label,
-        status: `${state}, ${written} of ${total} sections written`,
+        status: `${state}, ${percent}% of the requested information filled in (${written} of ${total})`,
         href: `policies/${policy.id}`,
       });
     }
@@ -162,11 +163,11 @@ export class WaterProgramService {
     return {
       key: 'plans',
       title: 'Write the policies: the two plans',
-      description: 'Start with the documents the rest of the program points to. The Cybersecurity Risk Management Plan and the Cyber Incident Response Plan follow the AWWA section order with standard wording under each heading; fill in the utility\'s own facts for each section, then publish.',
+      description: 'Start with the documents the rest of the program points to. The Cybersecurity Risk Management Plan and the Cyber Incident Response Plan follow the AWWA section order with standard wording under each heading; fill in the utility\'s own facts for each section, then publish. A plan can be published with boxes left empty; the guide shows how complete it is.',
       status: statusOf(done, WATER_PLAN_TEMPLATES.length, started),
       done,
       total: WATER_PLAN_TEMPLATES.length,
-      summary: `${done} of ${WATER_PLAN_TEMPLATES.length} plans written and published`,
+      summary: `${done} of ${WATER_PLAN_TEMPLATES.length} plans published`,
       href: 'policies',
       details,
     };

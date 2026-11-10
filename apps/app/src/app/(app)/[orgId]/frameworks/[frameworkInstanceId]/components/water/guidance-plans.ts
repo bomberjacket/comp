@@ -41,8 +41,21 @@ export function planGuidance(args: {
   fieldCount: number;
   written: number;
   published: boolean;
+  /** The publish confirmation is showing: percent of the boxes filled. */
+  publishPercent?: number;
 }): PageGuidance {
-  const { planKey, planName, index, total, sectionTitle, fieldCount, written, published } = args;
+  const { planKey, planName, index, total, sectionTitle, fieldCount, written, published, publishPercent } = args;
+  if (publishPercent !== undefined && publishPercent < 100) {
+    return {
+      about: `You are about to publish the ${planName} with ${publishPercent} percent of the requested information filled in. That is allowed; the choice is the utility's.`,
+      steps: [
+        'Look at the list of sections that still have empty boxes.',
+        'Choose "Go back and fill in" to complete them, or "Publish anyway".',
+        'A published plan can still be completed later and published again.',
+      ],
+      narration: `You are about to publish the ${planName}, and ${publishPercent} percent of the requested information is filled in. Publishing an incomplete plan is allowed; that choice belongs to the utility. Before you decide, look at the list of sections that still have empty boxes. An assessor who reads the plan will notice what is missing, so fill in what you can. If the information is not available yet, choose Publish anyway. You can come back later, fill in the rest, and publish the plan again as a new version. To keep working instead, choose Go back and fill in.`,
+    };
+  }
   const title = sectionTitle.replace(/^\d+\.\s*/, '');
   if (written === total && !published) {
     return {
@@ -73,6 +86,6 @@ export function planGuidance(args: {
       'The page has three parts. First, the grey box. That is standard wording that BomberJacket wrote for this section. It is already in the plan and it stays there, so you do not retype it. Read it so you know what the section says. ' +
       `Second, under Your part, there are ${fieldCount} boxes to fill in. Each box asks for one fact that only the utility knows, such as a name, a date or a place. The grey text inside an empty box is an example of the kind of answer expected. ` +
       'Type short, plain answers. If you do not know an answer yet, write who will find out and by when. The last box, Additional notes, is optional and is for anything the other boxes do not cover. ' +
-      `When you are done, choose Save and next. Your answers are added to the plan under the heading Utility record, each with its label. The circle beside the section turns green when every box is filled. When all ${total} sections are green, the Publish plan button becomes available.`,
+      `When you are done, choose Save and next. Your answers are added to the plan under the heading Utility record, each with its label. The circle beside the section turns green when every box is filled. You can publish the plan at any time; if boxes are still empty, you are told how complete the plan is before you confirm.`,
   };
 }

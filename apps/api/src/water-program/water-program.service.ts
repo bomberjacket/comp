@@ -7,10 +7,10 @@ import { PLAN_SECTIONS } from './plan-sections.generated';
 import { readPlanSections, type TipTapNode } from './plan-writer';
 import {
   EPA_PRIORITY_MARK,
-  INTERVIEW_TASK_PREFIX,
   WATER_FRAMEWORK_ID,
   WATER_PLAN_TEMPLATES,
 } from './water-program.constants';
+import { cadenceOf, WaterTabletopService } from './water-tabletop.service';
 
 export type StepStatus = 'not_started' | 'in_progress' | 'done';
 
@@ -55,7 +55,10 @@ function sectionsWritten(content: unknown, key: 'crmp' | 'cirp'): { written: num
 
 @Injectable()
 export class WaterProgramService {
-  constructor(private readonly answers: RequirementAnswersService) {}
+  constructor(
+    private readonly answers: RequirementAnswersService,
+    private readonly tabletop: WaterTabletopService,
+  ) {}
 
   async getProgram(frameworkInstanceId: string, organizationId: string): Promise<WaterProgram> {
     const instance = await db.frameworkInstance.findFirst({
@@ -222,26 +225,35 @@ export class WaterProgramService {
   }
 
   private async tabletopStep(instanceId: string, organizationId: string): Promise<WaterProgramStep> {
-    const links = await db.frameworkEditorControlTaskTemplateLink.findMany({
-      where: { frameworkId: WATER_FRAMEWORK_ID, taskTemplate: { name: { startsWith: INTERVIEW_TASK_PREFIX } } },
-      select: { taskTemplateId: true },
-    });
-    const tasks = await db.task.findMany({
-      where: { organizationId, taskTemplateId: { in: links.map((l) => l.taskTemplateId) } },
-      select: { id: true, title: true, status: true },
-      orderBy: { title: 'asc' },
-    });
+    const [tasks, sessions] = await Promise.all([
+      this.tabletop.interviewTasks(organizationId),
+      this.tabletop.sessions(instanceId, organizationId),
+    ]);
     const done = tasks.filter((t) => t.status === 'done').length;
+    const cadence = cadenceOf(sessions);
+    const planned = sessions.filter((s) => s.status === 'planned');
+    const current = !!cadence.lastHeldOn && !cadence.overdue;
+    const summary = cadence.lastHeldOn
+      ? `Last held ${cadence.lastHeldOn}, next due ${cadence.nextDue}${cadence.overdue ? ' (overdue)' : ''}`
+      : planned.length
+        ? 'A session is planned, none held yet'
+        : 'No tabletop session held yet';
     return {
       key: 'tabletop',
       title: 'Validate with a tabletop, on a cadence',
-      description: "Once the program is in place, exercise it at least yearly. Each interview task carries the CISA water-sector tabletop questions for one CPG goal: walk them with the people who own the practice, record the answers, attach the after-action report, and repeat on the cadence set in the plan.",
-      status: statusOf(done, tasks.length, tasks.some((t) => t.status !== 'todo')),
+      description: "Once the program is in place, exercise it at least yearly. A session walks the CISA water-sector tabletop questions, one topic per CPG goal, with the people who own each practice. Record who met, what was said and the after-action summary; the next session comes due on the cadence set here.",
+      status: current ? 'done' : sessions.length > 0 || tasks.some((t) => t.status !== 'todo') ? 'in_progress' : 'not_started',
       done,
       total: tasks.length,
-      summary: `${done} of ${tasks.length} interview tasks done`,
+      summary: `${summary}; ${done} of ${tasks.length} topics covered`,
       href: `tasks?framework=${instanceId}`,
-      details: tasks.map((t) => ({ label: t.title.replace(/^Evidence: /, ''), status: t.status.replace('_', ' '), href: `tasks/${t.id}` })),
+      details: [
+        ...sessions.map((s) => ({
+          label: s.title,
+          status: s.status === 'held' ? `Held ${s.heldOn?.toISOString().slice(0, 10) ?? ''}` : `Planned${s.scheduledFor ? ` for ${s.scheduledFor.toISOString().slice(0, 10)}` : ''}`,
+        })),
+        ...tasks.map((t) => ({ label: t.title, status: t.status.replace('_', ' '), href: `tasks/${t.id}` })),
+      ],
     };
   }
 }

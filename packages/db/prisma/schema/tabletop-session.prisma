@@ -1,0 +1,42 @@
+// Tabletop exercise sessions of a framework instance (water and wastewater program,
+// step 6). A session walks the interview questions of the framework's interview tasks
+// with the people who own each practice; holding it on a cadence is what validates the
+// program. The questions themselves live on the tasks; this table keeps who met, when,
+// what was said per topic, and the after-action summary.
+
+enum TabletopSessionStatus {
+  planned
+  held
+}
+
+model TabletopSession {
+  id String @id @default(dbgenerated("generate_prefixed_cuid('tts'::text)"))
+
+  organizationId      String
+  organization        Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  frameworkInstanceId String
+  frameworkInstance   FrameworkInstance @relation(fields: [frameworkInstanceId], references: [id], onDelete: Cascade)
+
+  title    String
+  /// The incident scenario walked in the exercise.
+  scenario String?
+  status   TabletopSessionStatus @default(planned)
+
+  scheduledFor DateTime?
+  heldOn       DateTime?
+  facilitator  String?
+  participants String?
+
+  /// Months until the next exercise is due, counted from heldOn.
+  cadenceMonths Int @default(12)
+
+  /// One entry per interview task covered: { taskId, discussion, gaps }.
+  notes       Json    @default("[]")
+  afterAction String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([organizationId])
+  @@index([frameworkInstanceId])
+}

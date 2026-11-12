@@ -4,7 +4,7 @@ import type { Prisma } from '@db';
 import { PoliciesService } from '../policies/policies.service';
 import type { UpdatePolicyDto } from '../policies/dto/update-policy.dto';
 import { planAutoValues } from './plan-auto';
-import { PLAN_SECTIONS, type PlanAutoKey, type PlanSectionDef, type WaterPlanKey } from './plan-sections.generated';
+import { PLAN_SECTIONS, type PlanAutoKey, type PlanPrefillKey, type PlanSectionDef, type WaterPlanKey } from './plan-sections.generated';
 import { readPlanSections, writePlanSection, type PlanSectionView, type TipTapNode } from './plan-writer';
 import { WATER_FRAMEWORK_ID, WATER_PLAN_TEMPLATES } from './water-program.constants';
 
@@ -21,7 +21,7 @@ export interface WaterPlanView {
   totalFields: number;
 }
 
-type Auto = Record<PlanAutoKey, string>;
+type Auto = Record<PlanAutoKey | PlanPrefillKey, string>;
 type PlanPolicy = { id: string; name: string; status: string; content: Prisma.JsonValue[]; policyTemplateId?: string | null };
 
 @Injectable()

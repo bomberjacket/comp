@@ -1,4 +1,4 @@
-import type { PlanAutoKey, PlanFieldDef, PlanSectionDef } from './plan-sections.generated';
+import type { PlanAutoKey, PlanFieldDef, PlanPrefillKey, PlanSectionDef } from './plan-sections.generated';
 import { PLAN_PROMPT_TEXT } from './water-program.constants';
 
 /** TipTap node as stored in Policy.content (an array of top-level nodes). */
@@ -19,6 +19,8 @@ const FIXED_SECTIONS = new Set(['Purpose', 'Source']);
 
 export interface PlanFieldView extends PlanFieldDef {
   value: string;
+  /** For an empty prefill box: the list from the platform's records to start from. */
+  suggestion?: string;
 }
 
 export interface PlanSectionView {
@@ -133,13 +135,21 @@ function parseRecord(record: TipTapNode[], labels: Set<string>): { values: Map<s
 }
 
 /** `auto` carries the platform's live values for auto-filled boxes; without it they read from the document. */
-export function readPlanSections(content: TipTapNode[], defs: PlanSectionDef[], auto?: Record<PlanAutoKey, string>): PlanSectionView[] {
+export function readPlanSections(
+  content: TipTapNode[],
+  defs: PlanSectionDef[],
+  auto?: Record<PlanAutoKey | PlanPrefillKey, string>,
+): PlanSectionView[] {
   return sectionRanges(content).map((r, index) => {
     const { guidance, prompts, record } = splitSection(content.slice(r.start, r.end));
     const def = defs[index];
     const fieldDefs = def?.fields ?? [];
     const { values, notes } = parseRecord(record, new Set(fieldDefs.map((f) => f.label)));
-    const fields = fieldDefs.map((f) => ({ ...f, value: (f.auto && auto ? auto[f.auto] : values.get(f.label)) ?? '' }));
+    const fields: PlanFieldView[] = fieldDefs.map((f) => {
+      const value = (f.auto && auto ? auto[f.auto] : values.get(f.label)) ?? '';
+      const suggestion = f.prefill && auto && !value.trim() ? auto[f.prefill] : '';
+      return { ...f, value, ...(suggestion ? { suggestion } : {}) };
+    });
     const required = fields.filter((f) => !f.optional);
     const filled = required.filter((f) => f.auto || f.value.trim()).length;
     return {

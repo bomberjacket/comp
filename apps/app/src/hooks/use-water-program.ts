@@ -34,7 +34,17 @@ export interface WaterPlanSection {
   guidance: string[];
   prompts: string[];
   /** One fill-in box per fact the utility supplies. */
-  fields: Array<{ label: string; hint?: string; long?: boolean; auto?: string; optional?: boolean; value: string }>;
+  fields: Array<{
+    label: string;
+    hint?: string;
+    long?: boolean;
+    auto?: string;
+    optional?: boolean;
+    prefill?: string;
+    value: string;
+    /** For an empty prefill box: the list from the platform's records to start from. */
+    suggestion?: string;
+  }>;
   notes: string;
   /** Required boxes filled, and how many are required. */
   filled: number;

@@ -39,6 +39,8 @@ export type WaterPlanKey = 'crmp' | 'cirp';
 
 export type PlanAutoKey = 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
 
+export type PlanPrefillKey = 'vendors' | 'vendor_scorers';
+
 export interface PlanFieldDef {
   label: string;
   hint?: string;
@@ -47,6 +49,8 @@ export interface PlanFieldDef {
   auto?: PlanAutoKey;
   /** Not counted in the plan's completeness. */
   optional?: boolean;
+  /** Starts with a list from the platform's records; editable. */
+  prefill?: PlanPrefillKey;
 }
 
 export interface PlanSectionDef {

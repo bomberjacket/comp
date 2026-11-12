@@ -31,7 +31,9 @@ function SectionIcon({ section }: { section: WaterPlanSection }) {
   return <Circle className="h-4 w-4 shrink-0 text-muted-foreground" />;
 }
 
-const valuesOf = (section: WaterPlanSection | undefined) => Object.fromEntries((section?.fields ?? []).map((f) => [f.label, f.value]));
+/** Box contents on opening a section: the saved value, or the platform's starting list for an empty prefill box. */
+const valuesOf = (section: WaterPlanSection | undefined) =>
+  Object.fromEntries((section?.fields ?? []).map((f) => [f.label, f.value || f.suggestion || '']));
 
 /**
  * Section-by-section writer for the two water plans. Each section shows the standard
@@ -62,7 +64,10 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   if (error) return <Text variant="muted">The plans could not be loaded: {error.message}</Text>;
   if (isLoading || !plan || !section) return <Text variant="muted">Loading the plans…</Text>;
 
-  const dirty = section.fields.some((f) => !f.auto && (values[f.label] ?? '').trim() !== f.value.trim()) || notes.trim() !== section.notes.trim();
+  const typed = (f: WaterPlanSection['fields'][number]) => (values[f.label] ?? '').trim();
+  // An untouched starting list is not an edit: it does not block moving on, but Save stores it.
+  const dirty = section.fields.some((f) => !f.auto && typed(f) !== f.value.trim() && typed(f) !== (f.suggestion ?? '').trim()) || notes.trim() !== section.notes.trim();
+  const canSave = dirty || section.fields.some((f) => !!f.suggestion && typed(f) === f.suggestion.trim());
   const filledNow = section.fields.filter((f) => !f.optional && (f.auto || (values[f.label] ?? '').trim())).length;
   const planName = plan.name.split(' (')[0] ?? plan.name;
   const percent = plan.totalFields > 0 ? Math.round((plan.filledFields / plan.totalFields) * 100) : 0;
@@ -187,7 +192,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
                     value={values[f.label] ?? ''}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setValues({ ...values, [f.label]: e.target.value })}
                     placeholder={f.hint}
-                    rows={3}
+                    rows={f.suggestion ? Math.min(10, Math.max(3, f.suggestion.split('\n').length + 1)) : 3}
                     disabled={!canEdit || saving}
                   />
                 ) : (
@@ -197,6 +202,13 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
                     placeholder={f.hint}
                     disabled={!canEdit || saving}
                   />
+                )}
+                {f.suggestion && (
+                  <span className="block text-xs text-muted-foreground">
+                    {f.prefill === 'vendor_scorers'
+                      ? 'Started from who has saved a procurement score sheet in this platform. Change it to the people or roles responsible, then save.'
+                      : 'Started from the Vendors page of this platform. Remove any that have no access, add what each can reach, then save.'}
+                  </span>
                 )}
               </label>
             ))}
@@ -223,10 +235,10 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
             </div>
             {canEdit && (
               <div className="flex gap-2">
-                <Button size="sm" variant="outline" onClick={() => void save(false)} disabled={!dirty || saving} loading={saving}>
+                <Button size="sm" variant="outline" onClick={() => void save(false)} disabled={!canSave || saving} loading={saving}>
                   Save
                 </Button>
-                <Button size="sm" onClick={() => void save(true)} disabled={!dirty || saving}>
+                <Button size="sm" onClick={() => void save(true)} disabled={!canSave || saving}>
                   Save and next
                 </Button>
                 <Button

@@ -128,7 +128,7 @@ export function WaterProgramGuide({
   const changed = () => void mutate();
   const wizards: Partial<Record<WaterProgramStep['key'], { label: string; node: React.ReactNode }>> = {
     plans: {
-      label: 'Write the plans here',
+      label: 'Onboarding & Publishing',
       node: <WaterPlanWriter orgId={orgId} frameworkInstanceId={frameworkInstanceId} canEdit={canEditPolicies} onChanged={changed} />,
     },
     assess: {

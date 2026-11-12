@@ -8,6 +8,8 @@ export type WaterPlanKey = 'crmp' | 'cirp';
 
 export type PlanAutoKey = 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
 
+export type PlanPrefillKey = 'vendors' | 'vendor_scorers';
+
 export interface PlanFieldDef {
   label: string;
   hint?: string;
@@ -16,6 +18,8 @@ export interface PlanFieldDef {
   auto?: PlanAutoKey;
   /** Not counted in the plan's completeness. */
   optional?: boolean;
+  /** Starts with a list from the platform's records; editable. */
+  prefill?: PlanPrefillKey;
 }
 
 export interface PlanSectionDef {
@@ -98,7 +102,8 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
           {
             "label": "Integrators and managed service providers with access",
             "hint": "Company, what they manage, contact",
-            "long": true
+            "long": true,
+            "prefill": "vendors"
           },
           {
             "label": "IT and OT coordination meeting",
@@ -188,12 +193,14 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
         "fields": [
           {
             "label": "Who scores vendors before a purchase",
-            "hint": "Names or roles"
+            "hint": "Names or roles",
+            "prefill": "vendor_scorers"
           },
           {
             "label": "Vendors, integrators and service providers with network or remote access",
             "hint": "Company and what they can reach",
-            "long": true
+            "long": true,
+            "prefill": "vendors"
           },
           {
             "label": "Approved remote access method",

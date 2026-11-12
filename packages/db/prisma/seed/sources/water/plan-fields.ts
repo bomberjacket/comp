@@ -13,6 +13,8 @@ export interface PlanField {
   auto?: 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
   /** Not counted in the plan's completeness. */
   optional?: boolean;
+  /** The box starts with a list from the platform's records; the utility edits and saves it. */
+  prefill?: 'vendors' | 'vendor_scorers';
 }
 
 const f = (label: string, hint?: string, long?: boolean): PlanField => ({ label, ...(hint ? { hint } : {}), ...(long ? { long } : {}) });
@@ -35,7 +37,7 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
       f('Operations lead', 'Name, title, phone'),
       f('IT lead or provider', 'Name or company, phone'),
       f('Finance and procurement contact', 'Name, title'),
-      f('Integrators and managed service providers with access', 'Company, what they manage, contact', true),
+      { label: 'Integrators and managed service providers with access', hint: 'Company, what they manage, contact', long: true, prefill: 'vendors' },
       f('IT and OT coordination meeting', 'How often, who attends, where the notes are kept'),
     ],
     '3. Risk Assessment, Monitoring, and Reporting': [
@@ -58,8 +60,8 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
       f('How contractors with accounts are trained'),
     ],
     '5. Third-Party Risk Management': [
-      f('Who scores vendors before a purchase', 'Names or roles'),
-      f('Vendors, integrators and service providers with network or remote access', 'Company and what they can reach', true),
+      { label: 'Who scores vendors before a purchase', hint: 'Names or roles', prefill: 'vendor_scorers' },
+      { label: 'Vendors, integrators and service providers with network or remote access', hint: 'Company and what they can reach', long: true, prefill: 'vendors' },
       f('Approved remote access method', 'For example: VPN with multifactor, enabled per session by the operator'),
       f('Where the standard contract language is kept'),
       f('Vendor re-scoring schedule', 'For example: at renewal and at least every two years'),

@@ -13,7 +13,8 @@ import type { PageGuidance } from './guidance-plans';
  * The spoken text can always be read under "Read the full explanation".
  */
 export function VoiceDirection({ guidance }: { guidance: PageGuidance }) {
-  const { supported, on, setOn, speak, stop } = useVoiceGuide();
+  // One switch: on speaks this page now and every page after; off stops it mid-sentence.
+  const { supported, on, setOn, speak } = useVoiceGuide();
   const [showText, setShowText] = useState(false);
   const { about, steps, narration } = guidance;
 
@@ -34,12 +35,11 @@ export function VoiceDirection({ guidance }: { guidance: PageGuidance }) {
               {on ? <Volume2 className="mr-1 h-4 w-4" /> : <VolumeX className="mr-1 h-4 w-4" />}
               Voice guidance {on ? 'on' : 'off'}
             </Button>
-            <Button size="sm" variant="outline" onClick={() => speak(narration)}>
-              Explain this page
-            </Button>
-            <Button size="sm" variant="ghost" onClick={stop}>
-              Stop
-            </Button>
+            {on && (
+              <Button size="sm" variant="outline" onClick={() => speak(narration)}>
+                Repeat
+              </Button>
+            )}
           </div>
         )}
       </div>

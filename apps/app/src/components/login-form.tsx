@@ -4,6 +4,7 @@ import { GithubSignIn } from '@/components/github-sign-in';
 import { GoogleSignIn } from '@/components/google-sign-in';
 import { MagicLinkSignIn } from '@/components/magic-link';
 import { MicrosoftSignIn } from '@/components/microsoft-sign-in';
+import { PasswordSignIn } from '@/components/password-sign-in';
 import { Button } from '@trycompai/ui/button';
 import { Card, CardContent, CardDescription, CardTitle } from '@trycompai/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@trycompai/ui/collapsible';
@@ -66,7 +67,8 @@ export function LoginForm({
     />
   );
 
-  const moreOptionsList = [];
+  // BNI: password plus authenticator code, offered beside the email link.
+  const moreOptionsList = [<PasswordSignIn key="password" inviteCode={inviteCode} redirectTo={redirectTo} />];
   if (showGoogle) {
     moreOptionsList.push(
       <MagicLinkSignIn
@@ -104,7 +106,7 @@ export function LoginForm({
                 size="sm"
                 className="relative px-4 text-sm text-muted-foreground bg-background hover:bg-muted"
               >
-                More options
+                Sign in with a password, or more options
                 {isOptionsOpen ? (
                   <ChevronUp className="ml-1 h-4 w-4 transition-transform duration-200" />
                 ) : (

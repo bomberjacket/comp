@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { EmailNotificationPreferences } from './components/EmailNotificationPreferences';
 import { LoginEmailSettings } from './components/LoginEmailSettings';
 import { McpOrganizationSelector } from './components/McpOrganizationSelector';
+import { PasswordSignInSettings } from './components/PasswordSignInSettings';
 import type { McpOrganizationData } from './hooks/useMcpOrganization';
 
 export default async function UserSettings({
@@ -43,6 +44,7 @@ export default async function UserSettings({
   return (
     <div className="space-y-6">
       <LoginEmailSettings currentEmail={emailRes.data.email} />
+      <PasswordSignInSettings />
       <EmailNotificationPreferences
         initialPreferences={emailRes.data.preferences}
         email={emailRes.data.email}

@@ -4,6 +4,7 @@ import {
   magicLinkClient,
   multiSessionClient,
   organizationClient,
+  twoFactorClient,
 } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 import { ac, allRoles } from './permissions';
@@ -32,6 +33,7 @@ export const authClient = createAuthClient({
     emailOTPClient(),
     magicLinkClient(),
     multiSessionClient(),
+    twoFactorClient(),
   ],
   // Authentication is handled via httpOnly cookies - no localStorage tokens needed
 });

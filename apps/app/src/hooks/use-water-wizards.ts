@@ -11,6 +11,17 @@ export interface WaterEvidenceTask {
   status: string;
   attachments: number;
   questions: Array<{ identifier: string; name: string; answer: string | null }>;
+  /** Who supplies the evidence today: the platform from its own records, or the utility. */
+  source: 'system' | 'you';
+  system: Array<{ label: string; provided: boolean; detail: string }>;
+  systemComplete: boolean;
+  /** A way the platform could supply this later; not built yet. */
+  planned?: string;
+}
+
+export interface WaterEvidence {
+  summary: { systemGoals: number; systemComplete: number; yourGoals: number; yourDone: number; plannedGoals: number };
+  tasks: WaterEvidenceTask[];
 }
 
 export interface TabletopNote {
@@ -110,11 +121,18 @@ export function useWaterReport(frameworkInstanceId: string) {
 /** Evidence tasks of the water framework, one per CPG goal. */
 export function useWaterEvidence(frameworkInstanceId: string) {
   const key = frameworkInstanceId ? `/v1/water-program/${frameworkInstanceId}/evidence` : null;
-  const { data, error, isLoading, mutate } = useSWR<WaterEvidenceTask[]>(key, fetchJson, {
+  const { data, error, isLoading, mutate } = useSWR<WaterEvidence>(key, fetchJson, {
     revalidateOnFocus: false,
     shouldRetryOnError: false,
   });
-  return { tasks: data ?? [], error, isLoading, refresh: mutate };
+  /** Let the platform mark the goals done whose evidence it already holds. */
+  const sync = useCallback(async () => {
+    const res = await apiClient.post<WaterEvidence>(`/v1/water-program/${frameworkInstanceId}/evidence/sync`, {});
+    if (res.error || !res.data) throw new Error(res.error ?? 'Could not check the platform records');
+    await mutate(res.data, { revalidate: false });
+    return res.data;
+  }, [frameworkInstanceId, mutate]);
+  return { tasks: data?.tasks ?? [], summary: data?.summary, error, isLoading, refresh: mutate, sync };
 }
 
 /** Tabletop topics, sessions and cadence, with save and delete per session. */

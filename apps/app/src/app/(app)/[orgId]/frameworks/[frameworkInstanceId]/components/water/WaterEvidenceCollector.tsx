@@ -7,7 +7,7 @@ import { ANSWER_LABELS, type AnswerValue } from '@/types/framework-answers';
 import { Badge, Button, Text } from '@trycompai/design-system';
 import { CheckCircle2, Circle, CircleDot, Paperclip } from 'lucide-react';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { evidenceGuidance } from './guidance-steps';
 import { VoiceDirection } from './VoiceDirection';
@@ -97,10 +97,19 @@ function Attachments({ taskId, canEdit, onChanged }: { taskId: string; canEdit: 
  * it supports, the files attached to the goal's evidence task, and the task status.
  */
 export function WaterEvidenceCollector({ orgId, frameworkInstanceId, canEdit, onChanged }: Props) {
-  const { tasks, error, isLoading, refresh } = useWaterEvidence(frameworkInstanceId);
+  const { tasks, summary, error, isLoading, refresh, sync } = useWaterEvidence(frameworkInstanceId);
   const { updateTask } = useTaskMutations();
   const [index, setIndex] = useState(0);
   const [saving, setSaving] = useState(false);
+
+  // On opening: let the platform mark the goals done whose evidence it already holds.
+  useEffect(() => {
+    if (!canEdit) return;
+    sync()
+      .then(() => onChanged?.())
+      .catch(() => undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [frameworkInstanceId, canEdit]);
 
   if (error) return <Text variant="muted">The evidence tasks could not be loaded: {error.message}</Text>;
   if (isLoading) return <Text variant="muted">Loading the evidence tasks…</Text>;
@@ -130,11 +139,34 @@ export function WaterEvidenceCollector({ orgId, frameworkInstanceId, canEdit, on
     title: task.title,
     attachments: task.attachments,
     questions: task.questions.length,
+    system: task.source === 'system' ? { provided: task.system.filter((i) => i.provided).length, total: task.system.length } : undefined,
+    planned: !!task.planned,
   });
 
   return (
     <div className="space-y-4 rounded-lg border p-4">
       <VoiceDirection guidance={guidance} />
+      {summary && (
+        <div className="grid gap-3 md:grid-cols-2">
+          <div className="rounded-md border p-3">
+            <div className="text-sm font-medium">
+              The system provides: {summary.systemGoals} goals ({summary.systemComplete} complete)
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Proof the platform already holds from the plans, vendor score sheets, tabletop sessions and training records. Nothing to attach.
+            </p>
+          </div>
+          <div className="rounded-md border p-3">
+            <div className="text-sm font-medium">
+              You provide: {summary.yourGoals} goals ({summary.yourDone} done)
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Attach a document for each. {summary.plannedGoals} of them may be checked by the platform in future (Microsoft 365, Google Workspace or
+              network monitoring); not built yet.
+            </p>
+          </div>
+        </div>
+      )}
       <div className="grid gap-4 md:grid-cols-[260px_1fr]">
         <ol className="max-h-[32rem] space-y-1 overflow-y-auto">
           {tasks.map((t, i) => (
@@ -146,6 +178,7 @@ export function WaterEvidenceCollector({ orgId, frameworkInstanceId, canEdit, on
               >
                 <TaskIcon status={t.status} />
                 <span className="min-w-0 flex-1 truncate">{t.title}</span>
+                {t.source === 'system' && <span className="shrink-0 rounded border px-1 text-[10px] uppercase text-muted-foreground">System</span>}
                 {t.attachments > 0 && <span className="shrink-0 text-xs tabular-nums text-muted-foreground">{t.attachments}</span>}
               </button>
             </li>
@@ -159,9 +192,27 @@ export function WaterEvidenceCollector({ orgId, frameworkInstanceId, canEdit, on
               Open the task
             </Link>
           </div>
+          {task.source === 'system' && (
+            <div className="space-y-2 rounded-md border p-3">
+              <Text size="sm" variant="muted">
+                The system provides ({task.system.filter((i) => i.provided).length} of {task.system.length} records present)
+              </Text>
+              <ul className="space-y-2">
+                {task.system.map((item) => (
+                  <li key={item.label} className="flex items-start gap-2 text-sm">
+                    {item.provided ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" /> : <Circle className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />}
+                    <span>
+                      <span className="font-medium">{item.label}.</span> <span className="text-muted-foreground">{item.detail}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {task.planned && <p className="rounded-md border border-dashed p-3 text-sm text-muted-foreground">{task.planned}</p>}
           <div className="space-y-2 rounded-md bg-muted/30 p-3">
             <Text size="sm" variant="muted">
-              What to collect
+              {task.source === 'system' ? 'You provide: nothing required. Attach a file only to add to the records above. For reference, what an assessor looks for' : 'You provide: what to collect'}
             </Text>
             {task.description.map((p, i) => (
               <p key={i} className="whitespace-pre-line text-sm leading-relaxed">

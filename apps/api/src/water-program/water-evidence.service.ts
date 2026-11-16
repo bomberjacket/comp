@@ -1,6 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { db } from '@db';
+import { goalEvidencePlan, goalIdOf, type EvidenceSource, type SystemEvidenceInputs, type SystemEvidenceItem } from './system-evidence';
+import { WaterPlansService } from './water-plans.service';
 import { WATER_FRAMEWORK_ID } from './water-program.constants';
+import { cadenceOf, WaterTabletopService } from './water-tabletop.service';
 
 export interface EvidenceTaskView {
   taskId: string;
@@ -11,11 +14,35 @@ export interface EvidenceTaskView {
   attachments: number;
   /** EPA checklist questions answered under the same CPG goal, with the current answer. */
   questions: Array<{ identifier: string; name: string; answer: string | null }>;
+  /** Who supplies the evidence today: the platform from its own records, or the utility. */
+  source: EvidenceSource;
+  /** For a system goal: each record that counts, and whether the platform holds it. */
+  system: SystemEvidenceItem[];
+  /** Every system record is present. */
+  systemComplete: boolean;
+  /** A way the platform could supply this later; not built yet. */
+  planned?: string;
+}
+
+export interface EvidenceView {
+  summary: {
+    systemGoals: number;
+    systemComplete: number;
+    yourGoals: number;
+    yourDone: number;
+    plannedGoals: number;
+  };
+  tasks: EvidenceTaskView[];
 }
 
 @Injectable()
 export class WaterEvidenceService {
-  /** Evidence tasks of the water framework: one per CPG 2.0 goal, with attachment counts. */
+  constructor(
+    private readonly plans: WaterPlansService,
+    private readonly tabletop: WaterTabletopService,
+  ) {}
+
+  /** Evidence tasks of the water framework: one per CPG 2.0 goal. */
   async evidenceTasks(organizationId: string) {
     const links = await db.frameworkEditorControlTaskTemplateLink.findMany({
       where: { frameworkId: WATER_FRAMEWORK_ID, taskTemplate: { name: { startsWith: 'Evidence:' } } },
@@ -29,7 +56,32 @@ export class WaterEvidenceService {
     return { links, tasks };
   }
 
-  async getEvidence(frameworkInstanceId: string, organizationId: string): Promise<EvidenceTaskView[]> {
+  /** The platform's own records that count as evidence: plans, vendor sheets, tabletops, training. */
+  private async systemInputs(frameworkInstanceId: string, organizationId: string): Promise<SystemEvidenceInputs> {
+    const [plans, vendors, sheets, sessions, members, trained] = await Promise.all([
+      this.plans.getPlans(frameworkInstanceId, organizationId),
+      db.vendor.count({ where: { organizationId } }),
+      db.vendorChecklistAssessment.findMany({ where: { organizationId }, select: { vendorId: true, kind: true } }),
+      this.tabletop.sessions(frameworkInstanceId, organizationId),
+      db.member.count({ where: { organizationId, isActive: true } }),
+      db.employeeTrainingVideoCompletion.findMany({
+        where: { completedAt: { not: null }, member: { organizationId, isActive: true } },
+        select: { memberId: true },
+        distinct: ['memberId'],
+      }),
+    ]);
+    return {
+      plans,
+      vendors,
+      vendorsScored: new Set(sheets.map((s) => s.vendorId)).size,
+      integratorSheets: sheets.filter((s) => s.kind === 'epa_integrator_msp').length,
+      cadence: cadenceOf(sessions),
+      members,
+      membersTrained: trained.length,
+    };
+  }
+
+  async getEvidence(frameworkInstanceId: string, organizationId: string): Promise<EvidenceView> {
     const instance = await db.frameworkInstance.findFirst({
       where: { id: frameworkInstanceId, organizationId, frameworkId: WATER_FRAMEWORK_ID },
       select: { id: true },
@@ -37,7 +89,7 @@ export class WaterEvidenceService {
     if (!instance) throw new NotFoundException('Water framework instance not found');
     const { links, tasks } = await this.evidenceTasks(organizationId);
     const controlByTemplate = new Map(links.map((l) => [l.taskTemplateId, l.controlTemplateId]));
-    const [counts, controls, answers] = await Promise.all([
+    const [counts, controls, answers, inputs] = await Promise.all([
       db.attachment.groupBy({
         by: ['entityId'],
         where: { organizationId, entityType: 'task', entityId: { in: tasks.map((t) => t.id) } },
@@ -54,22 +106,58 @@ export class WaterEvidenceService {
         where: { frameworkInstanceId, organizationId },
         select: { requirementId: true, answer: true },
       }),
+      this.systemInputs(frameworkInstanceId, organizationId),
     ]);
     const countByTask = new Map(counts.map((c) => [c.entityId, c._count._all]));
     const answerByReq = new Map(answers.map((a) => [a.requirementId, a.answer as string]));
     const reqsByControl = new Map(controls.map((c) => [c.id, c.requirements]));
-    return tasks.map((t) => {
+    const views: EvidenceTaskView[] = tasks.map((t) => {
       const reqs = reqsByControl.get(controlByTemplate.get(t.taskTemplateId ?? '') ?? '') ?? [];
+      const title = t.title.replace(/^Evidence: /, '');
+      const plan = goalEvidencePlan(goalIdOf(title), inputs);
       return {
         taskId: t.id,
-        title: t.title.replace(/^Evidence: /, ''),
+        title,
         description: (t.description ?? '').split(/\n{2,}/).map((p) => p.trim()).filter(Boolean),
         status: t.status,
         attachments: countByTask.get(t.id) ?? 0,
         questions: [...reqs]
           .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
           .map((r) => ({ identifier: r.identifier, name: r.name, answer: answerByReq.get(r.id) ?? null })),
+        source: plan.source,
+        system: plan.system,
+        systemComplete: plan.source === 'system' && plan.system.every((i) => i.provided),
+        ...(plan.planned ? { planned: plan.planned } : {}),
       };
     });
+    const mine = views.filter((v) => v.source === 'you');
+    const system = views.filter((v) => v.source === 'system');
+    return {
+      summary: {
+        systemGoals: system.length,
+        systemComplete: system.filter((v) => v.systemComplete).length,
+        yourGoals: mine.length,
+        yourDone: mine.filter((v) => v.status === 'done').length,
+        plannedGoals: mine.filter((v) => v.planned).length,
+      },
+      tasks: views,
+    };
+  }
+
+  /**
+   * Mark a goal's evidence task done when the platform holds every record that counts
+   * for it. Never moves a task backwards, never touches one in review, and leaves a goal
+   * alone while its checklist answer is No or In progress: the answer says it is not met.
+   */
+  async syncSystemEvidence(frameworkInstanceId: string, organizationId: string): Promise<EvidenceView> {
+    const view = await this.getEvidence(frameworkInstanceId, organizationId);
+    let changed = false;
+    for (const t of view.tasks) {
+      if (!t.systemComplete || !['todo', 'in_progress'].includes(t.status)) continue;
+      if (t.questions.some((q) => q.answer === 'no' || q.answer === 'incomplete')) continue;
+      await db.task.update({ where: { id: t.taskId }, data: { status: 'done', lastCompletedAt: new Date() } });
+      changed = true;
+    }
+    return changed ? this.getEvidence(frameworkInstanceId, organizationId) : view;
   }
 }

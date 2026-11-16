@@ -24,15 +24,39 @@ export function checklistGuidance(args: { index: number; total: number; question
   };
 }
 
-export function evidenceGuidance(args: { index: number; total: number; title: string; attachments: number; questions: number }): PageGuidance {
-  const { index, total, title, attachments, questions } = args;
+export function evidenceGuidance(args: {
+  index: number;
+  total: number;
+  title: string;
+  attachments: number;
+  questions: number;
+  /** For a goal the platform supplies: how many of its records are present. */
+  system?: { provided: number; total: number };
+  planned?: boolean;
+}): PageGuidance {
+  const { index, total, title, attachments, questions, system, planned } = args;
+  if (system) {
+    const complete = system.provided === system.total;
+    return {
+      about: `Goal ${index + 1} of ${total}: ${title}. The platform supplies the evidence for this goal from records made in the other steps. ${complete ? 'Every record is present, so there is nothing for you to attach.' : `${system.provided} of ${system.total} records are present.`}`,
+      steps: complete
+        ? ['Read the list under "The system provides" so you know what an assessor will be shown.', 'Attach something only if you want to add to it.', 'Choose Next.']
+        : ['Read the list under "The system provides". A tick is a record the platform holds; an empty circle is one that is missing.', 'Each missing line says which step of the guide supplies it. Go there and fill it in.', 'Come back: the goal is marked done by itself once every record is present.'],
+      narration:
+        `Goal ${index + 1} of ${total}: ${title}. For this goal you do not need to collect anything. The platform already holds the proof, because you created it in the other steps: the two plans, the vendor score sheets, the tabletop sessions and the training records. ` +
+        'Look at the list under The system provides. A green tick means the platform holds that record and shows what it says. An empty circle means the record is missing, and the line tells you which step of the guide supplies it. ' +
+        (complete
+          ? 'Every record is present, so this goal is complete and marked done. You may still attach a file if you want to add to it. Choose Next.'
+          : `Right now ${system.provided} of ${system.total} records are present. Go to the step named on each missing line and fill it in. When every record is present, the platform marks this goal done by itself.`),
+    };
+  }
   const first =
     index === 0
       ? `This step proves the answers you gave on the checklist. A regulator, an insurer or an assessor will not take a Yes on trust; they ask to see something. There are ${total} goals, one per page, and each needs at least one piece of proof. `
       : '';
   const have = attachments === 0 ? 'Nothing is attached to this goal yet. ' : `${attachments} ${attachments === 1 ? 'file is' : 'files are'} already attached to this goal. `;
   return {
-    about: `Goal ${index + 1} of ${total}: ${title}. This step proves the checklist answers. Each goal needs at least one document that shows the practice is really running.`,
+    about: `Goal ${index + 1} of ${total}: ${title}. This one is yours to supply: it needs at least one document that shows the practice is really running.`,
     steps: [
       'Read "What to collect": the kinds of proof that are accepted for this goal.',
       'Find one in the utility: a policy page, a screenshot of a setting, an export, a training record, a test log.',
@@ -44,7 +68,9 @@ export function evidenceGuidance(args: { index: number; total: number; title: st
       'The grey box, What to collect, lists the kinds of proof that are accepted for this goal. ' +
       `${questions > 0 ? `Under it you see the ${questions === 1 ? 'checklist answer' : `${questions} checklist answers`} that this proof backs up. ` : ''}` +
       'Find one real example in the utility. It can be a page of a policy, a screenshot of a setting, an export from a system, a training sign-in sheet or a backup test log. Good proof is dated and clearly comes from the utility\'s own system. ' +
-      'Choose Attach evidence and pick the file. Then set the status to Done. If the practice is not in place yet, leave the status as To do; the fix belongs to step 3 first. Choose Next for the following goal.',
+      'Choose Attach evidence and pick the file. Then set the status to Done. If the practice is not in place yet, leave the status as To do; the fix belongs to step 3 first. ' +
+      (planned ? 'A note on this page says the platform may be able to check this goal automatically in future. Until then, it is yours to supply. ' : '') +
+      'Choose Next for the following goal.',
   };
 }
 

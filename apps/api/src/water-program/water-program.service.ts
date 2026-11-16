@@ -215,7 +215,7 @@ export class WaterProgramService {
     return {
       key: 'evidence',
       title: 'Collect the operational evidence',
-      description: 'One evidence task per CPG 2.0 goal: inventories, configuration exports, logs, training records, backup tests. Attach the artefact that shows the practice is running; a Yes on the checklist moves the task to done, and the evidence keeps it there.',
+      description: 'One evidence task per CPG 2.0 goal. For some goals the platform already holds the proof in the plans, the vendor score sheets, the tabletop sessions and the training records, and supplies it itself. For the rest, attach the artefact that shows the practice is running: inventories, configuration exports, logs, backup tests.',
       status: statusOf(done, tasks.length, tasks.some((t) => t.status !== 'todo')),
       done,
       total: tasks.length,

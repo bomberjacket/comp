@@ -85,6 +85,13 @@ export class WaterProgramController {
     return this.evidence.getEvidence(frameworkInstanceId, organizationId);
   }
 
+  @Post(':frameworkInstanceId/evidence/sync')
+  @RequirePermission('task', 'update')
+  @ApiOperation({ summary: 'Mark goals done whose evidence the platform already holds in its own records' })
+  syncEvidence(@OrganizationId() organizationId: string, @Param('frameworkInstanceId') frameworkInstanceId: string) {
+    return this.evidence.syncSystemEvidence(frameworkInstanceId, organizationId);
+  }
+
   @Get(':frameworkInstanceId/tabletop')
   @RequirePermission('framework', 'read')
   @ApiOperation({ summary: 'Tabletop topics, sessions and the cadence' })

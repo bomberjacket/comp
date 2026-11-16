@@ -18,11 +18,17 @@ import {
   mcp,
   multiSession,
   organization,
+  twoFactor,
 } from 'better-auth/plugins';
 import { ac, allRoles } from '@trycompai/auth';
 import { createAuthMiddleware } from 'better-auth/api';
 import { Redis } from '@upstash/redis';
 import type { AccessControl } from 'better-auth/plugins/access';
+import {
+  assertPasswordSignInAllowed,
+  MAX_PASSWORD_LENGTH,
+  MIN_PASSWORD_LENGTH,
+} from './password-login';
 import {
   resolveMicrosoftEmail,
   type MicrosoftEmailClaims,
@@ -264,8 +270,15 @@ export const auth = betterAuth({
   baseURL: process.env.BASE_URL || 'http://localhost:3333',
   trustedOrigins: getBetterAuthTrustedOrigins(),
   emailAndPassword: {
-    // Not used — apps sign in via magic link, email OTP, and OAuth.
-    enabled: false,
+    // BNI: password sign-in, only together with an authenticator app code (see the
+    // before-hook below). Accounts are still created by invite, email link or OAuth,
+    // never by password sign-up; a first or forgotten password is set from a fresh
+    // email-link session (auth/password-login.controller.ts).
+    enabled: true,
+    disableSignUp: true,
+    minPasswordLength: MIN_PASSWORD_LENGTH,
+    maxPasswordLength: MAX_PASSWORD_LENGTH,
+    revokeSessionsOnPasswordReset: true,
   },
   emailVerification: {
     sendOnSignUp: true,
@@ -366,6 +379,12 @@ export const auth = betterAuth({
     },
   },
   hooks: {
+    // A password is never the only factor: refuse password sign-in for an account
+    // without a confirmed authenticator app.
+    before: createAuthMiddleware(async (ctx) => {
+      if (ctx.path !== '/sign-in/email') return;
+      await assertPasswordSignInAllowed((ctx.body as { email?: unknown } | undefined)?.email);
+    }),
     after: createAuthMiddleware(async (ctx) => {
       if (!ctx.path.startsWith('/admin/')) return;
 
@@ -517,6 +536,9 @@ export const auth = betterAuth({
       },
     }),
     multiSession(),
+    // Authenticator app (TOTP) as the second factor of password sign-in. It is asked
+    // for on every password sign-in; email-link and OAuth sign-ins are unchanged.
+    twoFactor({ issuer: process.env.AUTH_TOTP_ISSUER || 'Comp AI' }),
     bearer(),
     admin({
       defaultRole: 'user',

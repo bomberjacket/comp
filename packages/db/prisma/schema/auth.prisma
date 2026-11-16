@@ -14,8 +14,11 @@ model User {
   banReason                      String?
   banExpires                     DateTime?
   isPlatformAdmin                Boolean   @default(false)
+  // Authenticator app (TOTP) confirmed; password sign-in is refused without it.
+  twoFactorEnabled               Boolean?  @default(false)
 
   accounts                        Account[]
+  twoFactors                      TwoFactor[]
   auditLog                        AuditLog[]
   integrationResults              IntegrationResult[]
   invitations                     Invitation[]
@@ -89,6 +92,22 @@ model Account {
   password              String?
   createdAt             DateTime
   updatedAt             DateTime
+}
+
+// Authenticator app enrolment of a user (better-auth twoFactor plugin). The secret and
+// the backup codes are stored encrypted by the plugin.
+model TwoFactor {
+  id                      String    @id @default(dbgenerated("generate_prefixed_cuid('tfa'::text)"))
+  secret                  String
+  backupCodes             String
+  userId                  String
+  user                    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  verified                Boolean?  @default(true)
+  failedVerificationCount Int?      @default(0)
+  lockedUntil             DateTime?
+
+  @@index([secret])
+  @@index([userId])
 }
 
 model Verification {

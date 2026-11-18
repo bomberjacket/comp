@@ -84,7 +84,10 @@ export function WaterRosterEditor({ orgId, frameworkInstanceId, canEdit, onChang
     <div className="space-y-5 rounded-lg border p-4">
       <VoiceDirection guidance={rosterGuidance(roster.progress.filled, roster.progress.total)} />
       <div className="flex flex-wrap items-center gap-2">
-        <h3 className="text-base font-semibold">Who&apos;s who</h3>
+        <Button size="sm">1. Who&apos;s who and vendors</Button>
+        <Button size="sm" variant="outline" onClick={() => void persist(true)} disabled={saving}>
+          2 and 3. The two plans
+        </Button>
         <Badge variant="outline">
           {roster.progress.filled} of {roster.progress.total} filled in
         </Badge>

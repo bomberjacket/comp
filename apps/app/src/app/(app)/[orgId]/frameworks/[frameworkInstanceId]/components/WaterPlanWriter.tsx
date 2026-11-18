@@ -146,10 +146,10 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
       <div className="flex flex-wrap items-center gap-2">
         {roster && (
           <Button size="sm" variant="outline" onClick={() => void leave(false).then((ok) => ok && roster.onOpen())} disabled={saving}>
-            Who&apos;s who ({roster.filled}/{roster.total})
+            1. Who&apos;s who and vendors ({roster.filled}/{roster.total})
           </Button>
         )}
-        {plans.map((p) => (
+        {plans.map((p, n) => (
           <Button
             key={p.key}
             size="sm"
@@ -157,6 +157,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
             onClick={() => void switchPlan(p.key)}
             disabled={saving}
           >
+            {roster ? `${n + 2}. ` : ''}
             {p.name.split(' (')[0]} ({p.written}/{p.total})
           </Button>
         ))}

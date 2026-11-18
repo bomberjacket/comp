@@ -48,7 +48,7 @@ export function rosterGuidance(filled: number, total: number): PageGuidance {
       'The page has four parts. The first part is People and their roles. For each role, type the name, the title, a mobile phone, and an email address that would still work if the utility\'s own email were down. At a small utility one person often holds several roles. In that case, open the list beside the role and choose Same person as, then pick the other role. The incident commander starts out as the same person as the cybersecurity lead; change that if it is someone else. ' +
       'The second part is Outside contacts: the state agency that regulates the utility, the F B I field office, the cyber insurance carrier, and Water I S A C. If the utility has no insurer or is not a member, tick the box that says the utility has none. Below that is the vendor list. Add every company that has network or remote access or that supports the control system, with a few words on what it does and what it can reach. This is the same list as the Vendors page, so a vendor added here appears there too. ' +
       'The last part holds facts that both plans use, such as where the manual operation procedures are kept. ' +
-      'When you are done, choose Save and continue to the plans. You can come back at any time with the Who\'s who button at the top of the plans, and a change you make here reaches both plans.',
+      'When you are done, choose Save and continue to the plans. You can come back at any time: the first button at the top of the plans, numbered one, opens this page again, and a change you make here reaches both plans.',
   };
 }
 

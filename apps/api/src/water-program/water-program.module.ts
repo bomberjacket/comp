@@ -7,11 +7,12 @@ import { WaterPlansService } from './water-plans.service';
 import { WaterProgramController } from './water-program.controller';
 import { WaterProgramService } from './water-program.service';
 import { WaterReportService } from './water-report.service';
+import { WaterRosterService } from './water-roster.service';
 import { WaterTabletopService } from './water-tabletop.service';
 
 @Module({
   imports: [AuthModule, RequirementAnswersModule, PoliciesModule],
   controllers: [WaterProgramController],
-  providers: [WaterProgramService, WaterPlansService, WaterEvidenceService, WaterTabletopService, WaterReportService],
+  providers: [WaterProgramService, WaterPlansService, WaterEvidenceService, WaterTabletopService, WaterReportService, WaterRosterService],
 })
 export class WaterProgramModule {}

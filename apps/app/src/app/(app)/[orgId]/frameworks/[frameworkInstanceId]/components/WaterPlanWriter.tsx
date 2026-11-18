@@ -15,6 +15,8 @@ interface Props {
   frameworkInstanceId: string;
   canEdit: boolean;
   onChanged?: () => void;
+  /** The Who's who list: how complete it is, and how to open it. */
+  roster?: { filled: number; total: number; onOpen: () => void };
 }
 
 function GuidanceLine({ line }: { line: string }) {
@@ -44,7 +46,7 @@ const valuesOf = (section: WaterPlanSection | undefined) =>
  * stay consistent. Moving between sections saves by itself; the last section leads to
  * publishing, and then to the other plan.
  */
-export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged }: Props) {
+export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged, roster }: Props) {
   const { plans, error, isLoading, saveSection, publish } = useWaterPlans(frameworkInstanceId);
   const [planKey, setPlanKey] = useState<WaterPlan['key']>('crmp');
   const [index, setIndex] = useState(0);
@@ -70,7 +72,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   // An untouched starting list is not an edit: it does not block moving on, but Save stores it.
   const dirty = section.fields.some((f) => !f.auto && typed(f) !== f.value.trim() && typed(f) !== (f.suggestion ?? '').trim()) || notes.trim() !== section.notes.trim();
   const canSave = dirty || section.fields.some((f) => !!f.suggestion && typed(f) === f.suggestion.trim());
-  const filledNow = section.fields.filter((f) => !f.optional && (f.auto || (values[f.label] ?? '').trim())).length;
+  const filledNow = section.fields.filter((f) => !f.optional && (f.auto ? !f.auto.startsWith('roster_') || f.value.trim() : (values[f.label] ?? '').trim())).length;
   const planName = plan.name.split(' (')[0] ?? plan.name;
   const percent = plan.totalFields > 0 ? Math.round((plan.filledFields / plan.totalFields) * 100) : 0;
   const incomplete = plan.sections.filter((s) => !s.done);
@@ -142,6 +144,11 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
     <div className="space-y-4 rounded-lg border p-4">
       <VoiceDirection guidance={guidance} />
       <div className="flex flex-wrap items-center gap-2">
+        {roster && (
+          <Button size="sm" variant="outline" onClick={() => void leave(false).then((ok) => ok && roster.onOpen())} disabled={saving}>
+            Who&apos;s who ({roster.filled}/{roster.total})
+          </Button>
+        )}
         {plans.map((p) => (
           <Button
             key={p.key}
@@ -204,8 +211,12 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
                 <span className="text-sm font-medium">{f.label}</span>
                 {f.auto ? (
                   <div className="rounded-md border border-dashed bg-muted/30 px-3 py-2 text-sm">
-                    {f.value}
-                    <div className="mt-1 text-xs text-muted-foreground">Filled in by the platform from its own records. Nothing to type.</div>
+                    {f.value || 'Not filled in yet.'}
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      {f.auto.startsWith('roster_')
+                        ? "From the Who's who list, so it is the same in both plans. To change it, open Who's who at the top."
+                        : 'Filled in by the platform from its own records. Nothing to type.'}
+                    </div>
                   </div>
                 ) : f.long ? (
                   <Textarea

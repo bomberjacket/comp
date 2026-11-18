@@ -4,12 +4,14 @@ import { OrganizationId } from '../auth/auth-context.decorator';
 import { HybridAuthGuard } from '../auth/hybrid-auth.guard';
 import { PermissionGuard } from '../auth/permission.guard';
 import { RequirePermission } from '../auth/require-permission.decorator';
+import { SaveRosterDto } from './dto/save-roster.dto';
 import { SaveTabletopDto } from './dto/save-tabletop.dto';
 import { WriteSectionDto } from './dto/write-section.dto';
 import { WaterEvidenceService } from './water-evidence.service';
 import { WaterPlansService } from './water-plans.service';
 import { WaterProgramService } from './water-program.service';
 import { WaterReportService } from './water-report.service';
+import { WaterRosterService } from './water-roster.service';
 import { WaterTabletopService } from './water-tabletop.service';
 
 /** Progress of the water and wastewater program steps for one framework instance. */
@@ -24,6 +26,7 @@ export class WaterProgramController {
     private readonly evidence: WaterEvidenceService,
     private readonly tabletop: WaterTabletopService,
     private readonly report: WaterReportService,
+    private readonly roster: WaterRosterService,
   ) {}
 
   @Get(':frameworkInstanceId')
@@ -31,6 +34,24 @@ export class WaterProgramController {
   @ApiOperation({ summary: 'The six program steps with live progress and links' })
   getProgram(@OrganizationId() organizationId: string, @Param('frameworkInstanceId') frameworkInstanceId: string) {
     return this.service.getProgram(frameworkInstanceId, organizationId);
+  }
+
+  @Get(':frameworkInstanceId/roster')
+  @RequirePermission('policy', 'read')
+  @ApiOperation({ summary: "Who's who: the people, outside contacts and shared facts both plans read from" })
+  getRoster(@OrganizationId() organizationId: string, @Param('frameworkInstanceId') frameworkInstanceId: string) {
+    return this.roster.get(frameworkInstanceId, organizationId);
+  }
+
+  @Put(':frameworkInstanceId/roster')
+  @RequirePermission('policy', 'update')
+  @ApiOperation({ summary: "Save the Who's who list" })
+  saveRoster(
+    @OrganizationId() organizationId: string,
+    @Param('frameworkInstanceId') frameworkInstanceId: string,
+    @Body() dto: SaveRosterDto,
+  ) {
+    return this.roster.save(frameworkInstanceId, organizationId, dto);
   }
 
   @Get(':frameworkInstanceId/plans')

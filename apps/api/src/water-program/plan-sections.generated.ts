@@ -6,7 +6,30 @@
 
 export type WaterPlanKey = 'crmp' | 'cirp';
 
-export type PlanAutoKey = 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
+/** Boxes the platform fills in; the roster_ keys read from the utility's Who's who list. */
+export type PlanAutoKey =
+  | 'epa_assessment'
+  | 'risk_register'
+  | 'last_exercise'
+  | 'next_exercise'
+  | 'roster_cyber_lead'
+  | 'roster_cyber_alternate'
+  | 'roster_ot_lead'
+  | 'roster_operations_lead'
+  | 'roster_it_lead'
+  | 'roster_finance'
+  | 'roster_incident_commander_ir'
+  | 'roster_alternate_commander_ir'
+  | 'roster_ot_lead_ir'
+  | 'roster_it_lead_ir'
+  | 'roster_operations_lead_ir'
+  | 'roster_communications_lead_ir'
+  | 'roster_executive_ir'
+  | 'roster_primacy_name'
+  | 'roster_primacy_contact'
+  | 'roster_insurer'
+  | 'roster_partners'
+  | 'roster_manual_procedures';
 
 export type PlanPrefillKey = 'vendors' | 'vendor_scorers';
 
@@ -48,7 +71,7 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
           },
           {
             "label": "Regulatory primacy agency",
-            "hint": "The state agency that regulates the utility"
+            "auto": "roster_primacy_name"
           },
           {
             "label": "Systems and facilities in scope, by site",
@@ -77,27 +100,27 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
         "fields": [
           {
             "label": "Cybersecurity lead",
-            "hint": "Name, title, phone"
+            "auto": "roster_cyber_lead"
           },
           {
             "label": "Alternate for the cybersecurity lead",
-            "hint": "Name, title, phone"
+            "auto": "roster_cyber_alternate"
           },
           {
             "label": "OT cybersecurity lead",
-            "hint": "Name, title, phone; may be the same person at a small utility"
+            "auto": "roster_ot_lead"
           },
           {
             "label": "Operations lead",
-            "hint": "Name, title, phone"
+            "auto": "roster_operations_lead"
           },
           {
             "label": "IT lead or provider",
-            "hint": "Name or company, phone"
+            "auto": "roster_it_lead"
           },
           {
             "label": "Finance and procurement contact",
-            "hint": "Name, title"
+            "auto": "roster_finance"
           },
           {
             "label": "Integrators and managed service providers with access",
@@ -230,11 +253,11 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
           },
           {
             "label": "State primacy agency reporting contact",
-            "hint": "Office and phone"
+            "auto": "roster_primacy_contact"
           },
           {
             "label": "Cyber insurance carrier",
-            "hint": "Carrier, policy number, breach line; or \"None\""
+            "auto": "roster_insurer"
           },
           {
             "label": "Date of the last exercise",
@@ -264,7 +287,7 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
           },
           {
             "label": "Manual operation",
-            "hint": "How long the utility can run without SCADA and where the procedures are kept",
+            "hint": "How long the utility can run without SCADA, and which processes can be run by hand",
             "long": true
           },
           {
@@ -315,40 +338,41 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
         "fields": [
           {
             "label": "Incident commander",
-            "hint": "Name, mobile, personal email"
+            "auto": "roster_incident_commander_ir"
           },
           {
             "label": "Alternate commander",
-            "hint": "Name, mobile, personal email"
+            "auto": "roster_alternate_commander_ir"
           },
           {
             "label": "OT lead",
-            "hint": "Name, mobile"
+            "auto": "roster_ot_lead_ir"
           },
           {
             "label": "IT lead or provider",
-            "hint": "Name or company, mobile"
+            "auto": "roster_it_lead_ir"
           },
           {
             "label": "Operations lead",
-            "hint": "Name, mobile"
+            "auto": "roster_operations_lead_ir"
           },
           {
             "label": "Communications lead",
-            "hint": "Name, mobile"
+            "auto": "roster_communications_lead_ir"
           },
           {
             "label": "Executive who approves spending and public statements",
-            "hint": "Name, title, mobile"
+            "auto": "roster_executive_ir"
           },
           {
             "label": "Integrator, service provider and SCADA vendor support contacts",
             "hint": "Company, contact, 24-hour number",
-            "long": true
+            "long": true,
+            "prefill": "vendors"
           },
           {
             "label": "External partners and numbers",
-            "hint": "State agency, FBI field office, insurer breach line, WaterISAC",
+            "auto": "roster_partners",
             "long": true
           },
           {
@@ -425,7 +449,8 @@ export const PLAN_SECTIONS: Record<WaterPlanKey, { name: string; sections: PlanS
             "long": true
           },
           {
-            "label": "Where the manual operation procedures are kept"
+            "label": "Where the manual operation procedures are kept",
+            "auto": "roster_manual_procedures"
           },
           {
             "label": "Who makes each external notification",

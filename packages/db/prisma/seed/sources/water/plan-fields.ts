@@ -3,6 +3,37 @@
  * plan writer. BNI's own list; the standard wording of a section (guidance) says what
  * the utility commits to, these fields say who, where and when at this utility.
  */
+/**
+ * Boxes the platform fills in. The `roster_` keys read from the utility's Who's who list
+ * (one list of people and outside contacts for both plans, so nothing is asked twice):
+ * `roster_<role>` is name, title, phone; `roster_<role>_ir` is name, mobile, email.
+ */
+export const PLAN_AUTO_KEYS = [
+  'epa_assessment',
+  'risk_register',
+  'last_exercise',
+  'next_exercise',
+  'roster_cyber_lead',
+  'roster_cyber_alternate',
+  'roster_ot_lead',
+  'roster_operations_lead',
+  'roster_it_lead',
+  'roster_finance',
+  'roster_incident_commander_ir',
+  'roster_alternate_commander_ir',
+  'roster_ot_lead_ir',
+  'roster_it_lead_ir',
+  'roster_operations_lead_ir',
+  'roster_communications_lead_ir',
+  'roster_executive_ir',
+  'roster_primacy_name',
+  'roster_primacy_contact',
+  'roster_insurer',
+  'roster_partners',
+  'roster_manual_procedures',
+] as const;
+export type PlanAutoKey = (typeof PLAN_AUTO_KEYS)[number];
+
 export interface PlanField {
   label: string;
   /** Example or short instruction shown inside the empty box. */
@@ -10,7 +41,7 @@ export interface PlanField {
   /** Multi-line box. */
   long?: boolean;
   /** The platform fills this box in from its own records; the utility does not type it. */
-  auto?: 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
+  auto?: PlanAutoKey;
   /** Not counted in the plan's completeness. */
   optional?: boolean;
   /** The box starts with a list from the platform's records; the utility edits and saves it. */
@@ -18,25 +49,27 @@ export interface PlanField {
 }
 
 const f = (label: string, hint?: string, long?: boolean): PlanField => ({ label, ...(hint ? { hint } : {}), ...(long ? { long } : {}) });
+/** A box that reads from the Who's who list. */
+const who = (label: string, auto: PlanAutoKey, long?: boolean): PlanField => ({ label, auto, ...(long ? { long } : {}) });
 
 export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
   crmp: {
     '1. Introduction': [
       f('Utility name', 'Legal name of the utility or district'),
       f('Population served and service area', 'For example: 4,200 connections in the City of Example'),
-      f('Regulatory primacy agency', 'The state agency that regulates the utility'),
+      who('Regulatory primacy agency', 'roster_primacy_name'),
       f('Systems and facilities in scope, by site', 'Treatment plants, wells, pump and lift stations, storage, administrative offices', true),
       f('Plan approved by', 'Name and title of the official'),
       f('Approval date', 'For example: 9 November 2026'),
       f('Where the current version is kept and who may change it', 'For example: this platform; the cybersecurity lead'),
     ],
     '2. Cybersecurity Team': [
-      f('Cybersecurity lead', 'Name, title, phone'),
-      f('Alternate for the cybersecurity lead', 'Name, title, phone'),
-      f('OT cybersecurity lead', 'Name, title, phone; may be the same person at a small utility'),
-      f('Operations lead', 'Name, title, phone'),
-      f('IT lead or provider', 'Name or company, phone'),
-      f('Finance and procurement contact', 'Name, title'),
+      who('Cybersecurity lead', 'roster_cyber_lead'),
+      who('Alternate for the cybersecurity lead', 'roster_cyber_alternate'),
+      who('OT cybersecurity lead', 'roster_ot_lead'),
+      who('Operations lead', 'roster_operations_lead'),
+      who('IT lead or provider', 'roster_it_lead'),
+      who('Finance and procurement contact', 'roster_finance'),
       { label: 'Integrators and managed service providers with access', hint: 'Company, what they manage, contact', long: true, prefill: 'vendors' },
       f('IT and OT coordination meeting', 'How often, who attends, where the notes are kept'),
     ],
@@ -69,8 +102,8 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
     '6. Incident Response Plan': [
       f('Who may activate the Cyber Incident Response Plan', 'Names or roles'),
       f('Where the plan is kept, including the printed copy'),
-      f('State primacy agency reporting contact', 'Office and phone'),
-      f('Cyber insurance carrier', 'Carrier, policy number, breach line; or "None"'),
+      who('State primacy agency reporting contact', 'roster_primacy_contact'),
+      who('Cyber insurance carrier', 'roster_insurer'),
       { label: 'Date of the last exercise', auto: 'last_exercise' },
     ],
     '7. Business Continuity and Disaster Recovery': [
@@ -78,7 +111,7 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
       f('Where backups are kept, including the offline copy'),
       f('Backup schedule and who checks it'),
       f('Date and result of the last restore test'),
-      f('Manual operation', 'How long the utility can run without SCADA and where the procedures are kept', true),
+      f('Manual operation', 'How long the utility can run without SCADA, and which processes can be run by hand', true),
       f('Recovery order and target times', 'Which systems come back first and how fast', true),
       f('Outside dependencies and contacts', 'Power, carriers, chemical supplier, laboratory, integrator', true),
     ],
@@ -91,15 +124,15 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
   },
   cirp: {
     'Incident Response Team': [
-      f('Incident commander', 'Name, mobile, personal email'),
-      f('Alternate commander', 'Name, mobile, personal email'),
-      f('OT lead', 'Name, mobile'),
-      f('IT lead or provider', 'Name or company, mobile'),
-      f('Operations lead', 'Name, mobile'),
-      f('Communications lead', 'Name, mobile'),
-      f('Executive who approves spending and public statements', 'Name, title, mobile'),
-      f('Integrator, service provider and SCADA vendor support contacts', 'Company, contact, 24-hour number', true),
-      f('External partners and numbers', 'State agency, FBI field office, insurer breach line, WaterISAC', true),
+      who('Incident commander', 'roster_incident_commander_ir'),
+      who('Alternate commander', 'roster_alternate_commander_ir'),
+      who('OT lead', 'roster_ot_lead_ir'),
+      who('IT lead or provider', 'roster_it_lead_ir'),
+      who('Operations lead', 'roster_operations_lead_ir'),
+      who('Communications lead', 'roster_communications_lead_ir'),
+      who('Executive who approves spending and public statements', 'roster_executive_ir'),
+      { label: 'Integrator, service provider and SCADA vendor support contacts', hint: 'Company, contact, 24-hour number', long: true, prefill: 'vendors' },
+      who('External partners and numbers', 'roster_partners', true),
       f('Out-of-band channel for the team', 'For example: group text on personal phones'),
       f('Where the printed roster is kept', 'For example: control room binder and with the on-call supervisor'),
     ],
@@ -118,7 +151,7 @@ export const PLAN_FIELDS: Record<string, Record<string, PlanField[]>> = {
     ],
     'Cyber-Incident Action Checklist': [
       f('Who can isolate the OT network, and how', 'The person, the device and the physical step', true),
-      f('Where the manual operation procedures are kept'),
+      who('Where the manual operation procedures are kept', 'roster_manual_procedures'),
       f('Who makes each external notification', 'Regulator, CISA, law enforcement, insurer, customers', true),
       f('Where the incident log is kept', 'For example: paper log in the control room'),
       f('Changes to the standard checklist', 'Or "None, adopted as written"', true),

@@ -1,0 +1,26 @@
+// "Who's who" of a utility for the water and wastewater program: the people who hold
+// each cybersecurity and incident role, the outside contacts, and a few shared facts.
+// Gathered once at the start of step 1; the boxes of both plans that ask for the same
+// person or contact read from here, so nothing is typed twice. Its own list, not tied
+// to the People page: most utility staff and every outside contact never sign in.
+
+model UtilityRoster {
+  id String @id @default(dbgenerated("generate_prefixed_cuid('uro'::text)"))
+
+  organizationId      String
+  organization        Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  frameworkInstanceId String            @unique
+  frameworkInstance   FrameworkInstance @relation(fields: [frameworkInstanceId], references: [id], onDelete: Cascade)
+
+  /// Per role key: { name, title, phone, email, sameAs }.
+  staff    Json @default("{}")
+  /// Per contact key: { name, detail, phone, none }.
+  contacts Json @default("{}")
+  /// Per fact key: text.
+  facts    Json @default("{}")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([organizationId])
+}

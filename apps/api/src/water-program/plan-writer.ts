@@ -33,7 +33,8 @@ export interface PlanSectionView {
   fields: PlanFieldView[];
   /** Free text beyond the fields (also where text written before fields existed lands). */
   notes: string;
-  /** Required boxes with a value (boxes the platform fills in always count), and how many are required. */
+  /** Required boxes with a value, and how many are required. A box the platform fills from its own records
+   *  always counts; one that reads from the Who's who list counts once that entry is filled in. */
   filled: number;
   total: number;
   /** Every required box has a value. */
@@ -151,7 +152,7 @@ export function readPlanSections(
       return { ...f, value, ...(suggestion ? { suggestion } : {}) };
     });
     const required = fields.filter((f) => !f.optional);
-    const filled = required.filter((f) => f.auto || f.value.trim()).length;
+    const filled = required.filter((f) => (f.auto && !f.auto.startsWith('roster_')) || f.value.trim()).length;
     return {
       index,
       title: r.title,

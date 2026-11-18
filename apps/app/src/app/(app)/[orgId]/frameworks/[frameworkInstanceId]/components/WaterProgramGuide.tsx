@@ -3,7 +3,7 @@
 import { usePermissions } from '@/hooks/use-permissions';
 import { useWaterProgram, type StepStatus, type WaterProgramStep } from '@/hooks/use-water-program';
 import type { FrameworkEditorRequirement } from '@db';
-import { WaterPlanWriter } from './WaterPlanWriter';
+import { WaterPlansStep } from './water/WaterPlansStep';
 import { WaterChecklistPager } from './water/WaterChecklistPager';
 import { WaterEvidenceCollector } from './water/WaterEvidenceCollector';
 import { WaterTabletopRecorder } from './water/WaterTabletopRecorder';
@@ -129,7 +129,7 @@ export function WaterProgramGuide({
   const wizards: Partial<Record<WaterProgramStep['key'], { label: string; node: React.ReactNode }>> = {
     plans: {
       label: 'Onboarding & Publishing',
-      node: <WaterPlanWriter orgId={orgId} frameworkInstanceId={frameworkInstanceId} canEdit={canEditPolicies} onChanged={changed} />,
+      node: <WaterPlansStep orgId={orgId} frameworkInstanceId={frameworkInstanceId} canEdit={canEditPolicies} onChanged={changed} />,
     },
     assess: {
       label: 'Answer question by question',

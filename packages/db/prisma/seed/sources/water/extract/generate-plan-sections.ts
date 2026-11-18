@@ -8,7 +8,7 @@
  */
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { PLAN_FIELDS } from '../plan-fields';
+import { PLAN_AUTO_KEYS, PLAN_FIELDS } from '../plan-fields';
 import { PLANS } from '../plans';
 
 const OUTPUT = join(__dirname, '../../../../../../../apps/api/src/water-program/plan-sections.generated.ts');
@@ -37,7 +37,9 @@ writeFileSync(
 
 export type WaterPlanKey = 'crmp' | 'cirp';
 
-export type PlanAutoKey = 'epa_assessment' | 'risk_register' | 'last_exercise' | 'next_exercise';
+/** Boxes the platform fills in; the roster_ keys read from the utility's Who's who list. */
+export type PlanAutoKey =
+${PLAN_AUTO_KEYS.map((k) => `  | '${k}'`).join('\n')};
 
 export type PlanPrefillKey = 'vendors' | 'vendor_scorers';
 

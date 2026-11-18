@@ -131,8 +131,11 @@ export class WaterPlansService {
     if (stray) throw new BadRequestException(`"${stray.label}" is not a field of section ${index}`);
     const [company, auto] = await Promise.all([this.companyName(organizationId), planAutoValues(frameworkInstanceId, organizationId)]);
     const typed = Object.fromEntries(fields.filter((f) => manual.has(f.label)).map((f) => [f.label, f.value]));
-    const hasOwn = notes.trim().length > 0 || Object.values(typed).some((v) => v.trim());
-    const values = hasOwn ? { ...typed, ...this.autoByLabel(section, auto) } : {};
+    const fromPlatform = this.autoByLabel(section, auto);
+    // What the utility gave for this section: typed boxes, notes, or its Who's who entries.
+    const fromRoster = section.fields.some((f) => f.auto?.startsWith('roster_') && (fromPlatform[f.label] ?? '').trim());
+    const hasOwn = fromRoster || notes.trim().length > 0 || Object.values(typed).some((v) => v.trim());
+    const values = hasOwn ? { ...typed, ...fromPlatform } : {};
     let content: TipTapNode[];
     try {
       // Writing a section also settles the {{COMPANY}} placeholder in the stored document.

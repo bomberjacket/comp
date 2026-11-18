@@ -1,6 +1,8 @@
 import { db } from '@db';
 import type { PlanAutoKey, PlanPrefillKey } from './plan-sections.generated';
+import { rosterAutoValues } from './roster';
 import { WATER_FRAMEWORK_ID } from './water-program.constants';
+import { loadRoster } from './water-roster.service';
 import { cadenceOf } from './water-tabletop.service';
 
 const longDate = (d: Date): string => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -15,7 +17,7 @@ export async function planAutoValues(
   frameworkInstanceId: string,
   organizationId: string,
 ): Promise<Record<PlanAutoKey | PlanPrefillKey, string>> {
-  const [answered, expected, last, risks, sessions, vendors, sheets] = await Promise.all([
+  const [answered, expected, last, risks, sessions, vendors, sheets, { roster }] = await Promise.all([
     db.requirementAnswer.count({ where: { frameworkInstanceId, organizationId } }),
     db.frameworkEditorRequirement.count({ where: { frameworkId: WATER_FRAMEWORK_ID } }),
     db.requirementAnswer.findFirst({
@@ -33,6 +35,7 @@ export async function planAutoValues(
       where: { organizationId, assessedById: { not: null } },
       select: { assessedBy: { select: { user: { select: { name: true } } } } },
     }),
+    loadRoster(frameworkInstanceId, organizationId),
   ]);
   const scorers = [...new Set(sheets.map((s) => s.assessedBy?.user?.name?.trim()).filter((n): n is string => !!n))].sort();
   const cadence = cadenceOf(sessions);
@@ -41,6 +44,8 @@ export async function planAutoValues(
     .sort((a, b) => (b.heldOn as Date).getTime() - (a.heldOn as Date).getTime())[0];
   const who = last?.answeredBy?.user?.name;
   return {
+    // Boxes that read from the utility's Who's who list; empty until that entry is filled in.
+    ...(rosterAutoValues(roster) as Record<Extract<PlanAutoKey, `roster_${string}`>, string>),
     // Starting list for the vendor boxes: one vendor of the Vendors page per line; the utility adds what each can reach.
     vendors: vendors.map((v) => (v.category === 'other' ? v.name : `${v.name} (${v.category.replace(/_/g, ' ')})`)).join('\n'),
     // People who have saved a procurement score sheet in the platform so far.

@@ -6,6 +6,7 @@ import { CheckCircle2, Circle } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { tabletopGuidance } from './guidance-steps';
+import { RosterFill } from './RosterFill';
 import { Field, toDraft, today, type Draft } from './tabletop-draft';
 import { VoiceDirection } from './VoiceDirection';
 
@@ -190,6 +191,7 @@ export function WaterTabletopRecorder({ frameworkInstanceId, canEdit, onChanged 
               <Field label="Participants: names and roles">
                 <Textarea value={draft.participants} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => set({ participants: text(e) })} rows={3} disabled={locked} />
               </Field>
+              <RosterFill frameworkInstanceId={frameworkInstanceId} disabled={locked} onFill={(facilitator, participants) => set({ facilitator, participants })} />
             </div>
           )}
           {topic && (

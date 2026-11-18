@@ -32,6 +32,25 @@ const SECTION_PURPOSE: Record<'crmp' | 'cirp', string[]> = {
   ],
 };
 
+/** The Who's who page that opens step 1. */
+export function rosterGuidance(filled: number, total: number): PageGuidance {
+  return {
+    about: `Who's who is one list of the utility's people and outside contacts. Both plans read from it, so each name is typed once. ${filled} of ${total} entries are filled in.`,
+    steps: [
+      'For each role, type the person\'s name, title, mobile phone and an email that still works in an outage.',
+      'If one person holds two roles, choose "Same person as" instead of typing them again.',
+      'Fill in the outside contacts, or tick "The utility has none".',
+      'Choose "Save and continue to the plans".',
+    ],
+    narration:
+      `This page is called Who's who. It is a single list of the people and outside contacts the utility relies on for cybersecurity. Both plans, the Cybersecurity Risk Management Plan and the Cyber Incident Response Plan, ask who holds each role. Instead of asking you twice, the platform asks once here and fills in both plans from this list. So far ${filled} of ${total} entries are filled in. ` +
+      'The page has three parts. The first part is People and their roles. For each role, type the name, the title, a mobile phone, and an email address that would still work if the utility\'s own email were down. At a small utility one person often holds several roles. In that case, open the list beside the role and choose Same person as, then pick the other role. The incident commander starts out as the same person as the cybersecurity lead; change that if it is someone else. ' +
+      'The second part is Outside contacts: the state agency that regulates the utility, the F B I field office, the cyber insurance carrier, and Water I S A C. If the utility has no insurer or is not a member, tick the box that says the utility has none. Vendors are not typed here; they come from the Vendors page. ' +
+      'The third part holds facts that both plans use, such as where the manual operation procedures are kept. ' +
+      'When you are done, choose Save and continue to the plans. You can come back at any time with the Who\'s who button at the top of the plans, and a change you make here reaches both plans.',
+  };
+}
+
 export function planGuidance(args: {
   planKey: 'crmp' | 'cirp';
   planName: string;

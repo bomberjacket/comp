@@ -17,7 +17,7 @@ export async function planAutoValues(
   frameworkInstanceId: string,
   organizationId: string,
 ): Promise<Record<PlanAutoKey | PlanPrefillKey, string>> {
-  const [answered, expected, last, risks, sessions, vendors, sheets, { roster }] = await Promise.all([
+  const [answered, expected, last, risks, sessions, allVendors, sheets, { roster, accessVendors }] = await Promise.all([
     db.requirementAnswer.count({ where: { frameworkInstanceId, organizationId } }),
     db.frameworkEditorRequirement.count({ where: { frameworkId: WATER_FRAMEWORK_ID } }),
     db.requirementAnswer.findFirst({
@@ -30,13 +30,15 @@ export async function planAutoValues(
       where: { frameworkInstanceId, organizationId },
       select: { title: true, status: true, heldOn: true, cadenceMonths: true },
     }),
-    db.vendor.findMany({ where: { organizationId }, select: { name: true, category: true }, orderBy: { name: 'asc' } }),
+    db.vendor.findMany({ where: { organizationId }, select: { id: true, name: true, category: true }, orderBy: { name: 'asc' } }),
     db.vendorChecklistAssessment.findMany({
       where: { organizationId, assessedById: { not: null } },
       select: { assessedBy: { select: { user: { select: { name: true } } } } },
     }),
     loadRoster(frameworkInstanceId, organizationId),
   ]);
+  // Once the utility has marked the vendors with network or remote access, only those start the vendor boxes.
+  const vendors = accessVendors ? allVendors.filter((v) => accessVendors.includes(v.id)) : allVendors;
   const scorers = [...new Set(sheets.map((s) => s.assessedBy?.user?.name?.trim()).filter((n): n is string => !!n))].sort();
   const cadence = cadenceOf(sessions);
   const held = sessions
@@ -46,7 +48,7 @@ export async function planAutoValues(
   return {
     // Boxes that read from the utility's Who's who list; empty until that entry is filled in.
     ...(rosterAutoValues(roster) as Record<Extract<PlanAutoKey, `roster_${string}`>, string>),
-    // Starting list for the vendor boxes: one vendor of the Vendors page per line; the utility adds what each can reach.
+    // Starting list for the vendor boxes: one marked vendor per line; the utility adds what each can reach.
     vendors: vendors.map((v) => (v.category === 'other' ? v.name : `${v.name} (${v.category.replace(/_/g, ' ')})`)).join('\n'),
     // People who have saved a procurement score sheet in the platform so far.
     vendor_scorers: scorers.join(', '),

@@ -34,6 +34,8 @@ export interface WaterRoster extends RosterInput {
   };
   /** False until the list has been saved once. */
   saved: boolean;
+  /** Ids of the vendors marked as having network or remote access; null until any is marked (then all count). */
+  accessVendors: string[] | null;
   progress: { filled: number; total: number };
   /** Distinct people with the roles each holds. */
   people: Array<{ name: string; roles: string[] }>;
@@ -63,5 +65,17 @@ export function useWaterRoster(frameworkInstanceId: string, enabled = true) {
     [frameworkInstanceId, mutate, mutateAny],
   );
 
-  return { roster: data, error, isLoading, save };
+  const saveAccessVendors = useCallback(
+    async (vendorIds: string[]) => {
+      const res = await apiClient.put<WaterRoster>(`/v1/water-program/${frameworkInstanceId}/roster/vendors`, { vendorIds });
+      if (res.error || !res.data) throw new Error(res.error ?? 'Could not save the vendor marks');
+      const { accessVendors, saved } = res.data;
+      // Only the marks changed; keep whatever is being typed in the rest of the list.
+      await mutate((prev) => (prev ? { ...prev, accessVendors, saved } : res.data), { revalidate: false });
+      await mutateAny(`/v1/water-program/${frameworkInstanceId}/plans`);
+    },
+    [frameworkInstanceId, mutate, mutateAny],
+  );
+
+  return { roster: data, error, isLoading, save, saveAccessVendors };
 }

@@ -18,6 +18,9 @@ model UtilityRoster {
   contacts Json @default("{}")
   /// Per fact key: text.
   facts    Json @default("{}")
+  /// Ids of the vendors (Vendors page) with network or remote access to the utility's
+  /// systems; only these feed the plans. Null until chosen: every vendor counts.
+  accessVendors Json?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt

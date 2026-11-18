@@ -53,14 +53,23 @@ async function seedFromPlans(organizationId: string): Promise<Roster> {
   return normalizeRoster({ staff, contacts, facts });
 }
 
-/** The stored roster, or before the first save the starting point taken from the plans. */
-export async function loadRoster(frameworkInstanceId: string, organizationId: string): Promise<{ roster: Roster; saved: boolean }> {
+const idList = (v: unknown): string[] | null => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : null);
+
+/**
+ * The stored roster, or before the first save the starting point taken from the plans.
+ * `accessVendors` is the ids of the vendors marked as having network or remote access;
+ * null until the utility has marked any, and then every vendor counts.
+ */
+export async function loadRoster(
+  frameworkInstanceId: string,
+  organizationId: string,
+): Promise<{ roster: Roster; saved: boolean; accessVendors: string[] | null }> {
   const row = await db.utilityRoster.findFirst({
     where: { frameworkInstanceId, organizationId },
-    select: { staff: true, contacts: true, facts: true },
+    select: { staff: true, contacts: true, facts: true, accessVendors: true },
   });
-  if (row) return { roster: normalizeRoster(row), saved: true };
-  return { roster: await seedFromPlans(organizationId), saved: false };
+  if (row) return { roster: normalizeRoster(row), saved: true, accessVendors: idList(row.accessVendors) };
+  return { roster: await seedFromPlans(organizationId), saved: false, accessVendors: null };
 }
 
 @Injectable()
@@ -73,8 +82,10 @@ export class WaterRosterService {
     if (!instance) throw new NotFoundException('Water framework instance not found');
   }
 
-  private view(roster: Roster, saved: boolean) {
+  private view(roster: Roster, saved: boolean, accessVendors: string[] | null) {
     return {
+      /** Vendors marked as having network or remote access; null until any is marked. */
+      accessVendors,
       definition: { roles: ROSTER_ROLES, contacts: ROSTER_CONTACTS, facts: ROSTER_FACTS },
       ...roster,
       /** False until the utility has saved the list once. */
@@ -86,8 +97,8 @@ export class WaterRosterService {
 
   async get(frameworkInstanceId: string, organizationId: string) {
     await this.assertInstance(frameworkInstanceId, organizationId);
-    const { roster, saved } = await loadRoster(frameworkInstanceId, organizationId);
-    return this.view(roster, saved);
+    const { roster, saved, accessVendors } = await loadRoster(frameworkInstanceId, organizationId);
+    return this.view(roster, saved, accessVendors);
   }
 
   async save(frameworkInstanceId: string, organizationId: string, input: { staff?: unknown; contacts?: unknown; facts?: unknown }) {
@@ -98,11 +109,37 @@ export class WaterRosterService {
       contacts: roster.contacts as unknown as Prisma.InputJsonValue,
       facts: roster.facts as unknown as Prisma.InputJsonValue,
     };
-    await db.utilityRoster.upsert({
+    const row = await db.utilityRoster.upsert({
       where: { frameworkInstanceId },
       create: { organizationId, frameworkInstanceId, ...data },
       update: data,
+      select: { accessVendors: true },
     });
-    return this.view(roster, true);
+    return this.view(roster, true, idList(row.accessVendors));
+  }
+
+  /**
+   * Mark which vendors of the Vendors page have network or remote access. Only these feed
+   * the plans. Saved on its own, so ticking a vendor does not wait for the rest of the list;
+   * when nothing was saved yet, the people carried over from the plans are stored with it.
+   */
+  async saveAccessVendors(frameworkInstanceId: string, organizationId: string, vendorIds: string[]) {
+    await this.assertInstance(frameworkInstanceId, organizationId);
+    const known = await db.vendor.findMany({ where: { organizationId, id: { in: vendorIds } }, select: { id: true } });
+    const ids = known.map((v) => v.id);
+    const current = await loadRoster(frameworkInstanceId, organizationId);
+    await db.utilityRoster.upsert({
+      where: { frameworkInstanceId },
+      create: {
+        organizationId,
+        frameworkInstanceId,
+        staff: current.roster.staff as unknown as Prisma.InputJsonValue,
+        contacts: current.roster.contacts as unknown as Prisma.InputJsonValue,
+        facts: current.roster.facts as unknown as Prisma.InputJsonValue,
+        accessVendors: ids,
+      },
+      update: { accessVendors: ids },
+    });
+    return this.view(current.roster, true, ids);
   }
 }

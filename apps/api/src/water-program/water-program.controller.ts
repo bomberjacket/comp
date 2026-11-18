@@ -4,7 +4,7 @@ import { OrganizationId } from '../auth/auth-context.decorator';
 import { HybridAuthGuard } from '../auth/hybrid-auth.guard';
 import { PermissionGuard } from '../auth/permission.guard';
 import { RequirePermission } from '../auth/require-permission.decorator';
-import { SaveRosterDto } from './dto/save-roster.dto';
+import { SaveAccessVendorsDto, SaveRosterDto } from './dto/save-roster.dto';
 import { SaveTabletopDto } from './dto/save-tabletop.dto';
 import { WriteSectionDto } from './dto/write-section.dto';
 import { WaterEvidenceService } from './water-evidence.service';
@@ -52,6 +52,17 @@ export class WaterProgramController {
     @Body() dto: SaveRosterDto,
   ) {
     return this.roster.save(frameworkInstanceId, organizationId, dto);
+  }
+
+  @Put(':frameworkInstanceId/roster/vendors')
+  @RequirePermission('policy', 'update')
+  @ApiOperation({ summary: 'Mark which vendors have network or remote access; only these feed the plans' })
+  saveAccessVendors(
+    @OrganizationId() organizationId: string,
+    @Param('frameworkInstanceId') frameworkInstanceId: string,
+    @Body() dto: SaveAccessVendorsDto,
+  ) {
+    return this.roster.saveAccessVendors(frameworkInstanceId, organizationId, dto.vendorIds);
   }
 
   @Get(':frameworkInstanceId/plans')

@@ -20,11 +20,14 @@ interface Props {
  */
 export function RosterVendors({ orgId, frameworkInstanceId, canEdit }: Props) {
   const { data, isLoading, mutate } = useVendors();
-  const { createVendor } = useVendorActions();
+  const { createVendor, deleteVendor } = useVendorActions();
   const { mutate: mutateAny } = useSWRConfig();
   const [name, setName] = useState('');
   const [what, setWhat] = useState('');
   const [adding, setAdding] = useState(false);
+  /** Vendor waiting for the second click that confirms its removal. */
+  const [confirmId, setConfirmId] = useState<string | null>(null);
+  const [removingId, setRemovingId] = useState<string | null>(null);
   const vendors = data?.data?.data ?? [];
 
   const add = async () => {
@@ -44,6 +47,21 @@ export function RosterVendors({ orgId, frameworkInstanceId, canEdit }: Props) {
     }
   };
 
+  const remove = async (id: string, vendorName: string) => {
+    setRemovingId(id);
+    try {
+      await deleteVendor(id);
+      await mutate();
+      await mutateAny(`/v1/water-program/${frameworkInstanceId}/plans`);
+      toast.success(`${vendorName} removed from the vendor list`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Could not remove the vendor');
+    } finally {
+      setRemovingId(null);
+      setConfirmId(null);
+    }
+  };
+
   return (
     <section className="space-y-3">
       <Text size="sm" weight="medium">
@@ -51,7 +69,8 @@ export function RosterVendors({ orgId, frameworkInstanceId, canEdit }: Props) {
       </Text>
       <Text size="sm" variant="muted">
         List every company with network or remote access, or that supports the control system: the SCADA integrator, the IT provider,
-        equipment vendors with remote support. The plans&apos; vendor boxes and the vendor scoring step start from this list.
+        equipment vendors with remote support. The plans&apos; vendor boxes and the vendor scoring step start from this list. If a
+        company on the list is not one this utility uses, choose &quot;Not used&quot; to remove it.
       </Text>
       {isLoading ? (
         <Text size="sm" variant="muted">
@@ -69,6 +88,22 @@ export function RosterVendors({ orgId, frameworkInstanceId, canEdit }: Props) {
                 {v.name}
               </Link>
               <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">{v.description}</span>
+              {canEdit &&
+                (confirmId === v.id ? (
+                  <span className="flex items-center gap-2">
+                    <span className="text-xs text-muted-foreground">Removes it everywhere, with its score sheets.</span>
+                    <Button size="sm" variant="destructive" onClick={() => void remove(v.id, v.name)} loading={removingId === v.id} disabled={removingId !== null}>
+                      Remove
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => setConfirmId(null)} disabled={removingId !== null}>
+                      Keep
+                    </Button>
+                  </span>
+                ) : (
+                  <Button size="sm" variant="ghost" onClick={() => setConfirmId(v.id)} disabled={removingId !== null}>
+                    Not used
+                  </Button>
+                ))}
             </li>
           ))}
         </ul>

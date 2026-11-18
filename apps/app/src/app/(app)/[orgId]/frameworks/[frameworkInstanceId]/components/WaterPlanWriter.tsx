@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { planGuidance } from './water/guidance-plans';
+import { PlanWriterFooter, PublishConfirm } from './water/PlanWriterFooter';
 import { VoiceDirection } from './water/VoiceDirection';
 
 interface Props {
@@ -40,7 +41,8 @@ const valuesOf = (section: WaterPlanSection | undefined) =>
  * wording that is already in the plan, then one fill-in box per fact only the utility
  * knows. The boxes are saved into the plan under "Utility record" as labelled lines,
  * through the API, so the policy editor, the working draft and the version history
- * stay consistent. Publish when every box of every section is filled.
+ * stay consistent. Moving between sections saves by itself; the last section leads to
+ * publishing, and then to the other plan.
  */
 export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged }: Props) {
   const { plans, error, isLoading, saveSection, publish } = useWaterPlans(frameworkInstanceId);
@@ -84,7 +86,9 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
     publishPercent: confirmPublish ? percent : undefined,
   });
 
-  const save = async (thenNext: boolean) => {
+  const otherPlan = plans.find((p) => p.key !== plan.key && p.status !== 'published');
+
+  const persist = async (): Promise<boolean> => {
     setSaving(true);
     try {
       await saveSection(plan.policyId, index, {
@@ -93,12 +97,27 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
       });
       onChanged?.();
       toast.success(`${section.title} saved`);
-      if (thenNext && index < plan.sections.length - 1) setIndex(index + 1);
+      return true;
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Could not save');
+      return false;
     } finally {
       setSaving(false);
     }
+  };
+
+  /** Leaving a section saves what was typed; going forward also keeps an untouched starting list. */
+  const leave = async (forward: boolean): Promise<boolean> => !canEdit || !(forward ? canSave : dirty) || persist();
+  const go = async (target: number, forward = false) => {
+    if (await leave(forward)) setIndex(target);
+  };
+  const switchPlan = async (key: WaterPlan['key']) => {
+    if (!(await leave(false))) return;
+    setPlanKey(key);
+    setIndex(0);
+  };
+  const askPublish = async () => {
+    if (await leave(true)) setConfirmPublish(true);
   };
 
   const doPublish = async () => {
@@ -108,6 +127,10 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
       await publish(plan.policyId);
       onChanged?.();
       toast.success(percent < 100 ? `${planName} published with ${percent}% of the requested information` : `${planName} published`);
+      if (otherPlan) {
+        setPlanKey(otherPlan.key);
+        setIndex(0);
+      }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Could not publish');
     } finally {
@@ -124,11 +147,8 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
             key={p.key}
             size="sm"
             variant={p.key === plan.key ? 'default' : 'outline'}
-            onClick={() => {
-              setPlanKey(p.key);
-              setIndex(0);
-            }}
-            disabled={dirty}
+            onClick={() => void switchPlan(p.key)}
+            disabled={saving}
           >
             {p.name.split(' (')[0]} ({p.written}/{p.total})
           </Button>
@@ -148,8 +168,8 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
             <li key={s.index}>
               <button
                 type="button"
-                onClick={() => setIndex(s.index)}
-                disabled={dirty && s.index !== index}
+                onClick={() => void go(s.index)}
+                disabled={saving}
                 className={`flex w-full items-center gap-2 rounded px-2 py-1 text-left text-sm hover:bg-muted/50 ${s.index === index ? 'bg-muted font-medium' : ''}`}
               >
                 <SectionIcon section={s} />
@@ -224,65 +244,34 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
             </label>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex gap-2">
-              <Button size="sm" variant="outline" onClick={() => setIndex(index - 1)} disabled={index === 0 || dirty}>
-                Previous
-              </Button>
-              <Button size="sm" variant="outline" onClick={() => setIndex(index + 1)} disabled={index >= plan.sections.length - 1 || dirty}>
-                Next
-              </Button>
-            </div>
-            {canEdit && (
-              <div className="flex gap-2">
-                <Button size="sm" variant="outline" onClick={() => void save(false)} disabled={!canSave || saving} loading={saving}>
-                  Save
-                </Button>
-                <Button size="sm" onClick={() => void save(true)} disabled={!canSave || saving}>
-                  Save and next
-                </Button>
-                <Button
-                  size="sm"
-                  variant="default"
-                  onClick={() => (percent < 100 ? setConfirmPublish(true) : void doPublish())}
-                  disabled={saving || dirty || plan.status === 'published' || confirmPublish}
-                  title={dirty ? 'Save this section first' : 'Publish this plan'}
-                >
-                  Publish plan
-                </Button>
-              </div>
-            )}
-          </div>
+          <PlanWriterFooter
+            canEdit={canEdit}
+            saving={saving}
+            isFirst={index === 0}
+            isLast={index >= plan.sections.length - 1}
+            published={plan.status === 'published'}
+            hasChanges={canEdit && canSave}
+            nextPlanName={otherPlan?.name.split(' (')[0]}
+            onPrevious={() => void go(index - 1)}
+            onContinue={() => void go(index + 1, true)}
+            onSave={() => void persist()}
+            onPublish={() => void askPublish()}
+            onNextPlan={() => otherPlan && void switchPlan(otherPlan.key)}
+          />
 
           {confirmPublish && (
-            <div role="alert" className="space-y-3 rounded-md border border-amber-500/60 bg-amber-500/10 p-3">
-              <p className="text-sm font-medium">
-                This plan has {percent}% of the requested information: {plan.filledFields} of {plan.totalFields} boxes are filled in.
-              </p>
-              <p className="text-sm">You can publish it as it is, or go back and fill in the rest. Sections with empty boxes:</p>
-              <ul className="space-y-0.5 text-sm">
-                {incomplete.map((s) => (
-                  <li key={s.index} className="ml-4 list-disc">
-                    {s.title}: {s.total - s.filled} of {s.total} empty
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => {
-                    setConfirmPublish(false);
-                    if (incomplete[0]) setIndex(incomplete[0].index);
-                  }}
-                >
-                  Go back and fill in
-                </Button>
-                <Button size="sm" onClick={() => void doPublish()} disabled={saving}>
-                  Publish anyway
-                </Button>
-              </div>
-            </div>
+            <PublishConfirm
+              percent={percent}
+              filled={plan.filledFields}
+              total={plan.totalFields}
+              incomplete={incomplete}
+              saving={saving}
+              onBack={() => {
+                setConfirmPublish(false);
+                if (incomplete[0]) setIndex(incomplete[0].index);
+              }}
+              onPublish={() => void doPublish()}
+            />
           )}
         </div>
       </div>

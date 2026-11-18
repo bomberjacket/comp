@@ -62,10 +62,10 @@ export function planGuidance(args: {
       about: `Every box in every section of the ${planName} is filled in. The plan is ready to become official.`,
       steps: [
         'Choose "Open in the policy editor" and read the whole plan once.',
-        'Come back and choose "Publish plan".',
+        'Come back, go to the last section and choose "Publish plan".',
         'Then pick the other plan at the top, if it is not written yet.',
       ],
-      narration: `Every box in every section of the ${planName} is filled in, so the plan is ready to become official. Before you publish, open it in the policy editor and read it from top to bottom once, the way an auditor would. Then come back here and choose Publish plan. Publishing records this version as the approved one. After that, pick the other plan at the top of this box if it is not written yet.`,
+      narration: `Every box in every section of the ${planName} is filled in, so the plan is ready to become official. Before you publish, open it in the policy editor and read it from top to bottom once, the way an auditor would. Then come back here, go to the last section and choose Publish plan. Publishing records this version as the approved one. After that, pick the other plan at the top of this box if it is not written yet.`,
     };
   }
   const purpose = SECTION_PURPOSE[planKey][index] ?? '';
@@ -79,13 +79,18 @@ export function planGuidance(args: {
       'Read the grey box. That standard wording is already in the plan; you do not retype it.',
       `Under "Your part", fill in the ${fieldCount} boxes. Each asks for one fact about the utility; the grey text in a box is an example.`,
       'If you do not know one yet, write who will find out and by when.',
-      'Choose "Save and next". Your answers go into the plan under the heading "Utility record".',
+      index >= total - 1
+        ? 'This is the last section. Choose "Save and publish plan"; you are shown how complete the plan is before you confirm.'
+        : 'Choose "Save and continue". Your answers go into the plan under the heading "Utility record".',
     ],
     narration:
       `${intro}You are on section ${index + 1} of ${total}, ${title}. ${purpose} ` +
       'The page has three parts. First, the grey box. That is standard wording that BomberJacket wrote for this section. It is already in the plan and it stays there, so you do not retype it. Read it so you know what the section says. ' +
       `Second, under Your part, there are ${fieldCount} boxes to fill in. Each box asks for one fact that only the utility knows, such as a name, a date or a place. The grey text inside an empty box is an example of the kind of answer expected. ` +
       'Type short, plain answers. If you do not know an answer yet, write who will find out and by when. The last box, Additional notes, is optional and is for anything the other boxes do not cover. ' +
-      `When you are done, choose Save and next. Your answers are added to the plan under the heading Utility record, each with its label. The circle beside the section turns green when every box is filled. You can publish the plan at any time; if boxes are still empty, you are told how complete the plan is before you confirm.`,
+      (index >= total - 1
+        ? 'This is the last section. When you are done, choose Save and publish plan. Your answers are saved, and you are shown how complete the plan is before you confirm. If boxes are still empty you can publish anyway, or go back and fill them in. '
+        : 'When you are done, choose Save and continue. Your answers are saved and the next section opens. Moving to another section always saves what you typed, so there is no separate save step. ') +
+      'Your answers are added to the plan under the heading Utility record, each with its label. The circle beside the section turns green when every box is filled.',
   };
 }

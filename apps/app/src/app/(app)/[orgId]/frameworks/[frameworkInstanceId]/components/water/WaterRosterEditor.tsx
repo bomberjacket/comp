@@ -2,10 +2,10 @@
 
 import { useWaterRoster, type RosterContact, type RosterInput, type RosterPerson } from '@/hooks/use-water-roster';
 import { Badge, Button, Input, Text, Textarea } from '@trycompai/design-system';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { rosterGuidance } from './guidance-plans';
+import { RosterVendors } from './RosterVendors';
 import { VoiceDirection } from './VoiceDirection';
 
 interface Props {
@@ -47,17 +47,19 @@ export function WaterRosterEditor({ orgId, frameworkInstanceId, canEdit, onChang
   const setContact = (key: string, patch: Partial<RosterContact>) =>
     setDraft({ ...draft, contacts: { ...draft.contacts, [key]: { ...(draft.contacts[key] as RosterContact), ...patch } } });
   const labelOf = (key: string) => roles.find((r) => r.key === key)?.label ?? key;
-  /** Name of the person behind a "same person as" choice, following a short chain. */
-  const nameBehind = (key: string): string => {
+  /** The role a "same person as" choice finally lands on; undefined when the choices go round in a circle. */
+  const endOf = (key: string): string | undefined => {
     let current = key;
-    for (let i = 0; i < roles.length; i += 1) {
-      const p = draft.staff[current];
-      if (!p) return '';
-      if (!p.sameAs) return p.name;
-      current = p.sameAs;
+    for (let i = 0; i <= roles.length; i += 1) {
+      const next = draft.staff[current]?.sameAs;
+      if (!next) return current;
+      current = next;
     }
-    return '';
+    return undefined;
   };
+  const nameBehind = (key: string): string => draft.staff[endOf(key) ?? '']?.name ?? '';
+  /** Choosing `other` for `key` must not send the choices round in a circle. */
+  const canFollow = (key: string, other: string): boolean => other !== key && endOf(other) !== key && endOf(other) !== undefined;
 
   const persist = async (thenContinue: boolean) => {
     // Nothing typed and already saved once: just move on.
@@ -106,7 +108,7 @@ export function WaterRosterEditor({ orgId, frameworkInstanceId, canEdit, onChang
                 <select className={SELECT} value={p.sameAs} onChange={(e) => setPerson(role.key, { sameAs: e.target.value })} disabled={locked} aria-label={`${role.label}: who`}>
                   <option value="">A person named here</option>
                   {roles
-                    .filter((r) => r.key !== role.key)
+                    .filter((r) => r.key === p.sameAs || canFollow(role.key, r.key))
                     .map((r) => (
                       <option key={r.key} value={r.key}>
                         Same person as: {r.label}
@@ -159,14 +161,9 @@ export function WaterRosterEditor({ orgId, frameworkInstanceId, canEdit, onChang
             </div>
           );
         })}
-        <Text size="sm" variant="muted">
-          Vendors, integrators and service providers are not typed here. They come from the{' '}
-          <Link href={`/${orgId}/vendors`} className="text-primary underline underline-offset-2">
-            Vendors page
-          </Link>
-          .
-        </Text>
       </section>
+
+      <RosterVendors orgId={orgId} frameworkInstanceId={frameworkInstanceId} canEdit={canEdit} />
 
       <section className="space-y-3">
         <Text size="sm" weight="medium">

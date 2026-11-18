@@ -105,8 +105,14 @@ export function normalizeRoster(raw: { staff?: unknown; contacts?: unknown; fact
   };
 }
 
-/** The person who holds a role, following "same person as" (at most a few steps, never in a circle). */
+/**
+ * The person who holds a role, following "same person as". Two roles that point at each
+ * other form a circle with nobody at the end; the role then falls back to the name typed
+ * for it, or failing that to the first name typed anywhere in the circle, so a slip in
+ * the choices never blanks a box.
+ */
 export function personOf(roster: Roster, key: string): RosterPerson | undefined {
+  const chain: RosterPerson[] = [];
   const seen = new Set<string>();
   let current = key;
   while (!seen.has(current)) {
@@ -114,9 +120,10 @@ export function personOf(roster: Roster, key: string): RosterPerson | undefined 
     const p = roster.staff[current];
     if (!p) return undefined;
     if (!p.sameAs) return p;
+    chain.push(p);
     current = p.sameAs;
   }
-  return undefined;
+  return chain.find((p) => p.name);
 }
 
 const join = (...parts: string[]): string => parts.map((p) => p.trim()).filter(Boolean).join(', ');

@@ -96,6 +96,8 @@ export class PeopleController {
       callerRole: authContext.userRoles?.join(',') ?? '',
       isApiKey: authContext.isApiKey,
       apiKeyScopes: authContext.apiKeyScopes,
+      callerIsPlatformAdmin:
+        authContext.authType === 'session' && authContext.isPlatformAdmin === true,
     });
 
     return {

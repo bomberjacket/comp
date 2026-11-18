@@ -106,6 +106,11 @@ jest.mock('../email/templates/invite-member', () => ({
   InviteEmail: (...args: unknown[]) => mockInviteEmail(...args),
 }));
 
+const mockSendSetupLink = jest.fn().mockResolvedValue({ email: '', userId: '', created: false });
+jest.mock('../auth/setup-link', () => ({
+  sendSetupLink: (...args: unknown[]) => mockSendSetupLink(...args),
+}));
+
 const mockInvitePortalEmail = jest
   .fn()
   .mockReturnValue('mocked-portal-element');
@@ -630,35 +635,21 @@ describe('PeopleInviteService', () => {
       expect(results[1].success).toBe(true);
     });
 
-    it('should handle email send failure gracefully', async () => {
-      (mockDb.organization.findUnique as jest.Mock).mockResolvedValue({
-        name: 'Test Org',
-      });
+    it('reports a setup link that could not be sent, and still adds the member', async () => {
+      (mockDb.organization.findUnique as jest.Mock).mockResolvedValue({ name: 'Test Org' });
       (mockDb.user.findFirst as jest.Mock).mockResolvedValue(null);
-      (mockDb.user.create as jest.Mock).mockResolvedValue({
-        id: 'user_new',
-        email: 'emp@example.com',
-      });
+      (mockDb.user.create as jest.Mock).mockResolvedValue({ id: 'user_new', email: 'emp@example.com' });
       (mockDb.member.findFirst as jest.Mock).mockResolvedValue(null);
-      (mockDb.member.create as jest.Mock).mockResolvedValue({
-        id: 'member_new',
-      });
-      (
-        mockDb.employeeTrainingVideoCompletion.createMany as jest.Mock
-      ).mockResolvedValue({
-        count: 5,
-      });
-      mockTriggerEmail.mockRejectedValueOnce(new Error('Email service down'));
+      (mockDb.member.create as jest.Mock).mockResolvedValue({ id: 'member_new' });
+      (mockDb.employeeTrainingVideoCompletion.createMany as jest.Mock).mockResolvedValue({ count: 5 });
+      mockSendSetupLink.mockRejectedValueOnce(new Error('Email service down'));
 
       const results = await service.inviteMembers({
         ...baseParams,
-        invites: [
-          { email: 'emp@example.com', roles: ['employee'], sendPortalEmail: true },
-        ],
+        callerIsPlatformAdmin: true,
+        invites: [{ email: 'emp@example.com', roles: ['employee'], sendPortalEmail: true }],
       });
 
-      // A portal email was requested but the send failed — the member is still
-      // added and emailSent: false signals the UI to offer a resend.
       expect(results[0].success).toBe(true);
       expect(results[0].emailSent).toBe(false);
     });
@@ -689,168 +680,104 @@ describe('PeopleInviteService', () => {
       );
     });
 
-    describe('email flow by role combination', () => {
+    // BNI: being added to an organization never lets a person sign in. Only a platform
+    // admin's invite sends anything, and what it sends is the one-time setup link.
+    describe('sign-in is granted only by a platform admin', () => {
       function setupNewUserInvite() {
         (mockDb.user.findFirst as jest.Mock).mockResolvedValue(null);
-        (mockDb.organization.findUnique as jest.Mock).mockResolvedValue({
-          name: 'Test Org',
-        });
-        (mockDb.invitation.create as jest.Mock).mockResolvedValue({
-          id: 'inv_new',
-        });
+        (mockDb.organization.findUnique as jest.Mock).mockResolvedValue({ name: 'Test Org' });
+        (mockDb.invitation.create as jest.Mock).mockResolvedValue({ id: 'inv_new' });
       }
 
-      it('admin + employee with portal checked: sends single app email with portal link', async () => {
+      function setupNewEmployee() {
+        (mockDb.organization.findUnique as jest.Mock).mockResolvedValue({ name: 'Test Org' });
+        (mockDb.user.findFirst as jest.Mock).mockResolvedValue(null);
+        (mockDb.user.create as jest.Mock).mockResolvedValue({ id: 'usr_emp', email: 'emp@example.com' });
+        (mockDb.member.findFirst as jest.Mock).mockResolvedValue(null);
+        (mockDb.member.create as jest.Mock).mockResolvedValue({ id: 'mem_emp' });
+        (mockDb.employeeTrainingVideoCompletion.createMany as jest.Mock).mockResolvedValue({ count: 5 });
+      }
+
+      beforeEach(() => {
+        mockSendSetupLink.mockClear();
+      });
+
+      it('an organization member inviting an admin records the invitation and sends nothing', async () => {
         setupNewUserInvite();
 
         const results = await service.inviteMembers({
           ...baseParams,
-          invites: [
-            {
-              email: 'both@example.com',
-              roles: ['admin', 'employee'],
-              sendPortalEmail: true,
-            },
-          ],
+          invites: [{ email: 'admin@example.com', roles: ['admin'], sendPortalEmail: true }],
         });
 
         expect(results[0].success).toBe(true);
-        expect(mockTriggerEmail).toHaveBeenCalledTimes(1);
-        expect(mockInviteEmail).toHaveBeenCalledWith(
-          expect.objectContaining({
-            organizationName: 'Test Org',
-            portalLink: expect.stringContaining('org_123'),
-          }),
-        );
-        expect(mockInvitePortalEmail).not.toHaveBeenCalled();
-      });
-
-      it('employee only with portal checked: sends portal-only email', async () => {
-        (mockDb.organization.findUnique as jest.Mock).mockResolvedValue({
-          name: 'Test Org',
-        });
-        (mockDb.user.findFirst as jest.Mock).mockResolvedValue(null);
-        (mockDb.user.create as jest.Mock).mockResolvedValue({
-          id: 'usr_emp',
-          email: 'emp@example.com',
-        });
-        (mockDb.member.findFirst as jest.Mock).mockResolvedValue(null);
-        (mockDb.member.create as jest.Mock).mockResolvedValue({
-          id: 'mem_emp',
-        });
-        (
-          mockDb.employeeTrainingVideoCompletion.createMany as jest.Mock
-        ).mockResolvedValue({ count: 5 });
-
-        const results = await service.inviteMembers({
-          ...baseParams,
-          invites: [
-            {
-              email: 'emp@example.com',
-              roles: ['employee'],
-              sendPortalEmail: true,
-            },
-          ],
-        });
-
-        expect(results[0].success).toBe(true);
-        expect(mockTriggerEmail).toHaveBeenCalledTimes(1);
-        expect(mockInvitePortalEmail).toHaveBeenCalledWith(
-          expect.objectContaining({
-            organizationName: 'Test Org',
-            email: 'emp@example.com',
-          }),
-        );
+        expect(mockDb.invitation.create).toHaveBeenCalled();
+        expect(mockSendSetupLink).not.toHaveBeenCalled();
+        expect(mockTriggerEmail).not.toHaveBeenCalled();
         expect(mockInviteEmail).not.toHaveBeenCalled();
       });
 
-      // Regression: unchecking "Send portal invite email" when adding an
-      // employee via "+ Add User" must add the member WITHOUT emailing them.
-      // Previously the else-branch still sent an InviteEmail with a portal link.
-      it('employee only with portal UNchecked: adds member silently, sends no email', async () => {
-        (mockDb.organization.findUnique as jest.Mock).mockResolvedValue({
-          name: 'Test Org',
-        });
-        (mockDb.user.findFirst as jest.Mock).mockResolvedValue(null);
-        (mockDb.user.create as jest.Mock).mockResolvedValue({
-          id: 'usr_emp',
-          email: 'emp@example.com',
-        });
-        (mockDb.member.findFirst as jest.Mock).mockResolvedValue(null);
-        (mockDb.member.create as jest.Mock).mockResolvedValue({ id: 'mem_emp' });
-        (
-          mockDb.employeeTrainingVideoCompletion.createMany as jest.Mock
-        ).mockResolvedValue({ count: 5 });
+      it('an organization member adding an employee adds them silently', async () => {
+        setupNewEmployee();
 
         const results = await service.inviteMembers({
           ...baseParams,
-          invites: [
-            {
-              email: 'emp@example.com',
-              roles: ['employee'],
-              sendPortalEmail: false,
-            },
-          ],
+          invites: [{ email: 'emp@example.com', roles: ['employee'], sendPortalEmail: true }],
         });
 
-        // Member is still created...
         expect(results[0].success).toBe(true);
         expect(mockDb.member.create).toHaveBeenCalled();
-        // ...but NO email of any kind goes out when the portal invite is off.
+        expect(mockSendSetupLink).not.toHaveBeenCalled();
         expect(mockTriggerEmail).not.toHaveBeenCalled();
-        expect(mockInvitePortalEmail).not.toHaveBeenCalled();
-        expect(mockInviteEmail).not.toHaveBeenCalled();
-        // And no false "could not be sent" warning leaks to the UI.
         expect(results[0].emailSent).toBeUndefined();
       });
 
-      it('admin only (no portal): sends app email without portal link', async () => {
+      it('a platform admin inviting an admin sends the setup link, continuing to the invitation', async () => {
         setupNewUserInvite();
 
         const results = await service.inviteMembers({
           ...baseParams,
-          invites: [
-            {
-              email: 'admin@example.com',
-              roles: ['admin'],
-              sendPortalEmail: false,
-            },
-          ],
+          callerIsPlatformAdmin: true,
+          invites: [{ email: 'admin@example.com', roles: ['admin'] }],
         });
 
         expect(results[0].success).toBe(true);
-        expect(mockTriggerEmail).toHaveBeenCalledTimes(1);
-        expect(mockInviteEmail).toHaveBeenCalledWith(
-          expect.objectContaining({ organizationName: 'Test Org' }),
-        );
-        expect(mockInviteEmail).toHaveBeenCalledWith(
-          expect.not.objectContaining({
-            portalLink: expect.anything(),
-          }),
-        );
+        expect(mockSendSetupLink).toHaveBeenCalledTimes(1);
+        expect(mockSendSetupLink).toHaveBeenCalledWith({
+          email: 'admin@example.com',
+          createUser: true,
+          next: '/invite/inv_new',
+        });
+        expect(mockTriggerEmail).not.toHaveBeenCalled();
+      });
+
+      it('a platform admin adding an employee with the email box ticked sends the setup link', async () => {
+        setupNewEmployee();
+
+        const results = await service.inviteMembers({
+          ...baseParams,
+          callerIsPlatformAdmin: true,
+          invites: [{ email: 'emp@example.com', roles: ['employee'], sendPortalEmail: true }],
+        });
+
+        expect(results[0].success).toBe(true);
+        expect(results[0].emailSent).toBe(true);
+        expect(mockSendSetupLink).toHaveBeenCalledWith({ email: 'emp@example.com' });
         expect(mockInvitePortalEmail).not.toHaveBeenCalled();
       });
 
-      it('admin with portal checked but no compliance obligation: sends app email without portal', async () => {
-        setupNewUserInvite();
+      it('a platform admin adding an employee with the email box unticked sends nothing', async () => {
+        setupNewEmployee();
 
         const results = await service.inviteMembers({
           ...baseParams,
-          invites: [
-            {
-              email: 'admin2@example.com',
-              roles: ['admin'],
-              sendPortalEmail: true,
-            },
-          ],
+          callerIsPlatformAdmin: true,
+          invites: [{ email: 'emp@example.com', roles: ['employee'], sendPortalEmail: false }],
         });
 
         expect(results[0].success).toBe(true);
-        expect(mockTriggerEmail).toHaveBeenCalledTimes(1);
-        expect(mockInviteEmail).toHaveBeenCalledWith(
-          expect.objectContaining({ organizationName: 'Test Org' }),
-        );
-        expect(mockInvitePortalEmail).not.toHaveBeenCalled();
+        expect(mockSendSetupLink).not.toHaveBeenCalled();
+        expect(results[0].emailSent).toBeUndefined();
       });
     });
   });

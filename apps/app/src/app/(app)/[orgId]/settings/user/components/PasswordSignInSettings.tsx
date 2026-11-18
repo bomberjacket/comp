@@ -38,11 +38,12 @@ const secretOf = (uri: string): string => {
 
 /**
  * Password sign-in for the signed-in user, in three steps: set a password, scan the QR
- * code with any authenticator app, confirm with a code. Password sign-in works only
- * once the authenticator is confirmed; email-link sign-in keeps working throughout and
- * is how a forgotten password is replaced.
+ * code with any authenticator app, confirm with a code. Sign-in works only once the
+ * authenticator is confirmed. The same panel is the setup page a BNI administrator's
+ * one-time link lands on (`onReady` then continues into the app); a forgotten password
+ * or lost phone is fixed by asking the administrator for a new link.
  */
-export function PasswordSignInSettings() {
+export function PasswordSignInSettings({ onReady }: { onReady?: () => void } = {}) {
   const { data: status, mutate } = useSWR<Status>('/v1/auth/password-login', fetchStatus, { revalidateOnFocus: false });
   const [newPassword, setNewPassword] = useState('');
   const [confirm, setConfirm] = useState('');
@@ -93,7 +94,8 @@ export function PasswordSignInSettings() {
     setCode('');
     setCurrent('');
     await mutate();
-    toast.success('Authenticator confirmed. Password sign-in is ready.');
+    toast.success('Authenticator confirmed. Sign-in is ready.');
+    onReady?.();
   };
 
   const turnOff = async () => {
@@ -104,12 +106,12 @@ export function PasswordSignInSettings() {
     setCurrent('');
     setEnrolment(null);
     await mutate();
-    toast.success('Authenticator removed. Password sign-in is off until you add one again.');
+    toast.success('Authenticator removed. Add one again now: you cannot use the system without it.');
   };
 
   const description = status.passwordSignInReady
-    ? 'Password sign-in is on. Each sign-in asks for your password and a code from your authenticator app.'
-    : 'Sign in with a password and a code from an authenticator app, instead of waiting for an email link. The email link keeps working as a fallback.';
+    ? 'Each sign-in asks for your password and a code from your authenticator app.'
+    : 'You sign in with a password and a code from an authenticator app. Both must be set before you can use the system.';
 
   return (
     <Section title="Password sign-in" description={description}>
@@ -141,8 +143,8 @@ export function PasswordSignInSettings() {
               </div>
             ) : (
               <Text size="sm" variant="muted">
-                For safety a password can only be set within 30 minutes of signing in. Sign out, sign in again with an email link, and come
-                straight back here.
+                For safety a password can only be set within 30 minutes of signing in. Sign out, sign in again and come straight back
+                here. If you cannot sign in, ask your BNI administrator for a new setup link.
               </Text>
             )
           ) : (
@@ -214,7 +216,8 @@ export function PasswordSignInSettings() {
             </Text>
             <div className="w-full space-y-2 md:max-w-sm">
               <Text size="sm" variant="muted">
-                To move to a new phone, remove the authenticator and add it again. Removing it turns password sign-in off until then.
+                To move to a new phone, remove the authenticator and add it again straight away. Until the new one is confirmed you
+                cannot use the system. If the old phone is lost, ask your BNI administrator to reset your sign-in.
               </Text>
               <Input type="password" autoComplete="current-password" placeholder="Your password" value={current} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrent(e.target.value)} />
               <Button variant="outline" onClick={() => void turnOff()} disabled={!current || busy}>

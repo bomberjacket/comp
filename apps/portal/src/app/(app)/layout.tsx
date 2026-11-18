@@ -12,6 +12,15 @@ export default async function Layout({ children }: { children: React.ReactNode }
     redirect('/auth');
   }
 
+  // BNI: a session without a confirmed authenticator app can only finish setup, which
+  // lives in the main app. Impersonation sessions are exempt.
+  const setupPending =
+    (session.user as { twoFactorEnabled?: boolean | null }).twoFactorEnabled !== true &&
+    !(session.session as { impersonatedBy?: string | null }).impersonatedBy;
+  if (setupPending) {
+    redirect(`${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/setup-sign-in`);
+  }
+
   return (
     <div className="flex min-h-dvh">
       <div className="flex flex-1 flex-col">

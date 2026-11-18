@@ -16,8 +16,8 @@ type Stage = 'password' | 'code' | 'backup';
 
 /**
  * Password sign-in, always followed by a code from the user's authenticator app. The
- * server refuses a password for an account without an authenticator, so the first
- * sign-in is still by email link; this form says so when that happens.
+ * server refuses a password for an account without an authenticator and says to ask the
+ * BNI administrator for a setup link; this form shows that message.
  */
 export function PasswordSignIn({ inviteCode, redirectTo }: Props) {
   const [stage, setStage] = useState<Stage>('password');
@@ -136,7 +136,7 @@ export function PasswordSignIn({ inviteCode, redirectTo }: Props) {
           {message}
         </p>
       )}
-      <Button type="submit" variant="outline" className="h-11 w-full" disabled={busy || !email.trim() || !password}>
+      <Button type="submit" className="h-11 w-full" disabled={busy || !email.trim() || !password}>
         {busy ? (
           <Loader2 className="h-4 w-4 animate-spin" />
         ) : (
@@ -147,8 +147,8 @@ export function PasswordSignIn({ inviteCode, redirectTo }: Props) {
         )}
       </Button>
       <p className="text-xs text-muted-foreground">
-        Password sign-in also asks for a code from your authenticator app. First time, or forgot the password? Sign in with an email link
-        above, then set it up under Settings, User.
+        Sign-in asks for your password and a code from your authenticator app. No account yet, forgot the password or lost your phone? Ask
+        your BNI administrator for a setup link.
       </p>
     </form>
   );

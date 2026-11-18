@@ -114,7 +114,7 @@ describe('HybridAuthGuard active membership enforcement', () => {
       Promise.resolve(matchingMembers({ query, members })),
     );
     mockGetSession.mockResolvedValue({
-      user: { id: 'usr_1', email: 'user@example.com' },
+      user: { id: 'usr_1', email: 'user@example.com', twoFactorEnabled: true },
       session: { id: 'session_1', activeOrganizationId: 'org_1' },
     });
     mockGetMcpSession.mockResolvedValue({ userId: 'usr_1' });

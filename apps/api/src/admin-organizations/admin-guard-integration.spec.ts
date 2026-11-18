@@ -96,6 +96,7 @@ describe('PlatformAdminGuard — runtime rejection scenarios', () => {
         id: 'usr_regular',
         email: 'regular@test.com',
         role: 'user',
+        twoFactorEnabled: true,
       });
       const ctx = buildContext({ cookie: 'session=valid' });
 
@@ -137,13 +138,14 @@ describe('PlatformAdminGuard — runtime rejection scenarios', () => {
         id: 'usr_sneaky',
         email: 'sneaky@test.com',
         role: 'user',
+        twoFactorEnabled: true,
       });
       const ctx = buildContext({ authorization: 'Bearer valid' });
 
       await expect(guard.canActivate(ctx)).rejects.toThrow(ForbiddenException);
       expect(mockFindUnique).toHaveBeenCalledWith({
         where: { id: 'usr_sneaky' },
-        select: { id: true, email: true, role: true },
+        select: { id: true, email: true, role: true, twoFactorEnabled: true },
       });
     });
 
@@ -166,6 +168,7 @@ describe('PlatformAdminGuard — runtime rejection scenarios', () => {
         id: 'usr_admin',
         email: 'admin@platform.com',
         role: 'admin',
+        twoFactorEnabled: true,
       });
 
       const request = {

@@ -17,6 +17,15 @@ export default async function Layout({ children }: { children: React.ReactNode }
     return redirect('/auth');
   }
 
+  // BNI: a session without a confirmed authenticator app (opened by a setup link) can
+  // only finish setup; the API refuses it everywhere else. Impersonation is exempt.
+  const setupPending =
+    (session.user as { twoFactorEnabled?: boolean | null }).twoFactorEnabled !== true &&
+    !(session.session as { impersonatedBy?: string | null }).impersonatedBy;
+  if (setupPending) {
+    return redirect('/setup-sign-in');
+  }
+
   const meRes = await serverApi.get<AuthMeResponse>('/v1/auth/me');
   const pendingInvite = meRes.data?.pendingInvitation;
 

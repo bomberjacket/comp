@@ -5,8 +5,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { AuditLogEntityType, db } from '@db';
-import { triggerEmail } from '../email/trigger-email';
-import { InviteEmail } from '../email/templates/invite-member';
+import { sendSetupLink } from '../auth/setup-link';
 import { UpdateAdminOrganizationDto } from './dto/update-admin-organization.dto';
 import { MAX_AUDIT_LOG_OFFSET } from '../audit/audit-log.pagination';
 
@@ -356,20 +355,12 @@ export class AdminOrganizationsService {
     });
 
     try {
-      const appUrl =
-        process.env.NEXT_PUBLIC_APP_URL ??
-        process.env.BETTER_AUTH_URL ??
-        'https://app.trycomp.ai';
-      const inviteLink = `${appUrl}/invite/${invitation.id}`;
-
-      await triggerEmail({
-        to: normalizedEmail,
-        subject: `You've been invited to join ${org.name} on Comp AI`,
-        react: InviteEmail({
-          organizationName: org.name,
-          inviteLink,
-          email: normalizedEmail,
-        }),
+      // BNI: a platform admin's invite is the authorisation to sign in, so it sends
+      // the one-time setup link, which continues to the invitation afterwards.
+      await sendSetupLink({
+        email: normalizedEmail,
+        createUser: true,
+        next: `/invite/${invitation.id}`,
       });
     } catch (err) {
       this.logger.error(

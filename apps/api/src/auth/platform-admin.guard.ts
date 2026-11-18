@@ -55,6 +55,7 @@ export class PlatformAdminGuard implements CanActivate {
         id: true,
         email: true,
         role: true,
+        twoFactorEnabled: true,
       },
     });
 
@@ -65,6 +66,13 @@ export class PlatformAdminGuard implements CanActivate {
     if (user.role !== 'admin') {
       throw new ForbiddenException(
         'Access denied: Platform admin privileges required',
+      );
+    }
+
+    // BNI: admin routes need a fully set-up sign-in (password plus authenticator app).
+    if (!user.twoFactorEnabled) {
+      throw new ForbiddenException(
+        'Finish setting up sign-in first: set a password and an authenticator app.',
       );
     }
 

@@ -9,7 +9,7 @@ export const MAX_PASSWORD_LENGTH = 128;
 export const FRESH_SESSION_MS = 30 * 60 * 1000;
 
 export const PASSWORD_NEEDS_AUTHENTICATOR =
-  'Password sign-in is not set up for this account. Sign in with an email link, then set a password and an authenticator app under Settings, User.';
+  'Sign-in is not set up for this account. Ask your BNI administrator for a setup link, then set a password and an authenticator app.';
 
 /**
  * Password sign-in is allowed only for an account with a confirmed authenticator app,

@@ -5,6 +5,7 @@ import { IsString, MaxLength, MinLength } from 'class-validator';
 import { auth } from './auth.server';
 import { HybridAuthGuard } from './hybrid-auth.guard';
 import { FRESH_SESSION_MS, MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from './password-login';
+import { AllowSetupPending } from './setup-link-context';
 import { SkipOrgCheck } from './skip-org-check.decorator';
 import type { AuthenticatedRequest } from './types';
 
@@ -17,8 +18,8 @@ class SetPasswordDto {
 
 /**
  * Password sign-in settings of the signed-in user. A password is set (or replaced) from
- * a session that is at most 30 minutes old, which in practice means right after signing
- * in by email link: the link is how a first or a forgotten password is set. The
+ * a session that is at most 30 minutes old: right after opening a setup link from a BNI
+ * admin (how a first or a forgotten password is set), or right after signing in. The
  * authenticator app itself is enrolled through better-auth's two-factor endpoints.
  */
 @ApiExcludeController()
@@ -26,6 +27,7 @@ class SetPasswordDto {
 @Controller({ path: 'auth/password-login', version: '1' })
 @UseGuards(HybridAuthGuard)
 @SkipOrgCheck()
+@AllowSetupPending()
 export class PasswordLoginController {
   private async sessionUser(req: AuthenticatedRequest): Promise<{ userId: string; sessionCreatedAt: Date | null }> {
     if (req.authType !== 'session' || !req.userId || req.impersonatedBy) {
@@ -58,7 +60,7 @@ export class PasswordLoginController {
   async setPassword(@Req() req: AuthenticatedRequest, @Body() dto: SetPasswordDto) {
     const { userId, sessionCreatedAt } = await this.sessionUser(req);
     if (!sessionCreatedAt || Date.now() - sessionCreatedAt.getTime() > FRESH_SESSION_MS) {
-      throw new ForbiddenException('For safety, sign out and sign in again with an email link, then set the password within 30 minutes.');
+      throw new ForbiddenException('For safety a password can only be set within 30 minutes of signing in. Sign out and sign in again, or ask your BNI administrator for a new setup link.');
     }
     if (dto.newPassword.trim().length < MIN_PASSWORD_LENGTH) {
       throw new BadRequestException(`Use at least ${MIN_PASSWORD_LENGTH} characters`);

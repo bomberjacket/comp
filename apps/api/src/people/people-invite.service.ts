@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { db } from '@db';
 import { triggerEmail } from '../email/trigger-email';
-import { InviteEmail } from '../email/templates/invite-member';
+import { sendSetupLink } from '../auth/setup-link';
 import { InvitePortalEmail } from '@trycompai/email';
 import {
   BUILT_IN_ROLE_OBLIGATIONS,
@@ -38,6 +38,8 @@ export class PeopleInviteService {
     callerRole: string;
     isApiKey?: boolean;
     apiKeyScopes?: string[];
+    /** BNI: only a platform admin's invite emails a sign-in setup link. */
+    callerIsPlatformAdmin?: boolean;
   }): Promise<InviteResult[]> {
     const {
       organizationId,
@@ -47,6 +49,10 @@ export class PeopleInviteService {
       isApiKey,
       apiKeyScopes,
     } = params;
+    // BNI: adding a person puts them on the People list; it never lets them sign in.
+    // Sign-in is granted by a platform admin's setup link, sent here only when the
+    // caller is one. Anyone else's invite sends no email.
+    const grantSignIn = params.callerIsPlatformAdmin === true;
 
     const callerMemberActions = await this.resolveCallerMemberActions(
       callerRole,
@@ -90,7 +96,7 @@ export class PeopleInviteService {
           organizationId,
         );
         const shouldSendPortalEmail =
-          !!invite.sendPortalEmail && hasCompliance;
+          grantSignIn && !!invite.sendPortalEmail && hasCompliance;
         const shouldSendAppEmail = await this.rolesHaveAppAccess(
           invite.roles,
           organizationId,
@@ -117,8 +123,7 @@ export class PeopleInviteService {
             roles: invite.roles,
             organizationId,
             currentUserId: await getInviterId(),
-            sendPortalEmail: shouldSendPortalEmail,
-            sendAppEmail: shouldSendAppEmail,
+            grantSignIn: grantSignIn && (shouldSendAppEmail || shouldSendPortalEmail),
           });
           results.push({ email: invite.email, success: true });
         }
@@ -237,16 +242,7 @@ export class PeopleInviteService {
     let emailSent = false;
     if (sendPortalEmail) {
       try {
-        const inviteLink = this.buildPortalUrl(organizationId);
-        await triggerEmail({
-          to: email,
-          subject: `You've been invited to join ${organization.name} on Comp AI`,
-          react: InvitePortalEmail({
-            organizationName: organization.name,
-            inviteLink,
-            email,
-          }),
-        });
+        await sendSetupLink({ email });
         emailSent = true;
       } catch (emailErr) {
         emailSent = false;
@@ -288,17 +284,9 @@ export class PeopleInviteService {
     roles: string[];
     organizationId: string;
     currentUserId: string;
-    sendPortalEmail?: boolean;
-    sendAppEmail?: boolean;
+    grantSignIn?: boolean;
   }): Promise<void> {
-    const {
-      email,
-      roles,
-      organizationId,
-      currentUserId,
-      sendPortalEmail,
-      sendAppEmail,
-    } = params;
+    const { email, roles, organizationId, currentUserId, grantSignIn } = params;
 
     const existingUser = await db.user.findFirst({
       where: { email: { equals: email, mode: 'insensitive' } },
@@ -361,14 +349,13 @@ export class PeopleInviteService {
       },
     });
 
-    await this.sendInviteEmails({
-      email,
-      organizationName: organization.name,
-      sendPortalEmail,
-      sendAppEmail,
-      portalLink: this.buildPortalUrl(organizationId),
-      appLink: this.buildInviteLink(invitation.id),
-    });
+    if (grantSignIn) {
+      await sendSetupLink({
+        email,
+        createUser: true,
+        next: `/invite/${invitation.id}`,
+      });
+    }
   }
 
   /** Sort + de-dupe a comma-separated role string into a canonical form. */
@@ -468,55 +455,6 @@ export class PeopleInviteService {
       })),
       skipDuplicates: true,
     });
-  }
-
-  private async sendInviteEmails(params: {
-    email: string;
-    organizationName: string;
-    sendPortalEmail?: boolean;
-    sendAppEmail?: boolean;
-    portalLink: string;
-    appLink: string;
-  }): Promise<void> {
-    const {
-      email,
-      organizationName,
-      sendPortalEmail,
-      sendAppEmail,
-      portalLink,
-      appLink,
-    } = params;
-
-    if (sendAppEmail) {
-      await triggerEmail({
-        to: email,
-        subject: `You've been invited to join ${organizationName} on Comp AI`,
-        react: InviteEmail({
-          organizationName,
-          inviteLink: appLink,
-          portalLink: sendPortalEmail ? portalLink : undefined,
-        }),
-      });
-    } else if (sendPortalEmail) {
-      await triggerEmail({
-        to: email,
-        subject: `You've been invited to join ${organizationName} on Comp AI`,
-        react: InvitePortalEmail({
-          organizationName,
-          inviteLink: portalLink,
-          email,
-        }),
-      });
-    } else {
-      await triggerEmail({
-        to: email,
-        subject: `You've been invited to join ${organizationName} on Comp AI`,
-        react: InviteEmail({
-          organizationName,
-          inviteLink: appLink,
-        }),
-      });
-    }
   }
 
   private async rolesHaveAppAccess(
@@ -680,13 +618,5 @@ export class PeopleInviteService {
     const portalUrl =
       process.env.NEXT_PUBLIC_PORTAL_URL ?? 'https://portal.trycomp.ai';
     return `${portalUrl}/${organizationId}`;
-  }
-
-  private buildInviteLink(invitationId: string): string {
-    const appUrl =
-      process.env.NEXT_PUBLIC_APP_URL ??
-      process.env.BETTER_AUTH_URL ??
-      'https://app.trycomp.ai';
-    return `${appUrl}/invite/${invitationId}`;
   }
 }

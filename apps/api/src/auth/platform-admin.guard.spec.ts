@@ -88,6 +88,7 @@ describe('PlatformAdminGuard', () => {
       id: 'usr_1',
       email: 'user@test.com',
       role: 'user',
+      twoFactorEnabled: true,
     });
     const ctx = buildContext({ cookie: 'session=abc' });
 
@@ -115,6 +116,7 @@ describe('PlatformAdminGuard', () => {
       id: 'usr_admin',
       email: 'admin@platform.com',
       role: 'admin',
+      twoFactorEnabled: true,
     });
 
     const request = {
@@ -143,13 +145,14 @@ describe('PlatformAdminGuard', () => {
       id: 'usr_1',
       email: 'user@test.com',
       role: 'user',
+      twoFactorEnabled: true,
     });
     const ctx = buildContext({ cookie: 'session=abc' });
 
     await expect(guard.canActivate(ctx)).rejects.toThrow(ForbiddenException);
     expect(mockFindUnique).toHaveBeenCalledWith({
       where: { id: 'usr_1' },
-      select: { id: true, email: true, role: true },
+      select: { id: true, email: true, role: true, twoFactorEnabled: true },
     });
   });
 
@@ -169,6 +172,7 @@ describe('PlatformAdminGuard', () => {
       id: 'usr_admin',
       email: 'admin@test.com',
       role: 'admin',
+      twoFactorEnabled: true,
     });
     const ctx = buildContext({ authorization: 'Bearer token123' });
 
@@ -184,6 +188,7 @@ describe('PlatformAdminGuard', () => {
       id: 'usr_admin',
       email: 'admin@test.com',
       role: 'admin',
+      twoFactorEnabled: true,
     });
     const ctx = buildContext({ cookie: 'session=xyz' });
 

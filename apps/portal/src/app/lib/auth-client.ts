@@ -2,6 +2,7 @@ import {
   emailOTPClient,
   multiSessionClient,
   organizationClient,
+  twoFactorClient,
 } from 'better-auth/client/plugins';
 import { createAuthClient } from 'better-auth/react';
 import { ac, allRoles } from '@trycompai/auth';
@@ -12,6 +13,7 @@ export const authClient = createAuthClient({
     organizationClient({ ac, roles: allRoles }),
     emailOTPClient(),
     multiSessionClient(),
+    twoFactorClient(),
   ],
 });
 

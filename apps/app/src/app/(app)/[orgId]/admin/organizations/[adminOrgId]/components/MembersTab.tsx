@@ -38,6 +38,7 @@ import { Input } from '@trycompai/ui/input';
 import { Label } from '@trycompai/ui/label';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { SetupLinkButtons } from './SetupLinkButtons';
 
 const INVITE_ROLES = ['admin', 'auditor', 'employee', 'contractor'];
 
@@ -321,6 +322,8 @@ function MembersTable({
               </Text>
             </TableCell>
             <TableCell>
+              <div className="flex flex-wrap gap-2">
+              <SetupLinkButtons email={member.user.email} />
               <Button
                 size="sm"
                 variant="outline"
@@ -331,6 +334,7 @@ function MembersTable({
               >
                 Login As
               </Button>
+              </div>
             </TableCell>
           </TableRow>
         ))}
@@ -395,6 +399,8 @@ function InvitationsSection({
                   </Text>
                 </TableCell>
                 <TableCell>
+                  <div className="flex flex-wrap gap-2">
+                  <SetupLinkButtons email={inv.email} allowReset={false} />
                   <Button
                     size="sm"
                     variant="destructive"
@@ -404,6 +410,7 @@ function InvitationsSection({
                   >
                     Revoke
                   </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

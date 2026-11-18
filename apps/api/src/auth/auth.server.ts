@@ -1,12 +1,12 @@
 import '../config/load-env';
 import {
   ChangeEmailConfirmationEmail,
-  MagicLinkEmail,
   OTPVerificationEmail,
   VerifyEmail,
 } from '@trycompai/email';
 import { triggerEmail } from '../email/trigger-email';
 import { InviteEmail } from '../email/templates/invite-member';
+import { SetupLinkEmail } from '../email/templates/setup-link';
 import { db } from '@db';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
@@ -21,7 +21,7 @@ import {
   twoFactor,
 } from 'better-auth/plugins';
 import { ac, allRoles } from '@trycompai/auth';
-import { createAuthMiddleware } from 'better-auth/api';
+import { APIError, createAuthMiddleware } from 'better-auth/api';
 import { Redis } from '@upstash/redis';
 import type { AccessControl } from 'better-auth/plugins/access';
 import {
@@ -29,6 +29,14 @@ import {
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
 } from './password-login';
+import {
+  EMAIL_SIGN_IN_OFF_MESSAGE,
+  isAdminIssuedLink,
+  isEmailSignInPath,
+  SELF_SIGN_UP_OFF_MESSAGE,
+  SETUP_LINK_EXPIRES_IN_SECONDS,
+  SETUP_SESSION_MS,
+} from './setup-link-context';
 import {
   resolveMicrosoftEmail,
   type MicrosoftEmailClaims,
@@ -49,8 +57,6 @@ export {
   isStaticTrustedOrigin,
   isStaticTrustedOriginForRequest,
 } from './origin-policy';
-
-const MAGIC_LINK_EXPIRES_IN_SECONDS = 60 * 60; // 1 hour
 
 /**
  * Determine the cookie domain based on environment.
@@ -271,9 +277,8 @@ export const auth = betterAuth({
   trustedOrigins: getBetterAuthTrustedOrigins(),
   emailAndPassword: {
     // BNI: password sign-in, only together with an authenticator app code (see the
-    // before-hook below). Accounts are still created by invite, email link or OAuth,
-    // never by password sign-up; a first or forgotten password is set from a fresh
-    // email-link session (auth/password-login.controller.ts).
+    // before-hook below). Nobody signs up; a first or forgotten password is set from
+    // the session a BNI admin's one-time setup link opens (auth/setup-link.ts).
     enabled: true,
     disableSignUp: true,
     minPasswordLength: MIN_PASSWORD_LENGTH,
@@ -317,9 +322,34 @@ export const auth = betterAuth({
     }),
   },
   databaseHooks: {
+    user: {
+      create: {
+        // BNI: no self sign-up through any sign-in method. Accounts come from a BNI
+        // platform admin (admin create-user) or from being added to an organization,
+        // which writes the row directly and still grants no sign-in by itself.
+        before: (user, ctx) =>
+          ctx?.path === '/admin/create-user'
+            ? Promise.resolve({ data: user })
+            : Promise.reject(
+                new APIError('FORBIDDEN', { message: SELF_SIGN_UP_OFF_MESSAGE }),
+              ),
+      },
+    },
     session: {
       create: {
-        before: async (session) => {
+        before: async (rawSession) => {
+          // BNI: until the authenticator app is confirmed a session exists only to
+          // finish setup, so it is short. Impersonation sessions are left alone.
+          let session = rawSession;
+          if (!(rawSession as Record<string, unknown>).impersonatedBy) {
+            const owner = await db.user.findUnique({
+              where: { id: rawSession.userId },
+              select: { twoFactorEnabled: true },
+            });
+            if (!owner?.twoFactorEnabled) {
+              session = { ...rawSession, expiresAt: new Date(Date.now() + SETUP_SESSION_MS) };
+            }
+          }
           const isDev = process.env.NODE_ENV === 'development';
           if (isDev) {
             console.log(
@@ -380,8 +410,12 @@ export const auth = betterAuth({
   },
   hooks: {
     // A password is never the only factor: refuse password sign-in for an account
-    // without a confirmed authenticator app.
+    // without a confirmed authenticator app. Sign-in, sign-up and password reset
+    // through the mailbox are off; only an admin-issued setup link is ever emailed.
     before: createAuthMiddleware(async (ctx) => {
+      if (isEmailSignInPath(ctx.path) && !isAdminIssuedLink()) {
+        throw new APIError('FORBIDDEN', { message: EMAIL_SIGN_IN_OFF_MESSAGE });
+      }
       if (ctx.path !== '/sign-in/email') return;
       await assertPasswordSignInAllowed((ctx.body as { email?: unknown } | undefined)?.email);
     }),
@@ -503,25 +537,30 @@ export const auth = betterAuth({
         },
       },
     }),
+    // BNI: this plugin now only carries the one-time setup link a platform admin
+    // sends (auth/setup-link.ts). The public send endpoint is refused in the
+    // before-hook above, and a link never creates an account.
     magicLink({
-      expiresIn: MAGIC_LINK_EXPIRES_IN_SECONDS,
+      expiresIn: SETUP_LINK_EXPIRES_IN_SECONDS,
+      disableSignUp: true,
       sendMagicLink: async ({ email, url }) => {
-        // The `url` from better-auth points to the API's verify endpoint
-        // and includes the callbackURL from the client's sign-in request.
         // Flow: user clicks link → API verifies token & sets session cookie
-        // → API redirects (302) to callbackURL (the app).
+        // → API redirects (302) to the app's setup page.
+        if (!isAdminIssuedLink()) {
+          throw new APIError('FORBIDDEN', { message: EMAIL_SIGN_IN_OFF_MESSAGE });
+        }
         if (process.env.NODE_ENV === 'development') {
-          console.log('[Auth] Sending magic link to:', email);
-          console.log('[Auth] Magic link URL:', url);
+          console.log('[Auth] Sending setup link to:', email);
         }
         await triggerEmail({
           to: email,
-          subject: 'Login to Comp AI',
-          react: MagicLinkEmail({ email, url }),
+          subject: 'Set up your sign-in',
+          react: SetupLinkEmail({ url, hours: SETUP_LINK_EXPIRES_IN_SECONDS / 3600 }),
         });
       },
     }),
     emailOTP({
+      disableSignUp: true,
       otpLength: 6,
       expiresIn: 10 * 60,
       async sendVerificationOTP({ email, otp }) {

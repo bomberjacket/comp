@@ -14,6 +14,11 @@ import { hasAppAccess } from './app-access';
 import { auth } from './auth.server';
 import { IS_PUBLIC_KEY } from './public.decorator';
 import { SKIP_ORG_CHECK_KEY } from './skip-org-check.decorator';
+import {
+  ALLOW_SETUP_PENDING_KEY,
+  SETUP_REQUIRED_CODE,
+  SETUP_REQUIRED_MESSAGE,
+} from './setup-link-context';
 import { resolveServiceByToken } from './service-token.config';
 import { AuthenticatedRequest } from './types';
 
@@ -51,7 +56,11 @@ export class HybridAuthGuard implements CanActivate {
       SKIP_ORG_CHECK_KEY,
       [context.getHandler(), context.getClass()],
     );
-    return this.handleSessionAuth(request, skipOrgCheck);
+    const allowSetupPending = this.reflector.getAllAndOverride<boolean>(
+      ALLOW_SETUP_PENDING_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+    return this.handleSessionAuth(request, skipOrgCheck, allowSetupPending);
   }
 
   private async handleApiKeyAuth(
@@ -162,6 +171,7 @@ export class HybridAuthGuard implements CanActivate {
   private async handleSessionAuth(
     request: AuthenticatedRequest,
     skipOrgCheck = false,
+    allowSetupPending = false,
   ): Promise<boolean> {
     try {
       // Build headers for better-auth SDK
@@ -201,6 +211,27 @@ export class HybridAuthGuard implements CanActivate {
         throw new UnauthorizedException(
           'Invalid session: missing user information',
         );
+      }
+
+      // BNI: a session whose user has no confirmed authenticator app (one opened by
+      // a setup link) may only reach the routes that finish setup. An impersonation
+      // session is the platform admin's, so it is not held to the target's setup.
+      const impersonating = !!(sessionData as Record<string, unknown>).impersonatedBy;
+      if (
+        !allowSetupPending &&
+        !impersonating &&
+        (user as { twoFactorEnabled?: boolean | null }).twoFactorEnabled !== true
+      ) {
+        const row = await db.user.findUnique({
+          where: { id: user.id },
+          select: { twoFactorEnabled: true },
+        });
+        if (!row?.twoFactorEnabled) {
+          throw new ForbiddenException({
+            message: SETUP_REQUIRED_MESSAGE,
+            code: SETUP_REQUIRED_CODE,
+          });
+        }
       }
 
       const organizationId = sessionData.activeOrganizationId;

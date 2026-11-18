@@ -63,6 +63,12 @@ export async function proxy(request: NextRequest) {
       return response;
     }
 
+    // BNI: the setup page must load without a session, so an expired or used setup
+    // link shows an explanation instead of bouncing to the sign-in form.
+    if (nextUrl.pathname === '/setup-sign-in') {
+      return response;
+    }
+
     // 1. Not authenticated
     if (!hasToken && nextUrl.pathname !== '/auth') {
       const url = new URL('/auth', request.url);

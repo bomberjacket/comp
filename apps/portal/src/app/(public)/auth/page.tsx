@@ -1,5 +1,5 @@
 import { LoginForm } from '@/app/components/login-form';
-import { OtpSignIn } from '@/app/components/otp';
+import { PasswordSignIn } from '@/app/components/password-sign-in';
 import { Button } from '@trycompai/ui/button';
 import {
   Card,
@@ -35,7 +35,7 @@ export default async function Page({
 
   const defaultSignInOptions = (
     <div className="flex flex-col space-y-2">
-      <OtpSignIn deviceAuthRedirect={deviceAuthRedirect} />
+      <PasswordSignIn deviceAuthRedirect={deviceAuthRedirect} />
     </div>
   );
 
@@ -54,7 +54,7 @@ export default async function Page({
               Employee Portal
             </CardTitle>
             <CardDescription className="text-base text-muted-foreground px-4">
-              Enter your email address to receive a one time password.
+              Sign in with your password and authenticator code.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6 pb-6">

@@ -101,7 +101,7 @@ export function planGuidance(args: {
       'If you do not know one yet, write who will find out and by when.',
       index >= total - 1
         ? 'This is the last section. Choose "Save and publish plan"; you are shown how complete the plan is before you confirm.'
-        : 'Choose "Save and continue". Your answers go into the plan under the heading "Utility record".',
+        : 'Choose "Save and go to the next section". Your answers go into the plan under the heading "Utility record".',
     ],
     narration:
       `${intro}You are on section ${index + 1} of ${total}, ${title}. ${purpose} ` +
@@ -110,7 +110,7 @@ export function planGuidance(args: {
       'Type short, plain answers. If you do not know an answer yet, write who will find out and by when. The last box, Additional notes, is optional and is for anything the other boxes do not cover. ' +
       (index >= total - 1
         ? 'This is the last section. When you are done, choose Save and publish plan. Your answers are saved, and you are shown how complete the plan is before you confirm. If boxes are still empty you can publish anyway, or go back and fill them in. '
-        : 'When you are done, choose Save and continue. Your answers are saved and the next section opens. Moving to another section always saves what you typed, so there is no separate save step. ') +
+        : 'When you are done, choose Save and go to the next section. Your answers are saved and the next section opens at its top. Moving to another section always saves what you typed, so there is no separate save step. ') +
       'Your answers are added to the plan under the heading Utility record, each with its label. The circle beside the section turns green when every box is filled.',
   };
 }

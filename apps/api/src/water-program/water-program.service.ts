@@ -3,6 +3,7 @@ import { db } from '@db';
 import { RequirementAnswersService } from '../requirement-answers/requirement-answers.service';
 import { VENDOR_CHECKLISTS, type VendorChecklistKind } from '../vendor-checklists/checklists.generated';
 import { scoreChecklist, type ChecklistItemAnswer } from '../vendor-checklists/vendor-checklists.service';
+import { loadRoster } from './water-roster.service';
 import { PLAN_SECTIONS } from './plan-sections.generated';
 import { readPlanSections, type TipTapNode } from './plan-writer';
 import {
@@ -73,7 +74,7 @@ export class WaterProgramService {
       this.assessStep(frameworkInstanceId, organizationId),
       this.gapsStep(frameworkInstanceId, organizationId),
       this.evidenceStep(organizationId),
-      this.vendorsStep(organizationId),
+      this.vendorsStep(frameworkInstanceId, organizationId),
       this.tabletopStep(frameworkInstanceId, organizationId),
     ]);
     return {
@@ -173,12 +174,15 @@ export class WaterProgramService {
     };
   }
 
-  private async vendorsStep(organizationId: string): Promise<WaterProgramStep> {
-    const [vendors, sheets] = await Promise.all([
-      db.vendor.findMany({ where: { organizationId }, select: { id: true, name: true } }),
+  private async vendorsStep(frameworkInstanceId: string, organizationId: string): Promise<WaterProgramStep> {
+    const [allVendors, sheets, { accessVendors }] = await Promise.all([
+      db.vendor.findMany({ where: { organizationId }, select: { id: true, name: true }, orderBy: { name: 'asc' } }),
       db.vendorChecklistAssessment.findMany({ where: { organizationId }, select: { vendorId: true, kind: true, items: true } }),
+      loadRoster(frameworkInstanceId, organizationId),
     ]);
-    const assessed = new Set(sheets.map((s) => s.vendorId));
+    // The vendors ticked on Who's who as having network or remote access; all of them until any is ticked.
+    const vendors = accessVendors ? allVendors.filter((v) => accessVendors.includes(v.id)) : allVendors;
+    const assessed = new Set(sheets.map((s) => s.vendorId).filter((id) => vendors.some((v) => v.id === id)));
     const details: StepDetail[] = vendors.slice(0, 25).map((v) => {
       const mine = sheets.filter((s) => s.vendorId === v.id);
       const scores = mine.map((s) => {
@@ -195,7 +199,12 @@ export class WaterProgramService {
       status: statusOf(assessed.size, vendors.length),
       done: assessed.size,
       total: vendors.length,
-      summary: vendors.length === 0 ? 'No vendors recorded yet' : `${assessed.size} of ${vendors.length} vendors scored`,
+      summary:
+        vendors.length === 0
+          ? allVendors.length === 0
+            ? 'No vendors recorded yet'
+            : "No vendor is ticked on Who's who (step 1) as having access"
+          : `${assessed.size} of ${vendors.length} vendors with access scored`,
       href: 'vendors',
       details,
     };

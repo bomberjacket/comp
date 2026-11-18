@@ -150,7 +150,7 @@ export function WaterProgramGuide({
     },
     vendors: {
       label: 'Score vendors here',
-      node: <WaterVendorScorer orgId={orgId} canEdit={hasPermission('vendor', 'update')} onChanged={changed} />,
+      node: <WaterVendorScorer orgId={orgId} frameworkInstanceId={frameworkInstanceId} canEdit={hasPermission('vendor', 'update')} onChanged={changed} />,
     },
     tabletop: {
       label: 'Run a tabletop session',

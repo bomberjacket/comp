@@ -20,8 +20,8 @@ interface Props {
 }
 
 /**
- * The buttons under a plan section. There is one way forward at each point: "Save and
- * continue" on every section but the last, "Save and publish plan" on the last, then on
+ * The buttons under a plan section. There is one way forward at each point: the next
+ * section on every section but the last, "Save and publish plan" on the last, then on
  * to the other plan. Moving between sections saves by itself, so nothing is greyed out
  * waiting for a separate Save.
  */
@@ -39,7 +39,7 @@ export function PlanWriterFooter(props: Props) {
       <div className="flex flex-wrap items-center gap-2">
         {!isLast && (
           <Button size="sm" onClick={props.onContinue} disabled={saving} loading={saving}>
-            {canEdit ? (hasChanges ? 'Save and continue' : 'Continue') : 'Next'}
+            {canEdit && hasChanges ? 'Save and go to the next section' : 'Next section'}
           </Button>
         )}
         {isLast && canEdit && !published && (
@@ -62,6 +62,11 @@ export function PlanWriterFooter(props: Props) {
         {isLast && published && !hasChanges && nextPlanName && (
           <Button size="sm" onClick={props.onNextPlan}>
             Continue to the {nextPlanName}
+          </Button>
+        )}
+        {!isLast && published && nextPlanName && (
+          <Button size="sm" variant="outline" onClick={props.onNextPlan} disabled={saving}>
+            This plan is published. Go to the {nextPlanName}
           </Button>
         )}
         {isLast && published && !hasChanges && !nextPlanName && (

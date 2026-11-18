@@ -4,7 +4,7 @@ import { useWaterPlans, type WaterPlan, type WaterPlanSection } from '@/hooks/us
 import { Badge, Button, Input, Text, Textarea } from '@trycompai/design-system';
 import { CheckCircle2, Circle, CircleDot } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { planGuidance } from './water/guidance-plans';
 import { PlanWriterFooter, PublishConfirm } from './water/PlanWriterFooter';
@@ -48,14 +48,17 @@ const valuesOf = (section: WaterPlanSection | undefined) =>
  */
 export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged, roster }: Props) {
   const { plans, error, isLoading, saveSection, publish } = useWaterPlans(frameworkInstanceId);
-  const [planKey, setPlanKey] = useState<WaterPlan['key']>('crmp');
+  const [planKey, setPlanKey] = useState<WaterPlan['key'] | null>(null);
+  const top = useRef<HTMLDivElement>(null);
+  const moved = useRef(false);
   const [index, setIndex] = useState(0);
   const [values, setValues] = useState<Record<string, string>>({});
   const [notes, setNotes] = useState('');
   const [saving, setSaving] = useState(false);
   const [confirmPublish, setConfirmPublish] = useState(false);
 
-  const plan = plans.find((p) => p.key === planKey) ?? plans[0];
+  // Until a plan is picked, open the first one that is not published yet.
+  const plan = plans.find((p) => p.key === planKey) ?? plans.find((p) => p.status !== 'published') ?? plans[0];
   const section: WaterPlanSection | undefined = plan?.sections[index];
   const savedKey = JSON.stringify([valuesOf(section), section?.notes ?? '']);
 
@@ -64,6 +67,12 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
     setNotes(section?.notes ?? '');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [savedKey, plan?.policyId, index]);
+
+  // A new section or plan starts at its top; without this the page stays scrolled at the buttons and looks unchanged.
+  useEffect(() => {
+    if (moved.current) top.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    moved.current = true;
+  }, [plan?.policyId, index]);
 
   if (error) return <Text variant="muted">The plans could not be loaded: {error.message}</Text>;
   if (isLoading || !plan || !section) return <Text variant="muted">Loading the plans…</Text>;
@@ -129,10 +138,9 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
       await publish(plan.policyId);
       onChanged?.();
       toast.success(percent < 100 ? `${planName} published with ${percent}% of the requested information` : `${planName} published`);
-      if (otherPlan) {
-        setPlanKey(otherPlan.key);
-        setIndex(0);
-      }
+      // On to the plan that is still unpublished; with none left, stay on this one.
+      setPlanKey(otherPlan?.key ?? plan.key);
+      if (otherPlan) setIndex(0);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Could not publish');
     } finally {
@@ -141,7 +149,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
   };
 
   return (
-    <div className="space-y-4 rounded-lg border p-4">
+    <div ref={top} className="scroll-mt-4 space-y-4 rounded-lg border p-4">
       <VoiceDirection guidance={guidance} />
       <div className="flex flex-wrap items-center gap-2">
         {roster && (
@@ -158,7 +166,7 @@ export function WaterPlanWriter({ orgId, frameworkInstanceId, canEdit, onChanged
             disabled={saving}
           >
             {roster ? `${n + 2}. ` : ''}
-            {p.name.split(' (')[0]} ({p.written}/{p.total})
+            {p.name.split(' (')[0]} ({p.written}/{p.total}){p.status === 'published' ? ', published' : ''}
           </Button>
         ))}
         <Badge variant={plan.status === 'published' ? 'default' : 'secondary'}>{plan.status.replace('_', ' ')}</Badge>

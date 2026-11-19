@@ -22,6 +22,28 @@ export interface EvidenceTaskView {
   systemComplete: boolean;
   /** A way the platform could supply this later; not built yet. */
   planned?: string;
+  /** When (ISO timestamp) the status last changed; null when it has not changed since this was first recorded. */
+  statusChangedOn: string | null;
+  /** Date new evidence is next due: the completion date plus the task's cycle. Null until the task is done. */
+  nextDueOn: string | null;
+  /** The task's cycle, for example quarterly. */
+  cycle: string | null;
+}
+
+/** Full timestamps, so the browser shows the date in the reader's own time zone. */
+const day = (d: Date | null | undefined): string | null => (d ? d.toISOString() : null);
+
+/** Completion date plus one cycle, as the upstream task screens calculate the next review. */
+function nextDue(completed: Date | null, frequency: string | null): Date | null {
+  if (!completed || !frequency) return null;
+  const d = new Date(completed);
+  if (frequency === 'daily') d.setUTCDate(d.getUTCDate() + 1);
+  else if (frequency === 'weekly') d.setUTCDate(d.getUTCDate() + 7);
+  else if (frequency === 'monthly') d.setUTCMonth(d.getUTCMonth() + 1);
+  else if (frequency === 'quarterly') d.setUTCMonth(d.getUTCMonth() + 3);
+  else if (frequency === 'yearly') d.setUTCFullYear(d.getUTCFullYear() + 1);
+  else return null;
+  return d;
 }
 
 export interface EvidenceView {
@@ -50,7 +72,17 @@ export class WaterEvidenceService {
     });
     const tasks = await db.task.findMany({
       where: { organizationId, taskTemplateId: { in: links.map((l) => l.taskTemplateId) } },
-      select: { id: true, title: true, description: true, status: true, taskTemplateId: true },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        status: true,
+        taskTemplateId: true,
+        frequency: true,
+        lastCompletedAt: true,
+        reviewDate: true,
+        statusChangedAt: true,
+      },
       orderBy: { title: 'asc' },
     });
     return { links, tasks };
@@ -128,6 +160,9 @@ export class WaterEvidenceService {
         system: plan.system,
         systemComplete: plan.source === 'system' && plan.system.every((i) => i.provided),
         ...(plan.planned ? { planned: plan.planned } : {}),
+        statusChangedOn: day(t.statusChangedAt),
+        nextDueOn: t.status === 'done' ? day(t.reviewDate ?? nextDue(t.lastCompletedAt ?? t.statusChangedAt, t.frequency)) : null,
+        cycle: t.frequency,
       };
     });
     const mine = views.filter((v) => v.source === 'you');

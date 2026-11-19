@@ -16,6 +16,8 @@ model Task {
   updatedAt       DateTime  @updatedAt
   lastCompletedAt DateTime?
   reviewDate      DateTime?
+  /// BNI: when the status last changed; set by the database trigger task_status_changed_at.
+  statusChangedAt DateTime?
 
   // Relationships
   assigneeId            String?

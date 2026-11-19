@@ -19,7 +19,16 @@ export interface WaterProgramStep {
   summary: string;
   /** app path under /<orgId>/ */
   href: string;
-  details: Array<{ label: string; status: string; href?: string }>;
+  details: Array<{
+    label: string;
+    status: string;
+    href?: string;
+    /** Evidence step: how the evidence is collected, when the status last changed, when new evidence is due. */
+    method?: string;
+    changedOn?: string | null;
+    nextDueOn?: string | null;
+    overdue?: boolean;
+  }>;
 }
 
 export interface WaterProgram {

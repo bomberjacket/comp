@@ -3,6 +3,7 @@
 import { usePermissions } from '@/hooks/use-permissions';
 import { useWaterProgram, type StepStatus, type WaterProgramStep } from '@/hooks/use-water-program';
 import type { FrameworkEditorRequirement } from '@db';
+import { StepEvidenceTable } from './water/StepEvidenceTable';
 import { WaterPlansStep } from './water/WaterPlansStep';
 import { WaterChecklistPager } from './water/WaterChecklistPager';
 import { WaterEvidenceCollector } from './water/WaterEvidenceCollector';
@@ -85,7 +86,8 @@ function StepCard({
             )}
           </div>
           {showWizard && wizard?.node}
-          {open && step.details.length > 0 && (
+          {open && step.details.length > 0 && step.details.some((d) => d.method) && <StepEvidenceTable orgId={orgId} details={step.details} />}
+          {open && step.details.length > 0 && !step.details.some((d) => d.method) && (
             <ul className="divide-y rounded-md border text-sm">
               {step.details.map((d, i) => (
                 <li key={`${d.label}-${i}`} className="flex items-center justify-between gap-3 px-3 py-1.5">

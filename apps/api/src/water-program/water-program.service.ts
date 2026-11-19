@@ -3,6 +3,7 @@ import { db } from '@db';
 import { RequirementAnswersService } from '../requirement-answers/requirement-answers.service';
 import { VENDOR_CHECKLISTS, type VendorChecklistKind } from '../vendor-checklists/checklists.generated';
 import { scoreChecklist, type ChecklistItemAnswer } from '../vendor-checklists/vendor-checklists.service';
+import { WaterEvidenceService } from './water-evidence.service';
 import { loadRoster } from './water-roster.service';
 import { PLAN_SECTIONS } from './plan-sections.generated';
 import { readPlanSections, type TipTapNode } from './plan-writer';
@@ -18,6 +19,13 @@ export type StepStatus = 'not_started' | 'in_progress' | 'done';
 export interface StepDetail {
   label: string;
   status: string;
+  /** Evidence step: how the evidence is collected. */
+  method?: string;
+  /** Evidence step: when (ISO timestamp) the status last changed. */
+  changedOn?: string | null;
+  /** Evidence step: date new evidence is next due, and whether that date has passed. */
+  nextDueOn?: string | null;
+  overdue?: boolean;
   /** app path under /<orgId>/ */
   href?: string;
 }
@@ -59,6 +67,7 @@ export class WaterProgramService {
   constructor(
     private readonly answers: RequirementAnswersService,
     private readonly tabletop: WaterTabletopService,
+    private readonly evidence: WaterEvidenceService,
   ) {}
 
   async getProgram(frameworkInstanceId: string, organizationId: string): Promise<WaterProgram> {
@@ -73,7 +82,7 @@ export class WaterProgramService {
       this.plansStep(organizationId),
       this.assessStep(frameworkInstanceId, organizationId),
       this.gapsStep(frameworkInstanceId, organizationId),
-      this.evidenceStep(organizationId),
+      this.evidenceStep(frameworkInstanceId, organizationId),
       this.vendorsStep(frameworkInstanceId, organizationId),
       this.tabletopStep(frameworkInstanceId, organizationId),
     ]);
@@ -210,16 +219,9 @@ export class WaterProgramService {
     };
   }
 
-  private async evidenceStep(organizationId: string): Promise<WaterProgramStep> {
-    const links = await db.frameworkEditorControlTaskTemplateLink.findMany({
-      where: { frameworkId: WATER_FRAMEWORK_ID, taskTemplate: { name: { startsWith: 'Evidence:' } } },
-      select: { taskTemplateId: true },
-    });
-    const tasks = await db.task.findMany({
-      where: { organizationId, taskTemplateId: { in: links.map((l) => l.taskTemplateId) } },
-      select: { id: true, title: true, status: true },
-      orderBy: { title: 'asc' },
-    });
+  private async evidenceStep(frameworkInstanceId: string, organizationId: string): Promise<WaterProgramStep> {
+    const { tasks } = await this.evidence.getEvidence(frameworkInstanceId, organizationId);
+    const now = Date.now();
     const done = tasks.filter((t) => t.status === 'done').length;
     return {
       key: 'evidence',
@@ -230,7 +232,16 @@ export class WaterProgramService {
       total: tasks.length,
       summary: `${done} of ${tasks.length} evidence tasks done`,
       href: 'tasks',
-      details: tasks.map((t) => ({ label: t.title.replace(/^Evidence: /, ''), status: t.status.replace('_', ' '), href: `tasks/${t.id}` })),
+      details: tasks.map((t) => ({
+        label: t.title,
+        status: t.status.replace('_', ' '),
+        href: `tasks/${t.taskId}`,
+        // How the evidence is collected today. Automatic checks that are only planned are named as such.
+        method: t.source === 'system' ? 'Platform records' : t.planned ? 'Manual upload (automatic check planned)' : 'Manual upload',
+        changedOn: t.statusChangedOn,
+        nextDueOn: t.nextDueOn,
+        overdue: !!t.nextDueOn && new Date(t.nextDueOn).getTime() < now,
+      })),
     };
   }
 

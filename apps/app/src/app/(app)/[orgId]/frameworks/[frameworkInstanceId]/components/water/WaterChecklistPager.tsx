@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { groupByFamily } from '../answers/AssessTab';
 import { checklistGuidance } from './guidance-steps';
+import { ChecklistRosterNote } from './ChecklistRosterNote';
 import { ChecklistStrip } from './ChecklistStrip';
 import { VoiceDirection } from './VoiceDirection';
 
@@ -117,6 +118,7 @@ export function WaterChecklistPager({ frameworkInstanceId, requirementDefinition
         {/WWS/.test(q.name) && (
           <p className="text-xs text-muted-foreground">WWS is EPA&apos;s abbreviation for water and wastewater system: here, your utility.</p>
         )}
+        <ChecklistRosterNote frameworkInstanceId={frameworkInstanceId} identifier={q.identifier} />
         <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{q.description}</p>
       </div>
 

@@ -32,9 +32,9 @@ export interface RosterFactDef {
 }
 
 export const ROSTER_ROLES: RosterRoleDef[] = [
-  { key: 'cyber_lead', label: 'Cybersecurity lead', hint: 'Owns the cybersecurity program day to day' },
+  { key: 'cyber_lead', label: 'Cybersecurity lead (overall, IT and OT)', hint: 'Accountable for all cybersecurity at the utility; EPA checklist question 1.B' },
   { key: 'cyber_alternate', label: 'Alternate for the cybersecurity lead', hint: 'Acts when the lead is away' },
-  { key: 'ot_lead', label: 'OT (control systems) lead', hint: 'SCADA, PLCs and plant networks; may be the same person at a small utility' },
+  { key: 'ot_lead', label: 'OT (control systems) security lead', hint: 'Security oversight of SCADA, PLCs and the plant network; EPA question 1.C; may be the same person at a small utility' },
   { key: 'operations_lead', label: 'Operations lead', hint: 'Runs treatment and distribution' },
   { key: 'it_lead', label: 'IT lead or provider', hint: 'Person or company that runs the business network' },
   { key: 'finance', label: 'Finance and procurement contact', hint: 'Approves purchases and keeps contracts' },

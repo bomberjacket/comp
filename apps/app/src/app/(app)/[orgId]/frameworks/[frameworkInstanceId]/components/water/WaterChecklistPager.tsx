@@ -114,6 +114,9 @@ export function WaterChecklistPager({ frameworkInstanceId, requirementDefinition
 
       <div className="space-y-2">
         <h3 className="text-base font-semibold">{q.name}</h3>
+        {/WWS/.test(q.name) && (
+          <p className="text-xs text-muted-foreground">WWS is EPA&apos;s abbreviation for water and wastewater system: here, your utility.</p>
+        )}
         <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{q.description}</p>
       </div>
 

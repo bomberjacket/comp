@@ -41,7 +41,7 @@ export function ChecklistStrip({ questions, answered, index, locked, onPick }: P
         })}
       </div>
       <p className="text-xs text-muted-foreground">
-        Green questions are answered. The wizard opens on the first one that is not; choose any question to read or change its answer.
+        Green questions are answered. The wizard opens on the first one that is not; choose any question to read or change its answer. The numbers follow CISA&apos;s list of 38 practices; EPA&apos;s checklist uses 33 of them, so a few are skipped (1.F to 1.H, 4.B and 4.C).
         {locked ? ' Save this question before moving to another.' : ''}
       </p>
     </div>

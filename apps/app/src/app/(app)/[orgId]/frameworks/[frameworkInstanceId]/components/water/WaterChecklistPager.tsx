@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { groupByFamily } from '../answers/AssessTab';
 import { checklistGuidance } from './guidance-steps';
+import { ChecklistStrip } from './ChecklistStrip';
 import { VoiceDirection } from './VoiceDirection';
 
 const PRIORITY_MARK = '(EPA priority cybersecurity practice)';
@@ -109,6 +110,7 @@ export function WaterChecklistPager({ frameworkInstanceId, requirementDefinition
         {priority && <Badge variant="default">EPA priority practice</Badge>}
         <span className="text-xs tabular-nums text-muted-foreground">{answered} answered</span>
       </div>
+      <ChecklistStrip questions={questions} answered={new Set(byReq.keys())} index={index} locked={dirty} onPick={setIndex} />
 
       <div className="space-y-2">
         <h3 className="text-base font-semibold">{q.name}</h3>

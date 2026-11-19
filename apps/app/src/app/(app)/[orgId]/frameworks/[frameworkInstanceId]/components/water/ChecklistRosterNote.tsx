@@ -25,6 +25,12 @@ const NOTES: Record<string, { plain: string; role?: string; roleName?: string; p
     planBox: 'IT and OT coordination meeting',
     planBoxName: 'the risk plan (section 2, IT and OT coordination meeting)',
   },
+  '1.I': {
+    plain:
+      'This is about how the utility buys, not an audit of the vendor. Before buying an IT or OT product or service, does the utility weigh cybersecurity alongside price and function: how secure the product is, and how the supplier handles security? Scoring a vendor with the EPA procurement sheet (step 5) is one way to do it.',
+    planBox: 'Who scores vendors before a purchase',
+    planBoxName: 'the risk plan (section 5, who scores vendors before a purchase)',
+  },
 };
 
 /** The person behind a role, following "same person as"; a circle falls back to the first name typed in it. */
@@ -67,7 +73,7 @@ export function ChecklistRosterNote({ frameworkInstanceId, identifier }: { frame
               Already recorded in {note.planBoxName}: <span className="font-medium text-foreground">{recorded}</span>. If that is what happens, the answer is Yes.
             </>
           ) : (
-            <>Nothing is recorded yet in {note.planBoxName}. If no such meetings are held, answer No or In progress.</>
+            <>Nothing is recorded yet in {note.planBoxName}. If the utility does not do this, answer No or In progress.</>
           )}
         </p>
       )}

@@ -94,7 +94,7 @@ export function vendorGuidance(vendorName: string | null): PageGuidance {
       about: 'This step checks the companies that supply or maintain the utility\'s systems. No vendors are recorded yet, so there is nobody to score.',
       steps: ['Choose "Open vendors".', 'Add each supplier, integrator and service provider that touches the utility\'s systems.', 'Come back to this step to score them.'],
       narration:
-        'This step checks the companies that supply or maintain the utility\'s systems. Suppliers and integrators often have remote access to the control system, which makes their security part of the utility's. No vendors are recorded yet, so there is nobody to score. Choose Open vendors and add each supplier, integrator and managed service provider that touches the utility\'s systems. Then come back to this step.',
+        'This step checks the companies that supply or maintain the utility\'s systems. Suppliers and integrators often have remote access to the control system, so their security is part of the security of the utility. No vendors are recorded yet, so there is nobody to score. Choose Open vendors and add each supplier, integrator and managed service provider that touches the utility\'s systems. Then come back to this step.',
     };
   }
   return {

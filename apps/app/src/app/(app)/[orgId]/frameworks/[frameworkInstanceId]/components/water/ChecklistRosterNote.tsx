@@ -1,13 +1,14 @@
 'use client';
 
+import { useWaterPlans } from '@/hooks/use-water-program';
 import { useWaterRoster, type WaterRoster } from '@/hooks/use-water-roster';
 
 /**
- * BNI's plain-words reading of a checklist question, and the Who's who role that answers
- * it. EPA's own wording stays as published above this note; this only says what the
- * question is getting at and who the utility has already named.
+ * BNI's plain-words reading of a checklist question, and what the utility has already
+ * recorded that answers it: a Who's who role, or a box of the risk plan. EPA's own wording
+ * stays as published above this note.
  */
-const NOTES: Record<string, { plain: string; role: string; roleName: string }> = {
+const NOTES: Record<string, { plain: string; role?: string; roleName?: string; planBox?: string; planBoxName?: string }> = {
   '1.B': {
     plain: 'Overall cybersecurity for the whole utility, IT and OT together: is one named role accountable for all of it?',
     role: 'cyber_lead',
@@ -17,6 +18,12 @@ const NOTES: Record<string, { plain: string; role: string; roleName: string }> =
     plain: 'OT only: is one named role accountable for the security oversight of the control systems (SCADA, PLCs and the plant network)? At a small utility this can be the same person as in 1.B.',
     role: 'ot_lead',
     roleName: 'OT (control systems) security lead',
+  },
+  '1.D': {
+    plain:
+      'Do the IT staff, the OT staff and their vendors meet regularly? These meetings are where each side learns what the other needs: planned changes and roadmaps, shared procedures, and cross-training on the products each side runs. EPA asks that they happen regularly, not what is on the agenda.',
+    planBox: 'IT and OT coordination meeting',
+    planBoxName: 'the risk plan (section 2, IT and OT coordination meeting)',
   },
 };
 
@@ -38,16 +45,33 @@ function personOf(roster: WaterRoster, key: string) {
 
 export function ChecklistRosterNote({ frameworkInstanceId, identifier }: { frameworkInstanceId: string; identifier: string }) {
   const note = NOTES[identifier];
-  const { roster } = useWaterRoster(frameworkInstanceId, !!note);
+  const { roster } = useWaterRoster(frameworkInstanceId, !!note?.role);
+  const { plans } = useWaterPlans(frameworkInstanceId, !!note?.planBox);
   if (!note) return null;
-  const person = roster ? personOf(roster, note.role) : undefined;
+  const person = roster && note.role ? personOf(roster, note.role) : undefined;
+  const recorded = plans
+    .flatMap((p) => p.sections)
+    .flatMap((sec) => sec.fields)
+    .find((f) => f.label === note.planBox)
+    ?.value.trim();
   return (
     <div className="space-y-1 rounded-md border border-dashed bg-muted/30 px-3 py-2 text-sm">
       <p>
         <span className="font-medium">In plain words: </span>
         {note.plain}
       </p>
-      {roster && (
+      {note.planBox && plans.length > 0 && (
+        <p className="text-muted-foreground">
+          {recorded ? (
+            <>
+              Already recorded in {note.planBoxName}: <span className="font-medium text-foreground">{recorded}</span>. If that is what happens, the answer is Yes.
+            </>
+          ) : (
+            <>Nothing is recorded yet in {note.planBoxName}. If no such meetings are held, answer No or In progress.</>
+          )}
+        </p>
+      )}
+      {note.role && roster && (
         <p className="text-muted-foreground">
           {person?.name ? (
             <>

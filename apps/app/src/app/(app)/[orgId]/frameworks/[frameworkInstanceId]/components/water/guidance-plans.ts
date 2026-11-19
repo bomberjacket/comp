@@ -15,7 +15,7 @@ const SECTION_PURPOSE: Record<'crmp' | 'cirp', string[]> = {
     'It names the people responsible for cybersecurity and what each one decides. Without names, nobody owns the work.',
     'It explains how the utility finds its weak points, how often it checks, and who hears the results.',
     'It sets who is trained, on what, and how often. People are the most common way an attacker gets in.',
-    'It covers vendors, integrators and anyone with remote access. Many water sector incidents start through a supplier connection.',
+    'It covers vendors, integrators and anyone with remote access. A supplier connection is a way into the utility that the utility does not fully control.',
     'It points to the separate Cyber Incident Response Plan and says who may activate it.',
     'It explains how the utility keeps water flowing and restores its systems: manual operation, backups and restore tests.',
     'It keeps the plan current: when it is reviewed, who updates it, and what events force an early review.',
@@ -38,7 +38,7 @@ export function rosterGuidance(filled: number, total: number): PageGuidance {
     about: `Who's who is one list of the utility's people and outside contacts. Both plans read from it, so each name is typed once. ${filled} of ${total} entries are filled in.`,
     steps: [
       'For each role, type the person\'s name, title, mobile phone and an email that still works in an outage.',
-      'If one person holds two roles, choose "Same person as" instead of typing them again.',
+      'If one person holds two roles, choose "Same person as" instead of typing them again. The incident commander starts as the cybersecurity lead; change it if it is someone else.',
       'Fill in the outside contacts, or tick "The utility has none".',
       'Tick the vendors that have network or remote access; add any that are missing.',
       'Choose "Save and continue to the plans".',
@@ -98,7 +98,9 @@ export function planGuidance(args: {
     steps: [
       'Read the grey box. That standard wording is already in the plan; you do not retype it.',
       `Under "Your part", fill in the ${fieldCount} boxes. Each asks for one fact about the utility; the grey text in a box is an example.`,
-      'If you do not know one yet, write who will find out and by when.',
+      'If you do not know one yet, write who will find out and by when. "Additional notes" at the end is optional.',
+      'Boxes with a dashed border are filled in by the platform or from Who\u2019s who; there is nothing to type in them.',
+      'The circle beside a section in the list turns green when every box is filled.',
       index >= total - 1
         ? 'This is the last section. Choose "Save and publish plan"; you are shown how complete the plan is before you confirm.'
         : 'Choose "Save and go to the next section". Your answers go into the plan under the heading "Utility record".',

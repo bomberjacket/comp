@@ -7,7 +7,7 @@ import { Badge, Button, Text, Textarea } from '@trycompai/design-system';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { groupByFamily } from '../answers/AssessTab';
-import { checklistGuidance } from './guidance-steps';
+import { ANSWER_MEANINGS, checklistGuidance } from './guidance-steps';
 import { ChecklistRosterNote } from './ChecklistRosterNote';
 import { ChecklistStrip } from './ChecklistStrip';
 import { VoiceDirection } from './VoiceDirection';
@@ -137,6 +137,14 @@ export function WaterChecklistPager({ frameworkInstanceId, requirementDefinition
           </Button>
         ))}
       </div>
+      <dl className="grid gap-x-3 gap-y-0.5 text-xs text-muted-foreground sm:grid-cols-[auto_1fr]">
+        {api.data.profile.answerValues.map((v) => (
+          <div key={v} className="contents">
+            <dt className={`font-medium ${v === choice ? 'text-foreground' : ''}`}>{labelOf(v)}</dt>
+            <dd>{ANSWER_MEANINGS[v] ?? ''}</dd>
+          </div>
+        ))}
+      </dl>
 
       {needsReason && (
         <Textarea

@@ -1,5 +1,18 @@
 import type { PageGuidance } from './guidance-plans';
 
+/**
+ * What each checklist answer means, in BNI's words. Shown under the answer buttons and
+ * spoken by the voice guidance, so the two always say the same thing.
+ */
+export const ANSWER_MEANINGS: Record<string, string> = {
+  yes: 'The practice is fully in place today.',
+  incomplete: 'Part of it is in place, or work has started.',
+  no: 'It is not in place, or nobody can confirm that it is.',
+  not_applicable: 'The utility has no such system. Say why.',
+  alternate: 'A different measure achieves the same result. Say what it is.',
+  scoped: 'In place for part of the utility only. Say which part.',
+};
+
 export function checklistGuidance(args: { index: number; total: number; question: string; family: string; priority: boolean }): PageGuidance {
   const { index, total, question, family, priority } = args;
   const steps = [
@@ -19,7 +32,7 @@ export function checklistGuidance(args: { index: number; total: number; question
     narration:
       `${first}Question ${index + 1} of ${total}, in the group ${family}. ${prio}The question is: ${question} ` +
       'The grey text under the question is EPA\'s own explanation of why it matters and what a Yes looks like. ' +
-      'Choose Yes only when the practice is fully in place today. Choose In progress when part of it is in place. Choose No when it is not in place, or when you do not know, because EPA counts unknown as No. Choose Not applicable only when the utility truly has no such system, and say why. ' +
+      'The meaning of each answer is written under the answer buttons. Choose Yes only when the practice is fully in place today. Choose In progress when part of it is in place or work has started. Choose No when it is not in place, or when nobody can confirm that it is; a practice that cannot be confirmed should not be counted. Choose Not applicable only when the utility truly has no such system, and say why. ' +
       'Then use the note box to write how you know: what you looked at, or who told you. An assessor will ask. Choose Save and next to move on.',
   };
 }

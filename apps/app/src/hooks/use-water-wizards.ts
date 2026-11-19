@@ -17,6 +17,8 @@ export interface WaterEvidenceTask {
   systemComplete: boolean;
   /** A way the platform could supply this later; not built yet. */
   planned?: string;
+  /** Answered Yes or marked done with nothing attached. */
+  evidenceMissing?: boolean;
 }
 
 export interface WaterEvidence {

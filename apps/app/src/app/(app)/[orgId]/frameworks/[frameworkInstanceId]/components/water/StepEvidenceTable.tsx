@@ -37,7 +37,7 @@ export function StepEvidenceTable({ orgId, details }: { orgId: string; details: 
                 )}
               </td>
               <td className="px-3 py-1.5 text-xs text-muted-foreground">{d.method}</td>
-              <td className="whitespace-nowrap px-3 py-1.5 text-xs">{d.status}</td>
+              <td className={`whitespace-nowrap px-3 py-1.5 text-xs ${d.missing ? 'font-medium text-amber-700 dark:text-amber-400' : ''}`}>{d.status}</td>
               <td className="whitespace-nowrap px-3 py-1.5 text-xs text-muted-foreground">{date(d.changedOn) || 'Not changed yet'}</td>
               <td className={`whitespace-nowrap px-3 py-1.5 text-xs ${d.overdue ? 'font-medium text-destructive' : 'text-muted-foreground'}`}>
                 {d.nextDueOn ? `${date(d.nextDueOn)}${d.overdue ? ' (overdue)' : ''}` : 'When done'}

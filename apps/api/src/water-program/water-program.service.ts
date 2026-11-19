@@ -26,6 +26,8 @@ export interface StepDetail {
   /** Evidence step: date new evidence is next due, and whether that date has passed. */
   nextDueOn?: string | null;
   overdue?: boolean;
+  /** Evidence step: answered Yes or marked done with nothing attached. */
+  missing?: boolean;
   /** app path under /<orgId>/ */
   href?: string;
 }
@@ -234,7 +236,8 @@ export class WaterProgramService {
       href: 'tasks',
       details: tasks.map((t) => ({
         label: t.title,
-        status: t.status.replace('_', ' '),
+        status: t.evidenceMissing ? (t.status === 'done' ? 'done, evidence missing' : 'answered yes, evidence missing') : t.status.replace('_', ' '),
+        missing: t.evidenceMissing,
         href: `tasks/${t.taskId}`,
         // How the evidence is collected today. Automatic checks that are only planned are named as such.
         method: t.source === 'system' ? 'Platform records' : t.planned ? 'Manual upload (automatic check planned)' : 'Manual upload',

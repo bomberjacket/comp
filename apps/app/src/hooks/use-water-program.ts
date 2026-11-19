@@ -28,6 +28,7 @@ export interface WaterProgramStep {
     changedOn?: string | null;
     nextDueOn?: string | null;
     overdue?: boolean;
+    missing?: boolean;
   }>;
 }
 

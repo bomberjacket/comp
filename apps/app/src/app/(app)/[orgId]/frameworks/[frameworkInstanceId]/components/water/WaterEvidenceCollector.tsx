@@ -116,10 +116,13 @@ export function WaterEvidenceCollector({ orgId, frameworkInstanceId, canEdit, on
   const task: WaterEvidenceTask | undefined = tasks[index];
   if (!task) return <Text variant="muted">No evidence tasks yet. They are created when the framework is added.</Text>;
 
+  // After a file is attached or a status is set: the server completes a goal whose evidence is now there.
   const changed = () => {
-    void refresh();
-    onChanged?.();
+    void sync()
+      .catch(() => refresh())
+      .then(() => onChanged?.());
   };
+  const needsFile = task.source === 'you' && task.attachments === 0;
 
   const setStatus = async (status: (typeof STATUSES)[number]['value']) => {
     setSaving(true);
@@ -256,7 +259,8 @@ export function WaterEvidenceCollector({ orgId, frameworkInstanceId, canEdit, on
                     variant={task.status === s.value ? 'default' : 'outline'}
                     role="radio"
                     aria-checked={task.status === s.value}
-                    disabled={saving}
+                    disabled={saving || (s.value === 'done' && needsFile)}
+                    title={s.value === 'done' && needsFile ? 'Attach evidence first: a goal is done when its proof is attached' : undefined}
                     onClick={() => void setStatus(s.value)}
                   >
                     {s.label}

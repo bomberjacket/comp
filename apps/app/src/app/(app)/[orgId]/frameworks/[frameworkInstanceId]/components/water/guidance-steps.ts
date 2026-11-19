@@ -75,14 +75,15 @@ export function evidenceGuidance(args: {
       'Read "What to collect": the kinds of proof that are accepted for this goal.',
       'Find one in the utility: a policy page, a screenshot of a setting, an export, a training record, a test log.',
       'Choose "Attach evidence" and pick the file. A dated file from the utility\'s own system is best.',
-      'Set the status to Done, then choose Next. If the practice is not in place yet, leave the status as To do: the fix belongs to step 3 first.',
+      'The goal is marked done once a file is attached. A Yes on the checklist is not enough by itself. If the practice is not in place yet, attach nothing: the fix belongs to step 3 first.',
+      'Choose Next.',
     ],
     narration:
       `${first}Goal ${index + 1} of ${total}: ${title}. ${have}` +
       'The grey box, What to collect, lists the kinds of proof that are accepted for this goal. ' +
       `${questions > 0 ? `Under it you see the ${questions === 1 ? 'checklist answer' : `${questions} checklist answers`} that this proof backs up. ` : ''}` +
       'Find one real example in the utility. It can be a page of a policy, a screenshot of a setting, an export from a system, a training sign-in sheet or a backup test log. Good proof is dated and clearly comes from the utility\'s own system. ' +
-      'Choose Attach evidence and pick the file. Then set the status to Done. If the practice is not in place yet, leave the status as To do; the fix belongs to step 3 first. ' +
+      'Choose Attach evidence and pick the file. The goal is marked done once a file is attached; a Yes on the checklist is not enough by itself. If the practice is not in place yet, attach nothing; the fix belongs to step 3 first. ' +
       (planned ? 'A note on this page says the platform may be able to check this goal automatically in future. Until then, it is yours to supply. ' : '') +
       'Choose Next for the following goal.',
   };

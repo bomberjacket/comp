@@ -28,6 +28,8 @@ export interface EvidenceTaskView {
   nextDueOn: string | null;
   /** The task's cycle, for example quarterly. */
   cycle: string | null;
+  /** A goal the utility supplies, answered Yes on the checklist or marked done, with nothing attached. */
+  evidenceMissing: boolean;
 }
 
 /** Full timestamps, so the browser shows the date in the reader's own time zone. */
@@ -147,12 +149,15 @@ export class WaterEvidenceService {
       const reqs = reqsByControl.get(controlByTemplate.get(t.taskTemplateId ?? '') ?? '') ?? [];
       const title = t.title.replace(/^Evidence: /, '');
       const plan = goalEvidencePlan(goalIdOf(title), inputs);
+      const attachments = countByTask.get(t.id) ?? 0;
+      const answeredYes = reqs.some((r) => ['yes', 'alternate'].includes(answerByReq.get(r.id) ?? ''));
       return {
         taskId: t.id,
         title,
         description: (t.description ?? '').split(/\n{2,}/).map((p) => p.trim()).filter(Boolean),
         status: t.status,
-        attachments: countByTask.get(t.id) ?? 0,
+        attachments,
+        evidenceMissing: plan.source === 'you' && attachments === 0 && (t.status === 'done' || answeredYes),
         questions: [...reqs]
           .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
           .map((r) => ({ identifier: r.identifier, name: r.name, answer: answerByReq.get(r.id) ?? null })),
@@ -180,15 +185,17 @@ export class WaterEvidenceService {
   }
 
   /**
-   * Mark a goal's evidence task done when the platform holds every record that counts
-   * for it. Never moves a task backwards, never touches one in review, and leaves a goal
+   * Mark a goal's evidence task done when its evidence is there: for a platform goal,
+   * every record that counts; for a goal the utility supplies, at least one attached
+   * file. Never moves a task backwards, never touches one in review, and leaves a goal
    * alone while its checklist answer is No or In progress: the answer says it is not met.
    */
   async syncSystemEvidence(frameworkInstanceId: string, organizationId: string): Promise<EvidenceView> {
     const view = await this.getEvidence(frameworkInstanceId, organizationId);
     let changed = false;
     for (const t of view.tasks) {
-      if (!t.systemComplete || !['todo', 'in_progress'].includes(t.status)) continue;
+      const evidenced = t.source === 'system' ? t.systemComplete : t.attachments > 0;
+      if (!evidenced || !['todo', 'in_progress'].includes(t.status)) continue;
       if (t.questions.some((q) => q.answer === 'no' || q.answer === 'incomplete')) continue;
       await db.task.update({ where: { id: t.taskId }, data: { status: 'done', lastCompletedAt: new Date() } });
       changed = true;

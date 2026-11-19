@@ -204,6 +204,15 @@ export class RequirementAnswersService {
         select: { controlId: true, task: { select: { id: true, status: true } } },
       }),
     ]);
+    // BNI: an answer of Yes says the practice is in place; it is not the proof. A task is
+    // completed by an answer only when evidence is already attached to it. Without any,
+    // the task keeps its status and the evidence step shows it as missing.
+    const attached = await db.attachment.groupBy({
+      by: ['entityId'],
+      where: { entityType: 'task', entityId: { in: links.map((l) => l.task.id) } },
+      _count: { _all: true },
+    });
+    const hasEvidence = new Set(attached.filter((a) => a._count._all > 0).map((a) => a.entityId));
     const typed = answers.map((a) => ({
       requirementId: a.requirementId as string,
       domain: a.domain as AnswerDomain,
@@ -226,6 +235,7 @@ export class RequirementAnswersService {
           : null;
       for (const link of links.filter((l) => l.controlId === controlId)) {
         if (link.task.status === 'in_review' || link.task.status === status) continue;
+        if (status === 'done' && !hasEvidence.has(link.task.id)) continue;
         await db.task.update({
           where: { id: link.task.id },
           data: {
